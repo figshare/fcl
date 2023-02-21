@@ -1,0 +1,99 @@
+.button {
+  position: relative;
+
+  -webkit-touch-callout: none;
+}
+
+.tooltip {
+  --marginX: var(--gridSize);
+  --marginY: calc(2 * var(--gridSize));
+
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+
+  position: fixed;
+  z-index: 1;
+  top: calc(-100vh - 100%);
+  left: calc(-100vw - 100%);
+
+  display: block;
+
+  width: auto;
+  max-width: calc(46 * var(--gridSize));
+  padding: calc(var(--gridSize) + var(--marginY)) calc(calc(2 * var(--gridSize)) + var(--marginX));
+
+  user-select: none;
+
+  transition: opacity 0.2s ease-out 0s, left 0s linear 0.2s, top 0s linear 0.2s;
+  white-space: pre-wrap;
+
+  pointer-events: none;
+
+  opacity: 0;
+  filter: drop-shadow(2px 2px 7px rgba(0, 0, 0, 0.14));
+  color: var(--color-typography-primaryAlt);
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &[data-tooltip-visible="true"] {
+    top: var(--tooltipTop);
+    left: var(--tooltipLeft);
+
+    transition: opacity 0.2s ease-in 0.5s, left 0s linear 0s, top 0s linear 0s;
+
+    opacity: 1;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    top: var(--marginY);
+    right: var(--marginX);
+    bottom: var(--marginY);
+    left: var(--marginX);
+
+    display: block;
+
+    content: "";
+
+    border-radius: calc(0.5 * var(--gridSize));
+    background: var(--color-layout-secondaryAlt-background);
+  }
+
+  &::after {
+    --arrowWidth: calc(3 * var(--gridSize));
+    --arrowHeight: calc(1.5 * var(--gridSize));
+
+    position: absolute;
+    z-index: -1;
+    top: auto;
+    bottom: var(--gridSize);
+    left: clamp(var(--gridSize), calc(var(--tooltipArrowLeft) - calc(0.5 * var(--arrowWidth))), calc(100% - var(--arrowWidth) - var(--gridSize)));
+
+    display: block;
+
+    width: 0;
+    height: 0;
+
+    content: "";
+
+    border-top: var(--arrowHeight) solid var(--color-layout-secondaryAlt-background);
+    border-right: calc(0.5 * var(--arrowWidth)) solid transparent;
+    border-bottom: 0 none transparent;
+    border-left: calc(0.5 * var(--arrowWidth)) solid transparent;
+  }
+
+  &[data-tooltip-below="true"]::after {
+    top: calc(var(--gridSize));
+    bottom: auto;
+
+    border-top: 0 none transparent;
+    border-bottom: var(--arrowHeight) solid var(--color-layout-secondaryAlt-background);
+  }
+}

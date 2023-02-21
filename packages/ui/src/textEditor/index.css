@@ -1,0 +1,133 @@
+.componentContainer {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100%;
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: calc(var(--gridSize) / 2);
+  align-items: center;
+}
+
+.editorContainer.disabled {
+  background-color: var(--color-input-background_disabled);
+}
+
+.componentContainer:focus-within {
+  border: 2px solid var(--color-border-active);
+}
+
+.editorContainer {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100%;
+  min-width: calc(62 * var(--gridSize));
+  min-height: calc(45.5 * var(--gridSize));
+  max-height: calc(100 * var(--gridSize));
+
+  resize: vertical;
+
+  background-color: var(--color-layout-primary-background);
+  box-shadow: inset 0 1px 4px rgba(135, 134, 134, 0.2);
+}
+
+.editorContainer::-webkit-resizer {
+  display: none;
+}
+
+.editor {
+  position: absolute;
+
+  overflow-y: overlay;
+
+  width: 100%;
+  min-height: calc(30 * var(--gridSize));
+
+  cursor: text;
+}
+
+:global(.DraftEditor-root) {
+  height: 100%;
+}
+
+:global(.public-DraftEditorPlaceholder-root) {
+  font-size: var(--typography-S-fontSize);
+
+  position: absolute;
+
+  margin: var(--gridSize) calc(var(--gridSize) * 2);
+
+  color: var(--color-switch-label_disabled);
+}
+
+:global(.DraftEditor-editorContainer) {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+}
+
+:global(.public-DraftEditor-content) {
+  width: auto;
+  min-height: 80%;
+  margin: var(--gridSize) calc(2 * var(--gridSize));
+}
+
+:global(.public-DraftEditor-content):focus {
+  box-shadow: none;
+}
+
+:global(.public-DraftEditor-content[contenteditable="false"]) {
+  color: var(--color-typography-disabled);
+}
+
+.editorTextLength {
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  color: var(--color-typography-disabled);
+}
+
+.textNumber {
+  font-weight: bold;
+
+  margin-right: calc(var(--gridSize) / 2);
+}
+
+@media (max-width: 550px) {
+  .componentContainer {
+    width: fit-content;
+  }
+
+  .editorContainer {
+    width: 90%;
+    min-width: calc(75 * var(--gridSize));
+  }
+}
+
+@media (max-width: 500px) {
+  .editorContainer {
+    min-width: calc(67 * var(--gridSize));
+  }
+}
+
+@media (max-width: 450px) {
+  .editorContainer {
+    min-width: calc(50 * var(--gridSize));
+  }
+}
+
+@media (max-width: 350px) {
+  .editorContainer {
+    min-width: calc(47 * var(--gridSize));
+  }
+}

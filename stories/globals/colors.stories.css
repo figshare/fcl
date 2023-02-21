@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+  padding: calc(2 * var(--gridSize)) calc(6 * var(--gridSize));
+
+  color: black;
+
+  & h3 {
+    margin: var(--gridSize) 0;
+
+    text-transform: uppercase;
+  }
+
+  & h2 {
+    margin: calc(4 * var(--gridSize)) 0 0 0;
+
+    text-transform: uppercase;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &:last-of-type {
+    margin: 0 0 calc(4 * var(--gridSize)) 0;
+  }
+}
+
+.wrapperColumn {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  margin-left: calc(4 * var(--gridSize));
+}
+
+.colorTile {
+  position: relative;
+
+  display: block;
+
+  width: calc(8 * var(--gridSize));
+  height: calc(8 * var(--gridSize));
+  margin: calc(1 * var(--gridSize)) calc(1 * var(--gridSize));
+
+  border-radius: calc(0.5 * var(--gridSize));
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    box-sizing: border-box;
+    width: calc(8 * var(--gridSize));
+    height: calc(8 * var(--gridSize));
+
+    content: "";
+
+    /* Hard-coded color for blend mode */
+    border: 1px solid #666;
+    border-radius: calc(0.5 * var(--gridSize));
+    mix-blend-mode: difference;
+  }
+}
+
+.borderTile {
+  width: calc(8 * var(--gridSize));
+  height: calc(8 * var(--gridSize));
+  margin: calc(1 * var(--gridSize)) calc(1 * var(--gridSize));
+
+  border: 3px solid transparent;
+
+  border-radius: calc(0.5 * var(--gridSize));
+}
+
+.textTile {
+  font-size: calc(1.5 * var(--gridSize));
+  font-weight: bold;
+  line-height: calc(8 * var(--gridSize));
+
+  display: flex;
+
+  width: calc(8 * var(--gridSize));
+  height: calc(8 * var(--gridSize));
+  margin: calc(1 * var(--gridSize)) calc(1 * var(--gridSize));
+
+  text-transform: uppercase;
+
+  border-radius: calc(0.5 * var(--gridSize));
+  justify-content: center;
+  align-content: center;
+}

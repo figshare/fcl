@@ -1,0 +1,54 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import Input from "@figshare/ui/input/text";
+
+import uncontrollable from "@figshare/ui/helpers/uncontrollable";
+
+<Meta title="UI/Inputs/Text" component={Input} />
+
+# Text input
+---
+
+
+export const UncontrolledTextInput = uncontrollable(
+  Input,
+  { value: ["onChange", (_, e) => e.target.value] }
+);
+
+export const mountInput = (props) => <UncontrolledTextInput{...props} />;
+
+<Story 
+  name="Text" 
+  parameters={{
+    layout: "centered",
+    jest: ["ui/src/input"],
+  }}
+>
+  {mountInput()}
+</Story>
+
+
+```jsx
+import React from "react";
+import Input from "@figshare/ui/input";
+
+class InputComponent extends React.Component {
+  render() {
+    return (
+      <Input type="text" />
+    );
+  }
+}
+```
+
+<ArgsTable of={Input} />
+
+## Themes
+
+<Canvas>
+  <UncontrolledTextInput type="text" theme="default" placeholder="Default theme" />
+  <UncontrolledTextInput type="text" theme="underline" placeholder="Underline theme" />
+  <UncontrolledTextInput type="text" theme="default" error={true} placeholder="Default theme - error" />
+  <UncontrolledTextInput type="text" theme="underline" error={true} placeholder="Underline theme - error" />
+  <UncontrolledTextInput type="text" theme="default" disabled={true} placeholder="Default theme - disabled" />
+  <UncontrolledTextInput type="text" theme="underline" disabled={true} placeholder="Underline theme - disabled" />
+</Canvas>

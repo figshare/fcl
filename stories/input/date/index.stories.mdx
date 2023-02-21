@@ -1,0 +1,93 @@
+import { Meta, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import uncontrollable from "@figshare/ui/helpers/uncontrollable";
+import DatePickerComponent from "@figshare/ui/input/date/index";
+import InputComponent from '@figshare/ui/input/index';
+
+export const DatePicker = uncontrollable(
+  DatePickerComponent,
+  { selectedDate: ["onChange", (_, date) => date] }
+);
+
+export const Input = uncontrollable(
+  InputComponent,
+  { selectedDate: ["onChange", (_, date) => date] }
+);
+
+export const canvasStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "flex-start",
+  gap: "16px",
+};
+
+<Meta component={DatePicker} title="UI/Inputs/Date" />
+
+# Date Picker
+
+<Story
+  name="Date"
+  parameters={{
+    docs: { disable: true },
+    layout: "centered",
+  }}
+>
+  <DatePicker />
+</Story>
+
+<br />
+
+
+## Examples
+
+<Canvas>
+  <div style={canvasStyle}>
+    <p>Basic, with selected date</p>
+    <DatePicker selectedDate={new Date()} />
+    <p>Min and max date range</p>
+    <DatePicker minDate={new Date('May 1, 2000 03:24:00')} maxDate={new Date('December 1, 2030 00:20:00')} />
+    <p>Disabled</p>
+    <DatePicker selectedDate={new Date()} disabled />
+    <p>Error</p>
+    <DatePicker selectedDate={new Date()}  error />
+    <p>Input</p>
+    <Input type="date" />
+    <p>Custom placeholder</p>
+    <DatePicker placeholder="Select Date" />
+  </div>
+</Canvas>
+
+```jsx
+import React from "react";
+import DatePicker from "@figshare/ui/input/date";
+import Input from "@figshare/ui/input";
+
+class Example extends React.Component {
+  state = {
+    date: undefined
+  }
+
+  minDate = new Date('June 1, 1995 03:24:00');
+  maxDate = new Date('July 1, 2034 00:20:00');
+
+  onChange = (date) => this.setState({ date });
+
+  render() {
+    return (
+      <DatePicker selectedDate={this.state.date}  onChange={this.onChange} />
+      <DatePicker 
+        selectedDate={this.state.date}  
+        onChange={this.onChange} 
+        minDate={this.minDate} 
+        maxDate={this.maxDate} 
+      />
+      <DatePicker selectedDate={this.state.date}  onChange={this.onChange} placeholder="New placeholder" />
+      <Input type="date" selectedDate={this.state.date}  onChange={this.onChange} />
+    );
+  }
+}
+```
+
+## Props Table
+<ArgsTable of={DatePickerComponent} />

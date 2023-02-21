@@ -1,0 +1,119 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import Info from "@figshare/ui/icons/info/medium";
+
+import Toggletip, { Trigger, Content, UncontrolledToggletip } from "@figshare/ui/toggletip";
+
+export const Template = (args) => <span {...args} />;
+
+
+<Meta
+  component={Toggletip}
+  title="UI/Toggletip"
+/>
+
+<Story
+  name="Toggletip"
+  parameters={{
+    docs: { disable: true },
+    layout: "centered",
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+
+# Toggletip
+
+---
+
+## Primary
+
+<UncontrolledToggletip>
+  <Trigger>
+    Button Trigger
+  </Trigger>
+  <Content>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<br />
+
+<UncontrolledToggletip>
+  <Trigger displayedAs="iconButton" Icon={Info}>
+    IconButton Trigger
+  </Trigger>
+  <Content>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<br />
+
+<UncontrolledToggletip>
+  <Trigger displayedAs="genericButton">
+    GenericButton Trigger
+  </Trigger>
+  <Content>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+---
+
+## Secondary
+
+<UncontrolledToggletip>
+  <Trigger>
+    Button Trigger
+  </Trigger>
+  <Content theme="secondary">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<br />
+
+<UncontrolledToggletip>
+  <Trigger displayedAs="iconButton" Icon={Info}>
+    IconButton Trigger
+  </Trigger>
+  <Content theme="secondary">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<br />
+
+<UncontrolledToggletip>
+  <Trigger displayedAs="genericButton">
+    GenericButton Trigger
+  </Trigger>
+  <Content theme="secondary">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>

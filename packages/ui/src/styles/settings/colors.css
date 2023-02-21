@@ -1,0 +1,261 @@
+:global(:root) {
+  /* Branding colors */
+  --color-branding-figRed: #a60845;
+  --color-branding-figBlue: #556471;
+  --color-branding-figTurquoise: #5fbdbb;
+  --color-branding-figGreen: #a9c518;
+
+  /* Typography */
+  --color-typography-primary: #252525;
+  --color-typography-primaryAlt: #fff;
+  --color-typography-secondary: #464646;
+  --color-typography-tertiary: #525252;
+  --color-typography-disabled: #707070;
+  --color-typography-selection: #badbf7;
+  --color-typography-error: #b60000;
+
+  /* Background */
+  --color-layout-primary-background: #fff;
+  --color-layout-secondary-background: #f5f5f5;
+  --color-layout-secondaryAlt-background: #464646;
+  --color-layout-tertiary-background: #f8f8f8;
+  --color-layout-tertiaryAlt-background: #556471;
+  --color-layout-success-background: #e5efcc;
+  --color-layout-warning-background: #ffffa7;
+  --color-layout-error-background: #ffeded;
+  --color-layout-skeletonLoading-background: linear-gradient(90deg, #e9e9e9 0%, #f5f5f5 50%, #e9e9e9 100%);
+
+  /* Border */
+  --color-border-primary: #ddd;
+  --color-border-secondary: #e9e9e9;
+  --color-border-tertiary: #8d8d8d;
+  --color-border-active: #5fbdbb;
+  --color-border-warning: #ffffa7;
+  --color-border-error: #f00;
+  --color-border-focus: rgba(41, 217, 255, 0.5);
+  --color-border-focusShadow: rgba(106, 224, 250, 0.5);
+
+  /* Icon */
+  --color-icon-primary: #525252;
+  --color-icon-primaryAlt: #a60845;
+  --color-icon-secondary: #8d8d8d;
+  --color-icon-secondaryAlt: #7a183e;
+  --color-icon-tertiary: #f5f5f5;
+  --color-icon-tertiaryAlt: #63233c;
+  --color-icon-success: #98b212;
+  --color-icon-successAlt: #5fbdbb;
+  --color-icon-error: #f00;
+
+  /** Buttons **/
+
+  /* Primary */
+  --color-button-primary-background: #a60845;
+  --color-button-primary-background_hover: #7a183e;
+  --color-button-primary-background_click: #63233c;
+  --color-button-primary-background_disabled: #707070;
+  --color-button-primary-label: #fff;
+  --color-button-primary-label_hover: #fff;
+  --color-button-primary-label_click: #fff;
+  --color-button-primary-label_disabled: #f8f8f8;
+  --color-button-primary-icon: #fff;
+  --color-button-primary-icon_hover: #fff;
+  --color-button-primary-icon_click: #fff;
+  --color-button-primary-icon_disabled: #f8f8f8;
+
+  /* Primary Alternative */
+  --color-button-primaryAlt-background: #2a6347;
+  --color-button-primaryAlt-background_hover: #25573e;
+  --color-button-primaryAlt-background_click: #1f4a35;
+  --color-button-primaryAlt-background_disabled: #707070;
+  --color-button-primaryAlt-label: #fff;
+  --color-button-primaryAlt-label_hover: #fff;
+  --color-button-primaryAlt-label_click: #fff;
+  --color-button-primaryAlt-label_disabled: #f8f8f8;
+  --color-button-primaryAlt-icon: #fff;
+  --color-button-primaryAlt-icon_hover: #fff;
+  --color-button-primaryAlt-icon_click: #fff;
+  --color-button-primaryAlt-icon_disabled: #f8f8f8;
+
+  /* Secondary */
+  --color-button-secondary-background: #fff;
+  --color-button-secondary-background_hover: #7a183e;
+  --color-button-secondary-background_click: #63233c;
+  --color-button-secondary-background_disabled: #f8f8f8;
+  --color-button-secondary-label: #a60845;
+  --color-button-secondary-label_hover: #fff;
+  --color-button-secondary-label_click: #fff;
+  --color-button-secondary-label_disabled: #707070;
+  --color-button-secondary-icon: #8d8d8d;
+  --color-button-secondary-icon_hover: #fff;
+  --color-button-secondary-icon_click: #fff;
+  --color-button-secondary-icon_disabled: #bbb;
+
+  /* Secondary Alternative */
+  --color-button-secondaryAlt-background: #fff;
+  --color-button-secondaryAlt-background_hover: #7a183e;
+  --color-button-secondaryAlt-background_click: #63233c;
+  --color-button-secondaryAlt-background_disabled: #f8f8f8;
+  --color-button-secondaryAlt-label: #464646;
+  --color-button-secondaryAlt-label_hover: #fff;
+  --color-button-secondaryAlt-label_click: #fff;
+  --color-button-secondaryAlt-label_disabled: #707070;
+  --color-button-secondaryAlt-icon: #8d8d8d;
+  --color-button-secondaryAlt-icon_hover: #fff;
+  --color-button-secondaryAlt-icon_click: #fff;
+  --color-button-secondaryAlt-icon_disabled: #bbb;
+
+  /* Tertiary */
+  --color-button-tertiary-background: transparent;
+  --color-button-tertiary-background_hover: transparent;
+  --color-button-tertiary-background_click: transparent;
+  --color-button-tertiary-background_disabled: transparent;
+  --color-button-tertiary-label: #a60845;
+  --color-button-tertiary-label_hover: #7a183e;
+  --color-button-tertiary-label_click: #63233c;
+  --color-button-tertiary-label_disabled: #707070;
+  --color-button-tertiary-icon: #8d8d8d;
+  --color-button-tertiary-icon_hover: #8d8d8d;
+  --color-button-tertiary-icon_click: #8d8d8d;
+  --color-button-tertiary-icon_disabled: #bbb;
+
+  /* Tertiary Alternative */
+  --color-button-tertiaryAlt-background: transparent;
+  --color-button-tertiaryAlt-background_hover: transparent;
+  --color-button-tertiaryAlt-background_click: transparent;
+  --color-button-tertiaryAlt-background_disabled: transparent;
+  --color-button-tertiaryAlt-label: #464646;
+  --color-button-tertiaryAlt-label_hover: #7a183e;
+  --color-button-tertiaryAlt-label_click: #63233c;
+  --color-button-tertiaryAlt-label_disabled: #707070;
+  --color-button-tertiaryAlt-icon: #8d8d8d;
+  --color-button-tertiaryAlt-icon_hover: #8d8d8d;
+  --color-button-tertiaryAlt-icon_click: #8d8d8d;
+  --color-button-tertiaryAlt-icon_disabled: #bbb;
+
+  /* Inverted */
+  --color-button-inverted-background: transparent;
+  --color-button-inverted-background_hover: transparent;
+  --color-button-inverted-background_click: transparent;
+  --color-button-inverted-background_disabled: transparent;
+  --color-button-inverted-label: #fff;
+  --color-button-inverted-label_hover: #f5f5f5;
+  --color-button-inverted-label_click: #f5f5f5;
+  --color-button-inverted-label_disabled: #bbb;
+  --color-button-inverted-icon: #fff;
+  --color-button-inverted-icon_hover: #f5f5f5;
+  --color-button-inverted-icon_click: #f5f5f5;
+  --color-button-inverted-icon_disabled: #bbb;
+
+  /** Icon Buttons **/
+
+  /* Primary */
+  --color-iconButton-primary-background: transparent;
+  --color-iconButton-primary-background_hover: transparent;
+  --color-iconButton-primary-background_click: transparent;
+  --color-iconButton-primary-background_disabled: transparent;
+  --color-iconButton-primary-icon: #a60845;
+  --color-iconButton-primary-icon_hover: #7a183e;
+  --color-iconButton-primary-icon_click: #63233c;
+  --color-iconButton-primary-icon_disabled: #bbb;
+
+  /* Primary Alternative */
+  --color-iconButton-primaryAlt-background: transparent;
+  --color-iconButton-primaryAlt-background_hover: transparent;
+  --color-iconButton-primaryAlt-background_click: transparent;
+  --color-iconButton-primaryAlt-background_disabled: transparent;
+  --color-iconButton-primaryAlt-icon: #e9e9e9;
+  --color-iconButton-primaryAlt-icon_hover: #fff;
+  --color-iconButton-primaryAlt-icon_click: #fff;
+  --color-iconButton-primaryAlt-icon_disabled: #bbb;
+
+  /* Secondary */
+  --color-iconButton-secondary-background: transparent;
+  --color-iconButton-secondary-background_hover: transparent;
+  --color-iconButton-secondary-background_click: transparent;
+  --color-iconButton-secondary-background_disabled: transparent;
+  --color-iconButton-secondary-icon: #525252;
+  --color-iconButton-secondary-icon_hover: #7a183e;
+  --color-iconButton-secondary-icon_click: #63233c;
+  --color-iconButton-secondary-icon_disabled: #bbb;
+
+  /* Secondary Alternative */
+  --color-iconButton-secondaryAlt-background: transparent;
+  --color-iconButton-secondaryAlt-background_hover: transparent;
+  --color-iconButton-secondaryAlt-background_click: transparent;
+  --color-iconButton-secondaryAlt-background_disabled: transparent;
+  --color-iconButton-secondaryAlt-icon: #fff;
+  --color-iconButton-secondaryAlt-icon_hover: #e9e9e9;
+  --color-iconButton-secondaryAlt-icon_click: #e9e9e9;
+  --color-iconButton-secondaryAlt-icon_disabled: #bbb;
+
+  /* Tertiary */
+  --color-iconButton-tertiary-background: transparent;
+  --color-iconButton-tertiary-background_hover: transparent;
+  --color-iconButton-tertiary-background_click: transparent;
+  --color-iconButton-tertiary-background_disabled: transparent;
+  --color-iconButton-tertiary-icon: #8d8d8d;
+  --color-iconButton-tertiary-icon_hover: #7a183e;
+  --color-iconButton-tertiary-icon_click: #63233c;
+  --color-iconButton-tertiary-icon_disabled: #bbb;
+
+  /** Select Box **/
+  --color-dropdownTriggerButton-background: linear-gradient(180deg, #fff 0%, #f8f8f8 100%);
+  --color-dropdownTriggerButton-background_hover: linear-gradient(180deg, #fff 0%, #f8f8f8 100%);
+  --color-dropdownTriggerButton-background_click: linear-gradient(180deg, #f8f8f8 0%, #fff 100%);
+  --color-dropdownTriggerButton-background_disabled: #f8f8f8;
+  --color-dropdownTriggerButton-icon: #8d8d8d;
+  --color-dropdownTriggerButton-icon_hover: #7a183e;
+  --color-dropdownTriggerButton-icon_click: #63233c;
+  --color-dropdownTriggerButton-icon_disabled: #bbb;
+
+  /** Input **/
+  --color-input-background: #fff;
+  --color-input-background_disabled: #f8f8f8;
+
+  /** Checkbox **/
+  --color-checkbox-icon: #8d8d8d;
+  --color-checkbox-icon_checked: #5fbdbb;
+  --color-checkbox-icon_hover: #57adab;
+  --color-checkbox-icon_click: #57adab;
+  --color-checkbox-icon_disabled: #bbb;
+  --color-checkbox-alt-icon: #fff;
+  --color-checkbox-alt-icon_checked: #fff;
+  --color-checkbox-alt-icon_hover: #f5f5f5;
+  --color-checkbox-alt-icon_click: #f5f5f5;
+  --color-checkbox-alt-icon_disabled: #bbb;
+
+  /** Switch **/
+
+  /* Slider */
+  --color-switch-slider: #f8f8f8;
+  --color-switch-slider_hover: #f5f5f5;
+  --color-switch-slider_click: #f5f5f5;
+  --color-switch-slider_disabled: #f5f5f5;
+  --color-switch-slider_checked: #5fbdbb;
+  --color-switch-slider_checked_hover: #57adab;
+  --color-switch-slider_checked_click: #57adab;
+  --color-switch-slider_checked_disabled: #bbb;
+
+  /* Handle */
+  --color-switch-handle: #fff;
+  --color-switch-handle_hover: #fff;
+  --color-switch-handle_click: #fff;
+  --color-switch-handle_disabled: #f8f8f8;
+  --color-switch-handle_checked: #fff;
+  --color-switch-handle_checked_hover: #fff;
+  --color-switch-handle_checked_click: #fff;
+  --color-switch-handle_checked_disabled: #f5f5f5;
+
+  /* Label */
+  --color-switch-label: #8d8d8d;
+  --color-switch-label_hover: #8d8d8d;
+  --color-switch-label_click: #8d8d8d;
+  --color-switch-label_disabled: #bbb;
+  --color-switch-label_checked: #fff;
+  --color-switch-label_checked_hover: #fff;
+  --color-switch-label_checked_click: #fff;
+  --color-switch-label_checked_disabled: #f5f5f5;
+
+  /* Other */
+  --color-green-pea: #265940;
+}

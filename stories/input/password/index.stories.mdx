@@ -1,0 +1,54 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import PasswordInput from "@figshare/ui/input/password";
+
+import uncontrollable from "@figshare/ui/helpers/uncontrollable";
+
+<Meta title="UI/Inputs/Password" component={PasswordInput} />
+
+# Password input
+---
+
+
+export const UncontrolledPasswordInput = uncontrollable(
+  PasswordInput,
+  { value: ["onChange", (_, e) => e.target.value] }
+);
+
+export const mountPasswordInput = (props) => <UncontrolledPasswordInput{...props} />;
+
+<Story 
+  name="Password" 
+  parameters={{
+    layout: "centered",
+    jest: ["ui/src/input"],
+  }}
+>
+  {mountPasswordInput()}
+</Story>
+
+
+```jsx
+import React from "react";
+import Input from "@figshare/ui/input";
+
+class InputComponent extends React.Component {
+  render() {
+    return (
+      <Input type="password" />
+    );
+  }
+}
+```
+
+<ArgsTable of={PasswordInput} />
+
+## Themes
+
+<Canvas>
+  <UncontrolledPasswordInput type="password" theme="default" placeholder="Default theme" />
+  <UncontrolledPasswordInput type="password" theme="underline" placeholder="Underline theme" />
+  <UncontrolledPasswordInput type="password" theme="default" error={true} placeholder="Default theme - error" />
+  <UncontrolledPasswordInput type="password" theme="underline" error={true} placeholder="Underline theme - error" />
+  <UncontrolledPasswordInput type="password" theme="default" disabled={true} placeholder="Default theme - disabled" />
+  <UncontrolledPasswordInput type="password" theme="underline" disabled={true} placeholder="Underline theme - disabled" />
+</Canvas>

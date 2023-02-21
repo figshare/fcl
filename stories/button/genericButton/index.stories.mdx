@@ -1,0 +1,42 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import Home from "@figshare/ui/icons/home/medium";
+import GenericButton from "@figshare/ui/button/genericButton";
+
+
+<Meta title="UI/Button/Generic Button" component={GenericButton} />
+
+# Generic Button
+---
+
+
+<Story
+  name="Generic Button"
+  parameters={{
+    layout: "centered",
+    jest: ["ui/src/button/genericButton/base", "ui/src/button/genericButton/index"]
+  }}
+>
+  <GenericButton tooltip="Tooltip text">
+    Click me!
+  </GenericButton>
+</Story>
+
+
+```jsx
+import React from "react";
+import Home from "@figshare/ui/icons/home";
+import { GenericButton } from "@figshare/ui/button";
+
+class MyButton extends React.Component {
+  render() {
+    return (
+      <GenericButton tooltip="Tooltip text">
+        Click me!
+      </GenericButton>
+    );
+  }
+}
+```
+
+
+<ArgsTable of={GenericButton} />

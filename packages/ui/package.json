@@ -1,0 +1,39 @@
+{
+  "name": "@figshare/fcl",
+  "version": "0.0.0",
+  "description": "figshare UI/UX kit",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/figshare/fcl.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update:lock": "npm i --package-lock-only"
+  },
+  "keywords": [
+    "figshare",
+    "ui/ux",
+    "react"
+  ],
+  "author": "figshare",
+  "license": "ISC",
+  "dependencies": {
+    "@joplin/turndown-plugin-gfm": "1.0.45",
+    "classnames": "2.3.2",
+    "draft-js": "0.10.0",
+    "draft-js-export-html": "1.4.1",
+    "draft-js-import-html": "1.4.1",
+    "marked": "4.0.18",
+    "react-datepicker": "4.8.0",
+    "turndown": "7.1.1"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}

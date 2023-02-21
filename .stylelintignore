@@ -1,0 +1,8 @@
+# Bundle directories
+build
+
+# Dependency directories
+node_modules
+
+# Enable Storybook eslint
+!.storybook

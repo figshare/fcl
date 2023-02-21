@@ -1,0 +1,79 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import TextEditor from "@figshare/ui/textEditor";
+
+import styles from "./index.stories.css";
+
+export const canvasStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "flex-start",
+  gap: "16px",
+};
+
+<Meta title="UI/Text Editor" component={TextEditor} />
+
+# Text editor
+---
+
+<Story 
+  name="Text Editor" 
+  parameters={{
+    layout: "centered",
+  }}
+>
+  <TextEditor onChange={() => {}} />
+</Story>
+
+
+```jsx
+import React from "react";
+import TextEditor from "@figshare/ui/text_editor";
+
+class MyTextEditor extends React.Component {
+  render() {
+    return (
+      <TextEditor onChange={() => {}} />
+    );
+  }
+}
+```
+
+## Examples
+
+<Canvas>
+  <div style={canvasStyle}>
+    <p>Basic - empty</p>
+    <TextEditor
+      className={styles.editorWrapper}
+      placeholder="Type a text..."
+      onChange={() => {}}
+    />
+    <p>Basic - with value</p>
+    <TextEditor
+      className={styles.editorWrapper}
+      value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam mauris ut nibh rhoncus"
+      onChange={() => {}}
+    />
+    <p>Disabled - empty</p>
+    <TextEditor
+      className={styles.editorWrapper}
+      disabled={true}
+      placeholder="Type a text..."
+      onChange={() => {}}
+    />
+    <p>Disabled - with value</p>
+    <TextEditor
+      className={styles.editorWrapper}
+      disabled={true}
+      value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam mauris ut nibh rhoncus"
+      onChange={() => {}}
+    />
+  </div>
+</Canvas>
+
+## Props Tables
+
+### TextEditor
+<ArgsTable of={TextEditor} />
