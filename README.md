@@ -36,120 +36,64 @@
 
 ## About
 
-`fcl` is a monorepo for managing the UI components used across figshare. All the components have a showcase page in [storybook](https://storybook.figshare.network/). The monorepo is maintained using [lerna][lerna-url].
+`fcl` is an open source library for some of the React UI components used across figshare. This is the main repo that hosts the documentation and open source library. UI package is deployed and available publicly. Documentation is written using [storybook](https://storybook.js.org/), UX specifications and UI component showcases and docs are available [here](https://storybook.figshare.network/). Deployment and monorepo management is done using `lerna`.
 
 **Packages:**
 *   [![][ui]][ui-url]
 
 ## Usage
 
-### Prerequisites
+### Install
 
-*   [:link: nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Install the provided package to your project's `node_modules`:
+```
+npm install --save @figshare/fcl
+```
 
-    In order to be able to install and maintain multiple `node.js` versions you need to install `nvm`.
+The sources are provided as is, and the components need to be passed through your projects `build/transpilation pipeline` as a transpiled distribution is not provided.
 
-    :warning: If you do not have `node v12` set as default in `nvm` you will always need to run `nvm use || nvm install` before executing any `make` or `npm` commands.
+If you're using webpack, you can configure your babel loader rules to `include` `node_modules/@figshare` in the transpilation process. Our components are provided as class components with `es6` class features such as `statics` and `class properties`, so you may need to allow these features in your babelrc. See `@babel/proposal-class-properties`.
 
+Stylesheets are imported using `css-modules` so you might have to configure your pipeline to support them, if you do not support them already. The library exposes rules and variables through an `index.css` file available in `@figshare/fcl/styles/`. Import it in your project entry point:
 
-*   [:link: authenticate to GitHub packages](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages#authenticating-to-github-packages)
+```
+import "@figshare/fcl/styles/index.css"
+```
 
-    Most of the figshare npm packages are published in the github package registry privately.
+We recommend, if possible, setting a custom `css-module` name generation rule for class names defined for files inside `node_modules/@figshare/fcl` to `fcl-[name]-[local]`
 
-    In order to be able to install these packages you need to create a new [:link: personal acess token](https://github.com/settings/tokens) from github and select `repo` and `read:packages` scopes. If you are a publisher you will **also need to select** `write:packages` scope.
+```js
+// webpack loader example:
+{
+    test: "**/@figshare/fcl/**.css"
+    use: [{
+    loader: "css-loader",
+    options: {
+        importLoaders: 1,
+        modules: {
+            localIdentName: "fcl-[name]-[local]" 
+        },
+        sourceMap: true,
+    },
+    }]
+```
 
-    After you've generated the personal access token you can authenticate by logging in to `npm` via `npm login` command.
+This will allow you to easily reference and target our component classnames in your stylesheets and add custom style and layout rules as required, without having to provide `className` to exported components.
 
-    ```bash
-    $ npm login --registry=https://npm.pkg.github.com
-    > Username: USERNAME
-    > Password: TOKEN
-    > Email: PUBLIC-EMAIL-ADDRESS
-    ```
+### Importing and using components
+To use components simply import them from the package. You can find examples in the stories folder or on the documentation site.
 
-    Replace `USERNAME` with your github username.
+```jsx
+import { Button, IconButton } "@figshare/fcl/button"
+import Calendar "@figshare/fcl/icons/calendar";
 
-    Replace `TOKEN` with your newly generated personal access token.
+// render
+<Button onClick={...}>A Button</Button>
+<IconButton icon={Calendar} onClick={...}>An Icon Button</IconButton>
+```
+### 
 
-    Replace `PUBLIC-EMAIL-ADDRESS` with your figshare e-mail.
-
-
-### Installing dependencies
-
-Run the following commands in order:
-*   `npm ci`
-
-    Install the dependencies.
-
-
-### Building Storybook
-
-Run one of the following commands:
-*   `npm run storybook:build`
-
-    Build storybook and save the transpiled code in the `build` folder. You can open `build/index.html` to view the generated application.
-
-    :memo: This is used for stage/production deploys.
-
-
-*   `npm run storybook`
-
-    Build storybook in watch mode.
-
-
-
-## Development
-
-### first time setup
- add `nvmrc` with v12
- add a `npmrc` file with `@figshare` as a namespace:   
-
- `@figshare:registry=https://npm.pkg.github.com/`
-
-### Coding standards
-
-:memo: Please review [`ECMAScript style guide`](https://github.com/figshare/fig-style-guide/blob/master/ES_STYLE_GUIDE.md) and [`contributing guidelines`](CONTRIBUTING.md) before submitting any **pull request**.
-
-
-### Useful commands
-
-*   `npx lerna bootstrap --hoist`
-
-    Bootstrap and link the packages in the monorepo
-
-
-*   `npx lerna publish -m ":rocket: Deploy - DD Mon YYYY"`
-
-    Publish to github registry
-
-
-*   `npm run storybook`
-
-    Run storybook in watch mode
-
-
-*   `npm run storybook:build`
-
-    Build storybook into a static website ( ready for stage deploy )
-
-
-*   `npm run lint`
-
-    Executes ESlint and StyleLint against all `.js`, `.jsx` and `.css` files and outputs the code smells as errors or warnings.
-
-
-*   `npm run test`
-
-    Run all the tests within all the packages. You can pass extra jest arguments like so `npm run test -- --coverage`.
-
-
-
-<div align="center">
-
-**_PS:_**
-**If you have further questions you can contact the CODE OWNERS for help.**
-
-</div>
+[logo]: https://github.com/figshare/fcl/raw/master/assets/logo.png "fcl - figshare frontend component library"
 
 [node]: https://img.shields.io/badge/node-12.x.x-darkorange?logo=node.js "node"
 [node-url]: https://nodejs.org/en/
@@ -166,10 +110,8 @@ Run one of the following commands:
 [lerna]: https://img.shields.io/badge/lerna-4.x.x-darkgreen?logo=lerna "lerna"
 [lerna-url]: https://lerna.js.org/
 
-[ui]: https://img.shields.io/badge/-%40figshare%2Fcomponents-blue?logo=npm "@figshare/ui"
+[ui]: https://img.shields.io/badge/-%40figshare%2Ffcl-blue?logo=npm "@figshare/fcl"
 [ui-url]: https://github.com/figshare/fcl/packages/1
-
-[coverage]: https://img.shields.io/badge/code_coverage-100%25-brightgreen?logo=jest "jest code coverage"
 
 [duduta]: https://avatars0.githubusercontent.com/u/1036398?s=32&v=4 "Daniel Gavrila"
 [duduta-url]: https://github.com/danielduduta

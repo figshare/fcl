@@ -4,7 +4,6 @@ import { mount } from "enzyme";
 import Checkbox from "./checkbox";
 import Date from "./date";
 import Password from "./password";
-import Radio from "./radio";
 import Text from "./text";
 import Input from "./index";
 
@@ -32,12 +31,6 @@ describe("<Input />", () => {
     const input = mount(<Input type="password" />);
 
     expect(input.find(Password)).toHaveLength(1);
-  });
-
-  it("renders Radio component", () => {
-    const input = mount(<Input type="radio" />);
-
-    expect(input.find(Radio)).toHaveLength(1);
   });
 
   it("renders Text component", () => {

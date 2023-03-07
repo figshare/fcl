@@ -19,6 +19,8 @@ stories.addParameters({
     "components/a11y/linking/reference",
     "components/a11y/linking/storage",
   ],
+  viewMode: "docs",
+  previewTabs: { canvas: { hidden: true } },
 });
 
 stories.add("Component prop", () => <PropComponentShowcase />);

@@ -3,7 +3,16 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import SearchInput from "@figshare/ui/searchInput";
 import uncontrollable from "@figshare/ui/helpers/uncontrollable";
 
-<Meta title="UI/Inputs/Search" component={SearchInput} />
+<Meta 
+  title="UI/Inputs/Search" 
+  component={SearchInput}
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }} 
+/>
 
 # Search input
 ---

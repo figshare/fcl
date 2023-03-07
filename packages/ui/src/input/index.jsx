@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import Checkbox from "./checkbox";
 import Date from "./date";
 import Password from "./password";
-import Radio from "./radio";
 import Text from "./text";
 
 
@@ -12,7 +11,6 @@ const typesMap = {
   checkbox: Checkbox,
   date: Date,
   password: Password,
-  radio: Radio,
   text: Text,
 };
 

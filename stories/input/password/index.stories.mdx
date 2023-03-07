@@ -3,7 +3,16 @@ import PasswordInput from "@figshare/ui/input/password";
 
 import uncontrollable from "@figshare/ui/helpers/uncontrollable";
 
-<Meta title="UI/Inputs/Password" component={PasswordInput} />
+<Meta 
+  title="UI/Inputs/Password" 
+  component={PasswordInput} 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
 
 # Password input
 ---
