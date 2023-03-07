@@ -6,7 +6,11 @@ import NavigableList from "@figshare/ui/helpers/navigableList";
 const stories = storiesOf("UI/NavigableList", module);
 
 
-stories.addParameters({ jest: ["components/navigableList"] });
+stories.addParameters({
+  jest: ["components/navigableList"],
+  viewMode: "docs",
+  previewTabs: { canvas: { hidden: true } },
+});
 
 const renderContent = ({ ref, ...passedProps }) => (
   <div ref={ref} {...passedProps}>

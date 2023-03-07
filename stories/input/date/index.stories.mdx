@@ -22,7 +22,16 @@ export const canvasStyle = {
   gap: "16px",
 };
 
-<Meta component={DatePicker} title="UI/Inputs/Date" />
+<Meta 
+  component={DatePicker} 
+  title="UI/Inputs/Date" 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
 
 # Date Picker
 

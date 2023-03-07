@@ -3,7 +3,16 @@ import Input from "@figshare/ui/input/text";
 
 import uncontrollable from "@figshare/ui/helpers/uncontrollable";
 
-<Meta title="UI/Inputs/Text" component={Input} />
+<Meta 
+  title="UI/Inputs/Text" 
+  component={Input} 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
 
 # Text input
 ---

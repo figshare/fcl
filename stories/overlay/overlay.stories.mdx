@@ -83,7 +83,16 @@ export const Example = ({ children }) => {
       </>);
 }
 
-<Meta component={Overlay} title="UI/Overlay" />
+<Meta 
+  component={Overlay} 
+  title="UI/Overlay" 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
 
 # Examples
 
