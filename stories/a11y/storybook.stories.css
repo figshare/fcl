@@ -1,0 +1,27 @@
+.section {
+  margin: calc(3 * var(--gridSize));
+  padding: calc(3 * var(--gridSize));
+}
+
+.row {
+  margin-bottom: calc(10 * var(--gridSize));
+}
+
+.buttonRow {
+  & > *:not(:first-of-type) {
+    margin-left: calc(2 * var(--gridSize));
+  }
+}
+
+.debug {
+  font-size: 0.65rem;
+
+  overflow-x: scroll;
+
+  padding: 0.25rem 0.5rem;
+}
+
+.label {
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+}

@@ -1,0 +1,52 @@
+.container {
+  max-width: calc(120 * var(--gridSize));
+  padding: calc(6 * var(--gridSize));
+}
+
+.title {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  color: var(--color-branding-figBlue);
+}
+
+.item {
+  margin: 0 0 calc(5 * var(--gridSize));
+
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.sizeXXXL {
+  font-size: var(--typography-XXXL-fontSize);
+  line-height: var(--typography-XXXL-lineHeight);
+}
+
+.sizeXXL {
+  font-size: var(--typography-XXL-fontSize);
+  line-height: var(--typography-XXL-lineHeight);
+}
+
+.sizeXL {
+  font-size: var(--typography-XL-fontSize);
+  line-height: var(--typography-XL-lineHeight);
+}
+
+.sizeL {
+  font-size: var(--typography-L-fontSize);
+  line-height: var(--typography-L-lineHeight);
+}
+
+.sizeM {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+}
+
+.sizeS {
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+}
+
+.sizeXS {
+  font-size: var(--typography-XS-fontSize);
+  line-height: var(--typography-XS-lineHeight);
+}

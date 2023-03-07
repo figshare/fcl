@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css?family=B612|B612+Mono|Roboto&display=swap");
+
+:global(:root) {
+  --fontFamily: "Arial", "Roboto", "Helvetica", "Open Sans", sans-serif;
+  --fontFamilyMono: "B612 Mono", monospace;
+
+  /* XXXL */
+  --typography-XXXL-fontSize: 36px;
+  --typography-XXXL-lineHeight: 60px;
+
+  /* XXL */
+  --typography-XXL-fontSize: 28px;
+  --typography-XXL-lineHeight: 42px;
+
+  /* XL */
+  --typography-XL-fontSize: 24px;
+  --typography-XL-lineHeight: 36px;
+
+  /* L */
+  --typography-L-fontSize: 20px;
+  --typography-L-lineHeight: 30px;
+
+  /* M */
+  --typography-M-fontSize: 16px;
+  --typography-M-lineHeight: 24px;
+
+  /* S */
+  --typography-S-fontSize: 14px;
+  --typography-S-lineHeight: 24px;
+
+  /* XS */
+  --typography-XS-fontSize: 12px;
+  --typography-XS-lineHeight: 18px;
+}

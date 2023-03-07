@@ -1,0 +1,19 @@
+{
+  "parser": "@babel/eslint-parser",
+    "extends": [
+      "./node_modules/@figshare/style-guide/.eslintrc.json"
+    ],
+    "settings": {
+    "react": { "version": "16" }
+    },
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "parserOptions": {
+      "requireConfigFile": false,
+      "babelOptions": {
+        "presets": ["@babel/preset-react"]
+    }
+    }
+  }

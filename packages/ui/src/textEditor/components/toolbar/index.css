@@ -1,0 +1,34 @@
+.toolbarContainer {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  height: fit-content;
+}
+
+.toolbar {
+  position: absolute;
+  bottom: 8px;
+
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 0;
+
+  user-select: none;
+  flex-wrap: wrap;
+}
+
+.buttonResize {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+
+  width: 8px;
+  height: 8px;
+
+  border: none;
+  background-color: transparent;
+}

@@ -1,0 +1,132 @@
+html,
+body {
+  font-family: var(--fontFamily);
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  text-align: left;
+
+  color: var(--color-typography-primary);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+ol {
+  font-weight: normal;
+
+  margin: 0;
+  padding: 0;
+}
+
+h1:not([class]) {
+  font-size: var(--typography-XXL-fontSize);
+  font-weight: bold;
+  line-height: var(--typography-XXL-lineHeight);
+
+  margin: 0 0 calc(7 * var(--gridSize)) 0;
+}
+
+h2:not([class]) {
+  font-size: var(--typography-XL-fontSize);
+  font-weight: bold;
+  line-height: var(--typography-XL-lineHeight);
+
+  margin: calc(7 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+}
+
+h3:not([class]) {
+  font-size: var(--typography-L-fontSize);
+  font-weight: bold;
+  line-height: var(--typography-L-lineHeight);
+
+  margin: calc(5 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+}
+
+h4:not([class]) {
+  font-size: var(--typography-M-fontSize);
+  font-weight: bold;
+  line-height: var(--typography-M-lineHeight);
+
+  margin: calc(4 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+}
+
+h5:not([class]) {
+  font-size: var(--typography-S-fontSize);
+  font-weight: bold;
+  line-height: var(--typography-S-lineHeight);
+
+  margin: calc(4 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+
+  text-transform: uppercase;
+}
+
+h6:not([class]) {
+  font-size: var(--typography-S-fontSize);
+  font-weight: bold;
+  line-height: var(--typography-S-lineHeight);
+
+  margin: calc(4 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+}
+
+h2:not([class]) + h3:not([class]),
+h2:not([class]) + h4:not([class]),
+h2:not([class]) + h5:not([class]),
+h2:not([class]) + h6:not([class]),
+h3:not([class]) + h4:not([class]),
+h3:not([class]) + h5:not([class]),
+h3:not([class]) + h6:not([class]),
+h4:not([class]) + h5:not([class]),
+h4:not([class]) + h6:not([class]),
+h5:not([class]) + h6:not([class]) {
+  margin-top: calc(2 * var(--gridSize));
+}
+
+p:not([class]) {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  margin: 0 0 calc(4 * var(--gridSize)) 0;
+}
+
+ul:not([class]),
+ol:not([class]) {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  margin: 0 0 calc(4 * var(--gridSize)) 0;
+  padding: 0 0 0 calc(4 * var(--gridSize));
+}
+
+p:not([class]) + ul:not([class]),
+p:not([class]) + ol:not([class]) {
+  margin-top: calc(-3 * var(--gridSize));
+}
+
+ul:not([class]) ul:not([class]),
+ol:not([class]) ol:not([class]),
+ol:not([class]) ul:not([class]),
+ul:not([class]) ol:not([class]) {
+  margin: 0;
+}
+
+ol:not([class]) ol:not([class]),
+ul:not([class]) ol:not([class]) {
+  list-style-type: lower-roman;
+}
+
+ol:not([class]) ol:not([class]) ol:not([class]),
+ol:not([class]) ul:not([class]) ol:not([class]),
+ul:not([class]) ol:not([class]) ol:not([class]),
+ul:not([class]) ul:not([class]) ol:not([class]) {
+  list-style-type: lower-alpha;
+}

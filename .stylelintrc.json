@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@figshare/style-guide/.stylelintrc.json"
+  ]
+}

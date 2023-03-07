@@ -1,0 +1,41 @@
+# Main bundle directory
+build
+
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# Dependency directories
+node_modules/
+
+
+# npm local settings
+.npmrc
+.yarnrc
+.nvmrc
+
+
+# Yarn Integrity file
+.yarn-integrity
+
+
+# IDE & Config files
+.vscode
+.yalc
+.idea
+
+
+# Jest
+.coverage
+.jest-results.json
+
+
+# Cache
+.eslintcache
+.npm
+.cache

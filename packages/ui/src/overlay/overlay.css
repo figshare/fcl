@@ -1,0 +1,119 @@
+.overlay {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay.black {
+  background-color: var(--color-layout-secondaryAlt-background);
+}
+
+.overlay.blackTransparent {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay.white {
+  background-color: var(--color-layout-primary-background);
+}
+
+.overlay.whiteTransparent {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.overlayBox {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: calc(109 * var(--gridSize));
+
+  height: auto;
+  max-height: 100%;
+
+  background-color: var(--color-layout-primary-background);
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/*
+  using display: none to explicitly hide the overlay.
+  using visiblity: hidden would not be safe or enough,
+  as there might be nested elements,
+  that have visibility: visible set and they would show.
+ */
+/* stylelint-disable-next-line a11y/no-display-none */
+.overlay:not(:last-of-type) {
+  display: none;
+}
+
+.overlayBox.primary {
+  background-color: var(--color-layout-primary-background);
+}
+
+.overlayBox.secondary {
+  background-color: var(--color-layout-secondary-background);
+}
+
+.overlayBox.warning {
+  background-color: var(--color-layout-warning-background);
+}
+
+.overlayBox.success {
+  background-color: var(--color-layout-success-background);
+}
+
+.overlayBox.error {
+  background-color: var(--color-layout-error-background);
+}
+
+.overlayBox.modal {
+  width: calc(119 * var(--gridSize));
+
+  @media (max-width: 1023px) {
+    width: 100%;
+  }
+}
+
+.overlayBox.formModal {
+  width: calc(150 * var(--gridSize));
+  min-height: 100vh;
+  max-height: 100vh;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+.closeButton {
+  display: none;
+
+  @media (max-width: 1023px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: block;
+
+    width: calc(8 * var(--gridSize));
+    height: calc(8 * var(--gridSize));
+    margin: var(--gridSize);
+  }
+}

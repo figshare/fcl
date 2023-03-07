@@ -1,0 +1,78 @@
+svg {
+  width: auto;
+  height: auto;
+}
+
+* {
+  box-sizing: border-box;
+
+  &:focus {
+    border-radius: calc(0.5 * var(--gridSize));
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-border-focus), 0 0 4px 2px var(--color-border-focusShadow);
+  }
+}
+
+a,
+button {
+  appearance: none;
+
+  font-size: inherit;
+  line-height: inherit;
+
+  margin: 0;
+  padding: 0;
+
+  text-decoration: none;
+
+  color: var(--color-button-tertiary-label);
+  border: 0 none transparent;
+  background: var(--color-button-tertiary-background);
+
+  &:focus {
+    text-decoration: none;
+
+    color: var(--color-button-tertiary-label_hover);
+    background: var(--color-button-tertiary-background_hover);
+  }
+
+  &:hover {
+    text-decoration: underline;
+
+    color: var(--color-button-tertiary-label_hover);
+    background: var(--color-button-tertiary-background_hover);
+  }
+
+  &:active {
+    text-decoration: none;
+
+    color: var(--color-button-tertiary-label_click);
+    background: var(--color-button-tertiary-background_click);
+  }
+
+  &[disabled],
+  &[aria-disabled] {
+    color: var(--color-button-tertiary-label_disabled);
+    background: var(--color-button-tertiary-background_disabled);
+  }
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  font-family: var(--fontFamily);
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  height: calc(6 * var(--gridSize));
+
+  color: var(--color-typography-primary);
+  background-color: var(--color-layout-primary-background);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--fontFamilyMono);
+}

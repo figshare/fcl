@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+
+  width: 100%;
+  min-height: calc(15 * var(--gridSize));
+  margin-top: auto;
+
+  padding: calc(4 * var(--gridSize)) calc(6 * var(--gridSize)) calc(5 * var(--gridSize)) calc(6 * var(--gridSize));
+
+  background-color: transparent;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: calc(10 * var(--gridSize));
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    justify-content: space-around;
+
+    padding: calc(2 * var(--gridSize));
+  }
+}
+
+.footer.singleControl {
+  justify-content: flex-end;
+}
