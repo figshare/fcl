@@ -19,16 +19,50 @@ const componentTypes = {
 
 export default class Checkbox extends Component {
   static propTypes = {
+    /**
+      Boolean value to determine if the checkbox is checked/selected.
+     */
     checked: PropTypes.bool,
+    /**
+      Label text/content for the checkbox.
+     */
     children: PropTypes.any,
+    /**
+      Optional className to append to the input container class list.
+     */
     className: PropTypes.string,
+    /**
+      Mark the input as disabled. Can be focused but will be readonly and cannot be toggled.
+     */
     disabled: PropTypes.bool,
+    /**
+      Mark the input as being in an error state, visually.
+     */
     error: PropTypes.bool,
+    /**
+      Optional className to append to the checkmark icon.
+     */
     iconClassName: PropTypes.string,
+    /**
+      Optional ref function. Provide this property if you need a reference to the input node.
+     */
     innerRef: PropTypes.func,
+    /**
+      Style variation for the checkbox.
+     */
     theme: PropTypes.oneOf(["alt"]),
+    /**
+      Controls the component flavour.
+      If you want the input to be rendered as either a traditional checkbox or a switch.
+     */
     variant: PropTypes.oneOf(["checkbox", "switch"]),
+    /**
+      Triggered when the input state changes. Receives the change event as an argument.
+     */
     onChange: PropTypes.func,
+    /**
+      Triggered when the input is clicked on.
+     */
     onClick: PropTypes.func,
   }
 

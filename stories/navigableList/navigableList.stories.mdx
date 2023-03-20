@@ -1,0 +1,143 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import NavigableList from "@figshare/ui/helpers/navigableList";
+
+<Meta 
+  title="UI/NavigableList" 
+  component={NavigableList}
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# NavigableList
+---
+
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+NavigableList component, used to render breadcrumbs or inline, ordered link buttons.
+Use *Left and Right Arrow* keys to navigate between focusable elements for `"horizontal"` `navigationType`s, 
+or *Up and Down Arrow* keys for `"vertical"` `navigationType`s.
+
+<Story 
+  name="NavigableList" 
+  parameters={{
+    layout: "centered",
+  }}
+>
+  {() => {
+    const containerStyle = {
+      margin: "calc(3 * var(--gridSize))",
+      padding: "calc(3 * var(--gridSize))",
+      display: "flex",
+      flexWrap: "wrap",
+    };
+    const buttonStyle = {
+      margin: "calc(2 * var(--gridSize))",
+    };
+    const renderContent = ({ ref, ...passedProps }) => (
+      <div ref={ref} style={containerStyle} {...passedProps}>
+        <button style={buttonStyle}>Item 1</button>
+        <button style={buttonStyle}>Item 2</button>
+        <button style={buttonStyle}>Item 3</button>
+      </div>
+    );
+    return (
+      <NavigableList navigationType="horizontal">
+        {renderContent}
+      </NavigableList>
+    );
+  }}
+</Story>
+
+The component can be imported from:
+
+```jsx
+import NavigableList from "@figshare/fcl/helpers/navigableList";
+
+const containerStyle = {
+  margin: "calc(3 * var(--gridSize))",
+  padding: "calc(3 * var(--gridSize))",
+  display: "flex",
+  flexWrap: "wrap",
+};
+
+const buttonStyle = {
+  margin: "calc(2 * var(--gridSize))",
+};
+
+const renderContent = ({ ref, ...passedProps }) => (
+  <div ref={ref} style={containerStyle} {...passedProps}>
+    <button style={buttonStyle}>Item 1</button>
+    <button style={buttonStyle}>Item 2</button>
+    <button style={buttonStyle}>Item 3</button>
+  </div>
+);
+
+function ExampleHorizontalNavigableList() {
+    return (
+      <>
+        <div style={containerStyle}>
+          <NavigableList navigationType="horizontal">
+            {renderContent}
+          </NavigableList>
+        </div>
+        <span></span>
+      </>
+    );
+}
+```
+## Props Table
+
+<ArgsTable of={NavigableList} />
+Remaining set properties are desturctured and passed to the component node*
+
+## Examples
+
+export const containerStyle = {
+  margin: "calc(3 * var(--gridSize))",
+  padding: "calc(3 * var(--gridSize))",
+  display: "flex",
+  flexWrap: "wrap",
+};
+export const buttonStyle = {
+  margin: "calc(2 * var(--gridSize))",
+};
+
+export const renderContent = ({ ref, containerStyle, ...passedProps }) => (
+  <div ref={ref} style={containerStyle} {...passedProps}>
+    <button style={buttonStyle}>Item 1</button>
+    <button style={buttonStyle}>Item 2</button>
+    <button style={buttonStyle}>Item 3</button>
+  </div>
+);
+
+### Horizontal NavigableList
+
+export const verticalContainerStyle = {
+  margin: "calc(3 * var(--gridSize))",
+  padding: "calc(3 * var(--gridSize))",
+  display: "flex",
+  flexDirection: "column",
+  flexWrap: "wrap",
+};
+
+<Canvas>
+  <NavigableList navigationType="horizontal" containerStyle={containerStyle}>
+    {renderContent}
+  </NavigableList>
+</Canvas>
+
+### Vertical NavigableList
+
+<Canvas>
+  <NavigableList navigationType="vertical" containerStyle={verticalContainerStyle}>
+    {renderContent}
+  </NavigableList>
+</Canvas>

@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import Checkbox from "./checkbox";
 import Date from "./date";
 import Password from "./password";
+import Search from "./search";
 import Text from "./text";
 
 
@@ -11,12 +12,19 @@ const typesMap = {
   checkbox: Checkbox,
   date: Date,
   password: Password,
+  search: Search,
   text: Text,
 };
 
 
 export class Input extends Component {
-  static propTypes = { type: PropTypes.string.isRequired }
+  static propTypes = {
+    /**
+     Input component type variation.
+     Supported types: ["text", "checkbox", "date", "password", "search", "text"]
+     */
+    type: PropTypes.string.isRequired,
+  }
 
   render() {
     const { type, ...props } = this.props;

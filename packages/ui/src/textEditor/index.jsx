@@ -40,16 +40,52 @@ const KEY_ENTER = 13;
 
 export default class TextEditor extends React.Component {
   static propTypes = {
+    /**
+      Callback called when the editor contents are edited or changed.
+      Called with the new `value` as the first argument by default.
+      If `fieldName` is specified, the `fieldName` will be the first argument,
+      followed by the new `value`.
+     */
     onChange: PropTypes.func.isRequired,
+    /**
+      Optional class to append to the text editor wrapper node.
+     */
     className: PropTypes.string,
+    /**
+      Disables the editor.
+     */
     disabled: PropTypes.bool,
+    /**
+      Identify the editor through a unique field name. Will be passed to the `onChange` function as the first argument.
+     */
     fieldName: PropTypes.string,
+    /**
+      Maximum number of characters for the editor text value. Includes markup.
+     */
     maxTextLength: PropTypes.number,
+    /**
+      Minimum number of characters for the editor text value. Includes markup.
+     */
     minTextLength: PropTypes.number,
+    /**
+      Placeholder text for the editor.
+     */
     placeholder: PropTypes.string,
+    /**
+      Configuration options for the editor toolbar.
+     */
     toolbarConfig: PropTypes.array,
+    /**
+      Editor text value.
+     */
     value: PropTypes.string,
+    /**
+      Callback called when the editor looses focus.
+     */
     onBlur: PropTypes.func,
+    /**
+      Callback called when the editor gains focus.
+     */
     onFocus: PropTypes.func,
   };
 

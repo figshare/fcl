@@ -7,7 +7,13 @@ import styles from "./overlayContent.css";
 
 export default class OverlayContent extends Component {
   static propTypes = {
+    /**
+      Main contents for an overlay.
+     */
     children: PropTypes.node,
+    /**
+      Optional class to append to the content node.
+     */
     className: PropTypes.string,
   }
 

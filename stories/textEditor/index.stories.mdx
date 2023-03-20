@@ -25,6 +25,14 @@ export const canvasStyle = {
 
 # Text editor
 ---
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+A textarea which allows users to input more complex HTML markup text. 
+Users can mark portions or the whole content as paragraphs, headings or emphasise or underline text in various ways.
 
 <Story 
   name="Text Editor" 
@@ -35,19 +43,24 @@ export const canvasStyle = {
   <TextEditor onChange={() => {}} />
 </Story>
 
+The component can be imported from:
 
 ```jsx
-import React from "react";
-import TextEditor from "@figshare/ui/text_editor";
+import TextEditor from "@figshare/fcl/textEditor";
 
 class MyTextEditor extends React.Component {
   render() {
     return (
-      <TextEditor onChange={() => {}} />
+      <TextEditor onChange={(newValue) => {}} />
+      <TextEditor fieldName="description" onChange={(fieldName, newValue) => {}} />
     );
   }
 }
 ```
+
+## Props Table
+
+<ArgsTable of={TextEditor} />
 
 ## Examples
 
@@ -81,8 +94,3 @@ class MyTextEditor extends React.Component {
     />
   </div>
 </Canvas>
-
-## Props Tables
-
-### TextEditor
-<ArgsTable of={TextEditor} />

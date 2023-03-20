@@ -2,9 +2,20 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
 
 import styles from "./index.stories.css";
 
-<Meta title="Icons" />
+<Meta 
+  title="Icons"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
 
 # Presentation
+---
+
+An icon set for "presentation" related items. Icons for items ranging from projects, to individual publications, or simple quotations. 
 
 import Quote from "@figshare/ui/icons/presentation/quote";
 import Project from "@figshare/ui/icons/presentation/project";
@@ -20,7 +31,12 @@ import EmbedTitle from "@figshare/ui/icons/presentation/embedTitle";
 import Ribbon from "@figshare/ui/icons/presentation/ribbon";
 import Publications from "@figshare/ui/icons/presentation/publications";
 
-<Story name="Presentation">
+<Story 
+  name="Presentation"
+  parameters={{
+    layout: "centered",
+  }}
+>
   <Quote className={styles.icon} />
   <Project className={styles.icon} />
   <Collection className={styles.icon} />
@@ -36,3 +52,33 @@ import Publications from "@figshare/ui/icons/presentation/publications";
   <Ribbon className={styles.icon} />
   <Publications className={styles.icon} />
 </Story>
+
+```jsx
+import Quote from "@figshare/ui/icons/presentation/quote";
+import Project from "@figshare/ui/icons/presentation/project";
+import Collection from "@figshare/ui/icons/presentation/collection";
+import Exclamation from "@figshare/ui/icons/presentation/exclamation";
+import CheckMark from "@figshare/ui/icons/presentation/checkMark";
+import Note from "@figshare/ui/icons/presentation/note";
+import FTP from "@figshare/ui/icons/presentation/ftp";
+import EnvelopeSuccess from "@figshare/ui/icons/presentation/envelopeSuccess";
+import EnvelopeError from "@figshare/ui/icons/presentation/envelopeError";
+import EmbedCode from "@figshare/ui/icons/presentation/embedCode";
+import EmbedTitle from "@figshare/ui/icons/presentation/embedTitle";
+import Ribbon from "@figshare/ui/icons/presentation/ribbon";
+import Publications from "@figshare/ui/icons/presentation/publications";
+
+<Quote />
+<Project />
+<Collection />
+<Exclamation />
+<CheckMark />
+<Note />
+<FTP />
+<EnvelopeSuccess />
+<EnvelopeError />
+<EmbedCode />
+<EmbedTitle />
+<Ribbon />
+<Publications />
+```

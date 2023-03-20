@@ -1,14 +1,11 @@
-import React, { Fragment } from "react";
-import { withDesign } from "storybook-addon-designs";
-
-import "@figshare/ui/styles/index.css";
+import classnames from "classnames";
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import styles from "./colors.stories.css";
 
 
-const onSaveTitleClipboard = (ev) => {
+export const onSaveTitleClipboard = (ev) => {
   const dummy = document.createElement("textarea");
   const { title } = ev.target;
-
   document.body.appendChild(dummy);
   dummy.value = title;
   dummy.select();
@@ -16,10 +13,9 @@ const onSaveTitleClipboard = (ev) => {
   document.body.removeChild(dummy);
 };
 
-const ColorTile = (colorProps) => {
+export const ColorTile = (colorProps) => {
   const { title } = colorProps;
   const style = { background: `var(${title})`, cursor: "pointer" };
-
   return (
     <button
       className={styles.colorTile}
@@ -31,10 +27,9 @@ const ColorTile = (colorProps) => {
   );
 };
 
-const BorderTile = (colorProps) => {
+export const BorderTile = (colorProps) => {
   const { title } = colorProps;
   const style = { borderColor: `var(${title})`, cursor: "pointer" };
-
   return (
     <button
       className={styles.borderTile}
@@ -46,9 +41,8 @@ const BorderTile = (colorProps) => {
   );
 };
 
-const StateTiles = (options) => {
+export const StateTiles = (options) => {
   const { identifier } = options;
-
   return (
     <Fragment>
       <ColorTile title={`--color-${identifier}`} />
@@ -59,7 +53,7 @@ const StateTiles = (options) => {
   );
 };
 
-const StateHeadings = () => (
+export const StateHeadings = () => (
   <Fragment>
     <div className={styles.textTile}> Default </div>
     <div className={styles.textTile}> Hover </div>
@@ -68,9 +62,8 @@ const StateHeadings = () => (
   </Fragment>
 );
 
-const ButtonColorMatrix = (options) => {
+export const ButtonColorMatrix = (options) => {
   const { title, identifier } = options;
-
   return (
     <div className={styles.wrapperColumn}>
       <h3> {title} </h3>
@@ -97,9 +90,8 @@ const ButtonColorMatrix = (options) => {
   );
 };
 
-const IconColorMatrix = (options) => {
+export const IconColorMatrix = (options) => {
   const { title, identifier } = options;
-
   return (
     <div className={styles.wrapperColumn}>
       <h3> {title} </h3>
@@ -122,9 +114,8 @@ const IconColorMatrix = (options) => {
   );
 };
 
-const CheckboxColors = (options) => {
+export const CheckboxColors = (options) => {
   const { title, identifier } = options;
-
   return (
     <div className={styles.wrapperColumn}>
       <h3> {title} </h3>
@@ -148,9 +139,8 @@ const CheckboxColors = (options) => {
   );
 };
 
-const SwitchColors = (options) => {
+export const SwitchColors = (options) => {
   const { title, identifier } = options;
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapperColumn}>
@@ -190,7 +180,6 @@ export const Colors = () => (
       <ColorTile title="--color-branding-figTurquoise" />
       <ColorTile title="--color-branding-figGreen" />
     </div>
-
     <h2> General </h2>
     <div className={styles.wrapperColumn}>
       <h3> Typography </h3>
@@ -203,7 +192,6 @@ export const Colors = () => (
         <ColorTile title="--color-typography-error" />
         <ColorTile title="--color-typography-selection" />
       </div>
-
       <h3> Background </h3>
       <div className={styles.wrapper}>
         <ColorTile title="--color-layout-primary-background" />
@@ -216,7 +204,6 @@ export const Colors = () => (
         <ColorTile title="--color-layout-error-background" />
         <ColorTile title="--color-layout-skeletonLoading-background" />
       </div>
-
       <h3> Border </h3>
       <div className={styles.wrapper}>
         <BorderTile title="--color-border-primary" />
@@ -231,7 +218,6 @@ export const Colors = () => (
           title="focus state"
         />
       </div>
-
       <h3> Icon </h3>
       <div className={styles.wrapper}>
         <ColorTile title="--color-icon-primary" />
@@ -245,42 +231,34 @@ export const Colors = () => (
         <ColorTile title="--color-icon-error" />
       </div>
     </div>
-
     <h2> Button </h2>
     <div className={styles.wrapper}>
       <ButtonColorMatrix identifier="button-primary" title="Primary" />
       <ButtonColorMatrix identifier="button-primaryAlt" title="Primary Alternative" />
     </div>
-
     <div className={styles.wrapper}>
       <ButtonColorMatrix identifier="button-secondary" title="Secondary" />
       <ButtonColorMatrix identifier="button-secondaryAlt" title="Secondary Alternative" />
     </div>
-
     <div className={styles.wrapper}>
       <ButtonColorMatrix identifier="button-tertiary" title="Tertiary" />
       <ButtonColorMatrix identifier="button-tertiaryAlt" title="Tertiary Alternative" />
     </div>
-
     <div className={styles.wrapper}>
       <ButtonColorMatrix identifier="button-inverted" title="Inverted" />
     </div>
-
     <h2> Icon Button </h2>
     <div className={styles.wrapper}>
       <IconColorMatrix identifier="iconButton-primary" title="Primary" />
       <IconColorMatrix identifier="iconButton-primaryAlt" title="Primary Alternative" />
     </div>
-
     <div className={styles.wrapper}>
       <IconColorMatrix identifier="iconButton-secondary" title="Secondary" />
       <IconColorMatrix identifier="iconButton-secondaryAlt" title="Secondary Alternative" />
     </div>
-
     <div className={styles.wrapper}>
       <IconColorMatrix identifier="iconButton-tertiary" title="Tertiary" />
     </div>
-
     <h2> Select box - trigger button </h2>
     <div className={styles.wrapper}>
       <div className={styles.wrapperColumn}>
@@ -304,7 +282,6 @@ export const Colors = () => (
         </div>
       </div>
     </div>
-
     <h2> Input </h2>
     <div className={styles.wrapper}>
       <div className={styles.wrapperColumn}>
@@ -328,13 +305,11 @@ export const Colors = () => (
         </div>
       </div>
     </div>
-
     <h2> Checkbox </h2>
     <div className={styles.wrapper}>
       <CheckboxColors identifier="checkbox" title="Default" />
       <CheckboxColors identifier="checkbox-alt" title="Alternative" />
     </div>
-
     <h2> Switch </h2>
     <SwitchColors identifier="slider" title="Slider" />
     <SwitchColors identifier="handle" title="Handle" />
@@ -342,19 +317,69 @@ export const Colors = () => (
   </div>
 );
 
-const figmaFile = "YKkIGgDGEk4WRjSFHZQdK1il/00.Atomic-components?node-id=971%3A30";
-Colors.parameters = {
-  design: {
-    type: "figma",
-    url: `https://www.figma.com/file/${figmaFile}`,
-  },
-  backgrounds: {
-    default: "gray",
-    values: [{ name: "gray", value: "#c8c8c8" }],
-  },
-};
+<Meta 
+  title="Global Styles/Colors" 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
 
-export default {
-  title: "Global Styles/Colors",
-  decorators: [withDesign],
-};
+# Colors
+---
+- [Overview](#overview)
+- [Showcase](#showcase)
+
+
+## Overview
+
+Color definitions and style guides. The colors we use are exported as `css variables` and can be imported directly (`styles/settings/colors.css`) and used or as part of the global stylesheet (`styles/index.css`)
+
+You can import the color variables in your code:
+```jsx
+// import only color variables
+import "@figshare/fcl/styles/settings/colors.css";
+// or with typography and other styles as well
+import "@figshare/fcl/styles/index.css";
+```
+And reference the variables in your css files:
+```css
+.text {
+  color: var(--color-typography-primary);
+}
+
+.secondaryText {
+  color: var(--color-typography-secondary);
+}
+
+.error-text {
+  color: var(--color-typography-error);
+}
+```
+## Showcase
+
+Click on a color tile to copy the variable name to your clipboard.
+
+export const figmaFile = "YKkIGgDGEk4WRjSFHZQdK1il/00.Atomic-components?node-id=971%3A30";
+
+<Story
+  name="Definition"
+  parameters={{
+    design: {
+      type: "figma",
+      url: `https://www.figma.com/file/${figmaFile}`,
+    },
+    backgrounds: {
+      default: "gray",
+      values: [{ name: "gray", value: "#f3f3f3" }],
+    },
+  }}
+>
+  {() => {
+    return (
+      <Colors />
+    );
+  }}
+</Story>

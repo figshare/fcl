@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import EyeVisible from "@figshare/ui/icons/eye/visible/small";
-import EyeInvisible from "@figshare/ui/icons/eye/invisible/small";
-import { IconButton } from "@figshare/ui/button";
-import TextInput from "@figshare/ui/input/text";
+
+import EyeVisible from "../../icons/eye/visible/small";
+import EyeInvisible from "../../icons/eye/invisible/small";
+import { IconButton } from "../../button";
+import TextInput from "../../input/text";
 
 
 const iconMap = {
@@ -13,10 +14,26 @@ const iconMap = {
 
 export default class Password extends Component {
   static propTypes = {
+    /**
+      Disable the input. Input can be focused or tabbed through,
+      but will be read only and it's value cannot be modified.
+     */
     disabled: PropTypes.bool,
+    /**
+      Set the input as being in an error state, visually.
+     */
     error: PropTypes.bool,
+    /**
+      Choose the variation of the input, see `TextInput` variations for possible values.
+     */
     theme: PropTypes.string,
+    /**
+      The value stored in the input.
+     */
     value: PropTypes.string,
+    /**
+      A function called with the `change event` when users type in to the input.
+     */
     onChange: PropTypes.func,
   }
 

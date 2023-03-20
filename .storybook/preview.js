@@ -1,5 +1,7 @@
 import { withTests } from "@storybook/addon-jest";
-import "@figshare/ui/styles/index.css";
+import "@figshare/fcl/styles/index.css";
+
+import "./styles/index.css";
 
 import results from "../.jest-results.json";
 

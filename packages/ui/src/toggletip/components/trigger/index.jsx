@@ -12,14 +12,42 @@ const mapping = {
 
 export default class Trigger extends Component {
   static propTypes = {
+    /**
+      Trigger contents.
+     */
     children: PropTypes.any,
+    /**
+      Optional id string for the content element. Received from `Toggletip` context.
+     */
     contentId: PropTypes.string,
+    /**
+      Component to use for the Trigger. Given as a string name from one of the supported options.
+     */
     displayedAs: PropTypes.oneOf(["button", "genericButton", "iconButton"]),
+    /**
+      Provide this ref function if you want to receive a reference to the trigger node.
+     */
     innerRef: PropTypes.func,
+    /**
+      Property to force if the Toggletip `Content` is visible. Will receive this from context as well,
+      if rendered under a `Toggletip` component.
+     */
     isVisible: PropTypes.bool,
+    /**
+      Optional string id for the trigger element. Received from `Toggletip` context.
+     */
     triggerId: PropTypes.string,
+    /**
+      Callback called when trigger is clicked. Received from `Toggletip` context.
+     */
     onClick: PropTypes.func,
+    /**
+      Callback called when trigger is focused and a key is pressed. Received from `Toggletip` context.
+     */
     onKeyDown: PropTypes.func,
+    /**
+      Callback called when toggletip is toggled through the trigger. Received from `Toggletip` context.
+     */
     onToggle: PropTypes.func,
   }
 

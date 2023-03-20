@@ -1,0 +1,4 @@
+:global(tbody.docblock-argstable-body p:not([class])) {
+  font-size: inherit;
+  line-height: inherit;
+}

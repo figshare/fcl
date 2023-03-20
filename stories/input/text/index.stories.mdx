@@ -1,7 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
-import Input from "@figshare/ui/input/text";
-
-import uncontrollable from "@figshare/ui/helpers/uncontrollable";
+import TextInput from "@figshare/ui/input/text";
+import Input from "@figshare/ui/input";
 
 <Meta 
   title="UI/Inputs/Text" 
@@ -16,14 +15,13 @@ import uncontrollable from "@figshare/ui/helpers/uncontrollable";
 
 # Text input
 ---
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
 
+## Overview
 
-export const UncontrolledTextInput = uncontrollable(
-  Input,
-  { value: ["onChange", (_, e) => e.target.value] }
-);
-
-export const mountInput = (props) => <UncontrolledTextInput{...props} />;
+A text input component. Allows users to type in and store text values.
 
 <Story 
   name="Text" 
@@ -32,32 +30,34 @@ export const mountInput = (props) => <UncontrolledTextInput{...props} />;
     jest: ["ui/src/input"],
   }}
 >
-  {mountInput()}
+  <TextInput placeholder="Input text..." onChange={(event) => {}} />
 </Story>
 
+Can be imported directly or referenced as the default `Input` component variation:
 
 ```jsx
 import React from "react";
-import Input from "@figshare/ui/input";
+import Input from "@figshare/fcl/input";
+import TextInput from "@figshare/fcl/input/text";
 
-class InputComponent extends React.Component {
-  render() {
-    return (
-      <Input type="text" />
-    );
-  }
+function TextInputs() {
+  return (
+    <TextInput onChange={(event) => {}} />
+    <Input onChange={(event) => {}} />
+    <Input type="text" onChange={(event) => {}} />
+  );
 }
 ```
 
-<ArgsTable of={Input} />
+## Props Table
+<ArgsTable of={TextInput} />
 
-## Themes
-
+## Examples
 <Canvas>
-  <UncontrolledTextInput type="text" theme="default" placeholder="Default theme" />
-  <UncontrolledTextInput type="text" theme="underline" placeholder="Underline theme" />
-  <UncontrolledTextInput type="text" theme="default" error={true} placeholder="Default theme - error" />
-  <UncontrolledTextInput type="text" theme="underline" error={true} placeholder="Underline theme - error" />
-  <UncontrolledTextInput type="text" theme="default" disabled={true} placeholder="Default theme - disabled" />
-  <UncontrolledTextInput type="text" theme="underline" disabled={true} placeholder="Underline theme - disabled" />
+  <TextInput theme="default" placeholder="Default theme" />
+  <TextInput theme="underline" placeholder="Underline theme" />
+  <TextInput theme="default" error={true} placeholder="Default theme - error" />
+  <TextInput theme="underline" error={true} placeholder="Underline theme - error" />
+  <TextInput theme="default" disabled={true} placeholder="Default theme - disabled" />
+  <TextInput theme="underline" disabled={true} placeholder="Underline theme - disabled" />
 </Canvas>

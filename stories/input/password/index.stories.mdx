@@ -1,8 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import PasswordInput from "@figshare/ui/input/password";
 
-import uncontrollable from "@figshare/ui/helpers/uncontrollable";
-
 <Meta 
   title="UI/Inputs/Password" 
   component={PasswordInput} 
@@ -16,14 +14,12 @@ import uncontrollable from "@figshare/ui/helpers/uncontrollable";
 
 # Password input
 ---
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
 
-
-export const UncontrolledPasswordInput = uncontrollable(
-  PasswordInput,
-  { value: ["onChange", (_, e) => e.target.value] }
-);
-
-export const mountPasswordInput = (props) => <UncontrolledPasswordInput{...props} />;
+## Overview
+Password input component. Allows users to safely input passwords, and to temporarily toggle visibility.
 
 <Story 
   name="Password" 
@@ -32,32 +28,34 @@ export const mountPasswordInput = (props) => <UncontrolledPasswordInput{...props
     jest: ["ui/src/input"],
   }}
 >
-  {mountPasswordInput()}
+  <PasswordInput onChange={(event) => {}}/>
 </Story>
 
+Can be imported directly or referenced as an `Input` component variation, by setting `type="password"`:
 
 ```jsx
 import React from "react";
-import Input from "@figshare/ui/input";
+import Input from "@figshare/fcl/input";
+import PasswordInput from "@figshare/fcl/input/password";
 
-class InputComponent extends React.Component {
-  render() {
-    return (
-      <Input type="password" />
-    );
-  }
+function PasswordInputs() {
+  return (
+    <PasswordInput onChange={(event) => {}} />
+    <Input type="password" onChange={(event) => {}} />
+  );
 }
 ```
 
+## Props Table
 <ArgsTable of={PasswordInput} />
 
-## Themes
+## Examples
 
 <Canvas>
-  <UncontrolledPasswordInput type="password" theme="default" placeholder="Default theme" />
-  <UncontrolledPasswordInput type="password" theme="underline" placeholder="Underline theme" />
-  <UncontrolledPasswordInput type="password" theme="default" error={true} placeholder="Default theme - error" />
-  <UncontrolledPasswordInput type="password" theme="underline" error={true} placeholder="Underline theme - error" />
-  <UncontrolledPasswordInput type="password" theme="default" disabled={true} placeholder="Default theme - disabled" />
-  <UncontrolledPasswordInput type="password" theme="underline" disabled={true} placeholder="Underline theme - disabled" />
+  <PasswordInput onChange={(event) => {}} onChange={(event) => {}} type="password" theme="default" placeholder="Default theme" />
+  <PasswordInput onChange={(event) => {}} type="password" theme="underline" placeholder="Underline theme" />
+  <PasswordInput onChange={(event) => {}} type="password" theme="default" error={true} placeholder="Default theme - error" />
+  <PasswordInput onChange={(event) => {}} type="password" theme="underline" error={true} placeholder="Underline theme - error" />
+  <PasswordInput onChange={(event) => {}} type="password" theme="default" disabled={true} placeholder="Default theme - disabled" />
+  <PasswordInput onChange={(event) => {}} type="password" theme="underline" disabled={true} placeholder="Underline theme - disabled" />
 </Canvas>

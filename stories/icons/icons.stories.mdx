@@ -2,7 +2,20 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
 
 import styles from "./icons.stories.css";
 
-<Meta title="Icons/Generic"/>
+<Meta 
+  title="Icons/Generic" 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# Generic
+---
+
+A comprehensive, wide range of icons, useful for visually representing interactions, elements, data, or other miscelaneous items that can be associated to an icon.
 
 ## Caret
 
@@ -25,6 +38,27 @@ import CaretUpMedium from "@figshare/ui/icons/caret/up/medium";
   <CaretLeftMedium className={styles.icon} />
   <CaretUpMedium className={styles.icon} />
 </Story>
+
+```jsx
+
+import CaretRightSmall from "@figshare/fcl/icons/caret/right/small";
+import CaretDownSmall from "@figshare/fcl/icons/caret/down/small";
+import CaretLeftSmall from "@figshare/fcl/icons/caret/left/small";
+import CaretUpSmall from "@figshare/fcl/icons/caret/up/small";
+import CaretRightMedium from "@figshare/fcl/icons/caret/right/medium";
+import CaretDownMedium from "@figshare/fcl/icons/caret/down/medium";
+import CaretLeftMedium from "@figshare/fcl/icons/caret/left/medium";
+import CaretUpMedium from "@figshare/fcl/icons/caret/up/medium";
+
+<CaretRightSmall className={styles.icon} />
+<CaretDownSmall className={styles.icon} />
+<CaretLeftSmall className={styles.icon} />
+<CaretUpSmall className={styles.icon} />
+<CaretRightMedium className={styles.icon} />
+<CaretDownMedium className={styles.icon} />
+<CaretLeftMedium className={styles.icon} />
+<CaretUpMedium className={styles.icon} />
+```
 
 ---
 ## Chevron
@@ -49,6 +83,17 @@ import ChevronUpMedium from "@figshare/ui/icons/chevron/up/medium";
   <ChevronUpMedium className={styles.icon} />
 </Story>
 
+```jsx
+import ChevronRightSmall from "@figshare/fcl/icons/chevron/right/small";
+import ChevronDownSmall from "@figshare/fcl/icons/chevron/down/small";
+import ChevronLeftSmall from "@figshare/fcl/icons/chevron/left/small";
+import ChevronUpSmall from "@figshare/fcl/icons/chevron/up/small";
+import ChevronRightMedium from "@figshare/fcl/icons/chevron/right/medium";
+import ChevronDownMedium from "@figshare/fcl/icons/chevron/down/medium";
+import ChevronLeftMedium from "@figshare/fcl/icons/chevron/left/medium";
+import ChevronUpMedium from "@figshare/fcl/icons/chevron/up/medium";
+```
+
 ---
 ## DoubleChevron
 
@@ -72,6 +117,17 @@ import DoubleChevronUpMedium from "@figshare/ui/icons/doubleChevron/up/medium";
   <DoubleChevronUpMedium className={styles.icon} />
 </Story>
 
+```jsx
+import DoubleChevronRightSmall from "@figshare/fcl/icons/doubleChevron/right/small";
+import DoubleChevronDownSmall from "@figshare/fcl/icons/doubleChevron/down/small";
+import DoubleChevronLeftSmall from "@figshare/fcl/icons/doubleChevron/left/small";
+import DoubleChevronUpSmall from "@figshare/fcl/icons/doubleChevron/up/small";
+import DoubleChevronRightMedium from "@figshare/fcl/icons/doubleChevron/right/medium";
+import DoubleChevronDownMedium from "@figshare/fcl/icons/doubleChevron/down/medium";
+import DoubleChevronLeftMedium from "@figshare/fcl/icons/doubleChevron/left/medium";
+import DoubleChevronUpMedium from "@figshare/fcl/icons/doubleChevron/up/medium";
+```
+
 ---
 ## Angle
 
@@ -86,6 +142,13 @@ import AngleUp from "@figshare/ui/icons/angle/up";
   <AngleLeft className={styles.icon} />
   <AngleUp className={styles.icon} />
 </Story>
+
+```jsx
+import AngleRight from "@figshare/fcl/icons/angle/right";
+import AngleDown from "@figshare/fcl/icons/angle/down";
+import AngleLeft from "@figshare/fcl/icons/angle/left";
+import AngleUp from "@figshare/fcl/icons/angle/up";
+```
 
 ---
 ## Arrow
@@ -118,6 +181,21 @@ import ArrowUpLarge from "@figshare/ui/icons/arrow/up/large";
   <ArrowUpLarge className={styles.icon} />
 </Story>
 
+```jsx
+import ArrowRightSmall from "@figshare/fcl/icons/arrow/right/small";
+import ArrowDownSmall from "@figshare/fcl/icons/arrow/down/small";
+import ArrowLeftSmall from "@figshare/fcl/icons/arrow/left/small";
+import ArrowUpSmall from "@figshare/fcl/icons/arrow/up/small";
+import ArrowRightMedium from "@figshare/fcl/icons/arrow/right/medium";
+import ArrowDownMedium from "@figshare/fcl/icons/arrow/down/medium";
+import ArrowLeftMedium from "@figshare/fcl/icons/arrow/left/medium";
+import ArrowUpMedium from "@figshare/fcl/icons/arrow/up/medium";
+import ArrowRightLarge from "@figshare/fcl/icons/arrow/right/large";
+import ArrowDownLarge from "@figshare/fcl/icons/arrow/down/large";
+import ArrowLeftLarge from "@figshare/fcl/icons/arrow/left/large";
+import ArrowUpLarge from "@figshare/fcl/icons/arrow/up/large";
+```
+
 ---
 ## Sort
 
@@ -129,6 +207,10 @@ import SortDown from "@figshare/ui/icons/sort/down";
   <SortDown className={styles.icon} />
 </Story>
 
+```jsx
+import SortUp from "@figshare/fcl/icons/sort/up";
+import SortDown from "@figshare/fcl/icons/sort/down";
+```
 ---
 ## Expand
 
@@ -142,6 +224,11 @@ import ExpandLarge from "@figshare/ui/icons/expand/large";
   <ExpandLarge className={styles.icon} />
 </Story>
 
+```jsx
+import ExpandSmall from "@figshare/fcl/icons/expand/small";
+import ExpandMedium from "@figshare/fcl/icons/expand/medium";
+import ExpandLarge from "@figshare/fcl/icons/expand/large";
+```
 ---
 ## Collapse
 
@@ -154,6 +241,12 @@ import CollapseLarge from "@figshare/ui/icons/collapse/large";
   <CollapseMedium className={styles.icon} />
   <CollapseLarge className={styles.icon} />
 </Story>
+
+```jsx
+import CollapseSmall from "@figshare/fcl/icons/collapse/small";
+import CollapseMedium from "@figshare/fcl/icons/collapse/medium";
+import CollapseLarge from "@figshare/fcl/icons/collapse/large";
+```
 
 ---
 ## CheckMark
@@ -168,6 +261,12 @@ import CheckMarkLarge from "@figshare/ui/icons/checkMark/large";
   <CheckMarkLarge className={styles.icon} />
 </Story>
 
+```jsx
+import CheckMarkSmall from "@figshare/fcl/icons/checkMark/small";
+import CheckMarkMedium from "@figshare/fcl/icons/checkMark/medium";
+import CheckMarkLarge from "@figshare/fcl/icons/checkMark/large";
+```
+
 ---
 ## Plus
 
@@ -180,6 +279,12 @@ import PlusLarge from "@figshare/ui/icons/plus/large";
   <PlusMedium className={styles.icon} />
   <PlusLarge className={styles.icon} />
 </Story>
+
+```jsx
+import PlusSmall from "@figshare/fcl/icons/plus/small";
+import PlusMedium from "@figshare/fcl/icons/plus/medium";
+import PlusLarge from "@figshare/fcl/icons/plus/large";
+```
 
 ---
 ## Minus
@@ -194,6 +299,12 @@ import MinusLarge from "@figshare/ui/icons/minus/large";
   <MinusLarge className={styles.icon} />
 </Story>
 
+```jsx
+import MinusSmall from "@figshare/fcl/icons/minus/small";
+import MinusMedium from "@figshare/fcl/icons/minus/medium";
+import MinusLarge from "@figshare/fcl/icons/minus/large";
+```
+
 ---
 ## Home
 
@@ -206,6 +317,12 @@ import HomeLarge from "@figshare/ui/icons/home/large";
   <HomeMedium className={styles.icon} />
   <HomeLarge className={styles.icon} />
 </Story>
+
+```jsx
+import HomeSmall from "@figshare/fcl/icons/home/small";
+import HomeMedium from "@figshare/fcl/icons/home/medium";
+import HomeLarge from "@figshare/fcl/icons/home/large";
+```
 
 ---
 ## Lock
@@ -220,6 +337,12 @@ import LockLarge from "@figshare/ui/icons/lock/large";
   <LockLarge className={styles.icon} />
 </Story>
 
+```jsx
+import LockSmall from "@figshare/fcl/icons/lock/small";
+import LockMedium from "@figshare/fcl/icons/lock/medium";
+import LockLarge from "@figshare/fcl/icons/lock/large";
+```
+
 ---
 ## LockedFiles
 
@@ -232,6 +355,12 @@ import LockedFilesLarge from "@figshare/ui/icons/lockedFiles/large";
   <LockedFilesMedium className={styles.icon} />
   <LockedFilesLarge className={styles.icon} />
 </Story>
+
+```jsx
+import LockedFilesSmall from "@figshare/fcl/icons/lockedFiles/small";
+import LockedFilesMedium from "@figshare/fcl/icons/lockedFiles/medium";
+import LockedFilesLarge from "@figshare/fcl/icons/lockedFiles/large";
+```
 
 ---
 
@@ -248,6 +377,12 @@ import CancelLarge from "@figshare/ui/icons/cancel/large";
   <CancelLarge className={styles.icon} />
 </Story>
 
+```jsx
+import CancelSmall from "@figshare/fcl/icons/cancel/small";
+import CancelMedium from "@figshare/fcl/icons/cancel/medium";
+import CancelLarge from "@figshare/fcl/icons/cancel/large";
+```
+
 ---
 
 ---
@@ -262,6 +397,12 @@ import SearchLarge from "@figshare/ui/icons/search/large";
   <SearchMedium className={styles.icon} />
   <SearchLarge className={styles.icon} />
 </Story>
+
+```jsx
+import SearchSmall from "@figshare/fcl/icons/search/small";
+import SearchMedium from "@figshare/fcl/icons/search/medium";
+import SearchLarge from "@figshare/fcl/icons/search/large";
+```
 
 ---
 ## ViewType
@@ -282,6 +423,15 @@ import ViewTypeFileLarge from "@figshare/ui/icons/viewType/file/large";
   <ViewTypeFileLarge className={styles.icon} />
 </Story>
 
+```jsx
+import ViewTypeThumbnailSmall from "@figshare/fcl/icons/viewType/thumbnail/small";
+import ViewTypeThumbnailLarge from "@figshare/fcl/icons/viewType/thumbnail/large";
+import ViewTypeListSmall from "@figshare/fcl/icons/viewType/list/small";
+import ViewTypeListLarge from "@figshare/fcl/icons/viewType/list/large";
+import ViewTypeFileSmall from "@figshare/fcl/icons/viewType/file/small";
+import ViewTypeFileLarge from "@figshare/fcl/icons/viewType/file/large";
+```
+
 ---
 ## Zoom
 
@@ -293,6 +443,11 @@ import ZoomOut from "@figshare/ui/icons/zoom/out";
   <ZoomOut className={styles.icon} />
 </Story>
 
+```jsx
+import ZoomIn from "@figshare/fcl/icons/zoom/in";
+import ZoomOut from "@figshare/fcl/icons/zoom/out";
+```
+
 ---
 ## Download
 
@@ -302,6 +457,10 @@ import Download from "@figshare/ui/icons/download";
   <Download className={styles.icon} />
 </Story>
 
+```jsx
+import Download from "@figshare/fcl/icons/download";
+```
+
 ---
 ## Upload
 
@@ -310,6 +469,10 @@ import Upload from "@figshare/ui/icons/upload";
 <Story name="Upload">
   <Upload className={styles.icon} />
 </Story>
+
+```jsx
+import Upload from "@figshare/fcl/icons/upload";
+```
 
 ---
 ## Info
@@ -322,6 +485,11 @@ import InfoMedium from "@figshare/ui/icons/info/medium";
   <InfoMedium className={styles.icon} />
 </Story>
 
+```jsx
+import InfoSmall from "@figshare/fcl/icons/info/small";
+import InfoMedium from "@figshare/fcl/icons/info/medium";
+```
+
 ---
 ## Warning
 
@@ -332,6 +500,11 @@ import WarningMedium from "@figshare/ui/icons/warning/medium";
   <WarningSmall className={styles.icon} />
   <WarningMedium className={styles.icon} />
 </Story>
+
+```jsx
+import WarningSmall from "@figshare/fcl/icons/warning/small";
+import WarningMedium from "@figshare/fcl/icons/warning/medium";
+```
 
 ---
 ## Eye
@@ -348,6 +521,13 @@ import EyeInvisibleMedium from "@figshare/ui/icons/eye/invisible/medium";
   <EyeInvisibleMedium className={styles.icon} />
 </Story>
 
+```jsx
+import EyeVisibleSmall from "@figshare/fcl/icons/eye/visible/small";
+import EyeVisibleMedium from "@figshare/fcl/icons/eye/visible/medium";
+import EyeInvisibleSmall from "@figshare/fcl/icons/eye/invisible/small";
+import EyeInvisibleMedium from "@figshare/fcl/icons/eye/invisible/medium";
+```
+
 ---
 ## Filters
 
@@ -363,6 +543,13 @@ import FiltersHideLarge from "@figshare/ui/icons/filters/hide/large";
   <FiltersHideLarge className={styles.icon} />
 </Story>
 
+```jsx
+import FiltersShowSmall from "@figshare/fcl/icons/filters/show/small";
+import FiltersShowLarge from "@figshare/fcl/icons/filters/show/large";
+import FiltersHideSmall from "@figshare/fcl/icons/filters/hide/small";
+import FiltersHideLarge from "@figshare/fcl/icons/filters/hide/large";
+```
+
 ---
 ## Email
 
@@ -373,6 +560,11 @@ import EmailLarge from "@figshare/ui/icons/email/large";
   <EmailSmall className={styles.icon} />
   <EmailLarge className={styles.icon} />
 </Story>
+
+```jsx
+import EmailSmall from "@figshare/fcl/icons/email/small";
+import EmailLarge from "@figshare/fcl/icons/email/large";
+```
 
 ---
 ## Menu
@@ -385,6 +577,11 @@ import MenuLarge from "@figshare/ui/icons/menu/large";
   <MenuLarge className={styles.icon} />
 </Story>
 
+```jsx
+import MenuSmall from "@figshare/fcl/icons/menu/small";
+import MenuLarge from "@figshare/fcl/icons/menu/large";
+```
+
 ---
 ## List
 
@@ -395,6 +592,11 @@ import ListLarge from "@figshare/ui/icons/list/large";
   <ListSmall className={styles.icon} />
   <ListLarge className={styles.icon} />
 </Story>
+
+```jsx
+import ListSmall from "@figshare/fcl/icons/list/small";
+import ListLarge from "@figshare/fcl/icons/list/large";
+```
 
 ---
 ## User
@@ -409,6 +611,12 @@ import UserLarge from "@figshare/ui/icons/user/large";
   <UserLarge className={styles.icon} />
 </Story>
 
+```jsx
+import UserSmall from "@figshare/fcl/icons/user/small";
+import UserMedium from "@figshare/fcl/icons/user/medium";
+import UserLarge from "@figshare/fcl/icons/user/large";
+```
+
 ---
 ## CheckBox
 
@@ -422,6 +630,12 @@ import CheckBoxMixed from "@figshare/ui/icons/checkBox/mixed";
   <CheckBoxMixed className={styles.icon} />
 </Story>
 
+```jsx
+import CheckBoxChecked from "@figshare/fcl/icons/checkBox/checked";
+import CheckBoxUnchecked from "@figshare/fcl/icons/checkBox/unchecked";
+import CheckBoxMixed from "@figshare/fcl/icons/checkBox/mixed";
+```
+
 ---
 ## Radio
 
@@ -433,6 +647,11 @@ import RadioUnchecked from "@figshare/ui/icons/radio/unchecked";
   <RadioUnchecked className={styles.icon} />
 </Story>
 
+```jsx
+import RadioChecked from "@figshare/fcl/icons/radio/checked";
+import RadioUnchecked from "@figshare/fcl/icons/radio/unchecked";
+```
+
 ---
 ## MoreOptions
 
@@ -441,6 +660,10 @@ import MoreOptions from "@figshare/ui/icons/moreOptions";
 <Story name="MoreOptions">
   <MoreOptions className={styles.icon} />
 </Story>
+
+```jsx
+import MoreOptions from "@figshare/fcl/icons/moreOptions";
+```
 
 ---
 ## Earth
@@ -457,6 +680,13 @@ import EarthPrivateMedium from "@figshare/ui/icons/earth/private/medium";
   <EarthPrivateMedium className={styles.icon} />
 </Story>
 
+```jsx
+import EarthPublicSmall from "@figshare/fcl/icons/earth/public/small";
+import EarthPublicMedium from "@figshare/fcl/icons/earth/public/medium";
+import EarthPrivateSmall from "@figshare/fcl/icons/earth/private/small";
+import EarthPrivateMedium from "@figshare/fcl/icons/earth/private/medium";
+```
+
 ---
 ## Settings
 
@@ -469,6 +699,12 @@ import SettingsLarge from "@figshare/ui/icons/settings/large";
   <SettingsMedium className={styles.icon} />
   <SettingsLarge className={styles.icon} />
 </Story>
+
+```jsx
+import SettingsSmall from "@figshare/fcl/icons/settings/small";
+import SettingsMedium from "@figshare/fcl/icons/settings/medium";
+import SettingsLarge from "@figshare/fcl/icons/settings/large";
+```
 
 ---
 ## Delete
@@ -483,6 +719,12 @@ import DeleteLarge from "@figshare/ui/icons/delete/large";
   <DeleteLarge className={styles.icon} />
 </Story>
 
+```jsx
+import DeleteSmall from "@figshare/fcl/icons/delete/small";
+import DeleteMedium from "@figshare/fcl/icons/delete/medium";
+import DeleteLarge from "@figshare/fcl/icons/delete/large";
+```
+
 ---
 ## Timer
 
@@ -491,6 +733,10 @@ import Timer from "@figshare/ui/icons/timer";
 <Story name="Timer">
   <Timer className={styles.icon} />
 </Story>
+
+```jsx
+import Timer from "@figshare/fcl/icons/timer";
+```
 
 ---
 ## GoToLink
@@ -503,6 +749,11 @@ import GoToLinkLarge from "@figshare/ui/icons/goToLink/large";
   <GoToLinkLarge className={styles.icon} />
 </Story>
 
+```jsx
+import GoToLinkSmall from "@figshare/fcl/icons/goToLink/small";
+import GoToLinkLarge from "@figshare/fcl/icons/goToLink/large";
+```
+
 ---
 ## Link
 
@@ -513,6 +764,11 @@ import LinkUnlinked from "@figshare/ui/icons/link/unlinked";
   <LinkLinked className={styles.icon} />
   <LinkUnlinked className={styles.icon} />
 </Story>
+
+```jsx
+import LinkLinked from "@figshare/fcl/icons/link/linked";
+import LinkUnlinked from "@figshare/fcl/icons/link/unlinked";
+```
 
 ---
 ## Chain
@@ -525,6 +781,11 @@ import ChainUnlinked from "@figshare/ui/icons/chain/unlinked";
   <ChainUnlinked className={styles.icon} />
 </Story>
 
+```jsx
+import ChainLinked from "@figshare/fcl/icons/chain/linked";
+import ChainUnlinked from "@figshare/fcl/icons/chain/unlinked";
+```
+
 ---
 ## Notification
 
@@ -535,6 +796,11 @@ import NotificationActive from "@figshare/ui/icons/notification/active";
   <NotificationInactive className={styles.icon} />
   <NotificationActive className={styles.icon} />
 </Story>
+
+```jsx
+import NotificationInactive from "@figshare/fcl/icons/notification/inactive";
+import NotificationActive from "@figshare/fcl/icons/notification/active";
+```
 
 ---
 ## Edit
@@ -549,6 +815,12 @@ import EditLarge from "@figshare/ui/icons/edit/large";
   <EditLarge className={styles.icon} />
 </Story>
 
+```jsx
+import EditSmall from "@figshare/fcl/icons/edit/small";
+import EditMedium from "@figshare/fcl/icons/edit/medium";
+import EditLarge from "@figshare/fcl/icons/edit/large";
+```
+
 ---
 ## FitToScreen
 
@@ -557,6 +829,10 @@ import FitToScreen from "@figshare/ui/icons/fitToScreen";
 <Story name="FitToScreen">
   <FitToScreen className={styles.icon} />
 </Story>
+
+```jsx
+import FitToScreen from "@figshare/fcl/icons/fitToScreen";
+```
 
 ---
 ## DragAndDrop
@@ -567,6 +843,10 @@ import DragAndDrop from "@figshare/ui/icons/dragAndDrop";
   <DragAndDrop className={styles.icon} />
 </Story>
 
+```jsx
+import DragAndDrop from "@figshare/fcl/icons/dragAndDrop";
+```
+
 ---
 ## Papers
 
@@ -576,6 +856,10 @@ import Papers from "@figshare/ui/icons/papers";
   <Papers className={styles.icon} />
 </Story>
 
+```jsx
+import Papers from "@figshare/fcl/icons/papers";
+```
+
 ---
 ## Calendar
 
@@ -584,6 +868,10 @@ import Calendar from "@figshare/ui/icons/calendar";
 <Story name="Calendar">
   <Calendar className={styles.icon} />
 </Story>
+
+```jsx
+import Calendar from "@figshare/fcl/icons/calendar";
+```
 
 ---
 ## Fullscreen
@@ -596,6 +884,11 @@ import FullscreenExit from "@figshare/ui/icons/fullscreen/exit";
   <FullscreenExit className={styles.icon} />
 </Story>
 
+```jsx
+import FullscreenEnter from "@figshare/fcl/icons/fullscreen/enter";
+import FullscreenExit from "@figshare/fcl/icons/fullscreen/exit";
+```
+
 ---
 ## Undo
 
@@ -606,6 +899,11 @@ import UndoMedium from "@figshare/ui/icons/undo/medium";
   <UndoSmall className={styles.icon} />
   <UndoMedium className={styles.icon} />
 </Story>
+
+```jsx
+import UndoSmall from "@figshare/fcl/icons/undo/small";
+import UndoMedium from "@figshare/fcl/icons/undo/medium";
+```
 
 ---
 ## Retry
@@ -618,6 +916,11 @@ import RetryMedium from "@figshare/ui/icons/retry/medium";
   <RetryMedium className={styles.icon} />
 </Story>
 
+```jsx
+import RetrySmall from "@figshare/fcl/icons/retry/small";
+import RetryMedium from "@figshare/fcl/icons/retry/medium";
+```
+
 ---
 ## Replay
 
@@ -628,6 +931,11 @@ import ReplayMedium from "@figshare/ui/icons/replay/medium";
   <ReplaySmall className={styles.icon} />
   <ReplayMedium className={styles.icon} />
 </Story>
+
+```jsx
+import ReplaySmall from "@figshare/fcl/icons/replay/small";
+import ReplayMedium from "@figshare/fcl/icons/replay/medium";
+```
 
 ---
 ## Volume
@@ -644,6 +952,13 @@ import VolumeHigh from "@figshare/ui/icons/volume/high";
   <VolumeHigh className={styles.icon} />
 </Story>
 
+```jsx
+import VolumeMute from "@figshare/fcl/icons/volume/mute";
+import VolumeLow from "@figshare/fcl/icons/volume/low";
+import VolumeMedium from "@figshare/fcl/icons/volume/medium";
+import VolumeHigh from "@figshare/fcl/icons/volume/high";
+```
+
 ---
 ## Play
 
@@ -654,6 +969,11 @@ import PlayLarge from "@figshare/ui/icons/play/large";
   <PlaySmall className={styles.icon} />
   <PlayLarge className={styles.icon} />
 </Story>
+
+```jsx
+import PlaySmall from "@figshare/fcl/icons/play/small";
+import PlayLarge from "@figshare/fcl/icons/play/large";
+```
 
 ---
 ## Pause
@@ -666,6 +986,11 @@ import PauseLarge from "@figshare/ui/icons/pause/large";
   <PauseLarge className={styles.icon} />
 </Story>
 
+```jsx
+import PauseSmall from "@figshare/fcl/icons/pause/small";
+import PauseLarge from "@figshare/fcl/icons/pause/large";
+```
+
 ---
 ## Jump
 
@@ -676,6 +1001,11 @@ import JumpForward from "@figshare/ui/icons/jump/forward";
   <JumpBack className={styles.icon} />
   <JumpForward className={styles.icon} />
 </Story>
+
+```jsx
+import JumpBack from "@figshare/fcl/icons/jump/back";
+import JumpForward from "@figshare/fcl/icons/jump/forward";
+```
 
 ---
 ## Editor
@@ -719,6 +1049,27 @@ import Undo from "@figshare/ui/icons/editor/undo";
   <Superscript className={styles.icon} />
 </Story>
 
+```jsx
+
+import Bold from "@figshare/fcl/icons/editor/bold";
+import BulletList from "@figshare/fcl/icons/editor/bulletList";
+import ClearFormatting from "@figshare/fcl/icons/editor/clearFormatting";
+import HeadingTwo from "@figshare/fcl/icons/editor/h2";
+import HeadingThree from "@figshare/fcl/icons/editor/h3";
+import HeadingFour from "@figshare/fcl/icons/editor/h4";
+import Italic from "@figshare/fcl/icons/editor/italic";
+import Link from "@figshare/fcl/icons/editor/link";
+import NumberedList from "@figshare/fcl/icons/editor/numberedList";
+import Paragraph from "@figshare/fcl/icons/editor/paragraph";
+import PasteAsPlainText from "@figshare/fcl/icons/editor/paste";
+import Redo from "@figshare/fcl/icons/editor/redo";
+import Strikethrough from "@figshare/fcl/icons/editor/strikethrough";
+import Subscript from "@figshare/fcl/icons/editor/subscript";
+import Superscript from "@figshare/fcl/icons/editor/superscript";
+import Underline from "@figshare/fcl/icons/editor/underline";
+import Undo from "@figshare/fcl/icons/editor/undo";
+```
+
 ---
 ## Duplicate
 
@@ -727,6 +1078,10 @@ import Duplicate from "@figshare/ui/icons/duplicate";
 <Story name="Duplicate">
   <Duplicate className={styles.icon} />
 </Story>
+
+```jsx
+import Duplicate from "@figshare/fcl/icons/duplicate";
+```
 
 ---
 ## FontSize
@@ -739,6 +1094,11 @@ import FontSizeLarger from "@figshare/ui/icons/fontSize/larger";
   <FontSizeLarger className={styles.icon} />
 </Story>
 
+```jsx
+import FontSizeSmaller from "@figshare/fcl/icons/fontSize/smaller";
+import FontSizeLarger from "@figshare/fcl/icons/fontSize/larger";
+```
+
 ---
 ## Share
 
@@ -750,6 +1110,11 @@ import ShareLarge from "@figshare/ui/icons/share/large";
   <ShareLarge className={styles.icon} />
 </Story>
 
+```jsx
+import ShareSmall from "@figshare/fcl/icons/share/small";
+import ShareLarge from "@figshare/fcl/icons/share/large";
+```
+
 ---
 ## FTP
 
@@ -758,6 +1123,10 @@ import FTP from "@figshare/ui/icons/ftp";
 <Story name="FTP">
   <FTP className={styles.icon} />
 </Story>
+
+```jsx
+import FTP from "@figshare/fcl/icons/ftp";
+```
 
 ---
 ## Histogram
@@ -768,6 +1137,10 @@ import Histogram from "@figshare/ui/icons/histogram";
   <Histogram className={styles.icon} />
 </Story>
 
+```jsx
+import Histogram from "@figshare/fcl/icons/histogram";
+```
+
 ---
 ## Statistics
 
@@ -776,6 +1149,10 @@ import Statistics from "@figshare/ui/icons/statistics";
 <Story name="Statistics">
   <Statistics className={styles.icon} />
 </Story>
+
+```jsx
+import Statistics from "@figshare/fcl/icons/statistics";
+```
 
 ---
 ## ExpandTo / CollapseTo
@@ -792,6 +1169,13 @@ import CollapseToLeft from "@figshare/ui/icons/collapseTo/left";
   <CollapseToLeft className={styles.icon} />
 </Story>
 
+```jsx
+import ExpandToLeft from "@figshare/fcl/icons/expandTo/left";
+import CollapseToRight from "@figshare/fcl/icons/collapseTo/right";
+import ExpandToRight from "@figshare/fcl/icons/expandTo/right";
+import CollapseToLeft from "@figshare/fcl/icons/collapseTo/left";
+```
+
 ---
 ## LocationPin
 
@@ -800,6 +1184,10 @@ import LocationPin from "@figshare/ui/icons/locationPin";
 <Story name="LocationPin">
   <LocationPin className={styles.icon} />
 </Story>
+
+```jsx
+import LocationPin from "@figshare/fcl/icons/locationPin";
+```
 
 ---
 ## Project
@@ -814,6 +1202,12 @@ import ProjectLarge from "@figshare/ui/icons/project/large";
   <ProjectLarge className={styles.icon} />
 </Story>
 
+```jsx
+import ProjectSmall from "@figshare/fcl/icons/project/small";
+import ProjectMedium from "@figshare/fcl/icons/project/medium";
+import ProjectLarge from "@figshare/fcl/icons/project/large";
+```
+
 ---
 ## Collection
 
@@ -826,6 +1220,12 @@ import CollectionLarge from "@figshare/ui/icons/collection/large";
   <CollectionMedium className={styles.icon} />
   <CollectionLarge className={styles.icon} />
 </Story>
+
+```jsx
+import CollectionSmall from "@figshare/fcl/icons/collection/small";
+import CollectionMedium from "@figshare/fcl/icons/collection/medium";
+import CollectionLarge from "@figshare/fcl/icons/collection/large";
+```
 
 ---
 ## Users
@@ -840,6 +1240,12 @@ import UsersLarge from "@figshare/ui/icons/users/large";
   <UsersLarge className={styles.icon} />
 </Story>
 
+```jsx
+import UsersSmall from "@figshare/fcl/icons/users/small";
+import UsersMedium from "@figshare/fcl/icons/users/medium";
+import UsersLarge from "@figshare/fcl/icons/users/large";
+```
+
 ---
 ## Institution
 
@@ -852,6 +1258,12 @@ import InstitutionLarge from "@figshare/ui/icons/institution/large";
   <InstitutionMedium className={styles.icon} />
   <InstitutionLarge className={styles.icon} />
 </Story>
+
+```jsx
+import InstitutionSmall from "@figshare/fcl/icons/institution/small";
+import InstitutionMedium from "@figshare/fcl/icons/institution/medium";
+import InstitutionLarge from "@figshare/fcl/icons/institution/large";
+```
 
 ---
 ## Note
@@ -866,6 +1278,12 @@ import NoteLarge from "@figshare/ui/icons/note/large";
   <NoteLarge className={styles.icon} />
 </Story>
 
+```jsx
+import NoteSmall from "@figshare/fcl/icons/note/small";
+import NoteMedium from "@figshare/fcl/icons/note/medium";
+import NoteLarge from "@figshare/fcl/icons/note/large";
+```
+
 ---
 ## Quote
 
@@ -878,6 +1296,12 @@ import QuoteLarge from "@figshare/ui/icons/quote/large";
   <QuoteMedium className={styles.icon} />
   <QuoteLarge className={styles.icon} />
 </Story>
+
+```jsx
+import QuoteSmall from "@figshare/fcl/icons/quote/small";
+import QuoteMedium from "@figshare/fcl/icons/quote/medium";
+import QuoteLarge from "@figshare/fcl/icons/quote/large";
+```
 
 ---
 
@@ -894,6 +1318,12 @@ import DocumentLarge from "@figshare/ui/icons/document/large";
   <DocumentLarge className={styles.icon} />
 </Story>
 
+```jsx
+import DocumentSmall from "@figshare/fcl/icons/document/small";
+import DocumentMedium from "@figshare/fcl/icons/document/medium";
+import DocumentLarge from "@figshare/fcl/icons/document/large";
+```
+
 ---
 
 ---
@@ -908,6 +1338,12 @@ import XMLLarge from "@figshare/ui/icons/xml/large";
   <XMLMedium className={styles.icon} />
   <XMLLarge className={styles.icon} />
 </Story>
+
+```jsx
+import XMLSmall from "@figshare/fcl/icons/xml/small";
+import XMLMedium from "@figshare/fcl/icons/xml/medium";
+import XMLLarge from "@figshare/fcl/icons/xml/large";
+```
 
 ---
 
@@ -924,6 +1360,12 @@ import SplitDocumentLarge from "@figshare/ui/icons/splitDocument/large";
   <SplitDocumentLarge className={styles.icon} />
 </Story>
 
+```jsx
+import SplitDocumentSmall from "@figshare/fcl/icons/splitDocument/small";
+import SplitDocumentMedium from "@figshare/fcl/icons/splitDocument/medium";
+import SplitDocumentLarge from "@figshare/fcl/icons/splitDocument/large";
+```
+
 ---
 
 ---
@@ -938,5 +1380,11 @@ import FileLarge from "@figshare/ui/icons/file/large";
   <FileMedium className={styles.icon} />
   <FileLarge className={styles.icon} />
 </Story>
+
+```jsx
+import FileSmall from "@figshare/fcl/icons/file/small";
+import FileMedium from "@figshare/fcl/icons/file/medium";
+import FileLarge from "@figshare/fcl/icons/file/large";
+```
 
 ---

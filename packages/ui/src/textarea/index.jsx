@@ -12,11 +12,30 @@ const themes = {
 
 export default class Textarea extends Component {
   static propTypes = {
+    /**
+      Optional class name to append to the textarea node.
+     */
     className: PropTypes.string,
+    /**
+      Mark the input as disabled. Can be focused, but it's value cannot be changed or cleared.
+     */
     disabled: PropTypes.bool,
+    /**
+      Mark the input as being in an error state, visually.
+     */
     error: PropTypes.bool,
+    /**
+      Choose the style variation for the textarea.
+      Supported values: `["default", "underline"]`
+     */
     theme: PropTypes.string,
+    /**
+      Text value of the textarea.
+     */
     value: PropTypes.string,
+    /**
+      Callback called when the input value changes. Will receive the change event as the first argument.
+     */
     onChange: PropTypes.func,
   }
 

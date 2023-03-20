@@ -12,15 +12,46 @@ const themes = {
 
 export default class TextInput extends Component {
   static propTypes = {
+    /**
+      Additional, optional content to be prepended to the input.
+     */
     children: PropTypes.node,
+    /**
+      Optional extra class given to the input wrapper node.
+     */
     className: PropTypes.string,
+    /**
+      Disable the input. Input can be focused or tabbed through,
+      but will be read only and it's value cannot be modified.
+     */
     disabled: PropTypes.bool,
+    /**
+      Mark the input as being in an error state, visually,
+     */
     error: PropTypes.bool,
+    /**
+      Input style variation. Supported variations: `["default", "underline"]`
+     */
     theme: PropTypes.string,
+    /**
+      Input type. Same attribute values as `<input type />`
+     */
     type: PropTypes.string,
+    /**
+      Input value.
+     */
     value: PropTypes.string,
+    /**
+      Function called when input is blurred.
+     */
     onBlur: PropTypes.func,
+    /**
+      Function called when input value changes. Will be called with the `change event`.
+     */
     onChange: PropTypes.func,
+    /**
+      Function called when input receives focus.
+     */
     onFocus: PropTypes.func,
   }
 

@@ -17,6 +17,13 @@ import Button from "@figshare/ui/button/button";
 # Button
 ---
 
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+Basic button component. Allows users to trigger actions by interacting with the button by mouse or keyboard.
+Comes with different variations depending on the type of action we want to emphasise to the user.
 
 <Story
   name="Button"
@@ -25,32 +32,37 @@ import Button from "@figshare/ui/button/button";
     jest: ["ui/src/button/button"],
   }}
 >
-  <Button tooltip="Tooltip text">
+  <Button tooltip="This button has a tooltip.">
     Click me!
   </Button>
 </Story>
 
+Can be imported from:
 
 ```jsx
-import React from "react";
-import Home from "@figshare/ui/icons/home";
-import { Button } from "@figshare/ui/button";
+import { Button } from "@figshare/fcl/button";
 
-class MyButton extends React.Component {
-  render() {
-    return (
-      <Button tooltip="Tooltip text">
-        Click me!
-      </Button>
-    );
-  }
-}
+<Button 
+  theme="primary" 
+  onClick={() => {}} 
+  tooltip="This button has a tooltip"
+>
+  Main action
+</Button>
+<Button 
+  theme="secondary" 
+  onClick={() => {}} 
+  tooltip="This button has a tooltip"
+>
+  Secondary action
+</Button>
 ```
 
+## Props Table
 <ArgsTable of={Button} />
+*Accepts additional properties that can be supplied to a BaseButton component.*
 
-
-## Themes
+## Examples
 
 <Canvas>
 <div style={{ display: "flex", flexWrap: "wrap", gap: "calc(4 * var(--gridSize))"}}>

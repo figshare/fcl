@@ -1,0 +1,198 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import FigshareLogo from "@figshare/ui/icons/figshare/logo";
+import FigshareText from "@figshare/ui/icons/figshare/text";
+import FigshareFullLogo from "@figshare/ui/icons/figshare/index";
+
+
+export const Container = (props) => {
+  const style = {
+    display: "flex",
+    margin: "48px",
+    maxWidth: "700px",
+    flexDirection: "column",
+    justifyContent: "space-between"
+  }
+  return <div {...props} style={style} />;
+};
+
+<Meta 
+  title="Icons/Figshare" 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# Figshare and Media
+---
+
+A set of icons to represent the figshare logo, social media, or third parties related to dataset repositories.
+
+## Banner
+
+<Story
+  name="Figshare"
+  parameters={{
+    figma: { url: "https://www.figma.com/file/DqdzP2GRlCnN9SF5m7s1tCCY/figshare-brand" },
+    jest: ["icons/figshare/index.test.jsx"],
+  }}
+>
+  <div 
+    style={{
+      display: "flex",
+      margin: "48px",
+      maxWidth: "700px",
+      flexDirection: "column",
+      justifyContent: "space-between"
+    }}
+  >
+    <FigshareLogo animate={false} grayscale={false} />
+    <br />
+    <FigshareText />
+    <br />
+    <FigshareFullLogo />
+  </div>
+</Story>
+
+```jsx
+import FigshareLogo from "@figshare/fcl/icons/figshare/logo";
+import FigshareText from "@figshare/fcl/icons/figshare/text";
+import FigshareFullLogo from "@figshare/fcl/icons/figshare/index";
+
+<div 
+  style={{
+    display: "flex",
+    margin: "48px",
+    maxWidth: "700px",
+    flexDirection: "column",
+    justifyContent: "space-between"
+  }}
+>
+  <FigshareLogo animate={false} grayscale={false} />
+  <br />
+  <FigshareText />
+  <br />
+  <FigshareFullLogo />
+</div>
+```
+
+## OrcID
+
+import Orcid from "@figshare/ui/icons/orcid/index";
+import OrcidSmall from "@figshare/ui/icons/orcid/small";
+
+<Story
+  name="OrcID"
+  parameters={{
+    jest: ["icons/icons.test.jsx"],
+  }}
+>
+  <div style={{ display: "flex", margin: "48px", maxWidth: "700px", alignItems: "center" }}>
+    <Orcid style={ { width: "48px", height: "48px", margin: "0 24px" } } />
+    <OrcidSmall style={ { width: "48px", height: "48px", margin: "0 24px" } } />
+  </div>
+</Story>
+
+```jsx
+import Orcid from "@figshare/fcl/icons/orcid/index";
+import OrcidSmall from "@figshare/fcl/icons/orcid/small";
+
+<div style={{ display: "flex", margin: "48px", maxWidth: "700px", alignItems: "center" }}>
+  <Orcid style={ { width: "48px", height: "48px", margin: "0 24px" } } />
+  <OrcidSmall style={ { width: "48px", height: "48px", margin: "0 24px" } } />
+</div>
+```
+
+## Rss
+
+import Rss from "@figshare/ui/icons/rss/index";
+
+<Story
+  name="Rss"
+  parameters={{
+    jest: ["icons/icons.test.jsx"],
+  }}
+>
+  <div style={{ display: "flex", margin: "48px", maxWidth: "700px", alignItems: "center" }}>
+    <Rss fill="#ee802f" style={ { width: "24px", height: "24px", margin: "0 24px" } } />
+  </div>
+</Story>
+
+```jsx
+import Rss from "@figshare/fcl/icons/rss/index";
+
+<div style={{ display: "flex", margin: "48px", maxWidth: "700px", alignItems: "center" }}>
+  <Rss fill="#ee802f" style={ { width: "24px", height: "24px", margin: "0 24px" } } />
+</div>
+```
+
+## Social Media
+
+
+import Facebook from "@figshare/ui/icons/socialMedia/facebook";
+import Linkedin from "@figshare/ui/icons/socialMedia/linkedin";
+import Twitter from "@figshare/ui/icons/socialMedia/twitter";
+import TwitterInverted from "@figshare/ui/icons/socialMedia/twitter_inverted";
+import Vimeo from "@figshare/ui/icons/socialMedia/vimeo";
+
+<Story
+  name="Social Media"
+  parameters={{
+    jest: ["icons/icons.test.jsx"],
+  }}
+>
+  {() => {
+    const iconStyle = {
+      width: "30px",
+      height: "30px",
+      margin: "0 24px",
+    };
+    return (
+      <div style={{
+          display: "flex",
+          margin: "48px",
+          maxWidth: "700px",
+          alignItems: "center",
+        }}
+      >
+        <Facebook fill="#4267B2" style={iconStyle} />
+        <Linkedin fill="#0072b1" style={iconStyle} />
+        <Twitter fill="#1DA1F2" style={iconStyle} />
+        <TwitterInverted fill="#1DA1F2" style={iconStyle} />
+        <Vimeo fill="#1AB7EA" style={iconStyle} />
+      </div>
+    );
+  }}
+  
+</Story>
+
+```jsx
+import Facebook from "@figshare/fcl/icons/socialMedia/facebook";
+import Linkedin from "@figshare/fcl/icons/socialMedia/linkedin";
+import Twitter from "@figshare/fcl/icons/socialMedia/twitter";
+import TwitterInverted from "@figshare/fcl/icons/socialMedia/twitter_inverted";
+import Vimeo from "@figshare/fcl/icons/socialMedia/vimeo";
+
+
+const iconStyle = {
+  width: "30px",
+  height: "30px",
+  margin: "0 24px",
+};
+
+<div style={{
+    display: "flex",
+    margin: "48px",
+    maxWidth: "700px",
+    alignItems: "center",
+  }}
+>
+  <Facebook fill="#4267B2" style={iconStyle} />
+  <Linkedin fill="#0072b1" style={iconStyle} />
+  <Twitter fill="#1DA1F2" style={iconStyle} />
+  <TwitterInverted fill="#1DA1F2" style={iconStyle} />
+  <Vimeo fill="#1AB7EA" style={iconStyle} />
+</div>
+```
