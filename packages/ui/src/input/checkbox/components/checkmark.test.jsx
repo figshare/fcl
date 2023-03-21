@@ -1,7 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Checked from "@figshare/ui/icons/checkBox/checked";
-import Unchecked from "@figshare/ui/icons/checkBox/unchecked";
+
+import Checked from "../../../icons/checkBox/checked";
+import Unchecked from "../../../icons/checkBox/unchecked";
 
 import Checkmark from "./checkmark";
 import style from "./checkmark.css";

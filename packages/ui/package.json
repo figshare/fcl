@@ -21,14 +21,11 @@
   "author": "figshare",
   "license": "ISC",
   "dependencies": {
-    "@joplin/turndown-plugin-gfm": "1.0.45",
     "classnames": "2.3.2",
     "draft-js": "0.10.0",
     "draft-js-export-html": "1.4.1",
     "draft-js-import-html": "1.4.1",
-    "marked": "4.0.18",
-    "react-datepicker": "4.8.0",
-    "turndown": "7.1.1"
+    "react-datepicker": "4.8.0"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0",

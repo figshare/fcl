@@ -1,4 +1,4 @@
-import withConsumer from "@figshare/ui/helpers/withConsumer";
+import withConsumer from "../../helpers/withConsumer";
 
 import Context from "./context";
 

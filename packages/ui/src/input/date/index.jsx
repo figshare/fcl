@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDatepicker from "react-datepicker";
 import moment from "moment";
-import ChevronRight from "@figshare/ui/icons/chevron/right/medium";
-import ChevronLeft from "@figshare/ui/icons/chevron/left/medium";
+
+import ChevronRight from "../../icons/chevron/right/medium";
+import ChevronLeft from "../../icons/chevron/left/medium";
 
 import "./datepicker.css";
 
@@ -19,19 +20,79 @@ const FOCUS_DELAY = 50;
 
 export default class Date extends Component {
   static propTypes = {
+    /**
+      Custom `className` to append to the component root node.
+     */
     className: PropTypes.string,
+    /**
+      A format string describing the structure of the calendar date value, eg: `"YYYY-MM-DD"`.
+      Will be used as the placeholder for the input if an explicit `placeholder` property is not provided.
+     */
     dateFormat: validateDateFormat,
+    /**
+      Disable the input. Input can be focused or tabbed through,
+      but will be read only, and the calendar will always remain closed.
+     */
     disabled: PropTypes.bool,
+    /**
+      Mark the input as being, visually in an error state.
+     */
     error: PropTypes.bool,
+    /**
+      Use with inline 2 step range calendar implementations, to mark this input as being the end of the range,
+      or as holding the value to the `endDate`.
+     */
     isRangeEnd: PropTypes.bool,
+    /**
+      Use with inline 2 step range calendar implementations, to mark this input as being the start of the range,
+      or as holding the value to the `startDate`.
+     */
     isRangeStart: PropTypes.bool,
+    /**
+      `Date` value marking the maximum selectable date for this calendar.
+     */
     maxDate: PropTypes.any,
+    /**
+      `Date` value marking the minimum selectable date for this calendar.
+     */
     minDate: PropTypes.any,
+    /**
+      Input placeholder value.
+     */
     placeholder: PropTypes.string,
+    /**
+      Use in inline 2 step range calendar implementations, to mark the opposite end, or second range value of the set.
+
+      <Input type="date"
+        isRangeEnd={true}
+        rangeSelectedDate={startDate}
+        selectedDate={endDate}
+      >
+      <Input type="date"
+       isRangeStart={true}
+        rangeSelectedDate={endDate}
+        selectedDate={startDate}
+      >
+
+    */
     rangeSelectedDate: PropTypes.any,
+    /**
+      Initial selected date value. Can be a date string or Date object.
+     */
     selectedDate: PropTypes.any,
+    /**
+      Optional wrapper node className for the calendar.
+     */
     wrapperClassName: PropTypes.string,
+    /**
+      Number of year options to show in the year calendar grid.
+     */
     yearItemNumber: PropTypes.number,
+    /**
+      Handler function triggered on a date change. Either submitted in the input or selected from the calendar.
+      Receives the new date as a parsable date string.
+      (newDate: DateString) => void;
+     */
     onChange: PropTypes.func,
   }
 

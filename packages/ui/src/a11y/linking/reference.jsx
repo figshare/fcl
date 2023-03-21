@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import isFunction from "@figshare/ui/helpers/utils/isFunction";
 
+import isFunction from "../../helpers/utils/isFunction";
 import withConsumer from "../../helpers/withConsumer";
 import withRef from "../../helpers/withRef";
 import { withA11y } from "../../a11y/context";

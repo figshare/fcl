@@ -9,13 +9,38 @@ const generalQuerySelector = "button, [href], input, select, textarea, [tabindex
 
 export default class Toggletip extends Component {
   static propTypes = {
+    /**
+      Toggletip manager inner contents. Should ideally contain a Trigger and Content component,
+      to which certain props will be passed.
+     */
     children: PropTypes.any.isRequired,
+    /**
+      Toggles the visibility of the tooltip `Content`.
+     */
     isVisible: PropTypes.bool.isRequired,
+    /**
+      Function called when visibility state should change.
+     */
     onToggle: PropTypes.func.isRequired,
+    /**
+      Optional id string for the tooltip contents.
+     */
     contentId: PropTypes.string,
+    /**
+      Selector string for the content element we want to first move focus to when the ToggleTip is made visible.
+     */
     querySelector: PropTypes.string,
+    /**
+      Optional id string for the tooltip trigger element.
+     */
     triggerId: PropTypes.string,
+    /**
+      Callback called when the tooltip is hidden.
+     */
     onAfterClose: PropTypes.func,
+    /**
+      Callback called when the tooltip is made visible.
+     */
     onAfterOpen: PropTypes.func,
   }
 

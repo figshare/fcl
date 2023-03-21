@@ -10,6 +10,7 @@ import { PropComponentShowcase } from "./propComponent.stories";
 const stories = storiesOf("Utils/A11y/Aria liking", module);
 
 stories.addParameters({
+  description: "Aria linking utilities, to provide aria labels and descriptions through react context API.",
   jest: [
     "components/a11y/linking/index",
     "components/a11y/linking/helpers",

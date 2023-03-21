@@ -7,7 +7,13 @@ import style from "./overlayFooter.css";
 
 export default class OverlayFooter extends Component {
   static propTypes = {
+    /**
+      Contents for the overlay footer, usually a set of action buttons to close or save the overlay.
+     */
     children: PropTypes.node,
+    /**
+      Optional class to append to the footer node.
+     */
     className: PropTypes.string,
   }
 

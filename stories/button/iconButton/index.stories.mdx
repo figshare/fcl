@@ -17,6 +17,15 @@ import IconButton from "@figshare/ui/button/iconButton";
 # Icon Button
 ---
 
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+Similar to a Button component, but for contexts where we want to represent actions as visual Icons instead of Text labeled buttons.
+Useful for when we have limited space or a label would be redundant and an `Icon` would more clearly, and concicely, represent the action.
+Comes with different variations depending on the type of action we want to emphasise to the user.
 
 <Story
   name="Icon Button"
@@ -26,31 +35,35 @@ import IconButton from "@figshare/ui/button/iconButton";
   }}
 >
   <IconButton Icon={Home}>
-    Tooltip text
+    This IconButton has a tooltip.
   </IconButton>
 </Story>
 
+Can be imported from:
 
 ```jsx
 import React from "react";
-import Home from "@figshare/ui/icons/home";
-import { IconButton } from "@figshare/ui/button";
+import Home from "@figshare/fcl/icons/home";
+import { IconButton } from "@figshare/fcl/button";
 
 class MyButton extends React.Component {
   render() {
     return (
       <IconButton Icon={Home}>
-        Tooltip text
+        This IconButton has a tooltip, 
+        and these are the contents of that tooltip.
       </IconButton>
     );
   }
 }
 ```
 
+## Props Table
+
 <ArgsTable of={IconButton} />
+*Accepts additional properties that can be supplied to a BaseButton component.*
 
-
-## Themes
+## Examples
 
 <Canvas style={{ background: "white" }}>
   <IconButton theme="primary" Icon={Home}>Primary</IconButton>

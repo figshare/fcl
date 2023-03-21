@@ -1,8 +1,9 @@
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import Checked from "@figshare/ui/icons/checkBox/checked";
-import Unchecked from "@figshare/ui/icons/checkBox/unchecked";
+
+import Checked from "../../../icons/checkBox/checked";
+import Unchecked from "../../../icons/checkBox/unchecked";
 
 import styles from "./checkmark.css";
 

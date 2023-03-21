@@ -25,12 +25,39 @@ const sizes = {
 
 export default class Button extends Component {
   static propTypes = {
+    /**
+      Inner content, or button label
+     */
     children: PropTypes.node.isRequired,
+    /**
+      Optional Icon component button label.
+      Must be a functional or class component.
+      For example you can use the icon components provided in `@figshare/fcl/icons`.
+     */
     Icon: PropTypes.elementType,
+    /**
+      Optional custom class string appended to the button classList.
+     */
     className: PropTypes.string,
+    /**
+      If Icon component is provided,
+      this property controls the positioning of the rendered Icon element.
+     */
     iconPlacement: PropTypes.oneOf(["left", "right"]),
+    /**
+      Controls button size. Supported size values:
+     */
     size: PropTypes.oneOf(Object.keys(sizes)),
+    /**
+      Controls button style variation.
+      Use this property to visually emphasize the button relative to the type of action it is supposed to trigger.
+      Supported theme values:
+     */
     theme: PropTypes.oneOf(Object.keys(themes)),
+    /**
+      Optional button tooltip content.
+      If provided, a tooltip will be shown when the button is hovered or keyboard focused.
+     */
     tooltip: PropTypes.node,
   }
 

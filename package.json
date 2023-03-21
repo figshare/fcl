@@ -97,7 +97,6 @@
     "react-dom": "16.14.0",
     "storybook-addon-designs": "6.3.1",
     "style-loader": "2.0.0",
-    "turndown": "7.1.1",
     "url-loader": "4.1.1",
     "webpack": "4.46.0",
     "worker-loader": "3.0.8"
@@ -105,6 +104,7 @@
   "dependencies": {
     "@figshare/tools": "*",
     "@figshare/ui": "file:./packages/ui",
+    "@figshare/fcl": "file:./packages/ui",
     "@loadable/component": "5.15.3",
     "core-js": "3.26.1",
     "flightplan": "0.6.20",

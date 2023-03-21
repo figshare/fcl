@@ -1,4 +1,4 @@
-import { Meta, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import uncontrollable from "@figshare/ui/helpers/uncontrollable";
 import DatePickerComponent from "@figshare/ui/input/date/index";
@@ -34,22 +34,39 @@ export const canvasStyle = {
 />
 
 # Date Picker
+---
+
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+Date picker input component with calendar.
+Allows users to select a date value from an associated calendar or to type in a date value in the input, following a specified date format.
 
 <Story
   name="Date"
   parameters={{
-    docs: { disable: true },
     layout: "centered",
   }}
 >
-  <DatePicker />
+  <DatePicker selectedDate={new Date()} onChange={(date) => {}} />
 </Story>
 
-<br />
+Can be imported individually or referenced as a variation of the `Input` component:
+```jsx
+import DatePicker from "@figshare/fcl/input/date";
+import Input from "@figshare/fcl/input";
 
+<DatePicker onChange={(date) => {}} />
+<Input type="date" onChange={(date) => {}} />
+```
+
+## Props Table
+<ArgsTable of={DatePickerComponent} />
 
 ## Examples
-
 <Canvas>
   <div style={canvasStyle}>
     <p>Basic, with selected date</p>
@@ -69,8 +86,8 @@ export const canvasStyle = {
 
 ```jsx
 import React from "react";
-import DatePicker from "@figshare/ui/input/date";
-import Input from "@figshare/ui/input";
+import DatePicker from "@figshare/fcl/input/date";
+import Input from "@figshare/fcl/input";
 
 class Example extends React.Component {
   state = {
@@ -97,6 +114,3 @@ class Example extends React.Component {
   }
 }
 ```
-
-## Props Table
-<ArgsTable of={DatePickerComponent} />

@@ -1,6 +1,14 @@
-
+import { useState, useCallback } from "react";
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
-import uncontrollable from "@figshare/ui/helpers/uncontrollable";
+import Textarea from "@figshare/ui/textarea";
+
+export const ControlledTextarea = (props) => {
+  const [value, setValue] = useState("");
+  const onChange = useCallback((event) => {
+    setValue(event.target.value);
+  }, [setValue]);
+  return (<Textarea {...props} value={value} onChange={onChange} />);
+};
 
 <Meta 
   title="UI/Textarea" 
@@ -16,14 +24,13 @@ import uncontrollable from "@figshare/ui/helpers/uncontrollable";
 # Textarea
 ---
 
-import Textarea from "@figshare/ui/textarea";
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
 
-export const UncontrolledTextarea = uncontrollable(
-  Textarea,
-  { value: ["onChange", (_, e) => e.target.value] }
-);
+## Overview
 
-export const mountTextarea = (props) => <UncontrolledTextarea{...props} />;
+Textarea input. Useful for inputing large volume text, or text that is required to span multiple lines.
 
 <Story 
   name="Textarea" 
@@ -32,33 +39,40 @@ export const mountTextarea = (props) => <UncontrolledTextarea{...props} />;
     jest: ["ui/src/textarea"],
   }}
 >
-  {mountTextarea()}
+  {() => {
+    const [value, setValue] = useState("");
+    const onChange = useCallback((event) => {
+      setValue(event.target.value);
+    }, [setValue]);
+    return (<Textarea placeholder="Input text..." value={value} onChange={onChange} />);
+  }}
 </Story>
 
+The component can be imported from:
 
 ```jsx
-import React from "react";
-import Textarea from "@figshare/ui/textarea";
+import Textarea from "@figshare/fcl/textarea";
 
-class TextareaComponent extends React.Component {
-  render() {
-    return (
-      <Textarea />
-    );
-  }
+function ControlledTextarea() {
+  const [value, setValue] = useState("");
+  const onChange = useCallback((event) => {
+    setValue(event.target.value);
+  }, [setValue]);
+  return (<Textarea placeholder="Input text..." value={value} onChange={onChange} />);
 }
 ```
+## Props Table
 
 <ArgsTable of={Textarea} />
+Remaining set properties are desturctured and passed to the component node*
 
-
-## Themes
+## Examples
 
 <Canvas>
-  <UncontrolledTextarea theme="default" placeholder="Default theme" />
-  <UncontrolledTextarea theme="underline" placeholder="Underline theme" />
-  <UncontrolledTextarea theme="default" error={true} placeholder="Default theme - error" />
-  <UncontrolledTextarea theme="underline" error={true} placeholder="Underline theme - error" />
-  <UncontrolledTextarea theme="default" disabled={true} placeholder="Default theme - disabled" />
-  <UncontrolledTextarea theme="underline" disabled={true} placeholder="Underline theme - disabled" />
+  <ControlledTextarea theme="default" placeholder="Default theme" />
+  <ControlledTextarea theme="underline" placeholder="Underline theme" />
+  <ControlledTextarea theme="default" error={true} placeholder="Default theme - error" />
+  <ControlledTextarea theme="underline" error={true} placeholder="Underline theme - error" />
+  <ControlledTextarea theme="default" disabled={true} placeholder="Default theme - disabled" />
+  <ControlledTextarea theme="underline" disabled={true} placeholder="Underline theme - disabled" />
 </Canvas>

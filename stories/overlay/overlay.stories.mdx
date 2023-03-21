@@ -94,25 +94,106 @@ export const Example = ({ children }) => {
   }}
 />
 
-# Examples
+# Overlay
+---
+
+- [Overview](#overview)
+- [Props](#props-tables)
+    - [Overlay](#props-tables)
+    - [OverlayHeader](#overlayheader)
+    - [OverlayContent](#overlaycontent)
+    - [OverlayFooter](#overlayfooter)
+- [Examples](#examples)
+
+## Overview
+
+Used to render different flavours of overlays, from form overlays to confirmation modals.
+Use this component when you have separate, complex or information rich interactions to show to the user as part of a main flow.
 
 <Story 
   name="Overlay"
   parameters={{
-    docs: { disable: true },
     layout: "centered",
+    args: {
+      background: "confirmation"
+    }
   }}
 >
-  <Example />
+  {({ background }) => {
+    const [opened, setOpened] = useState("");
+    return (
+      <>
+        <div className={style.buttons}>
+          <Button onClick={() => setOpened(true)}>Open Overlay</Button>
+          <Overlay background={background} isVisible={opened} onClose={() => setOpened(false)}>
+            <OverlayHeader title="Title" description="Summary description" />
+            <OverlayContent>
+              The majority of the overlay content goes here.
+              <br />
+              Especially useful for delimiting content, that can sometimes, depending on available space, be scrolled through.
+            </OverlayContent>
+            <OverlayFooter>
+              <Button theme="primary" onClick={() => setOpened(false)}>Close</Button>
+            </OverlayFooter>
+          </Overlay>
+        </div>
+      </>
+    )
+  }}
 </Story>
 
+Comes with a set of helper components to easily define it's content structure, 
+and ensure appropriate spacing between the structure elements.
+The component set can be imported from `fcl/overlay`:
+
+```jsx
+import { Overlay, OverlayHeader, OverlayFooter, OverlayContent } from "@figshare/fcl/overlay";
+
+function MyOverlay({ onSave }) {
+  const [opened, setOpened] = useState("");
+
+  return (
+    <>
+      <div className={style.buttons}>
+        <Button onClick={() => setOpened(true)}>Open Overlay</Button>
+        <Overlay background="primary" isVisible={opened} onClose={() => setOpened(false)}>
+          <OverlayHeader title="Title" description="Summary description" />
+          <OverlayContent>
+            Main contents of the overlay.
+          </OverlayContent>
+          <OverlayFooter>
+            <Button theme="primary" onClick={() => { onSave(); setOpened(false); }}>Save</Button>
+            <Button theme="secondary" onClick={() => setOpened(false)}>Close</Button>
+          </OverlayFooter>
+        </Overlay>
+      </div>
+    </>
+  )
+}
+```
+## Props Tables
+<br/>
+
+### Overlay
+<ArgsTable of={Overlay} />
+
+### OverlayHeader
+<ArgsTable of={OverlayHeader} />
+
+### OverlayContent
+<ArgsTable of={OverlayContent} />
+
+### OverlayFooter
+<ArgsTable of={OverlayFooter} />
+
+## Examples
 
 <Canvas>
   <Example />
 </Canvas>
 
 ```jsx
-import { Overlay, OverlayHeader, OverlayFooter, OverlayContent } from "@figshare/ui/overlay";
+import { Overlay, OverlayHeader, OverlayFooter, OverlayContent } from "@figshare/fcl/overlay";
 
 export const MoreContent = () => {
   const content = useMemo(() =>  (Array.from(new Array(20), (v, i) => 
@@ -185,17 +266,3 @@ export const Example = ({ children }) => {
 
 <Example />
 ```
-
-## Props Tables
-
-### Overlay
-<ArgsTable of={Overlay} />
-
-### OverlayHeader
-<ArgsTable of={OverlayHeader} />
-
-### OverlayFooter
-<ArgsTable of={OverlayFooter} />
-
-### OverlayContent
-<ArgsTable of={OverlayContent} />

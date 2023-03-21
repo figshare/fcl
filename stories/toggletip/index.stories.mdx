@@ -1,10 +1,8 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { useState, useCallback } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import Info from "@figshare/ui/icons/info/medium";
 
 import Toggletip, { Trigger, Content, UncontrolledToggletip } from "@figshare/ui/toggletip";
-
-export const Template = (args) => <span {...args} />;
-
 
 <Meta
   component={Toggletip}
@@ -17,22 +15,117 @@ export const Template = (args) => <span {...args} />;
   }}
 />
 
+# Toggletip
+---
+
+- [Overview](#overview)
+- [Props](#props-tables)
+    - [Toggletip](#props-tables)
+    - [Trigger](#trigger)
+    - [Content](#content)
+- [Examples](#examples)
+
+## Overview
+
+A component that can be used to show a focusable, persitable tooltip tied to a any type of target node.
+The persistent tooltip will get revealed when users click on the target or focus on it and press "Enter" or "Spacebar" keys. 
+If the tooltip has focusable elements, focus will cycle through those elements. Users can exit the toggletip and return to the trigger by pressing "Escape".
+
 <Story
   name="Toggletip"
   parameters={{
-    docs: { disable: true },
     layout: "centered",
   }}
 >
-  {Template.bind({})}
+  {() => {
+    const [isVisible, setIsVisible] = useState(false);
+    const onToggle = useCallback(() => {
+      setIsVisible((visible) => !visible);
+    });
+    return (
+      <Toggletip isVisible={isVisible} onToggle={onToggle}>
+        <Trigger>
+          Button Trigger
+        </Trigger>
+        <Content>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+          <button>Focusable element</button>
+          Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+          <input value="static value, but focusable element" />
+          pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+        </Content>
+      </Toggletip>
+    );
+  }}
 </Story>
 
+The component is a composite of a `Manager - Trigger - Content` set similar to other popup component implementations,
+and can be imported from:
 
-# Toggletip
+```jsx
+import Toggletip, { Trigger, Content } from "@figshare/fcl/toggletip";
 
----
+function MyToggletip() {
+  const [isVisible, setIsVisible] = useState(false);
+  const onToggle = useCallback(() => {
+    setIsVisible((visible) => !visible);
+  });
 
-## Primary
+  return (
+    <Toggletip isVisible={isVisible} onToggle={onToggle}>
+      <Trigger>
+        Button Trigger
+      </Trigger>
+      <Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+        <button>Focusable element</button>
+        Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+        <input value="static value, but focusable element" />
+        pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+      </Content>
+    </Toggletip>
+  );
+}
+```
+
+We also export an `uncontrolled` version of the component for convenience, where we do not need to explicity control the visibility state:
+
+```jsx
+import { Trigger, Content, UncontrolledToggletip } from "@figshare/fcl/toggletip";
+
+function MyUncontrolledToggletip() {
+  return (
+    <UncontrolledToggletip>
+      <Trigger>
+        Button Trigger
+      </Trigger>
+      <Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+        <button>Focusable element</button>
+        Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+        <input value="static value, but focusable element" />
+        pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+      </Content>
+    </UncontrolledToggletip>
+  );
+}
+```
+
+## Props Tables
+<br/>
+
+### Toggletip
+<ArgsTable of={Toggletip} />
+
+### Trigger
+<ArgsTable of={Trigger} />
+
+### Content
+<ArgsTable of={Content} />
+
+## Examples
+
+### Primary
 
 <UncontrolledToggletip>
   <Trigger>
@@ -79,7 +172,7 @@ export const Template = (args) => <span {...args} />;
 
 ---
 
-## Secondary
+### Secondary
 
 <UncontrolledToggletip>
   <Trigger>
@@ -123,3 +216,88 @@ export const Template = (args) => <span {...args} />;
     pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
   </Content>
 </UncontrolledToggletip>
+
+
+```jsx
+<h3>Primary</h3>
+
+<UncontrolledToggletip>
+  <Trigger>
+    Button Trigger
+  </Trigger>
+  <Content>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<UncontrolledToggletip>
+  <Trigger displayedAs="iconButton" Icon={Info}>
+    IconButton Trigger
+  </Trigger>
+  <Content>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<UncontrolledToggletip>
+  <Trigger displayedAs="genericButton">
+    GenericButton Trigger
+  </Trigger>
+  <Content>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<h3>Secondary</h3>
+
+<UncontrolledToggletip>
+  <Trigger>
+    Button Trigger
+  </Trigger>
+  <Content theme="secondary">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<UncontrolledToggletip>
+  <Trigger displayedAs="iconButton" Icon={Info}>
+    IconButton Trigger
+  </Trigger>
+  <Content theme="secondary">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+
+<UncontrolledToggletip>
+  <Trigger displayedAs="genericButton">
+    GenericButton Trigger
+  </Trigger>
+  <Content theme="secondary">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+    <button>Focusable element</button>
+    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+    <input value="static value, but focusable element" />
+    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+  </Content>
+</UncontrolledToggletip>
+```

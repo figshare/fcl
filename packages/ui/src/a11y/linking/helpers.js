@@ -1,4 +1,4 @@
-import isFunction from "@figshare/ui/helpers/utils/isFunction";
+import isFunction from "../../helpers/utils/isFunction";
 
 
 export const computeDynamicDefault = (props, state, key, defaultValue) => {
