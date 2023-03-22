@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "@figshare/ui/button";
-import { LinkingProvider, withLinkingObject, withLinkingReference } from "@figshare/ui/a11y/linking/index";
+import { Button } from "@figshare/fcl/button";
+import { LinkingProvider, withLinkingObject, withLinkingReference } from "@figshare/fcl/a11y/linking/index";
 
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from "./storybook.stories.css";

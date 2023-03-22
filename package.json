@@ -103,7 +103,6 @@
   },
   "dependencies": {
     "@figshare/tools": "*",
-    "@figshare/ui": "file:./packages/ui",
     "@figshare/fcl": "file:./packages/ui",
     "@loadable/component": "5.15.3",
     "core-js": "3.26.1",

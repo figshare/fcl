@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component, Children } from "react";
-import Popup from "@figshare/ui/popup";
-import uidGenerator from "@figshare/ui/a11y/context/uidGenerator";
+import Popup from "@figshare/fcl/popup";
+import uidGenerator from "@figshare/fcl/a11y/context/uidGenerator";
 
 
 const uid = uidGenerator();

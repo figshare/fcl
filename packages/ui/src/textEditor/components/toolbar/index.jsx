@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Resize from "@figshare/ui/icons/editor/resize";
+import Resize from "@figshare/fcl/icons/editor/resize";
 
 import ToolbarButton from "../toolbarButton";
 import {

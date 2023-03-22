@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Trigger as PopupTrigger } from "@figshare/ui/popup";
-import { Button, IconButton, GenericButton } from "@figshare/ui/button";
+import { Trigger as PopupTrigger } from "@figshare/fcl/popup";
+import { Button, IconButton, GenericButton } from "@figshare/fcl/button";
 
 
 const mapping = {
