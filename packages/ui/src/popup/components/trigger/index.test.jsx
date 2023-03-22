@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Button } from "@figshare/ui/button";
+import { Button } from "@figshare/fcl/button";
 
 import Trigger from "./index";
 

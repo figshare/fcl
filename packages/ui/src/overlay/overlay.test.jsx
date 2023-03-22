@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
-import { IconButton } from "@figshare/ui/button";
-import RenderInPortal from "@figshare/ui/helpers/renderInPortal";
+import { IconButton } from "@figshare/fcl/button";
+import RenderInPortal from "@figshare/fcl/helpers/renderInPortal";
 
 import Overlay from "./overlay";
 

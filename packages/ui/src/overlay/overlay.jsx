@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import React, { Component, createContext } from "react";
 import PropTypes from "prop-types";
-import Cancel from "@figshare/ui/icons/cancel/large";
+import Cancel from "@figshare/fcl/icons/cancel/large";
 
 import { IconButton } from "../button";
 import FocusTrap from "../helpers/focusTrap";

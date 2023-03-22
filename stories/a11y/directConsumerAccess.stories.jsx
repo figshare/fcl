@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Button } from "@figshare/ui/button";
-import { withA11y } from "@figshare/ui/a11y/context";
-import { LinkingProvider, LinkingObject, LinkingReference, withLinkingContext } from "@figshare/ui/a11y/linking/index";
+import { Button } from "@figshare/fcl/button";
+import { withA11y } from "@figshare/fcl/a11y/context";
+import { LinkingProvider, LinkingObject, LinkingReference, withLinkingContext } from "@figshare/fcl/a11y/linking/index";
 
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from "./storybook.stories.css";

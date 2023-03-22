@@ -1,8 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
-import { Trigger as PopupTrigger } from "@figshare/ui/popup";
-import { Button, GenericButton, IconButton } from "@figshare/ui/button";
-import Info from "@figshare/ui/icons/info/medium";
+import { Trigger as PopupTrigger } from "@figshare/fcl/popup";
+import { Button, GenericButton, IconButton } from "@figshare/fcl/button";
+import Info from "@figshare/fcl/icons/info/medium";
 
 import Trigger from "./index";
 
