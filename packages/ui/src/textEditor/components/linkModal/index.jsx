@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 import { Button } from "@figshare/fcl/button";
 
 import { findEntityType } from "../../utils";
@@ -57,7 +58,10 @@ class LinkModal extends Component {
         <div className={styles.modalContainer}>
           <div>
             <span className={styles.title}>{title}</span>
-            <div> Link{this.renderOpenLinkButton(hasLinkEntity)} </div>
+            <div className={styles.linkContainer}>
+              <span className={styles.linkLabel}>Link</span>
+              {this.renderOpenLinkButton(hasLinkEntity)}
+            </div>
           </div>
           <input
             autoFocus={true}
@@ -72,7 +76,11 @@ class LinkModal extends Component {
             <Button className={styles.buttonCancel} onClick={onCancelLinkAddition}>
               Cancel
             </Button>
-            <Button className={styles.buttonSave} disabled={!hasMinimumLength} onClick={onConfirmLink} >
+            <Button
+              className={classnames(styles.buttonSave, { [styles.focusBtn]: !hasMinimumLength })}
+              disabled={!hasMinimumLength}
+              onClick={onConfirmLink}
+            >
               Save
             </Button>
           </div>

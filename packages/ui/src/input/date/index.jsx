@@ -123,6 +123,7 @@ export default class Date extends Component {
     if (!this.portal) {
       this.portal = document.createElement("div");
       this.portal.id = PORTAL_ID;
+      this.portal.setAttribute("tabindex", "-1");
       this.portal.classList.add(style.portal);
 
       document.body.appendChild(this.portal);
@@ -265,6 +266,10 @@ export default class Date extends Component {
   }
 
   onFocus = (event) => {
+    if (this.props.disabled) {
+      return;
+    }
+
     if (event.target === this.datepicker?.input && !this.datepicker.isCalendarOpen()) {
 
       this.datepicker.setOpen(true);

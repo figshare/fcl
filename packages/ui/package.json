@@ -25,7 +25,9 @@
     "draft-js": "0.10.0",
     "draft-js-export-html": "1.4.1",
     "draft-js-import-html": "1.4.1",
-    "react-datepicker": "4.8.0"
+    "moment": "^2.29.4",
+    "react-datepicker": "4.8.0",
+    "react-popper": "2.3.0"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0",

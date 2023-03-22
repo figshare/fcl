@@ -159,6 +159,7 @@ export default class Overlay extends Component {
           className={classnames(styles.overlay, styles[overlayBackground])}
           role="presentation"
           style={overlayStyle}
+          tabIndex={-1}
           onClick={this.onClickOverlay}
           onKeyDown={this.onEscape}
         >

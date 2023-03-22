@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import { Popper } from "react-popper";
 import React, { PureComponent } from "react";
 
 import BaseButton from "./base";
@@ -90,10 +91,6 @@ export default class GenericButton extends PureComponent {
     isVisible: false,
   }
 
-  componentWillUnmount() {
-    this.removeListeners();
-  }
-
   render() {
     const { children, className, classNameTooltip, ...props } = this.props;
 
@@ -117,33 +114,73 @@ export default class GenericButton extends PureComponent {
   }
 
   renderTooltip() {
-    const { tooltip, classNameTooltip } = this.props;
+    const { tooltip } = this.props;
     if (!tooltip) {
       return null;
     }
 
-    const { left, top, arrowLeft, isBelow, isActive, isVisible } = this.state;
+    const { isVisible } = this.state;
 
     return (
-      <span
-        ref={this.setTooltipRef}
-        aria-hidden={false}
-        className={classnames(styles.tooltip, classNameTooltip)}
-        data-tooltip-below={isBelow}
-        data-tooltip-visible={isActive && isVisible}
-        style={ {
-          "--tooltipLeft": `${left}px`,
-          "--tooltipTop": `${top}px`,
-          "--tooltipArrowLeft": `${arrowLeft}px`,
-        } }
+      <Popper
+        eventsEnabled={isVisible}
+        modifiers={[
+          {
+            name: "flip",
+            options: {
+              fallbackPlacements: ["top", "bottom"],
+              boundary: "viewport",
+            },
+          },
+        ]}
+        placement="top"
+        referenceElement={this.buttonNode}
+        strategy="fixed"
       >
-        {tooltip}
-      </span>
+        {this.renderTooltipPopper}
+      </Popper>
     );
   }
 
   buttonNode = null;
   tooltipNode = null;
+
+  renderTooltipPopper = (popperProps) => {
+    const {
+      ref: tooltipRef,
+      style: popperStyle,
+      placement: popperPlacement,
+      arrowProps: {
+        ref: arrowRef,
+        style: arrowStyle,
+      },
+    } = popperProps;
+
+    const { tooltip, classNameTooltip } = this.props;
+    const { isActive } = this.state;
+
+    return (
+      <>
+        <span
+          ref={tooltipRef}
+          aria-hidden={false}
+          className={classnames(styles.tooltip, classNameTooltip)}
+          data-placement={popperPlacement}
+          data-tooltip-visible={isActive}
+          style={popperStyle}
+        >
+          {tooltip}
+          <span
+            ref={arrowRef}
+            className={styles.tooltipArrow}
+            data-placement={popperPlacement}
+            data-popper-arrow={true}
+            style={arrowStyle}
+          />
+        </span>
+      </>
+    );
+  }
 
   setButtonRef = (node) => {
     const { innerRef } = this.props;
@@ -159,8 +196,6 @@ export default class GenericButton extends PureComponent {
       innerRef.current = node;
     }
   }
-
-  setTooltipRef = (node) => this.tooltipNode = node;
 
   onMouseOver = (event) => {
     this.showTooltip();
@@ -220,8 +255,7 @@ export default class GenericButton extends PureComponent {
       return;
     }
 
-    this.setState({ isActive: true }, this.computePosition);
-    this.addListeners();
+    this.setState({ isActive: true });
   }
 
   hideTooltip = () => {
@@ -230,33 +264,5 @@ export default class GenericButton extends PureComponent {
     }
 
     this.setState({ isActive: false });
-    this.removeListeners();
-  }
-
-  computePosition = () => {
-    const { x: buttonX, y: buttonY, width: buttonW, height: buttonH } = this.buttonNode.getBoundingClientRect();
-    const { width: tooltipW, height: tooltipH } = this.tooltipNode.getBoundingClientRect();
-    const { clientWidth: viewportW } = document.documentElement;
-
-    const buttonCenterX = buttonX + (buttonW / 2);
-    const tooltipCenterX = buttonCenterX - (tooltipW / 2);
-
-    const isBelow = (buttonY - tooltipH) < 0;
-    const top = isBelow ? buttonY + buttonH : buttonY - tooltipH;
-    const left = Math.max(0, Math.min(tooltipCenterX, viewportW - tooltipW));
-    const arrowLeft = Math.max(0, Math.min(buttonCenterX - left, tooltipW));
-    const isVisible = buttonX + buttonW >= 0 && buttonX <= viewportW;
-
-    this.setState({ left, top, arrowLeft, isBelow, isVisible });
-  }
-
-  addListeners = () => {
-    document.addEventListener("resize", this.computePosition);
-    document.addEventListener("scroll", this.computePosition, true);
-  }
-
-  removeListeners = () => {
-    document.removeEventListener("resize", this.computePosition);
-    document.removeEventListener("scroll", this.computePosition, true);
   }
 }

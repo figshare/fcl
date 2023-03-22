@@ -301,6 +301,18 @@ describe("<DateInput />", () => {
     expect(setOpenSpy).not.toHaveBeenCalled();
   });
 
+  it("does not open calendar on focus if it is disabled", async() => {
+    const mounted = mount(<DatePicker disabled={true} />);
+    const instance = mounted.instance();
+    const setOpenSpy = jest.spyOn(instance.datepicker, "setOpen");
+
+    instance.onFocus({ target: instance.datepicker.input });
+
+    await wait();
+    mounted.update();
+
+    expect(setOpenSpy).not.toHaveBeenCalled();
+  });
 
   it("onYearChange checks for out of bounds dates", async() => {
     const onChangeFn = jest.fn();
