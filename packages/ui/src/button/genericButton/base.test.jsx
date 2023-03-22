@@ -41,7 +41,7 @@ describe("<Base />", () => {
     expect(baseButton.find("a").prop("rel")).toMatch("fakeRel");
   });
 
-  it("prevents default onClick when disabled", () => {
+  it("does not call onClick when disabled", () => {
     const onClick = jest.fn();
     const event = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
 
@@ -54,7 +54,7 @@ describe("<Base />", () => {
     expect(baseButton.prop("aria-disabled")).toEqual(true);
 
     baseButton.simulate("click", event);
-    expect(onClick).toHaveBeenCalledWith(event);
+    expect(onClick).not.toHaveBeenCalled();
     expect(event.preventDefault).toHaveBeenCalled();
     expect(event.stopPropagation).toHaveBeenCalled();
   });

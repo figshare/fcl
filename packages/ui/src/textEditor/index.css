@@ -62,7 +62,7 @@
 
   margin: var(--gridSize) calc(var(--gridSize) * 2);
 
-  color: var(--color-switch-label_disabled);
+  color: var(--color-typography-tertiary);
 }
 
 :global(.DraftEditor-editorContainer) {
@@ -76,6 +76,14 @@
   width: auto;
   min-height: 80%;
   margin: var(--gridSize) calc(2 * var(--gridSize));
+}
+
+:global(.public-DraftStyleDefault-ul) {
+  margin-left: calc(4 * var(--gridSize));
+}
+
+:global(.public-DraftStyleDefault-ol) {
+  margin-left: calc(4 * var(--gridSize));
 }
 
 :global(.public-DraftEditor-content):focus {
@@ -104,12 +112,7 @@
 }
 
 @media (max-width: 550px) {
-  .componentContainer {
-    width: fit-content;
-  }
-
   .editorContainer {
-    width: 90%;
     min-width: calc(75 * var(--gridSize));
   }
 }
@@ -129,5 +132,11 @@
 @media (max-width: 350px) {
   .editorContainer {
     min-width: calc(47 * var(--gridSize));
+  }
+}
+
+@media (max-width: 320px) {
+  .componentContainer {
+    width: fit-content;
   }
 }

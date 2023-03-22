@@ -100,6 +100,7 @@ export default class SearchInput extends PureComponent {
           aria-invalid={error || undefined}
           className={styles.input}
           data-size={size}
+          disabled={disabled || undefined}
           type="text"
           onBlur={this.onBlur}
           onChange={this.onChange}

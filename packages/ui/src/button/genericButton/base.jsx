@@ -79,6 +79,8 @@ export default class Base extends PureComponent {
     if (this.props.disabled) {
       event.preventDefault();
       event.stopPropagation();
+
+      return;
     }
 
     this.props.onClick?.(event);

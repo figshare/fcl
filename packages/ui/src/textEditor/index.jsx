@@ -37,6 +37,7 @@ import { LinkModal, Toolbar } from "./components";
 const DEFAULT_MAX_TEXT_LENGTH = 10000;
 const DEFAULT_MIN_TEXT_LENGTH = 5000;
 const KEY_ENTER = 13;
+const DEBOUNCE_DELAY = 1000;
 
 export default class TextEditor extends React.Component {
   static propTypes = {
@@ -211,7 +212,12 @@ export default class TextEditor extends React.Component {
 
   onFocusEditor = () => this.editorNode.focus();
 
-  onClickEditor = () => (this.lastActionWasClick = true);
+  onClickEditor = () => {
+    this.lastActionWasClick = true;
+    setTimeout(() => {
+      this.lastActionWasClick = false;
+    }, DEBOUNCE_DELAY);
+  };
 
   onKeyDownEditor = () => (this.lastActionWasClick = false);
 

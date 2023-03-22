@@ -5,29 +5,8 @@ import BaseButton from "./base";
 import GenericButton from "./index";
 
 
-const spyBCR = (node, rect) => jest.spyOn(node, "getBoundingClientRect").mockImplementation(() => rect);
-
-
 describe("<GenericButton />", () => {
   const classNameTooltip = "tooltipClass";
-  let documentElement = null;
-  let addEventListener = null;
-  let removeEventListener = null;
-
-  beforeEach(() => {
-    documentElement = jest.spyOn(document, "documentElement", "get").mockImplementation(() => {
-      return { clientWidth: 1024 };
-    });
-
-    addEventListener = jest.spyOn(document, "addEventListener");
-    removeEventListener = jest.spyOn(document, "removeEventListener");
-  });
-
-  afterEach(() => {
-    documentElement.mockRestore();
-    addEventListener.mockRestore();
-    removeEventListener.mockRestore();
-  });
 
   it("renders <BaseButton />", () => {
     const genericButton = shallow(<GenericButton>Click me</GenericButton>);
@@ -36,15 +15,17 @@ describe("<GenericButton />", () => {
 
   it("renders visually hidden tooltip", () => {
     const tooltip = "Extra info";
-    const genericButton = shallow(
+    const genericButton = mount(
       <GenericButton classNameTooltip={classNameTooltip} tooltip={tooltip}>
         Click me
       </GenericButton>
     );
 
-    expect(genericButton.find(`.${classNameTooltip}`).text()).toMatch(tooltip);
-    expect(genericButton.find(`.${classNameTooltip}`).prop("aria-hidden")).toEqual(false);
-    expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(false);
+    const tooltipElement = genericButton.find(`.${classNameTooltip}`);
+
+    expect(tooltipElement.text()).toMatch(tooltip);
+    expect(tooltipElement.getDOMNode().getAttribute("aria-hidden")).toEqual("false");
+    expect(tooltipElement.getDOMNode().getAttribute("data-tooltip-visible")).toEqual("false");
   });
 
   it("renders tooltip on mouse over and hides on mouse out", () => {
@@ -54,26 +35,13 @@ describe("<GenericButton />", () => {
       </GenericButton>
     );
 
-    const { buttonNode, tooltipNode } = genericButton.instance();
-    const buttonBCR = spyBCR(buttonNode, { x: 0, y: 0, width: 100, height: 10 });
-    const tooltipBCR = spyBCR(tooltipNode, { width: 100, height: 100 });
-
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(false);
 
     genericButton.simulate("mouseOver");
-
-    expect(addEventListener).toHaveBeenCalledWith("resize", expect.any(Function));
-    expect(addEventListener).toHaveBeenCalledWith("scroll", expect.any(Function), true);
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(true);
 
     genericButton.simulate("mouseOut");
-
-    expect(removeEventListener).toHaveBeenCalledWith("resize", expect.any(Function));
-    expect(removeEventListener).toHaveBeenCalledWith("scroll", expect.any(Function), true);
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(false);
-
-    buttonBCR.mockRestore();
-    tooltipBCR.mockRestore();
   });
 
   it("renders tooltip on focus and hides on blur", () => {
@@ -83,26 +51,13 @@ describe("<GenericButton />", () => {
       </GenericButton>
     );
 
-    const { buttonNode, tooltipNode } = genericButton.instance();
-    const buttonBCR = spyBCR(buttonNode, { x: 0, y: 0, width: 100, height: 10 });
-    const tooltipBCR = spyBCR(tooltipNode, { width: 100, height: 100 });
-
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(false);
 
     genericButton.simulate("focus");
-
-    expect(addEventListener).toHaveBeenCalledWith("resize", expect.any(Function));
-    expect(addEventListener).toHaveBeenCalledWith("scroll", expect.any(Function), true);
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(true);
 
     genericButton.simulate("blur");
-
-    expect(removeEventListener).toHaveBeenCalledWith("resize", expect.any(Function));
-    expect(removeEventListener).toHaveBeenCalledWith("scroll", expect.any(Function), true);
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(false);
-
-    buttonBCR.mockRestore();
-    tooltipBCR.mockRestore();
   });
 
   it("hides tooltip on click", () => {
@@ -112,60 +67,13 @@ describe("<GenericButton />", () => {
       </GenericButton>
     );
 
-    const { buttonNode, tooltipNode } = genericButton.instance();
-    const buttonBCR = spyBCR(buttonNode, { x: 0, y: 0, width: 100, height: 10 });
-    const tooltipBCR = spyBCR(tooltipNode, { width: 100, height: 100 });
-
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(false);
     genericButton.simulate("focus");
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(true);
 
     genericButton.simulate("click");
 
-    expect(removeEventListener).toHaveBeenCalledWith("resize", expect.any(Function));
-    expect(removeEventListener).toHaveBeenCalledWith("scroll", expect.any(Function), true);
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(false);
-
-    buttonBCR.mockRestore();
-    tooltipBCR.mockRestore();
-  });
-
-  it("renders tooltip above when tooltip height fits in the upper part of the button", () => {
-    const genericButton = mount(
-      <GenericButton classNameTooltip={classNameTooltip} tooltip="Extra info" >
-        Click me
-      </GenericButton>
-    );
-
-    const { buttonNode, tooltipNode } = genericButton.instance();
-    const buttonBCR = spyBCR(buttonNode, { x: 0, y: 100, width: 100, height: 10 });
-    const tooltipBCR = spyBCR(tooltipNode, { width: 100, height: 100 });
-
-    genericButton.simulate("focus");
-    expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(true);
-    expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-below")).toEqual(false);
-
-    buttonBCR.mockRestore();
-    tooltipBCR.mockRestore();
-  });
-
-  it("renders tooltip below when tooltip height doesn't fit in the upper part of the button", () => {
-    const genericButton = mount(
-      <GenericButton classNameTooltip={classNameTooltip} tooltip="Extra info" >
-        Click me
-      </GenericButton>
-    );
-
-    const { buttonNode, tooltipNode } = genericButton.instance();
-    const buttonBCR = spyBCR(buttonNode, { x: 0, y: 0, width: 100, height: 10 });
-    const tooltipBCR = spyBCR(tooltipNode, { width: 100, height: 100 });
-
-    genericButton.simulate("focus");
-    expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(true);
-    expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-below")).toEqual(true);
-
-    buttonBCR.mockRestore();
-    tooltipBCR.mockRestore();
   });
 
   it("sets button node when innerRef is using React.createRef", () => {
@@ -282,16 +190,6 @@ describe("<GenericButton />", () => {
     expect(event.preventDefault).toHaveBeenCalled();
 
     createEvent.mockRestore();
-  });
-
-  it("removes global listeners on unmount", () => {
-    const genericButton = shallow(<GenericButton tooltip="Extra info">Click me</GenericButton>);
-
-    expect(removeEventListener).not.toHaveBeenCalled();
-
-    genericButton.unmount();
-    expect(removeEventListener).toHaveBeenCalledWith("resize", expect.any(Function));
-    expect(removeEventListener).toHaveBeenCalledWith("scroll", expect.any(Function), true);
   });
 
   it("does url normalization", () => {

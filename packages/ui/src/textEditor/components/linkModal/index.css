@@ -35,8 +35,18 @@
   background-color: var(--color-layout-secondary-background);
 }
 
+.linkContainer {
+  display: flex;
+  align-items: center;
+}
+
+.linkLabel {
+  margin-right: var(--gridSize);
+}
+
 .icon {
   margin-right: calc(var(--gridSize) * 2);
+  margin-bottom: calc(var(--gridSize) / 4);
 }
 
 .title {
@@ -79,6 +89,11 @@
   line-height: var(--typography-M-lineHeight);
 
   padding: var(--gridSize) calc(var(--gridSize) * 2);
+}
+
+.focusBtn {
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 
 .buttonCancel {
