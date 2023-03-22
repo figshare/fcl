@@ -16,6 +16,7 @@ const props = {
   onConfirmLink: undefined,
   onCancelLinkAddition: undefined,
   onRemoveLink: undefined,
+  onURLChange: jest.fn(),
 };
 
 describe("<LinkModal />", () => {

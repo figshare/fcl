@@ -72,6 +72,8 @@ export default class FocusTrap extends Component {
       innerRef,
       isActive,
       onKeyDown,
+      focusIn,
+      returnFocus,
       ...restProps
     } = this.props;
 

@@ -10,7 +10,7 @@ describe("<ToolbarButton />", () => {
   beforeEach(() => {
     props = {
       editorNode: { focus: () => undefined },
-      Icon: jest.fn(() => <svg />),
+      icon: jest.fn(() => <svg />),
       onToggle: jest.fn(),
       disabled: false,
       isActive: false,

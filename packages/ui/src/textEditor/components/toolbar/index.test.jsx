@@ -10,7 +10,7 @@ import Toolbar from "./index.jsx";
 const contentState = onConvertHTMLtoDraft("<p>test component</p>");
 const props = {
   editorState: EditorState.createWithContent(contentState),
-  onToggle: jest.fn(),
+  onToggle: jest.fn(() => () => undefined),
 };
 
 describe("<Toolbar />", () => {
