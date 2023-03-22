@@ -69,10 +69,10 @@ class LinkModal extends Component {
           />
           <div className={styles.buttonsContainer}>
             {this.renderRemoveButton(hasLinkEntity)}
-            <Button extraClass={styles.buttonCancel} type="simple" onClick={onCancelLinkAddition}>
+            <Button className={styles.buttonCancel} onClick={onCancelLinkAddition}>
               Cancel
             </Button>
-            <Button disabled={!hasMinimumLength} extraClass={styles.buttonSave} type="simple" onClick={onConfirmLink} >
+            <Button className={styles.buttonSave} disabled={!hasMinimumLength} onClick={onConfirmLink} >
               Save
             </Button>
           </div>
@@ -89,7 +89,7 @@ class LinkModal extends Component {
     }
 
     return (
-      <Button extraClass={styles.buttonOpenLink} href={urlValue} target="_blank" type="link">
+      <Button className={styles.buttonOpenLink} href={urlValue} target="_blank">
         <OpenLinkIcon className={styles.icon} /> Open link
       </Button>
     );
@@ -103,7 +103,7 @@ class LinkModal extends Component {
     }
 
     return (
-      <Button extraClass={styles.buttonUnlink} type="link" onClick={onRemoveLink}>
+      <Button className={styles.buttonUnlink} onClick={onRemoveLink}>
         <UnlinkIcon className="icon" /> Unlink
       </Button>
     );
