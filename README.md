@@ -4,12 +4,10 @@
 
 </h1>
 
-[![][jira]][jira-url]
 [![][node]][node-url]
 [![][lerna]][lerna-url]
 [![][storybook]][storybook-url]
 [![][react]][react-url]
-![][coverage]
 
 
 <div align="right">
@@ -33,19 +31,20 @@
 
 </details>
 
-
+----
 ## About
 
-`fcl` is an open source library for some of the React UI components used across figshare. This is the main repo that hosts the documentation and open source library. UI package is deployed and available publicly. Documentation is written using [storybook](https://storybook.js.org/), UX specifications and UI component showcases and docs are available [here](https://storybook.figshare.network/). Deployment and monorepo management is done using `lerna`.
+`fcl` is an open source library for some of the React UI components used across figshare. This is the main repo that hosts the documentation and open source library. Deployment and monorepo management is done using `lerna`.
 
 **Packages:**
 *   [![][ui]][ui-url]
+---
 
 ## Usage
 
-### Install
+### Installation
 
-Install the provided package to your project's `node_modules`:
+Install the components package to your project's `node_modules`:
 ```
 npm install --save @figshare/fcl
 ```
@@ -91,7 +90,26 @@ import Calendar "@figshare/fcl/icons/calendar";
 <Button onClick={...}>A Button</Button>
 <IconButton icon={Calendar} onClick={...}>An Icon Button</IconButton>
 ```
-### 
+
+---
+### Documentation
+
+Each component is documented and showcased using `storybook`. To build the documentation locally, you can follow these steps:
+- clone or fork fcl repo
+- install dev dependencies
+```
+npm install
+```
+- build stories in watch mode
+```
+npm run storybook
+```
+After the build is finished, the documentation will be available at [http://localhost:9001](http://localhost:9001).
+
+You can also build a static version of the documentation and `serve` it later by running:
+```
+npm run storybook:build
+```
 
 [logo]: https://github.com/figshare/fcl/raw/master/assets/logo.png "fcl - figshare frontend component library"
 
