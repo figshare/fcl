@@ -1,0 +1,18 @@
+.figure {
+  margin: 0;
+  padding: 0;
+}
+
+.default {
+  height: 60px;
+}
+
+.logo {
+  width: inherit;
+  height: inherit;
+}
+
+.text {
+  width: inherit;
+  height: inherit;
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@figshare/fcl",
+  "version": "0.0.0",
+  "description": "figshare UI components",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/figshare/fcl.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update:lock": "npm i --package-lock-only"
+  },
+  "keywords": [
+    "figshare",
+    "fcl",
+    "ui/ux",
+    "react"
+  ],
+  "author": "figshare",
+  "license": "ISC",
+  "dependencies": {
+    "classnames": "2.3.2",
+    "draft-js": "0.10.0",
+    "draft-js-export-html": "1.4.1",
+    "draft-js-import-html": "1.4.1",
+    "moment": "2.29.4",
+    "react-datepicker": "4.8.0",
+    "react-popper": "2.3.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}

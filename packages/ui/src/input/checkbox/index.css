@@ -1,0 +1,71 @@
+.label {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.container {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  flex-grow: 0;
+
+  margin-top: calc(var(--gridSize) / 3);
+  margin-right: var(--gridSize);
+}
+
+.checkbox {
+  width: calc(5 * var(--gridSize));
+  height: calc(5 * var(--gridSize));
+  flex-basis: calc(5 * var(--gridSize));
+}
+
+.checkbox::before {
+  position: absolute;
+
+  top: calc(-0.5 * var(--gridSize));
+  right: calc(-0.5 * var(--gridSize));
+  bottom: calc(-0.5 * var(--gridSize));
+  left: calc(-0.5 * var(--gridSize));
+
+  content: "";
+}
+
+@media (max-width: 1073px) {
+  .checkbox::before {
+    position: absolute;
+    top: calc(-1.5 * var(--gridSize));
+    right: calc(-1.5 * var(--gridSize));
+    bottom: calc(-1.5 * var(--gridSize));
+    left: calc(-1.5 * var(--gridSize));
+
+    content: "";
+  }
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
+  border: none;
+  border-radius: calc(var(--gridSize) / 2);
+
+  appearance: none;
+}
+
+.labelText {
+  padding: var(--gridSize) 0;
+}
+
+.switch .input {
+  border-radius: calc(2.5 * var(--gridSize));
+}

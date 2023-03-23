@@ -1,0 +1,50 @@
+.popper {
+  z-index: 2;
+
+  border-radius: calc(0.5 * var(--gridSize));
+}
+
+.arrow {
+  position: absolute;
+
+  &::before {
+    display: block;
+
+    width: calc(2 * var(--gridSize));
+    height: calc(2 * var(--gridSize));
+
+    border-radius: calc(0.5 * var(--gridSize));
+  }
+
+  &[data-placement*="top"] {
+    bottom: 0;
+
+    &::before {
+      transform: translateY(var(--gridSize)) rotate(-45deg);
+    }
+  }
+
+  &[data-placement*="right"] {
+    left: 0;
+
+    &::before {
+      transform: translateX(calc(-1 * var(--gridSize))) rotate(-45deg);
+    }
+  }
+
+  &[data-placement*="bottom"] {
+    top: 0;
+
+    &::before {
+      transform: translateY(calc(-1 * var(--gridSize))) rotate(-45deg);
+    }
+  }
+
+  &[data-placement*="left"] {
+    right: 0;
+
+    &::before {
+      transform: translateX(var(--gridSize)) rotate(-45deg);
+    }
+  }
+}

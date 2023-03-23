@@ -1,0 +1,122 @@
+{
+  "name": "@figshare/fcl-documentation",
+  "description": "> This repository contains front-end core packages.",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "version": "0.0.0",
+  "main": "index.js",
+  "private": true,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:css": "stylelint '**/*.css'",
+    "lint:js": "eslint ./ --ext=js,jsx",
+    "lint:staged": "lint-staged",
+    "test": "jest",
+    "test:generateJSON": "jest --json --outputFile=.jest-results.json || true",
+    "postinstall": "npm run lerna:hoist",
+    "lerna:hoist": "lerna clean -y && lerna bootstrap --no-ci --force-local --hoist",
+    "lerna:updatelock": "lerna run --parallel update:lock",
+    "prestorybook": "npm run test:generateJSON",
+    "storybook": "NODE_ENV=development start-storybook -p 9001 -c .storybook",
+    "prestorybook:build": "npm run prestorybook && rm -rf build",
+    "storybook:build": "NODE_ENV=production build-storybook -c .storybook -o build"
+  },
+  "pre-commit": {
+    "run": [
+      "lint:staged"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint"
+    ],
+    "*.css": [
+      "stylelint"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/figshare/fcl.git"
+  },
+  "keywords": [
+    "figshare",
+    "frontend",
+    "fcl",
+    "core",
+    "commons"
+  ],
+  "author": "figshare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/figshare/fcl/issues"
+  },
+  "homepage": "https://github.com/figshare/fcl#readme",
+  "devDependencies": {
+    "@babel/core": "7.20.12",
+    "@babel/eslint-parser": "7.16.5",
+    "@babel/eslint-plugin": "7.16.5",
+    "@babel/plugin-proposal-class-properties": "7.18.6",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "7.18.6",
+    "@storybook/addon-docs": "6.5.16",
+    "@storybook/addon-essentials": "6.5.16",
+    "@storybook/addon-jest": "6.5.16",
+    "@storybook/addons": "6.5.16",
+    "@storybook/components": "6.5.16",
+    "@storybook/react": "6.5.16",
+    "@storybook/theming": "6.5.16",
+    "babel-jest": "28.1.3",
+    "babel-loader": "8.2.5",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.24",
+    "copy-webpack-plugin": "6.4.1",
+    "css-loader": "5.2.1",
+    "cssnano": "5.1.15",
+    "enzyme": "3.11.0",
+    "enzyme-adapter-react-16": "1.15.7",
+    "enzyme-to-json": "3.6.2",
+    "eslint": "7.32.0",
+    "eslint-plugin-css-modules": "2.11.0",
+    "eslint-plugin-import": "2.25.2",
+    "eslint-plugin-jest": "26.0.0",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-react": "7.28.0",
+    "file-loader": "6.2.0",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "28.1.3",
+    "jest-environment-jsdom": "^28.1.3",
+    "lerna": "4.0.0",
+    "lint-staged": "12.5.0",
+    "moment": "2.29.4",
+    "pixrem": "5.0.0",
+    "pleeease-filters": "4.0.0",
+    "postcss": "8.4.21",
+    "postcss-flexbugs-fixes": "5.0.2",
+    "postcss-import": "14.1.0",
+    "postcss-loader": "4.3.0",
+    "postcss-preset-env": "7.7.2",
+    "pre-commit": "1.2.2",
+    "prop-types": "15.8.1",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "storybook-addon-designs": "6.3.1",
+    "stylelint": "14.3.0",
+    "stylelint-a11y": "1.2.3",
+    "stylelint-config-css-modules": "2.3.0",
+    "stylelint-config-standard": "24.0.0",
+    "stylelint-order": "5.0.0",
+    "style-loader": "2.0.0",
+    "url-loader": "4.1.1",
+    "webpack": "4.46.0",
+    "worker-loader": "3.0.8"
+  },
+  "dependencies": {
+    "@figshare/fcl": "file:./packages/ui",
+    "@loadable/component": "5.15.3",
+    "core-js": "3.26.1",
+    "regenerator-runtime": "0.13.11"
+  }
+}

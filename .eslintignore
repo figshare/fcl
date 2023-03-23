@@ -1,0 +1,10 @@
+# Main bundle directory
+build
+*.mdx
+
+
+# Dependency directories
+node_modules
+
+# Enable Storybook eslint
+!.storybook

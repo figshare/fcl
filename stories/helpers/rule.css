@@ -1,0 +1,25 @@
+.rule {
+  margin-bottom: calc(2 * var(--gridSize));
+  padding: calc(2 * var(--gridSize)) calc(3 * var(--gridSize));
+
+  border-left: 5px solid rgba(3, 3, 3, 0.1);
+  border-radius: var(--gridSize);
+  background: rgba(3, 3, 3, 0.02);
+}
+
+.title {
+  font-size: 1.3em;
+
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.links {
+  margin-bottom: calc(2 * var(--gridSize));
+}
+
+.description {
+  font-weight: bold;
+
+  color: #404040;
+}

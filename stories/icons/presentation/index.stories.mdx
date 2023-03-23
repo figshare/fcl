@@ -1,0 +1,84 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+
+import styles from "./index.stories.css";
+
+<Meta 
+  title="Icons"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# Presentation
+---
+
+An icon set for "presentation" related items. Icons for items ranging from projects, to individual publications, or simple quotations. 
+
+import Quote from "@figshare/fcl/icons/presentation/quote";
+import Project from "@figshare/fcl/icons/presentation/project";
+import Collection from "@figshare/fcl/icons/presentation/collection";
+import Exclamation from "@figshare/fcl/icons/presentation/exclamation";
+import CheckMark from "@figshare/fcl/icons/presentation/checkMark";
+import Note from "@figshare/fcl/icons/presentation/note";
+import FTP from "@figshare/fcl/icons/presentation/ftp";
+import EnvelopeSuccess from "@figshare/fcl/icons/presentation/envelopeSuccess";
+import EnvelopeError from "@figshare/fcl/icons/presentation/envelopeError";
+import EmbedCode from "@figshare/fcl/icons/presentation/embedCode";
+import EmbedTitle from "@figshare/fcl/icons/presentation/embedTitle";
+import Ribbon from "@figshare/fcl/icons/presentation/ribbon";
+import Publications from "@figshare/fcl/icons/presentation/publications";
+
+<Story 
+  name="Presentation"
+  parameters={{
+    layout: "centered",
+  }}
+>
+  <Quote className={styles.icon} />
+  <Project className={styles.icon} />
+  <Collection className={styles.icon} />
+  <Exclamation className={styles.icon} />
+  <CheckMark className={styles.icon} />
+  <Note className={styles.icon} />
+  <FTP className={styles.icon} />
+  <br />
+  <EnvelopeSuccess className={styles.icon} />
+  <EnvelopeError className={styles.icon} />
+  <EmbedCode className={styles.icon} />
+  <EmbedTitle className={styles.icon} />
+  <Ribbon className={styles.icon} />
+  <Publications className={styles.icon} />
+</Story>
+
+```jsx
+import Quote from "@figshare/fcl/icons/presentation/quote";
+import Project from "@figshare/fcl/icons/presentation/project";
+import Collection from "@figshare/fcl/icons/presentation/collection";
+import Exclamation from "@figshare/fcl/icons/presentation/exclamation";
+import CheckMark from "@figshare/fcl/icons/presentation/checkMark";
+import Note from "@figshare/fcl/icons/presentation/note";
+import FTP from "@figshare/fcl/icons/presentation/ftp";
+import EnvelopeSuccess from "@figshare/fcl/icons/presentation/envelopeSuccess";
+import EnvelopeError from "@figshare/fcl/icons/presentation/envelopeError";
+import EmbedCode from "@figshare/fcl/icons/presentation/embedCode";
+import EmbedTitle from "@figshare/fcl/icons/presentation/embedTitle";
+import Ribbon from "@figshare/fcl/icons/presentation/ribbon";
+import Publications from "@figshare/fcl/icons/presentation/publications";
+
+<Quote />
+<Project />
+<Collection />
+<Exclamation />
+<CheckMark />
+<Note />
+<FTP />
+<EnvelopeSuccess />
+<EnvelopeError />
+<EmbedCode />
+<EmbedTitle />
+<Ribbon />
+<Publications />
+```

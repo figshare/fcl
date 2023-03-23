@@ -1,0 +1,27 @@
+.checkmark {
+  fill: var(--color-checkbox-icon);
+}
+
+.checked {
+  fill: var(--color-checkbox-icon_checked);
+}
+
+.error {
+  fill: var(--color-icon-error);
+}
+
+.disabled {
+  fill: var(--color-checkbox-icon_disabled);
+}
+
+input:hover + .checkmark:not(.error):not(.disabled),
+input:focus + .checkmark:not(.error):not(.disabled) {
+  fill: var(--color-checkbox-icon_hover);
+}
+
+.alt {
+  --color-checkbox-icon: var(--color-checkbox-alt-icon);
+  --color-checkbox-icon_checked: var(--color-checkbox-alt-icon_checked);
+  --color-checkbox-icon_disabled: var(--color-checkbox-alt-icon_disabled);
+  --color-checkbox-icon_hover: var(--color-checkbox-alt-icon_hover);
+}

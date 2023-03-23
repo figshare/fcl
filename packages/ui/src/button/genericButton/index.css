@@ -1,0 +1,81 @@
+.button {
+  position: relative;
+
+  -webkit-touch-callout: none;
+}
+
+.tooltip {
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+
+  z-index: 1;
+
+  display: block;
+
+  width: max-content;
+  max-width: calc(46 * var(--gridSize));
+  padding: var(--gridSize) calc(calc(2 * var(--gridSize)));
+
+  user-select: none;
+
+  transition: opacity 0.2s ease-out 0s, left 0s linear 0.2s, top 0s linear 0.2s;
+  white-space: pre-wrap;
+
+  pointer-events: none;
+
+  opacity: 0;
+  filter: drop-shadow(2px 2px 7px rgba(0, 0, 0, 0.14));
+  color: var(--color-typography-primaryAlt);
+
+  border-radius: calc(0.5 * var(--gridSize));
+  background: var(--color-layout-secondaryAlt-background);
+}
+
+.tooltipArrow {
+  --arrowWidth: calc(3 * var(--gridSize));
+  --arrowHeight: calc(1.5 * var(--gridSize));
+
+  position: absolute;
+  z-index: -1;
+
+  bottom: calc(0px - var(--arrowHeight));
+
+  display: block;
+
+  width: var(--arrowWidth);
+  height: var(--arrowHeight);
+
+  content: "";
+
+  border-top: var(--arrowHeight) solid var(--color-layout-secondaryAlt-background);
+  border-right: calc(0.5 * var(--arrowWidth)) solid transparent;
+  border-bottom: 0 none transparent;
+  border-left: calc(0.5 * var(--arrowWidth)) solid transparent;
+}
+
+.tooltipArrow[data-placement^="bottom"] {
+  top: calc(0px - var(--arrowHeight));
+
+  border-top: 0 none transparent;
+  border-right: calc(0.5 * var(--arrowWidth)) solid transparent;
+  border-bottom: var(--arrowHeight) solid var(--color-layout-secondaryAlt-background);
+  border-left: calc(0.5 * var(--arrowWidth)) solid transparent;
+}
+
+.tooltip[data-tooltip-visible="true"],
+.tooltipArrow[data-tooltip-visible="true"] {
+  transition: opacity 0.2s ease-in 0.5s, left 0s linear 0s, top 0s linear 0s;
+
+  opacity: 1;
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .tooltip,
+  .tooltipArrow {
+    transition: none;
+  }
+}
