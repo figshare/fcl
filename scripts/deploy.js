@@ -1,7 +1,7 @@
 const flightplan = require("flightplan");
 
 
-const sysName = "website-storybook";
+const sysName = "fcl-storybook";
 const flagPrefix = "--fig-";
 
 /**
