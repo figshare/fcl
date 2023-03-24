@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "figshare UI components",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "repository": {
