@@ -7,9 +7,6 @@
   "version": "0.0.0",
   "main": "index.js",
   "private": true,
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "scripts": {
     "lint": "npm run lint:js && npm run lint:css",
     "lint:css": "stylelint '**/*.css'",
@@ -17,9 +14,6 @@
     "lint:staged": "lint-staged",
     "test": "jest",
     "test:generateJSON": "jest --json --outputFile=.jest-results.json || true",
-    "postinstall": "npm run lerna:hoist",
-    "lerna:hoist": "lerna clean -y && lerna bootstrap --no-ci --force-local --hoist",
-    "lerna:updatelock": "lerna run --parallel update:lock",
     "prestorybook": "npm run test:generateJSON",
     "storybook": "NODE_ENV=development start-storybook -p 9001 -c .storybook",
     "prestorybook:build": "npm run prestorybook && rm -rf build",
@@ -88,7 +82,6 @@
     "identity-obj-proxy": "3.0.0",
     "jest": "28.1.3",
     "jest-environment-jsdom": "^28.1.3",
-    "lerna": "4.0.0",
     "lint-staged": "12.5.0",
     "moment": "2.29.4",
     "pixrem": "5.0.0",
@@ -115,7 +108,6 @@
   },
   "dependencies": {
     "@figshare/fcl": "file:./packages/ui",
-    "@loadable/component": "5.15.3",
     "core-js": "3.26.1",
     "regenerator-runtime": "0.13.11"
   }
