@@ -41,7 +41,6 @@ module.exports = ({ config: defaultConfig }) => {
     ...defaultConfig,
     resolve: {
       ...defaultConfig.resolve,
-      alias: { "@figshare/fcl": "@figshare/fcl/src" },
       modules: ["node_modules"],
     },
     plugins: [
