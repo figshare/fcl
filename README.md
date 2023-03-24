@@ -22,13 +22,9 @@
 
 *   [About](#about)
 *   [Usage](#usage)
-    *   [Prerequisites](#prerequisites)
-    *   [Installing dependencies](#installing-dependencies)
-    *   [Building Storybook](#building-storybook)
-*   [Development](#development)
-    *   [Coding standards](#coding-standards)
-    *   [Useful commands](#useful-commands)
-
+    *   [Installation](#installation)
+    *   [Importing and using components](#importing-and-using-components)
+    *   [Documentation](#documentation)
 </details>
 
 ----
