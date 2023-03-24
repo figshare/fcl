@@ -111,7 +111,7 @@ You can also build a static version of the documentation and `serve` it later by
 npm run storybook:build
 ```
 
-[logo]: https://github.com/figshare/fcl/raw/master/assets/logo.png "fcl - figshare frontend component library"
+[logo]: https://raw.githubusercontent.com/figshare/fcl/main/assets/logo.png "fcl - figshare frontend component library"
 
 [node]: https://img.shields.io/badge/node-12.x.x-darkorange?logo=node.js "node"
 [node-url]: https://nodejs.org/en/
