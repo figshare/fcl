@@ -40,7 +40,12 @@
 
 ### Installation
 
-Install the components package to your project's `node_modules`:
+We provide our packages through github packages registry, so firstly you need to add the registry for `@figshare` scope to your `.npmrc` file to be able to install the packages:
+```
+@figshare:registry=https://npm.pkg.github.com/
+```
+
+You can now install the components package to your project's `node_modules`:
 ```
 npm install --save @figshare/fcl
 ```
