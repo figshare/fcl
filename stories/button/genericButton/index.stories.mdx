@@ -1,0 +1,62 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import Home from "@figshare/fcl/icons/home/medium";
+import GenericButton from "@figshare/fcl/button/genericButton";
+
+
+<Meta 
+  title="UI/Button/Generic Button" 
+  component={GenericButton} 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# Generic Button
+---
+
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+Similar to a Button component, but for contexts where we want to represent actions as links instead of boxed buttons.
+Useful for when we want to display an action inline with text, 
+or display a set of actions, close toghether or one after the other.
+
+<Story
+  name="Generic Button"
+  parameters={{
+    layout: "centered",
+    jest: ["ui/src/button/genericButton/base", "ui/src/button/genericButton/index"]
+  }}
+>
+  <GenericButton tooltip="Tooltip text">
+    Click me!
+  </GenericButton>
+</Story>
+
+
+```jsx
+import React from "react";
+import Home from "@figshare/fcl/icons/home";
+import { GenericButton } from "@figshare/fcl/button";
+
+class MyButton extends React.Component {
+  render() {
+    return (
+      <GenericButton tooltip="Tooltip text">
+        Click me!
+      </GenericButton>
+    );
+  }
+}
+```
+
+## Props Table
+
+<ArgsTable of={GenericButton} />
+*Accepts additional properties that can be supplied to a BaseButton component.*

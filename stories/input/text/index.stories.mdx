@@ -1,0 +1,63 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import TextInput from "@figshare/fcl/input/text";
+import Input from "@figshare/fcl/input";
+
+<Meta 
+  title="UI/Inputs/Text" 
+  component={Input} 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# Text input
+---
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+A text input component. Allows users to type in and store text values.
+
+<Story 
+  name="Text" 
+  parameters={{
+    layout: "centered",
+    jest: ["ui/src/input"],
+  }}
+>
+  <TextInput placeholder="Input text..." onChange={(event) => {}} />
+</Story>
+
+Can be imported directly or referenced as the default `Input` component variation:
+
+```jsx
+import React from "react";
+import Input from "@figshare/fcl/input";
+import TextInput from "@figshare/fcl/input/text";
+
+function TextInputs() {
+  return (
+    <TextInput onChange={(event) => {}} />
+    <Input onChange={(event) => {}} />
+    <Input type="text" onChange={(event) => {}} />
+  );
+}
+```
+
+## Props Table
+<ArgsTable of={TextInput} />
+
+## Examples
+<Canvas>
+  <TextInput theme="default" placeholder="Default theme" />
+  <TextInput theme="underline" placeholder="Underline theme" />
+  <TextInput theme="default" error={true} placeholder="Default theme - error" />
+  <TextInput theme="underline" error={true} placeholder="Underline theme - error" />
+  <TextInput theme="default" disabled={true} placeholder="Default theme - disabled" />
+  <TextInput theme="underline" disabled={true} placeholder="Underline theme - disabled" />
+</Canvas>

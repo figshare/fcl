@@ -1,0 +1,59 @@
+.toolbarButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: calc(var(--gridSize) * 6);
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: calc(var(--gridSize) * 5);
+  height: calc(var(--gridSize) * 6);
+  margin: 0 calc(var(--gridSize) / 2);
+  padding: 0;
+
+  cursor: pointer;
+
+  color: none;
+  border: none;
+  border-radius: calc(var(--gridSize) / 2);
+  background-color: transparent;
+}
+
+.button:hover,
+.button:focus {
+  text-decoration: none;
+
+  color: var(--color-icon-secondaryAl);
+}
+
+.button:disabled {
+  cursor: initial;
+
+  opacity: 0.2;
+}
+
+.buttonActive {
+  color: var(--color-button-primary-background_click);
+  background-color: var(--color-layout-secondary-background);
+}
+
+.separator {
+  display: inline-flex;
+
+  width: 1px;
+  height: calc(var(--gridSize) * 3);
+
+  margin: var(--gridSize);
+
+  background-color: var(--color-border-primary);
+}
+
+.icon {
+  width: calc(var(--gridSize) * 5);
+  height: calc(var(--gridSize) * 5);
+}

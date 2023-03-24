@@ -1,0 +1,103 @@
+
+import { useState, useCallback } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import SearchInput from "@figshare/fcl/input/search";
+
+<Meta 
+  title="UI/Inputs/Search" 
+  component={SearchInput}
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }} 
+/>
+
+# Search input
+---
+
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+Search input component.   
+Allows users to type in a search query and submit that query to search for results.
+
+<Story 
+  name="Search" 
+  parameters={{
+    layout: "centered",
+    jest: ["ui/src/input/search"],
+  }}
+>
+  {() => {
+    const [query, setQuery] = useState("");
+    const onChange = useCallback((event) => {
+      setQuery(event.target.value);
+    },[]);
+    const onSubmit = useCallback((event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    },[]);
+    return <SearchInput id="searchQuery" placeholder="Search..." value={query} onChange={onChange} onSubmit={onSubmit}/>
+  }}
+</Story>
+
+Can be imported standalone or as a variation of the `Input` component:
+
+```jsx
+import SearchInput from "@figshare/fcl/input/search";
+import Input from "@figshare/fcl/input";
+
+const Query = ({ handleQuerySubmission }) => {
+    const [query, setQuery] = useState("");
+    const onChange = useCallback((event) => {
+      setQuery(event.target.value);
+    },[]);
+
+    // if no action is provided, we can handle the submission through a function
+    const onSubmit = useCallback((event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      handleQuerySubmission(query);
+    },[query]);
+    // we could also do so by extracting the search query data from the wrapping form node
+    const onSubmitWithQueryValueFromFormData = useCallback((event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      const query = new FormData(event.target).get("searchQuery");
+
+      handleQuerySubmission(query);
+    },[]);
+
+    return <SearchInput name="searchQuery" value={query} placeholder="Search..." onChange={onChange} onSubmit={onSubmit}/>
+  }
+```
+
+## Props Table
+
+<ArgsTable of={SearchInput} />
+
+## Examples
+
+<Canvas>
+  <SearchInput size="S" theme="default" placeholder="Default theme" />
+  <SearchInput size="S" theme="underline" placeholder="Underline theme" />
+  <SearchInput size="S" theme="default" error={true} placeholder="Default theme - error" />
+  <SearchInput size="S" theme="underline" error={true} placeholder="Underline theme - error" />
+  <SearchInput size="S" theme="default" disabled={true} placeholder="Default theme - disabled" />
+  <SearchInput size="S" theme="underline" disabled={true} placeholder="Underline theme - disabled" />
+</Canvas>
+
+<Canvas>
+  <SearchInput size="L" theme="default" placeholder="Default theme" />
+  <SearchInput size="L" theme="underline" placeholder="Underline theme" />
+  <SearchInput size="L" theme="default" error={true} placeholder="Default theme - error" />
+  <SearchInput size="L" theme="underline" error={true} placeholder="Underline theme - error" />
+  <SearchInput size="L" theme="default" disabled={true} placeholder="Default theme - disabled" />
+  <SearchInput size="L" theme="underline" disabled={true} placeholder="Underline theme - disabled" />
+</Canvas>

@@ -1,0 +1,29 @@
+.header {
+  padding: calc(5 * var(--gridSize)) calc(6 * var(--gridSize)) 0 calc(6 * var(--gridSize));
+}
+
+.partOfContent {
+  padding: 0 0 calc(5 * var(--gridSize)) 0;
+}
+
+.title {
+  font-size: var(--typography-XL-fontSize);
+  line-height: var(--typography-XL-lineHeight);
+
+  @media (max-width: 1023px) {
+    padding-right: calc(2 * var(--gridSize));
+  }
+}
+
+.description {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  padding-top: var(--gridSize);
+}
+
+.header.confirmation .title {
+  font-size: var(--typography-L-fontSize);
+  font-weight: 700;
+  line-height: var(--typography-L-lineHeight);
+}

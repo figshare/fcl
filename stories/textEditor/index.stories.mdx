@@ -1,0 +1,96 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import TextEditor from "@figshare/fcl/textEditor";
+
+import styles from "./index.stories.css";
+
+export const canvasStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "flex-start",
+  gap: "16px",
+};
+
+<Meta 
+  title="UI/Text Editor" 
+  component={TextEditor} 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# Text editor
+---
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+A textarea which allows users to input more complex HTML markup text. 
+Users can mark portions or the whole content as paragraphs, headings or emphasise or underline text in various ways.
+
+<Story 
+  name="Text Editor" 
+  parameters={{
+    layout: "centered",
+  }}
+>
+  <TextEditor onChange={() => {}} />
+</Story>
+
+The component can be imported from:
+
+```jsx
+import TextEditor from "@figshare/fcl/textEditor";
+
+class MyTextEditor extends React.Component {
+  render() {
+    return (
+      <TextEditor onChange={(newValue) => {}} />
+      <TextEditor fieldName="description" onChange={(fieldName, newValue) => {}} />
+    );
+  }
+}
+```
+
+## Props Table
+
+<ArgsTable of={TextEditor} />
+
+## Examples
+
+<Canvas>
+  <div style={canvasStyle}>
+    <p>Basic - empty</p>
+    <TextEditor
+      className={styles.editorWrapper}
+      placeholder="Type a text..."
+      onChange={() => {}}
+    />
+    <p>Basic - with value</p>
+    <TextEditor
+      className={styles.editorWrapper}
+      value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam mauris ut nibh rhoncus"
+      onChange={() => {}}
+    />
+    <p>Disabled - empty</p>
+    <TextEditor
+      className={styles.editorWrapper}
+      disabled={true}
+      placeholder="Type a text..."
+      onChange={() => {}}
+    />
+    <p>Disabled - with value</p>
+    <TextEditor
+      className={styles.editorWrapper}
+      disabled={true}
+      value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam mauris ut nibh rhoncus"
+      onChange={() => {}}
+    />
+  </div>
+</Canvas>
