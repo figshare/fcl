@@ -1,10 +1,10 @@
 {
   "name": "@figshare/fcl",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "figshare UI components",
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",
