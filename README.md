@@ -5,7 +5,6 @@
 </h1>
 
 [![][node]][node-url]
-[![][lerna]][lerna-url]
 [![][storybook]][storybook-url]
 [![][react]][react-url]
 
@@ -30,7 +29,7 @@
 ----
 ## About
 
-`fcl` is an open source library for some of the React UI components used across figshare. This is the main repo that hosts the documentation and open source library. Deployment and monorepo management is done using `lerna`.
+`fcl` is an open source library for some of the React UI components used across figshare. This is the main repo that hosts the documentation and open source library.
 
 **Packages:**
 *   [![][ui]][ui-url]
@@ -125,9 +124,6 @@ npm run storybook:build
 
 [storybook]: https://img.shields.io/badge/storybook-6.x.x-darkgreen?logo=storybook "storybook"
 [storybook-url]: https://storybook.js.org/
-
-[lerna]: https://img.shields.io/badge/lerna-4.x.x-darkgreen?logo=lerna "lerna"
-[lerna-url]: https://lerna.js.org/
 
 [ui]: https://img.shields.io/badge/-%40figshare%2Ffcl-blue?logo=npm "@figshare/fcl"
 [ui-url]: https://github.com/figshare/fcl/packages/1
