@@ -1,6 +1,6 @@
 {
   "name": "@figshare/fcl-documentation",
-  "description": "> This repository contains front-end core packages.",
+  "description": "Figshare components library (FCL) for research repositories",
   "engines": {
     "node": ">=10.0.0"
   },
@@ -43,8 +43,8 @@
     "core",
     "commons"
   ],
-  "author": "figshare",
-  "license": "ISC",
+  "author": "Digital Science",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/figshare/fcl/issues"
   },
