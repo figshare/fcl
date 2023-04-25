@@ -1,7 +1,7 @@
-import CancelMedium from "@figshare/fcl/icons/cancel/medium";
-import CancelLarge from "@figshare/fcl/icons/cancel/large";
-import SearchMedium from "@figshare/fcl/icons/search/medium";
-import SearchLarge from "@figshare/fcl/icons/search/large";
+import CancelMedium from "../../icons/cancel/medium";
+import CancelLarge from "../../icons/cancel/large";
+import SearchMedium from "../../icons/search/medium";
+import SearchLarge from "../../icons/search/large";
 
 
 export const sizes = {

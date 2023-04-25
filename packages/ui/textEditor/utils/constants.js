@@ -1,4 +1,4 @@
-import icons from "@figshare/fcl/icons/editor";
+import icons from "../../icons/editor";
 
 
 export const controlButtons = [

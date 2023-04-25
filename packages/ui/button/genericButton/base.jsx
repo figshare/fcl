@@ -124,11 +124,9 @@ export default class Base extends PureComponent {
     if (!href) {
       props = { type };
     } else {
-      const extraRel = target === "_blank" ? ["noopener", "noreferrer"] : [];
-      const safeRel = [rel, ...extraRel].join(" ").trim();
       const nHref = normalizeHref ? normalizeUrl(href) : href;
 
-      props = { href: nHref, target, rel: safeRel || undefined };
+      props = { href: nHref, target, rel };
     }
 
     if (this.hasTouchSupport) {

@@ -23,13 +23,13 @@ export default class OverlayFooter extends Component {
   }
 
   render() {
-    const { children, className } = this.props;
+    const { children, className, ...props } = this.props;
 
     const count = React.Children.toArray(children).length;
     const classes = classnames(style.footer, { [style.singleControl]: count === 1 }, className);
 
     return (
-      <div className={classes}>
+      <div className={classes} {...props}>
         {children}
       </div>
     );

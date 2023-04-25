@@ -36,8 +36,6 @@ describe("<Base />", () => {
 
     baseButton.setProps({ target: "_blank", rel: "fakeRel" });
     expect(baseButton.find("a").prop("target")).toEqual("_blank");
-    expect(baseButton.find("a").prop("rel")).toMatch("noopener");
-    expect(baseButton.find("a").prop("rel")).toMatch("noreferrer");
     expect(baseButton.find("a").prop("rel")).toMatch("fakeRel");
   });
 

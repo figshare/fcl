@@ -1,10 +1,11 @@
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import FocusTrap from "@figshare/fcl/helpers/focusTrap";
 import { Content as PopupContent } from "@figshare/fcl/popup";
 import { GenericButton } from "@figshare/fcl/button";
-import Cancel from "@figshare/fcl/icons/cancel/small";
+
+import FocusTrap from "../../../helpers/focusTrap";
+import Cancel from "../../../icons/cancel/small";
 
 import styles from "./index.css";
 
