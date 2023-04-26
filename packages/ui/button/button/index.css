@@ -33,6 +33,8 @@
 }
 
 .iconContainer {
+  line-height: normal;
+
   display: inline-block;
   overflow: hidden;
 

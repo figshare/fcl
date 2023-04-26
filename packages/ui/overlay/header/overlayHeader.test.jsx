@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 
+import { IconButton } from "../../button";
 import { OverlayContext } from "../overlay";
 
 import OverlayHeader from "./overlayHeader";
@@ -64,5 +65,31 @@ describe("<OverlayHeader />", () => {
 
     expect(component.isEmptyRender()).toEqual(false);
     expect(component.find(".partOfContent")).toHaveLength(1);
+  });
+
+  it("should render the icon button", () => {
+    const component = shallow(
+      <OverlayHeader
+        description="Description"
+        title="Title"
+      />);
+
+    expect(component.find(IconButton)).toHaveLength(1);
+    component.unmount();
+  });
+
+  it("should call the onClose function", () => {
+    const onClose = jest.fn();
+    const component = shallow(
+      <OverlayHeader
+        description="Description"
+        title="Title"
+        onClose={onClose}
+      />);
+
+    expect(component.find(IconButton)).toHaveLength(1);
+    component.find(IconButton).simulate("click");
+    expect(onClose).toHaveBeenCalled();
+    component.unmount();
   });
 });

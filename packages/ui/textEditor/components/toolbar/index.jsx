@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Resize from "@figshare/fcl/icons/editor/resize";
 
+import Resize from "../../../icons/editor/resize";
 import ToolbarButton from "../toolbarButton";
 import {
   findEntityType,
@@ -34,8 +34,8 @@ export default class Toolbar extends Component {
     if (toolbarConfig.length) {
       toolbarConfig.forEach((toolbarItem) => {
         controlButtons.forEach((button) => {
-          if (button.key === toolbarItem) {
-            newConfig.push(button);
+          if (button.key === toolbarItem.key) {
+            newConfig.push(toolbarItem);
           }
         });
       });

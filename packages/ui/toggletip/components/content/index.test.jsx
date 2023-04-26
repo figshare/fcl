@@ -1,8 +1,9 @@
 import React from "react";
 import { mount } from "enzyme";
-import FocusTrap from "@figshare/fcl/helpers/focusTrap";
-import { Content as PopupContent } from "@figshare/fcl/popup";
-import Cancel from "@figshare/fcl/icons/cancel/small";
+
+import FocusTrap from "../../../helpers/focusTrap";
+import { Content as PopupContent } from "../../../popup";
+import Cancel from "../../../icons/cancel/small";
 
 import Content from "./index";
 

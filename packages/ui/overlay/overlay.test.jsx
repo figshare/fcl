@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
-import { IconButton } from "@figshare/fcl/button";
-import RenderInPortal from "@figshare/fcl/helpers/renderInPortal";
+
+import RenderInPortal from "../helpers/renderInPortal";
 
 import Overlay from "./overlay";
 
@@ -38,17 +38,10 @@ describe("<Overlay />", () => {
     overlay.unmount();
   });
 
-  it("renders icon button", () => {
-    const overlay = mount(<Overlay>Test</Overlay>);
-
-    expect(overlay.find(IconButton)).toHaveLength(1);
-    overlay.unmount();
-  });
-
   it("calls onClose on click outside", () => {
     const overlay = mount(<Overlay onClose={jest.fn()}>Test</Overlay>);
 
-    overlay.find(".overlay").simulate("click");
+    overlay.find(".overlay").simulate("mousedown");
 
     expect(overlay.props().onClose).toHaveBeenCalled();
 
@@ -58,7 +51,7 @@ describe("<Overlay />", () => {
   it("doesn't call onClose when clicking on content", () => {
     const overlay = mount(<Overlay onClose={jest.fn()}>Test</Overlay>);
 
-    overlay.find(".overlayBox").simulate("click");
+    overlay.find(".overlayBox").simulate("mousedown");
 
     expect(overlay.props().onClose).not.toHaveBeenCalled();
 

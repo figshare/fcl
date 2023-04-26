@@ -6,6 +6,10 @@
   height: calc(var(--gridSize) * 6);
 }
 
+.toolbarButtonContainer svg {
+  flex: 1;
+}
+
 .button {
   display: inline-flex;
   justify-content: center;

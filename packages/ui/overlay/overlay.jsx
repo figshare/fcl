@@ -1,9 +1,7 @@
 import classnames from "classnames";
 import React, { Component, createContext } from "react";
 import PropTypes from "prop-types";
-import Cancel from "@figshare/fcl/icons/cancel/large";
 
-import { IconButton } from "../button";
 import FocusTrap from "../helpers/focusTrap";
 import RenderInPortal from "../helpers/renderInPortal";
 
@@ -157,11 +155,12 @@ export default class Overlay extends Component {
         <aside
           ref={this.setOverlayRef}
           className={classnames(styles.overlay, styles[overlayBackground])}
+          data-node-id={`overlay-background-for-${this.id}`}
           role="presentation"
           style={overlayStyle}
           tabIndex={-1}
-          onClick={this.onClickOverlay}
           onKeyDown={this.onEscape}
+          onMouseDown={this.onClickOverlay}
         >
           <OverlayContext.Provider value={context}>
             <FocusTrap
@@ -182,7 +181,7 @@ export default class Overlay extends Component {
 
   renderContent = (focusTrapProps) => {
     const { ref } = focusTrapProps;
-    const { children, className, variant, background, onClose } = this.props;
+    const { children, className, variant, background } = this.props;
     const aria = {
       "aria-labelledby": `dialog-${this.id}-title`,
       "aria-describedby": `dialog-${this.id}-description`,
@@ -192,18 +191,11 @@ export default class Overlay extends Component {
       <section
         ref={ref}
         className={classnames(styles.overlayBox, styles[background], styles[variant], className)}
+        data-node-id={`overlay-box-for-${this.id}`}
         role="dialog"
         {...aria}
       >
-        <IconButton
-          Icon={Cancel}
-          className={styles.closeButton}
-          size="M" tabIndex={-1} theme="primary"
-          onClick={onClose}
-        >
-          Close
-        </IconButton>
-        <>{children}</>
+        {children}
       </section>
     );
   };

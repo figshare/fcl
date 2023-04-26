@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
+import { IconButton } from "../../button";
+import Cancel from "../../icons/cancel/large";
 import { OverlayContext } from "../overlay";
 
 import styles from "./overlayHeader.css";
@@ -30,6 +32,11 @@ export default class OverlayHeader extends Component {
       Text or content for the Overlay title.
      */
     title: PropTypes.node,
+    /**
+     Triggered when the "Close" header button is clicked.
+     If not provided, will be inherited from the `Overlay` component context.
+    */
+    onClose: PropTypes.func,
   }
 
   static defaultProps = {
@@ -37,10 +44,11 @@ export default class OverlayHeader extends Component {
     description: undefined,
     isPartOfContent: false,
     title: undefined,
+    onClose: undefined,
   }
 
   render() {
-    const { className, isPartOfContent, description, title } = this.props;
+    const { className, isPartOfContent, description, title, onClose, ...props } = this.props;
     const overlayId = this.context?.id ?? 0;
     const isForConfirmationOverlay = CONFIRMATION_OVERLAYS.includes(this.context?.background);
     const ariaTitle = `dialog-${overlayId}-title`;
@@ -48,13 +56,26 @@ export default class OverlayHeader extends Component {
 
     return (
       <div
+        {...props}
         className={classNames(styles.header, {
           [styles.partOfContent]: isPartOfContent,
           [styles.confirmation]: isForConfirmationOverlay,
         }, className)}
       >
-        <h1 className={styles.title} id={ariaTitle}>{title}</h1>
-        {description && <p className={styles.description} id={ariaDescription}>{description}</p>}
+        <div>
+          <h1 className={styles.title} id={ariaTitle}>{title}</h1>
+          {description && <p className={styles.description} id={ariaDescription}>{description}</p>}
+        </div>
+        <IconButton
+          Icon={Cancel}
+          className={styles.closeButton}
+          size="M"
+          tabIndex={-1}
+          theme="primary"
+          onClick={onClose ?? this.context.onClose}
+        >
+          Close
+        </IconButton>
       </div>
     );
   }

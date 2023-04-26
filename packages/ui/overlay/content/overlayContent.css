@@ -7,10 +7,14 @@
 
   max-width: 100%;
 
-  padding: calc(5 * var(--gridSize)) calc(6 * var(--gridSize)) calc(1 * var(--gridSize)) calc(6 * var(--gridSize));
+  padding: calc(6 * var(--gridSize)) calc(6 * var(--gridSize)) 0;
   flex: 1 1;
 
   flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
+
+  @media (max-width: 443px) {
+    padding: calc(4 * var(--gridSize)) calc(4 * var(--gridSize)) 0;
+  }
 }

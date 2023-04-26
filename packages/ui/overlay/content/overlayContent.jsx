@@ -23,10 +23,10 @@ export default class OverlayContent extends Component {
   }
 
   render() {
-    const { className, children } = this.props;
+    const { className, children, ...props } = this.props;
 
     return (
-      <div className={classnames(styles.content, className)}>
+      <div {...props} className={classnames(styles.content, className)}>
         {children}
       </div>
     );
