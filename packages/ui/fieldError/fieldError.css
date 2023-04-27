@@ -1,0 +1,91 @@
+.fieldError {
+  position: relative;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(100% - var(--gridSize));
+  margin: 0 auto;
+}
+
+.small {
+  --font-size: var(--typography-S-fontSize);
+  --line-height: var(--typography-S-lineHeight);
+  --icon-width: var(--typography-S-fontSize);
+}
+
+.large {
+  --font-size: var(--typography-M-fontSize);
+  --line-height: var(--typography-M-lineHeight);
+  --icon-width: var(--typography-L-fontSize);
+}
+
+.valid {
+  visibility: hidden;
+  overflow: hidden;
+
+  max-height: 0;
+
+  transition: max-height 0.3s cubic-bezier(0, 0, 0, 1);
+}
+
+.invalid {
+  visibility: visible;
+
+  max-height: calc(100 * var(--gridSize));
+
+  transition: max-height 0.3s cubic-bezier(0.3, 0, 1, 1);
+}
+
+.errorEntry {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+
+  display: flex;
+  flex-direction: row;
+
+  padding: calc(1 * var(--gridSize)) calc(2 * var(--gridSize));
+
+  background-color: var(--color-layout-error-background);
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.errorEntry > div {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.errorEntry svg {
+  width: var(--icon-width);
+  height: auto;
+}
+
+.warningIcon {
+  flex-shrink: 0;
+
+  fill: var(--color-icon-error);
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .valid {
+    visibility: hidden;
+    overflow: hidden;
+
+    max-height: 0;
+
+    transition: none;
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .invalid {
+    visibility: visible;
+
+    height: calc(6 * var(--gridSize));
+
+    max-height: calc(100 * var(--gridSize));
+
+    transition: none;
+  }
+}

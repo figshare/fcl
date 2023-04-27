@@ -1,0 +1,148 @@
+.alerts {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  flex: 1 0;
+  gap: calc(2 * var(--gridSize));
+
+  margin-bottom: calc(3 * var(--gridSize));
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .empty {
+    overflow: hidden;
+
+    max-height: 0;
+
+    transition: none;
+    transition-timing-function: cubic-bezier(0, 0, 0, 1);
+
+    opacity: 0;
+  }
+}
+
+.empty {
+  overflow: hidden;
+
+  max-height: 0;
+
+  margin-bottom: 0;
+
+  transition: max-height 0.3s, opacity 0.3s;
+  transition-timing-function: cubic-bezier(0, 0, 0, 1);
+
+  opacity: 0;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .shown {
+    max-height: calc(100 * var(--gridSize));
+
+    transition: none;
+    transition-timing-function: cubic-bezier(0.3, 0, 1, 1);
+
+    opacity: 1;
+  }
+}
+
+.shown {
+  max-height: calc(100 * var(--gridSize));
+
+  transition: max-height 0.3s, opacity 0.3s;
+  transition-timing-function: cubic-bezier(0.3, 0, 1, 1);
+
+  opacity: 1;
+}
+
+.alert {
+  --color-icon: currentcolor;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+.success {
+  --color-icon: var(--color-icon-success);
+}
+
+.error {
+  --color-icon: var(--color-icon-error);
+}
+
+.warning {
+  --color-icon: var(--color-icon-warning);
+}
+
+div.alert {
+  padding: 0;
+}
+
+.alert > div {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  margin: 0;
+
+  padding: calc(2 * var(--gridSize));
+  gap: var(--gridSize);
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.alertIcon {
+  position: relative;
+
+  display: inline-flex;
+
+  width: calc(3 * var(--gridSize));
+  min-width: calc(3 * var(--gridSize));
+  max-width: calc(3 * var(--gridSize));
+  height: calc(3 * var(--gridSize));
+  max-height: calc(3 * var(--gridSize));
+
+  align-items: center;
+  justify-content: center;
+  fill: var(--color-icon);
+}
+
+.alertIcon > svg {
+  width: 100%;
+  max-width: 100%;
+
+  color: inherit;
+  fill: inherit;
+}
+
+.error .alertIcon {
+  margin-top: calc(var(--gridSize) / 3);
+}
+
+.warning .alertIcon {
+  margin-top: calc(var(--gridSize) / 2);
+}
+
+.warning .alertIcon > svg {
+  transform: rotate(180deg);
+}
+
+.success .alertIcon {
+  margin-top: calc(var(--gridSize) / 2);
+}
+
+.alertText {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+}
+
+.alertClose {
+  width: calc(3 * var(--gridSize));
+  height: calc(3 * var(--gridSize));
+  margin-right: 0;
+  margin-left: auto;
+}
