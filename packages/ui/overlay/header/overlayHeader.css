@@ -39,14 +39,9 @@
   line-height: var(--typography-XL-lineHeight);
 }
 
-/* stylelint-disable-next-line a11y/no-display-none */
 .closeButton {
-  display: none;
+  display: flex;
 
-  @media (max-width: 899px) {
-    display: flex;
-
-    width: calc(6 * var(--gridSize));
-    height: calc(6 * var(--gridSize));
-  }
+  width: calc(6 * var(--gridSize));
+  height: calc(6 * var(--gridSize));
 }

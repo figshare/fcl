@@ -21,6 +21,8 @@
       bottom: calc(-1 * var(--gridSize));
       left: 0;
 
+      height: fit-content;
+
       content: "";
     }
   }
@@ -221,6 +223,8 @@
     bottom: calc(-1 * var(--gridSize));
     left: 0;
 
+    height: fit-content;
+
     content: "";
 
     @media (max-width: 1023px) {
@@ -308,6 +312,8 @@
     right: 0;
     bottom: calc(-1 * var(--gridSize));
     left: 0;
+
+    height: fit-content;
 
     content: "";
 
@@ -400,6 +406,8 @@
     bottom: calc(-1 * var(--gridSize));
     left: 0;
 
+    height: fit-content;
+
     content: "";
 
     @media (max-width: 1023px) {
@@ -491,6 +499,8 @@
     bottom: calc(-1 * var(--gridSize));
     left: 0;
 
+    height: fit-content;
+
     content: "";
 
     @media (max-width: 1023px) {
@@ -581,6 +591,8 @@
     right: 0;
     bottom: calc(-1 * var(--gridSize));
     left: 0;
+
+    height: fit-content;
 
     content: "";
 
