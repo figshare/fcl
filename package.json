@@ -93,22 +93,25 @@
     "postcss-preset-env": "7.7.2",
     "pre-commit": "1.2.2",
     "prop-types": "15.8.1",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "storybook-addon-designs": "6.3.1",
+    "style-loader": "2.0.0",
     "stylelint": "14.3.0",
     "stylelint-a11y": "1.2.3",
     "stylelint-config-css-modules": "2.3.0",
     "stylelint-config-standard": "24.0.0",
     "stylelint-order": "5.0.0",
-    "style-loader": "2.0.0",
     "url-loader": "4.1.1",
     "webpack": "4.46.0",
     "worker-loader": "3.0.8"
   },
   "dependencies": {
     "@figshare/fcl": "file:./packages/ui",
+    "@lexical/react": "^0.10.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "core-js": "3.26.1",
+    "lexical": "^0.10.0",
     "regenerator-runtime": "0.13.11"
   }
 }

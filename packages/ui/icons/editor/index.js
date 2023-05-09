@@ -2,19 +2,19 @@ import Bold from "./bold";
 import Italic from "./italic";
 import Underline from "./underline";
 import Strikethrough from "./strikethrough";
-import HeadingTwo from "./h2";
-import HeadingThree from "./h3";
-import HeadingFour from "./h4";
+import H2 from "./h2";
+import H3 from "./h3";
+import H4 from "./h4";
 import Paragraph from "./paragraph";
-import NumberedList from "./numberedList";
-import BulletList from "./bulletList";
+import Ol from "./numberedList";
+import Ul from "./bulletList";
 import Subscript from "./subscript";
 import Superscript from "./superscript";
 import Link from "./link";
 import Undo from "./undo";
 import Redo from "./redo";
 import ClearFormatting from "./clearFormatting";
-import PasteAsPlainText from "./paste";
+import PasteWithoutFormat from "./paste";
 import Resize from "./resize";
 
 
@@ -23,11 +23,11 @@ export default {
   Italic,
   Underline,
   Strikethrough,
-  HeadingTwo,
-  HeadingThree,
-  HeadingFour,
-  BulletList,
-  NumberedList,
+  H2,
+  H3,
+  H4,
+  Ul,
+  Ol,
   Superscript,
   Subscript,
   Paragraph,
@@ -35,6 +35,6 @@ export default {
   Undo,
   Redo,
   ClearFormatting,
-  PasteAsPlainText,
+  PasteWithoutFormat,
   Resize,
 };

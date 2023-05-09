@@ -1,0 +1,31 @@
+.underline {
+  text-decoration: underline;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.underlineStrikethrough {
+  text-decoration: underline line-through;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.ol {
+  padding: 0;
+  margin: 0;
+  margin-left: 16px;
+}
+
+.ul {
+  padding: 0;
+  margin: 0;
+  margin-left: 16px;
+}

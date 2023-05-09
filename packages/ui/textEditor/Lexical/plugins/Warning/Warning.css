@@ -1,0 +1,10 @@
+.editorTextLength {
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  color: var(--color-typography-disabled);
+}

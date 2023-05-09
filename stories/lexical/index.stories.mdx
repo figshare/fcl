@@ -1,0 +1,80 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import {useState} from 'react';
+
+import Editor from "@figshare/fcl/textEditor/Lexical";
+
+import styles from "./index.stories.css";
+
+export const canvasStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "flex-start",
+  gap: "16px",
+};
+
+<Meta
+  title="UI/Lexical Editor" 
+  component={Editor} 
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# Text editor
+---
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+A textarea which allows users to input more complex HTML markup text. 
+Users can mark portions or the whole content as paragraphs, headings or emphasise or underline text in various ways.
+
+<Story 
+  name="Text Editor" 
+  parameters={{
+    layout: "centered",
+  }}
+>
+  {() => {
+      const [text, setText] = useState("");
+      return <Editor onChange={() => {}} value="test default value" />;
+  }}
+</Story>
+
+The component can be imported from:
+
+```jsx
+import Editor from "@figshare/fcl/textEditor";
+
+class MyTextEditor extends React.Component {
+  render() {
+    return (
+      <Editor onChange={(newValue) => {}} />
+      <Editor fieldName="description" onChange={(fieldName, newValue) => {}} />
+    );
+  }
+}
+```
+
+## Props Table
+
+<ArgsTable of={Editor} />
+
+## Examples
+
+<Canvas>
+  <div style={canvasStyle}>
+    <p>Basic - empty</p>
+    <Editor
+      className={styles.editorWrapper}
+      placeholder="Type a text..."
+      onChange={() => {}}
+    />
+  </div>
+</Canvas>

@@ -1,0 +1,89 @@
+.toolbar {
+  display: flex;
+  margin-bottom: 1px;
+  background: #fff;
+  padding: 4px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  vertical-align: middle;
+}
+
+.divider {
+  width: 1px;
+  background-color: #eee;
+  margin: 0 4px;
+}
+
+.toolbarItem {
+  border: 0;
+  display: flex;
+  background: none;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.spaced {
+  margin-right: 2px;
+}
+
+.format {
+  background-size: contain;
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  margin-top: 2px;
+  vertical-align: -0.25em;
+  display: flex;
+  opacity: 0.6;
+  background-color: rgba(223, 232, 250, 0.3);
+}
+
+.active {
+  background-color: rgba(223, 232, 250, 0.3);
+}
+
+.blockControls button:hover {
+  background-color: #efefef;
+}
+.blockControls button:focus-visible {
+  border-color: blue;
+}
+
+.blockControls span.block-type {
+  background-size: contain;
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 2px;
+}
+
+
+.blockControls span.block-type.quote {
+  background-image: url(../../images/icons/chat-square-quote.svg);
+}
+
+.blockControls span.block-type.code {
+  background-image: url(../../images/icons/code.svg);
+}
+
+.italic {
+  background-image: url(../../images/icons/type-italic.svg);
+}
+
+.bold {
+  background-image: url(../../images/icons/type-bold.svg);
+}
+
+.underline {
+  background-image: url(../../images/icons/type-underline.svg);
+}
+
+.strikethrough {
+  background-image: url(../../images/icons/type-strikethrough.svg);
+}
+
+.link {
+  background-image: url(../../images/icons/link.svg);
+}

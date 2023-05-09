@@ -2,9 +2,9 @@
 import React, { PureComponent } from "react";
 
 
-export default class PasteAsPlainText extends PureComponent {
+export default class PasteWithoutFormat extends PureComponent {
 
-  static name = "icons/PasteAsPlainText";
+  static name = "icons/PasteWithoutFormat";
 
   render() {
     return (
@@ -13,7 +13,7 @@ export default class PasteAsPlainText extends PureComponent {
         fill="transparent"
         preserveAspectRatio="xMidYMid meet"
         {...this.props}
-        data-component={PasteAsPlainText.name}
+        data-component={PasteWithoutFormat.name}
         focusable={false}
         viewBox="0 0 30 36"
         xmlns="http://www.w3.org/2000/svg"

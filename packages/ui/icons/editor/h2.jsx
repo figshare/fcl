@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 
 
-export default class HeadingTwo extends PureComponent {
+export default class H2 extends PureComponent {
 
   static name = "icons/HeadingTwo";
 
@@ -13,7 +13,7 @@ export default class HeadingTwo extends PureComponent {
         fill="transparent"
         preserveAspectRatio="xMidYMid meet"
         {...this.props}
-        data-component={HeadingTwo.name}
+        data-component={H2.name}
         focusable={false}
         viewBox="0 0 30 36"
         xmlns="http://www.w3.org/2000/svg"

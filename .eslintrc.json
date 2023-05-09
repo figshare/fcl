@@ -11,7 +11,7 @@
   "extends": [],
   "parser": "@babel/eslint-parser",
   "settings": {
-  "react": { "version": "16" }
+    "react": { "version": "17" }
   },
   "globals": {
     "figshare": true

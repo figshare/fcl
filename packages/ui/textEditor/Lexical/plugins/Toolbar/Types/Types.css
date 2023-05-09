@@ -1,0 +1,57 @@
+
+.h2 {
+  background-image: url(../../../images/icons/type-h2.svg);
+}
+
+.h3 {
+  background-image: url(../../../images/icons/type-h3.svg);
+}
+  
+.h4 {
+  background-image: url(../../../images/icons/type-h4.svg);
+}
+
+.paragraph {
+  background-image: url(../../../images/icons/text-paragraph.svg);
+}
+
+.ul {
+  background-image: url(../../../images/icons/list-ul.svg);
+}
+  
+.ol {
+  background-image: url(../../../images/icons/list-ol.svg);
+}
+
+.subscript {
+  background-image: url(../../../images/icons/type-subscript.svg);
+}
+
+.superscript {
+  background-image: url(../../../images/icons/type-superscript.svg);
+}
+
+.redo {
+  background-image: url(../../../images/icons/arrow-clockwise.svg);
+}
+
+.undo {
+  background-image: url(../../../images/icons/arrow-counterclockwise.svg);
+}
+
+.toolbarButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: calc(var(--gridSize) * 6);
+}
+
+.toolbarButtonContainer svg {
+  flex: 1;
+}
+
+.icon {
+  width: calc(var(--gridSize) * 5);
+  height: calc(var(--gridSize) * 5);
+}
