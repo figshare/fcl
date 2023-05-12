@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import classnames from "classnames";
-import { node, string, shape, oneOf } from "prop-types";
+import { node, string, shape, oneOf, bool } from "prop-types";
 
 import Warning from "../icons/warning/medium";
 
@@ -8,7 +8,7 @@ import Warning from "../icons/warning/medium";
 import styles from "./fieldError.css";
 
 
-export function FieldError({ error, field, size, className }) {
+export function FieldError({ error, field, fullWidth, size, className }) {
   const message = error?.message;
   const id = error?.id;
   const valid = useMemo(() => {
@@ -29,7 +29,14 @@ export function FieldError({ error, field, size, className }) {
 
   return (
     <div
-      className={classnames(styles.fieldError, styles[size], valid ? styles.valid : styles.invalid, className)}
+      className={
+        classnames(
+          styles.fieldError,
+          styles[size],
+          valid ? styles.valid : styles.invalid,
+          { [styles.fullWidth]: fullWidth },
+          className)
+      }
       data-error={!valid}
       data-error-at={descriptor.at}
       data-error-for={field}
@@ -71,12 +78,16 @@ FieldError.propTypes = {
    */
   field: string,
   /**
+   * Makes the error take the full width of the parent, no margins.
+   */
+  fullWidth: bool,
+  /**
    * Size variant for the field error.
    * Recommended use: "small" for overlay forms and "large" for full page forms.
    */
   size: oneOf(["small", "large"]),
 };
 
-FieldError.defaultProps = { className: undefined, field: "unknown", error: undefined, size: "small" };
+FieldError.defaultProps = { className: undefined, field: "unknown", fullWidth: false, error: undefined, size: "small" };
 
 export default FieldError;

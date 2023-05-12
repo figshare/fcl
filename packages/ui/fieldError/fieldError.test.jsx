@@ -37,6 +37,21 @@ describe("<FieldError />", () => {
 
     component.unmount();
   });
+  it("supports full width", () => {
+    const component = mount(
+      <FieldError
+        error={ {
+          id: "error-1",
+          at: "blur",
+          message: "message",
+        } }
+        field="my-field"
+        fullWidth={true}
+      />
+    );
+
+    expect(component.find(".fullWidth")).toHaveLength(1);
+  });
 
   it("supports a couple of sizes", () => {
     const defaultSmall = shallow(<FieldError error={null} />);
