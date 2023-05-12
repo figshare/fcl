@@ -53,8 +53,8 @@ export const validate = (value, at) => {
 
 A field error component. Used to visually show error messages for form fields.
 
-<Story 
-  name="FieldError" 
+<Story
+  name="FieldError"
   parameters={{
     layout: "centered",
   }}
@@ -167,5 +167,15 @@ export function ValidatedTextField() {
       <FieldError size="large" error={{ at: "change", message: "Invalid character length", id: "description.maxlen" }} field="description" />
       <FieldError size="large" error={{ at: "blur", message: "This field is required.", id: "references.required" }} field="references" />
       <FieldError size="large" error={{ at: "submit/publish", message: <><span>Cannot publish with missing information. </span><GenericButton>Publish anyway.</GenericButton></>, id: "resources.required" }} field="resources" />
+      <code>full width</code>
+      <div style={{width: "200px", border: "1px solid black"}}>
+        <FieldError error={{ at: "change", message: "Invalid character length", id: "description.maxlen" }} field="description" fullWidth={true}/>
+      </div>
+      <div style={{width: "200px", border: "1px solid black"}}>
+        <FieldError error={{ at: "blur", message: "This field is required.", id: "references.required" }} field="references" fullWidth={true}/>
+      </div>
+      <div style={{width: "200px", border: "1px solid black"}}>
+        <FieldError error={{ at: "submit/publish", message: <><span>Cannot publish with missing information. </span><GenericButton>Publish anyway.</GenericButton></>, id: "resources.required" }} field="resources" fullWidth={true}/>
+      </div>
     </div>
 </Canvas>

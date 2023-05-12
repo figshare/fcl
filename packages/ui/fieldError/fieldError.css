@@ -7,6 +7,10 @@
   margin: 0 auto;
 }
 
+.fullWidth {
+  max-width: 100%;
+}
+
 .small {
   --font-size: var(--typography-S-fontSize);
   --line-height: var(--typography-S-lineHeight);
