@@ -9,6 +9,12 @@
   margin-bottom: calc(3 * var(--gridSize));
 }
 
+.isFixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 @media screen and (prefers-reduced-motion: reduce) {
   .empty {
     overflow: hidden;
@@ -76,6 +82,10 @@
   --color-icon: var(--color-icon-warning);
 }
 
+.info {
+  --color-icon: var(--color-icon-successAlt);
+}
+
 div.alert {
   padding: 0;
 }
@@ -132,6 +142,10 @@ div.alert {
 }
 
 .success .alertIcon {
+  margin-top: calc(var(--gridSize) / 2);
+}
+
+.info .alertIcon {
   margin-top: calc(var(--gridSize) / 2);
 }
 

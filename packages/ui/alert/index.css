@@ -29,6 +29,11 @@
   background-color: var(--color-layout-error-background);
 }
 
+.info {
+  border-radius: var(--gridSize);
+  background-color: var(--color-layout-secondary-background);
+}
+
 .close {
   width: calc(6 * var(--gridSize));
   height: calc(6 * var(--gridSize));

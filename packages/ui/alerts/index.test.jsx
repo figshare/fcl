@@ -2,7 +2,7 @@ import { mount } from "enzyme";
 import React from "react";
 import { act } from "react-dom/test-utils";
 
-import { FormAlerts, pushFormAlert, popFormAlert, clearFormAlerts } from "./index";
+import { Alerts, pushAlert, popAlert, clearAlerts } from "./index";
 
 
 const DEFAULT_DELAY = 200;
@@ -17,35 +17,46 @@ const wait = (resolution, rejection, delay = DEFAULT_DELAY) => act(() => new Pro
   }, delay);
 }));
 
-describe("<FormAlerts />", () => {
+describe("<Alerts />", () => {
   it("renders a form alerts list node", () => {
     const component = mount(
-      <FormAlerts id="alerts" />
+      <Alerts id="alerts" />
     );
 
     expect(component.find(".alerts")).toHaveLength(1);
     expect(component.find(".empty")).toHaveLength(1);
+    expect(component.find(".isFixed")).toHaveLength(0);
+
+    component.unmount();
+  });
+
+  it("renders an alert with fixed position", () => {
+    const component = mount(
+      <Alerts id="alerts" isFixed={true} />
+    );
+
+    expect(component.find(".isFixed")).toHaveLength(1);
 
     component.unmount();
   });
 
   it("subscribes to form-alerts:message, to push messages to it's own list", async() => {
     const component = mount(
-      <FormAlerts id="alerts" />
+      <Alerts id="alerts" />
     );
 
     expect(component.find(".alerts")).toHaveLength(1);
     expect(component.find(".empty")).toHaveLength(1);
 
     act(() => {
-      pushFormAlert({
+      pushAlert({
         channel: "alerts",
         type: "warning",
         content: "Some message",
         identifier: "form-alert",
       });
 
-      pushFormAlert({
+      pushAlert({
         channel: "wrong-channel",
         type: "warning",
         content: "Some message 2",
@@ -66,7 +77,7 @@ describe("<FormAlerts />", () => {
 
   it("subscribes to form-alerts:message, handles timeout if given", async() => {
     const component = mount(
-      <FormAlerts id="alerts" />
+      <Alerts id="alerts" />
     );
 
     expect(component.find(".alerts")).toHaveLength(1);
@@ -74,7 +85,7 @@ describe("<FormAlerts />", () => {
     const timeout = 3000;
 
     act(() => {
-      pushFormAlert({
+      pushAlert({
         channel: "wrong-channel",
         type: "warning",
         content: "Some message 2",
@@ -96,14 +107,14 @@ describe("<FormAlerts />", () => {
 
   it("subscribes to form-alerts:message, to pop one or clear all messages from it's own list", async() => {
     const component = mount(
-      <FormAlerts id="alerts" />
+      <Alerts id="alerts" />
     );
 
     expect(component.find(".alerts")).toHaveLength(1);
     expect(component.find(".empty")).toHaveLength(1);
 
     act(() => {
-      pushFormAlert({
+      pushAlert({
         channel: "alerts",
         type: "warning",
         content: "Some message",
@@ -112,7 +123,7 @@ describe("<FormAlerts />", () => {
     });
 
     act(() => {
-      clearFormAlerts("alerts");
+      clearAlerts("alerts");
     });
 
     await wait(() => component.update());
@@ -124,24 +135,26 @@ describe("<FormAlerts />", () => {
 
 
     act(() => {
-      pushFormAlert({
+      pushAlert({
         channel: "alerts",
         type: "warning",
         content: "Some message",
         identifier: "form-alert-to-remove",
+        persistent: false,
       });
-      pushFormAlert({
+      pushAlert({
         channel: "alerts",
         type: "warning",
         content: "Some message",
         identifier: "form-alert",
+        persistent: false,
       });
     });
 
     await wait(() => component.update());
 
     act(() => {
-      popFormAlert("alerts", "not a match");
+      popAlert("alerts", "not a match");
     });
 
     act(() => {
@@ -159,7 +172,7 @@ describe("<FormAlerts />", () => {
 
   it("ignores unknown actions even if channel is ok", async() => {
     const component = mount(
-      <FormAlerts id="alerts" />
+      <Alerts id="alerts" />
     );
 
 

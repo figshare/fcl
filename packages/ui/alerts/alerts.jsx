@@ -1,5 +1,6 @@
 import React from "react";
-import { string } from "prop-types";
+import { string, bool } from "prop-types";
+import classnames from "classnames";
 
 import { IconButton } from "../button";
 import Alert from "../alert";
@@ -9,26 +10,31 @@ import Close from "../icons/cancel/medium";
 import Checkmark from "../icons/checkMark/small";
 
 // eslint-disable-next-line css-modules/no-unused-class
-import styles from "./formAlerts.css";
-import { popFormAlert } from "./utils";
+import styles from "./alerts.css";
+import { popAlert } from "./utils";
 
 
 const IconsByType = {
   error: Warning,
   warning: Info,
   success: Checkmark,
+  info: Info,
 };
 
-export class FormAlerts extends React.PureComponent {
+export class Alerts extends React.PureComponent {
   static propTypes = {
     /**
      * The unique id for this alerts component.
      * Will represent the `channel` used to listen to form alert messages.
      */
     id: string.isRequired,
+    /**
+      * Optional class to show Alerts at the viewport level.
+    */
+    isFixed: bool,
   }
 
-  static defaultProps = { id: "global-alerts" }
+  static defaultProps = { id: "global-alerts", isFixed: false }
 
   state = { messages: [], id: this.props.id }
 
@@ -42,11 +48,20 @@ export class FormAlerts extends React.PureComponent {
 
   render() {
     const { messages } = this.state;
+    const { isFixed } = this.props;
 
     const empty = !messages?.length;
 
     return (
-      <div className={`${styles.alerts} ${empty ? styles.empty : styles.shown}`}>
+      <div
+        className={
+          classnames(
+            styles.alerts,
+            empty ? styles.empty : styles.shown,
+            { [styles.isFixed]: isFixed },
+          )
+        }
+      >
         {messages.map(this.renderAlert)}
       </div>
     );
@@ -66,16 +81,27 @@ export class FormAlerts extends React.PureComponent {
         {() => (<>
           <div className={styles.alertIcon}><Icon /></div>
           <div className={styles.alertText}>{content}</div>
-          <IconButton
-            Icon={Close}
-            className={styles.alertClose}
-            data-control-id="form-alert-close-button"
-            theme="tertiary"
-            onClick={this.onHideAlert(alert)}
-          />
+          {this.renderCloseBtn(alert)}
         </>)}
       </Alert>
     );
+  }
+
+  renderCloseBtn = (alert) => {
+    const { persistent } = alert;
+
+    if (!persistent) {
+      return (
+        <IconButton
+          Icon={Close}
+          className={styles.alertClose}
+          data-control-id="form-alert-close-button"
+          theme="tertiary"
+          onClick={this.onHideAlert(alert)}
+        />);
+    }
+
+    return null;
   }
 
   onWarningEvent = (event) => {
@@ -94,7 +120,7 @@ export class FormAlerts extends React.PureComponent {
           const id = message?.id;
 
           setTimeout(() => {
-            popFormAlert(componentChannel, id);
+            popAlert(componentChannel, id);
           }, [timeout]);
         }
         break;
@@ -120,7 +146,7 @@ export class FormAlerts extends React.PureComponent {
   onHideAlert = (alert) => () => {
     const { id: componentChannel } = this.state;
 
-    popFormAlert(componentChannel, alert.id);
+    popAlert(componentChannel, alert.id);
   }
 }
 

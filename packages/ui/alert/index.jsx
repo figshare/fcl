@@ -13,6 +13,7 @@ const variantStyles = {
   error: styles.error,
   success: styles.success,
   warning: styles.warning,
+  info: styles.info,
 };
 
 class Alert extends Component {
