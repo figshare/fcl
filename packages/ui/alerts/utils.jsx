@@ -3,14 +3,15 @@ import uuid from "../helpers/utils/uuid";
 
 const defaultOptions = {
   channel: "global-alerts",
+  persistent: false,
   type: "warning",
   content: "Unknown message",
   identifier: "form-alert",
 };
 
-export function pushFormAlert(options = {}) {
+export function pushAlert(options = {}) {
   const config = { ...defaultOptions, ...options };
-  const { type, channel, content, identifier, timeout } = config;
+  const { type, channel, content, persistent, identifier, timeout } = config;
 
   const event = new CustomEvent("form-alerts:message", {
     detail: {
@@ -21,6 +22,7 @@ export function pushFormAlert(options = {}) {
         id: `${identifier}:${uuid()}`,
         type,
         content,
+        persistent,
       },
     },
   });
@@ -28,7 +30,7 @@ export function pushFormAlert(options = {}) {
   document.dispatchEvent(event);
 }
 
-export function clearFormAlerts(channel) {
+export function clearAlerts(channel) {
   const event = new CustomEvent("form-alerts:message", {
     detail: {
       action: "clear",
@@ -39,7 +41,7 @@ export function clearFormAlerts(channel) {
   document.dispatchEvent(event);
 }
 
-export function popFormAlert(channel, id) {
+export function popAlert(channel, id) {
   const event = new CustomEvent("form-alerts:message", {
     detail: {
       action: "pop",

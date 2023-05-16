@@ -1,0 +1,133 @@
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Alerts, pushAlert, clearAlerts } from "@figshare/fcl/alerts";
+import { Button } from "@figshare/fcl/button";
+
+<Meta
+  title="UI/Alerts/Alerts"
+  component={Alerts}
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: { hidden: true }
+     },
+  }}
+/>
+
+# Alerts
+---
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+An inline alerts manager component. Holds a list of alert message entries and renders them.
+Messages can be added or removed by dispatching `"form-alerts:message"` type events.
+The module exports utilities to easily dispatch such events.
+
+<Story
+  name="Alerts"
+  parameters={{
+    layout: "centered",
+  }}
+>
+  {() => {
+    const [fixed,setFixed] = useState(false);
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <div style={{ display: "flex", flexDirection: "row", gap: "12px" }}>
+          <Button
+            theme="secondary"
+            onClick={() => {setFixed(!fixed)}}
+          >
+            {fixed ? "Show Inline" : "Show fixed to viewport"}
+          </Button>
+          <Button theme="secondary" onClick={() => pushAlert({ channel: "alerts-channel", content: "Something is wrong.", type: "error" })}>Push Error</Button>
+          <Button theme="secondary" onClick={() => pushAlert({ channel: "alerts-channel", content: "Something is not ok.", type: "warning" })}>Push Warning</Button>
+          <Button theme="secondary" onClick={() => pushAlert({ channel: "alerts-channel", content: "All is well.", type: "success" })}>Push success</Button>
+          <Button theme="secondary" onClick={() => pushAlert({ channel: "alerts-channel", content: "Info.", persistent: true, type: "info" })}>Push info</Button>
+          <Button theme="secondary" onClick={() => clearAlerts("alerts-channel")}>Clear</Button>
+        </div>
+        <div className="field-container" style={{ display: "flex", flexDirection: "column", width: "50%" }}>
+        <Alerts id="alerts-channel" isFixed={fixed ? true : false}/>
+        </div>
+      </div>
+    )
+  }}
+</Story>
+
+The component and utilities can be imported from `@figshare/fcl/alerts`.
+See the example below on how to register a alerts component and `push` or `clear` alerts for it.
+
+
+```jsx
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import TextInput from "@figshare/fcl/input/text";
+import { Alerts, pushAlert, clearAlerts } from "@figshare/fcl/alerts";
+
+function AlertsExample() {
+  const [description, setDescription] = useState("");
+
+  const onSubmit = useCallback(async (event) => {
+    clearAlerts("description-update-form-alerts-channel");
+
+    try {
+      await backendAPI(description);
+
+      pushAlert({
+        type: "success",
+        content: "Updated description."
+        channel: "description-update-form-alerts-channel"
+      });
+    } catch (e) {
+      pushAlert({
+        type: "error",
+        content: `Some error occured. ${e.message}`,
+        channel: "description-update-form-alerts-channel"
+      });
+    }
+  }, [description]);
+  const onReset = useCallback(async (event) => {
+      setDescription("");
+      pushAlert({
+        type: "warning",
+        content: "Cleared.",
+        channel: "description-update-form-alerts-channel",
+        timeout: 2000
+    });
+  }, [setDescription]);
+
+    return (
+      <form data-form-id="description-update-form" onReset={onReset} onSubmit={onSubmit}>
+        <Alerts id="description-update-form-alerts-channel" />
+        <div className="fields" style={{ display: "flex", flexDirection: "column", width: "50%" }}>
+          <TextInput type="text" onChange={e => setInput(e.target.value)} name="description" />
+        </div>
+        <div className="controls">
+          <Button theme="primary" type="reset">Clear</Button>
+          <Button theme="primary" type="submit">Submit</Button>
+        </div>
+      </form>
+    );
+}
+```
+
+## Props Table
+<ArgsTable of={Alerts} />
+
+## Examples
+<Canvas>
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div style={{ display: "flex", flexDirection: "row", gap: "12px" }}>
+        <Button theme="secondary" onClick={() => pushAlert({ channel: "alerts-channel", content: "Something is wrong.", type: "error" })}>Push Error</Button>
+        <Button theme="secondary" onClick={() => pushAlert({ channel: "alerts-channel", content: "Something is not ok.", type: "warning" })}>Push Warning</Button>
+        <Button theme="secondary" onClick={() => pushAlert({ channel: "alerts-channel", content: "All is well.", type: "success" })}>Push success</Button>
+        <Button theme="secondary" onClick={() => pushAlert({ channel: "alerts-channel", content: "Info.", persistent: false, type: "info" })}>Push info</Button>
+        <Button theme="secondary" onClick={() => clearAlerts("alerts-channel")}>Clear</Button>
+      </div>
+    <div className="field-container" style={{ display: "flex", flexDirection: "column", width: "50%" }}>
+      <Alerts id="alerts-channel" />
+    </div>
+    </div>
+</Canvas>
