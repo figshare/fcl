@@ -1,0 +1,136 @@
+import { useState, useCallback } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import Radio from "@figshare/fcl/input/radio";
+import Input from "@figshare/fcl/input";
+
+<Meta
+  title="UI/Inputs/Radio"
+  component={Radio}
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: { hidden: true }
+     },
+  }}
+/>
+
+# Radio
+---
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+A radio button component. Allows users to select a single state from multiple options.
+
+<Story
+  name="Radio"
+  parameters={{
+    layout: "centered",
+    jest: ["ui/input"],
+  }}
+>{() => {
+    const items = [
+        {name: "Test 1", value: "1", label: "Test 1"},
+        {name: "Test 2", value: "2", label: "Test 2", disabled: true},
+        {name: "Test 3", value: "3", label: "Test 3", error: true},
+        {name: "Test 4", value: "4", label: "Test 4", hasRightIcon: true},
+    ]
+    const [selectedOption, setSelectedOption] = useState(null);
+    const handleOptionChange = useCallback((event) => {
+      const { value } = event.target;
+      setSelectedOption(value);
+    }, []);
+    const isChecked = (value) => {
+        if (value === selectedOption) {
+            return true;
+        }
+        return false;
+    };
+    return (
+      <div style={{width: "200px"}}>
+        {items.map((item) => (
+            <Input
+                key={`${item.name}-${item.value}`}
+                checked={isChecked(item.value)}
+                disabled={item.disabled}
+                error={item.error}
+                hasRightIcon={item.hasRightIcon}
+                label={item.label}
+                value={item.value}
+                type="radio"
+                onChange={handleOptionChange}
+            />
+        ))}
+      </div>
+    )
+  }}
+</Story>
+
+Can be imported directly or referenced as the default `Input` component variation:
+
+```jsx
+import React, { useState, useCallback }  from "react";
+import Input from "@figshare/fcl/input";
+
+function Checks() {
+     const items = [
+        {name: "Test 1", value: "1", label: "Test 1"},
+        {name: "Test 2", value: "2", label: "Test 2", disabled: true},
+        {name: "Test 3", value: "3", label: "Test 3", error: true},
+        {name: "Test 4", value: "4", label: "Test 4", hasRightIcon: true},
+    ]
+    const [selectedOption, setSelectedOption] = useState(null);
+    const handleOptionChange = useCallback((event) => {
+      const { value } = event.target;
+      setSelectedOption(value);
+    }, []);
+    const isChecked = (value) => {
+        if (value === selectedOption) {
+            return true;
+        }
+        return false;
+    };
+    return (
+      <div style={{width: "200px"}}>
+        {items.map((item) => (
+            <Input
+                key={`${item.name}-${item.value}`}
+                checked={isChecked(item.value)}
+                disabled={item.disabled}
+                error={item.error}
+                hasRightIcon={item.hasRightIcon}
+                label={item.label}
+                value={item.value}
+                type="radio"
+                onChange={handleOptionChange}
+            />
+        ))}
+      </div>
+    )
+}
+```
+
+## Props Table
+<ArgsTable of={Radio} />
+
+## Examples
+<Canvas>
+  <div style={{width: "300px"}}>
+    <Radio name="examples-radio-set-one-1" checked={false} label={"Test 1"} value={"1"} />
+    <Radio name="examples-radio-set-one-2" checked={true} label={"Test 2"} value={"2"} />
+    <Radio name="examples-radio-set-one-3" checked={false} disabled={true} label={"Test 3"} value={"3"} />
+    <Radio name="examples-radio-set-one-4" checked={true} disabled={true} label={"Test 4"} value={"4"} />
+    <Radio name="examples-radio-set-one-5" checked={false} error={true} label={"Test 5"} value={"5"} />
+    <Radio name="examples-radio-set-one-6" checked={true} error={true} label={"Test 6"} value={"6"} />
+  </div>
+  <div style={{width: "200px"}}>
+    <Radio name="examples-radio-set-two-1" checked={false} hasRightIcon={true} label={"Test 1"} value={"1"} />
+    <Radio name="examples-radio-set-two-2" checked={true} hasRightIcon={true} label={"Test 2"} value={"2"} />
+    <Radio name="examples-radio-set-two-3" checked={false} hasRightIcon={true} disabled={true} label={"Test 3"} value={"3"} />
+    <Radio name="examples-radio-set-two-4" checked={true} hasRightIcon={true} disabled={true} label={"Test 4"} value={"4"} />
+    <Radio name="examples-radio-set-two-5" checked={false} hasRightIcon={true} error={true} label={"Test 5"} value={"5"} />
+    <Radio name="examples-radio-set-two-6" checked={true} hasRightIcon={true} error={true} label={"Test 6"} value={"6"} />
+  </div>
+</Canvas>
