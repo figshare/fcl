@@ -6,6 +6,7 @@ import Date from "./date";
 import Password from "./password";
 import Search from "./search";
 import Text from "./text";
+import Radio from "./radio";
 
 
 const typesMap = {
@@ -14,6 +15,7 @@ const typesMap = {
   password: Password,
   search: Search,
   text: Text,
+  radio: Radio,
 };
 
 
