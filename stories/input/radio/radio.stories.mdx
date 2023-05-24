@@ -32,10 +32,10 @@ A radio button component. Allows users to select a single state from multiple op
   }}
 >{() => {
     const items = [
-        {name: "Test 1", value: "1", label: "Test 1"},
-        {name: "Test 2", value: "2", label: "Test 2", disabled: true},
-        {name: "Test 3", value: "3", label: "Test 3", error: true},
-        {name: "Test 4", value: "4", label: "Test 4", hasRightIcon: true},
+      {name: "radio-group", value: "1", label: "Option"},
+      {name: "radio-group", value: "2", label: "Option - Disabled", disabled: true},
+      {name: "radio-group", value: "3", label: "Option - Error", error: true},
+      {name: "radio-group", value: "4", label: "Option label with a large character count" },
     ]
     const [selectedOption, setSelectedOption] = useState(null);
     const handleOptionChange = useCallback((event) => {
@@ -49,14 +49,13 @@ A radio button component. Allows users to select a single state from multiple op
         return false;
     };
     return (
-      <div style={{width: "200px"}}>
+      <div style={{width: "200px", display: "flex", flexDirection: "column", gap: "12px" }}>
         {items.map((item) => (
             <Input
                 key={`${item.name}-${item.value}`}
                 checked={isChecked(item.value)}
                 disabled={item.disabled}
                 error={item.error}
-                hasRightIcon={item.hasRightIcon}
                 label={item.label}
                 value={item.value}
                 type="radio"
@@ -75,11 +74,11 @@ import React, { useState, useCallback }  from "react";
 import Input from "@figshare/fcl/input";
 
 function Checks() {
-     const items = [
-        {name: "Test 1", value: "1", label: "Test 1"},
-        {name: "Test 2", value: "2", label: "Test 2", disabled: true},
-        {name: "Test 3", value: "3", label: "Test 3", error: true},
-        {name: "Test 4", value: "4", label: "Test 4", hasRightIcon: true},
+    const items = [
+      {name: "radio-group", value: "1", label: "Option"},
+      {name: "radio-group", value: "2", label: "Option - Disabled", disabled: true},
+      {name: "radio-group", value: "3", label: "Option - Error", error: true},
+      {name: "radio-group", value: "4", label: "Option label with a large character count" },
     ]
     const [selectedOption, setSelectedOption] = useState(null);
     const handleOptionChange = useCallback((event) => {
@@ -93,14 +92,13 @@ function Checks() {
         return false;
     };
     return (
-      <div style={{width: "200px"}}>
+      <div style={{width: "200px", display: "flex", flexDirection: "column", gap: "12px" }}>
         {items.map((item) => (
             <Input
                 key={`${item.name}-${item.value}`}
                 checked={isChecked(item.value)}
                 disabled={item.disabled}
                 error={item.error}
-                hasRightIcon={item.hasRightIcon}
                 label={item.label}
                 value={item.value}
                 type="radio"
@@ -117,20 +115,12 @@ function Checks() {
 
 ## Examples
 <Canvas>
-  <div style={{width: "300px"}}>
-    <Radio name="examples-radio-set-one-1" checked={false} label={"Test 1"} value={"1"} />
-    <Radio name="examples-radio-set-one-2" checked={true} label={"Test 2"} value={"2"} />
-    <Radio name="examples-radio-set-one-3" checked={false} disabled={true} label={"Test 3"} value={"3"} />
-    <Radio name="examples-radio-set-one-4" checked={true} disabled={true} label={"Test 4"} value={"4"} />
-    <Radio name="examples-radio-set-one-5" checked={false} error={true} label={"Test 5"} value={"5"} />
-    <Radio name="examples-radio-set-one-6" checked={true} error={true} label={"Test 6"} value={"6"} />
-  </div>
-  <div style={{width: "200px"}}>
-    <Radio name="examples-radio-set-two-1" checked={false} hasRightIcon={true} label={"Test 1"} value={"1"} />
-    <Radio name="examples-radio-set-two-2" checked={true} hasRightIcon={true} label={"Test 2"} value={"2"} />
-    <Radio name="examples-radio-set-two-3" checked={false} hasRightIcon={true} disabled={true} label={"Test 3"} value={"3"} />
-    <Radio name="examples-radio-set-two-4" checked={true} hasRightIcon={true} disabled={true} label={"Test 4"} value={"4"} />
-    <Radio name="examples-radio-set-two-5" checked={false} hasRightIcon={true} error={true} label={"Test 5"} value={"5"} />
-    <Radio name="examples-radio-set-two-6" checked={true} hasRightIcon={true} error={true} label={"Test 6"} value={"6"} />
+  <div style={{width: "300px", display: "flex", flexDirection: "column", gap: "12px" }}>
+    <Radio name="examples-radio-set-one-1" checked={false} label={"Option"} value={"1"} />
+    <Radio name="examples-radio-set-one-2" checked={true} label={"Option Two"} value={"2"} />
+    <Radio name="examples-radio-set-one-3" checked={false} disabled={true} label={"Option Three - Disabled"} value={"3"} />
+    <Radio name="examples-radio-set-one-4" checked={true} disabled={true} label={"Option Four  - Checked & Disabled"} value={"4"} />
+    <Radio name="examples-radio-set-one-5" checked={false} error={true} label={"Option Five - Error"} value={"5"} />
+    <Radio name="examples-radio-set-one-6" checked={true} error={true} label={"Some options have labels that will break to other lines."} value={"6"} />
   </div>
 </Canvas>
