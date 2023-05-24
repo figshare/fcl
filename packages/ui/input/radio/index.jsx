@@ -1,9 +1,6 @@
 import React, { useCallback } from "react";
 import classnames from "classnames";
 import { bool, func, string } from "prop-types";
-import AngleRight from "@figshare/fcl/icons/angle/right";
-
-import { IconButton } from "../../button";
 
 import styles from "./index.css";
 
@@ -14,12 +11,10 @@ export default function Radio(
     className,
     disabled,
     error,
-    hasRightIcon,
     id,
     label,
     name,
     onChange,
-    onClickRightIcon,
     value: inputValue,
     ...others
   }
@@ -28,31 +23,20 @@ export default function Radio(
   const handler = useCallback((e) => onChange?.(e), [onChange]);
 
   return (
-    <div className={classnames(styles.container, className)}>
-      <div className={classnames(styles.buttonContainer, { [styles.error]: error })}>
-        <input
-          checked={checked}
-          disabled={disabled}
-          id={inputId}
-          name={name}
-          type="radio"
-          value={inputValue}
-          onChange={handler}
-          {...others}
-        />
-        <label htmlFor={inputId}>
-          {label}
-        </label>
-      </div>
-      {hasRightIcon &&
-      <IconButton
-        Icon={AngleRight}
-        className={styles.angleRightBtn}
+    <div className={classnames(styles.radio, { [styles.error]: error }, className)}>
+      <input
+        checked={checked}
         disabled={disabled}
-        size="S"
-        theme="tertiary"
-        onClick={onClickRightIcon ?? onClickRightIcon}
-      />}
+        id={inputId}
+        name={name}
+        type="radio"
+        value={inputValue}
+        onChange={handler}
+        {...others}
+      />
+      <label htmlFor={inputId}>
+        {label}
+      </label>
     </div>
   );
 }
@@ -75,10 +59,6 @@ Radio.propTypes = {
   */
   error: bool,
   /**
-   * Display the icon.
-   */
-  hasRightIcon: bool,
-  /**
    * Optional id for input.
    */
   id: string,
@@ -98,10 +78,6 @@ Radio.propTypes = {
     * Callback called when the button value changes.
   */
   onChange: func,
-  /**
-   * Called when users `click on` or `activate` the icon button, either by mouse or key interaction
-  */
-  onClickRightIcon: func,
 };
 
 Radio.defaultProps = {
@@ -109,11 +85,9 @@ Radio.defaultProps = {
   className: undefined,
   disabled: false,
   error: false,
-  hasRightIcon: false,
   id: undefined,
   label: undefined,
   name: undefined,
   value: null,
   onChange: undefined,
-  onClickRightIcon: undefined,
 };

@@ -1,8 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { IconButton } from "../../button";
-
 import Radio from "./index";
 
 
@@ -19,11 +17,6 @@ describe("<Radio />", () => {
   it("should apply the 'disabled' prop correctly", () => {
     const wrapper = mount(<Radio disabled={true} />);
     expect(wrapper.prop("disabled")).toBe(true);
-  });
-
-  it("renders IconButton when hasRightIcon is true", () => {
-    const wrapper = mount(<Radio hasRightIcon={true} />);
-    expect(wrapper.find(IconButton)).toHaveLength(1);
   });
 
   it("should call the onChange function when the radio button is changed", () => {
