@@ -21,6 +21,8 @@ const IconsByType = {
   info: Info,
 };
 
+const NO_ATTRIBUTES = {};
+
 export class Alerts extends React.PureComponent {
   static propTypes = {
     /**
@@ -29,12 +31,21 @@ export class Alerts extends React.PureComponent {
      */
     id: string.isRequired,
     /**
-      * Optional class to show Alerts at the viewport level.
+      * Optional className to append to the Alerts wrapper.
+    */
+    className: string,
+    /**
+      * Optional flag to show Alerts at the viewport level.
     */
     isFixed: bool,
+    /**
+      * Optional flag to hide Alert `type` icons.
+      * If true, content will also be visually centered.
+    */
+    noTypeIcon: bool,
   }
 
-  static defaultProps = { id: "global-alerts", isFixed: false }
+  static defaultProps = { id: "global-alerts", className: undefined, isFixed: false, noTypeIcon: false }
 
   state = { messages: [], id: this.props.id }
 
@@ -47,8 +58,8 @@ export class Alerts extends React.PureComponent {
   }
 
   render() {
-    const { messages } = this.state;
-    const { isFixed } = this.props;
+    const { id, messages } = this.state;
+    const { className, isFixed, noTypeIcon } = this.props;
 
     const empty = !messages?.length;
 
@@ -58,9 +69,15 @@ export class Alerts extends React.PureComponent {
           classnames(
             styles.alerts,
             empty ? styles.empty : styles.shown,
-            { [styles.isFixed]: isFixed },
+            {
+              [styles.isFixed]: isFixed,
+              [styles.noTypeIcon]: noTypeIcon,
+            },
+            className,
           )
         }
+        data-alerts-channel={id}
+        data-alerts-empty={empty}
       >
         {messages.map(this.renderAlert)}
       </div>
@@ -68,7 +85,7 @@ export class Alerts extends React.PureComponent {
   }
 
   renderAlert = (alert) => {
-    const { id, type, content } = alert;
+    const { id, type, content, attributes = NO_ATTRIBUTES } = alert;
     const Icon = IconsByType[type];
 
     return (
@@ -77,6 +94,8 @@ export class Alerts extends React.PureComponent {
         className={`${styles.alert} ${styles[type]}`}
         data-id={`form-alert:${this.state.id}-${id}`}
         variant={type}
+        {...attributes}
+        data-alert-type={type}
       >
         {() => (<>
           <div className={styles.alertIcon}><Icon /></div>

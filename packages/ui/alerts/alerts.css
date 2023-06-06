@@ -150,6 +150,8 @@ div.alert {
 }
 
 .alertText {
+  flex: 1 0;
+
   font-size: var(--typography-M-fontSize);
   line-height: var(--typography-M-lineHeight);
 }
@@ -159,4 +161,16 @@ div.alert {
   height: calc(3 * var(--gridSize));
   margin-right: 0;
   margin-left: auto;
+}
+
+/* stylelint-disable-next-line a11y/no-display-none */
+.noTypeIcon .alertIcon {
+  display: none;
+}
+
+.noTypeIcon .alertText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
