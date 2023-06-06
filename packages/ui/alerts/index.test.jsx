@@ -40,6 +40,16 @@ describe("<Alerts />", () => {
     component.unmount();
   });
 
+  it("renders an alerts with no type icons if specified", () => {
+    const component = mount(
+      <Alerts id="alerts" noTypeIcon={true} />
+    );
+
+    expect(component.find(".noTypeIcon")).toHaveLength(1);
+
+    component.unmount();
+  });
+
   it("subscribes to form-alerts:message, to push messages to it's own list", async() => {
     const component = mount(
       <Alerts id="alerts" />
@@ -54,6 +64,7 @@ describe("<Alerts />", () => {
         type: "warning",
         content: "Some message",
         identifier: "form-alert",
+        attributes: { "data-custom-alert-attribute": "attribute-value" },
       });
 
       pushAlert({
@@ -70,6 +81,7 @@ describe("<Alerts />", () => {
     expect(component.find(".empty")).toHaveLength(0);
     expect(component.find(".shown")).toHaveLength(1);
     expect(component.find("div.alert.warning")).toHaveLength(1);
+    expect(component.find("div[data-custom-alert-attribute=\"attribute-value\"]")).toHaveLength(1);
 
     component.unmount();
   });
