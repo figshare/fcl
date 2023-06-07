@@ -1,9 +1,17 @@
 .toolbarButtonContainer {
   display: flex;
-  flex-direction: row;
-  align-items: center;
 
-  height: calc(var(--gridSize) * 6);
+  padding: var(--gridSize);
+
+  cursor: pointer;
+
+  vertical-align: middle;
+
+  border: 0;
+
+  border-radius: var(--gridSize);
+
+  background: none;
 }
 
 .toolbarButtonContainer svg {

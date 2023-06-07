@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import icons from "../../../../../icons/editor";
 
-import styles from "./Types.css";
+import styles from "./Types.css"; // eslint-disable-line css-modules/no-unused-class
 
 
 const ToolbarSections = {
@@ -78,7 +78,7 @@ export const renderTypes = (toolbarStyles = {}, section, activeType, onClick) =>
       return "";
     }
 
-    return (<div key={type} className={styles.toolbarButtonContainer} >
+    return (<div key={type}>
       <button
         aria-label={selectedToolbarSection.names[activeType]}
         className={setWrapperClass(type)}

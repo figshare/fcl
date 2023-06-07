@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
@@ -32,8 +32,6 @@ import styles from "./editor.css"; // eslint-disable-line css-modules/no-unused-
 
 const DEFAULT_MAX_TEXT_LENGTH = 10000;
 const DEFAULT_MIN_TEXT_LENGTH = 5000;
-const KEY_ENTER = 13;
-const DEBOUNCE_DELAY = 1000;
 
 const editorConfig = {
   // The editor theme
@@ -89,33 +87,31 @@ const Editor = (props) => {
 
   return (<>
     <div className={styles.container}>
-      <div className={styles.inner} >
-        <RichTextPlugin
-          ErrorBoundary={LexicalErrorBoundary}
-          contentEditable={<ContentEditable className={styles.input} />}
-          placeholder={<div className={styles.placeholder}>{props.placeholder}</div>}
-        />
-        <HistoryPlugin />
-        <AutoFocusPlugin />
-        <OnChangePlugin
-          onChange={(editorState) => {
-            editorState.read(() => {
-              const { onChange, id, name } = props;
+      <RichTextPlugin
+        ErrorBoundary={LexicalErrorBoundary}
+        contentEditable={<ContentEditable className={styles.input} />}
+        placeholder={<div className={styles.placeholder}>{props.placeholder}</div>}
+      />
+      <HistoryPlugin />
+      <AutoFocusPlugin />
+      <OnChangePlugin
+        onChange={(editorState) => {
+          editorState.read(() => {
+            const { onChange, id, name } = props;
 
-              if (typeof onChange === "function") {
-                const serializedHTML = $generateHtmlFromNodes(editor);
-                onChange({ target: { value: serializedHTML, id, name } });
+            if (typeof onChange === "function") {
+              const serializedHTML = $generateHtmlFromNodes(editor);
+              onChange({ target: { value: serializedHTML, id, name } });
 
-                setContentLength(serializedHTML.length);
-              }
-            });
-          }}
-        />
+              setContentLength(serializedHTML.length);
+            }
+          });
+        }}
+      />
 
-        <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
-        <ListPlugin />
-        <LinkPlugin />
-      </div>
+      <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+      <ListPlugin />
+      <LinkPlugin />
       <ToolbarPlugin props={props} />
     </div>
     <WarningPlugin contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
@@ -133,24 +129,24 @@ Editor.propTypes = {
   /**
     Optional class to append to the text editor wrapper node.
   */
-  className: PropTypes.string,
+  className: PropTypes.string, //eslint-disable-line
   /**
     Disables the editor.
   */
-  disabled: PropTypes.bool,
+  disabled: PropTypes.bool, //eslint-disable-line
   /**
     Identify the editor through a unique field name. Will be passed to the `onChange` function as the first argument.
   */
-  name: PropTypes.string,
-  id: PropTypes.string,
+  name: PropTypes.string, //eslint-disable-line
+  id: PropTypes.string, //eslint-disable-line
   /**
     Maximum number of characters for the editor text value. Includes markup.
   */
-  maxTextLength: PropTypes.number,
+  maxTextLength: PropTypes.number, //eslint-disable-line
   /**
     Minimum number of characters for the editor text value. Includes markup.
   */
-  minTextLength: PropTypes.number,
+  minTextLength: PropTypes.number, //eslint-disable-line
   /**
     Placeholder text for the editor.
   */
@@ -158,7 +154,7 @@ Editor.propTypes = {
   /**
     Configuration options for the editor toolbar.
   */
-  toolbarConfig: PropTypes.array,
+  toolbarConfig: PropTypes.array, //eslint-disable-line
   /**
     Editor text value.
   */
@@ -166,11 +162,11 @@ Editor.propTypes = {
   /**
     Callback called when the editor looses focus.
   */
-  onBlur: PropTypes.func,
+  onBlur: PropTypes.func, //eslint-disable-line
   /**
     Callback called when the editor gains focus.
   */
-  onFocus: PropTypes.func,
+  onFocus: PropTypes.func, //eslint-disable-line
 };
 
 Editor.defaultProps = {

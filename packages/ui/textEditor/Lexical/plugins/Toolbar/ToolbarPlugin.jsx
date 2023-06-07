@@ -11,13 +11,19 @@ import {
   $getSelection,
   $isRangeSelection,
   $createParagraphNode,
+  $isTextNode,
 } from "lexical";
 import { $isLinkNode, $isAutoLinkNode } from "@lexical/link";
 import {
   $wrapNodes,
   $isAtNodeEnd,
 } from "@lexical/selection";
-import { $findMatchingParent, $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
+import {
+  $findMatchingParent,
+  $getNearestNodeOfType,
+  mergeRegister,
+  $getNearestBlockElementAncestorOrThrow,
+} from "@lexical/utils";
 import {
   INSERT_ORDERED_LIST_COMMAND,
   INSERT_UNORDERED_LIST_COMMAND,
@@ -28,8 +34,10 @@ import {
 import {
   $createHeadingNode,
   $isHeadingNode,
+  $isQuoteNode,
 } from "@lexical/rich-text";
 import classnames from "classnames";
+import { $isDecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
 
 import { renderBlockTypes } from "../Toolbar/Types/Blocks";
 import useModal from "../LinkEditor/useModal";
@@ -37,7 +45,7 @@ import { LinkEditor } from "../LinkEditor/LinkEditor";
 import icons from "../../../../icons/editor";
 
 import { renderTypes } from "./Types";
-import styles from "./Toolbar.css";
+import styles from "./Toolbar.css"; // eslint-disable-line css-modules/no-unused-class
 
 
 const LowPriority = 1;
@@ -252,9 +260,45 @@ export default function ToolbarPlugin() {
     editor.dispatchCommand(commands[type]);
   });
 
-  const onFormatClick = (type) => useCallback(() => {
-    // to do
-  });
+  const onClearFormat = () => useCallback(() => {
+    activeEditor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        const { anchor } = selection;
+        const { focus } = selection;
+        const nodes = selection.getNodes();
+
+        if (anchor.key === focus.key && anchor.offset === focus.offset) {
+          return;
+        }
+
+        nodes.forEach((node, idx) => {
+          // We split the first and last node by the selection
+          // So that we don't format unselected text inside those nodes
+          if ($isTextNode(node)) {
+            if (idx === 0 && anchor.offset !== 0) {
+              node = node.splitText(anchor.offset)[1] || node; //eslint-disable-line
+            }
+            if (idx === nodes.length - 1) {
+              node = node.splitText(focus.offset)[0] || node; //eslint-disable-line
+            }
+
+            if (node.__style !== "") {
+              node.setStyle("");
+            }
+            if (node.__format !== 0) {
+              node.setFormat(0);
+              $getNearestBlockElementAncestorOrThrow(node).setFormat("");
+            }
+          } else if ($isHeadingNode(node) || $isQuoteNode(node)) {
+            node.replace($createParagraphNode(), true);
+          } else if ($isDecoratorBlockNode(node)) {
+            node.setFormat("");
+          }
+        });
+      }
+    });
+  }, [activeEditor]);
 
   // CLASSNAMES
   const { toolbarItem, spaced, format, active } = styles;
@@ -279,7 +323,7 @@ export default function ToolbarPlugin() {
       {renderTypes({ toolbarItem, spaced, format, active }, "list", listType, onListClick)}
       {renderTypes({ toolbarItem, spaced, format, active }, "script", scriptType, onScriptClick)}
       <Divider />
-      {renderTypes({ toolbarItem, spaced, format, active }, "format", null, onFormatClick)}
+      {renderTypes({ toolbarItem, spaced, format, active }, "format", null, onClearFormat)}
       <Divider />
       {renderTypes({ toolbarItem, spaced, format, active, canUndo, canRedo }, "history", null, onHistoryClick)}
       {modal}
