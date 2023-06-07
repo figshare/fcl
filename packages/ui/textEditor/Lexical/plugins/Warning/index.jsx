@@ -1,5 +1,5 @@
 import React from "react";
-import { node, number } from "prop-types";
+import { number } from "prop-types";
 
 import styles from "./Warning.css";
 

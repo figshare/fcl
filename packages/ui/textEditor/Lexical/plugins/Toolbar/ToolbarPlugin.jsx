@@ -108,6 +108,7 @@ export default function ToolbarPlugin() {
           setBlockType(type);
         }
       }
+      console.log(selection.hasFormat("ol"));
       // Update text format
       setIsBold(selection.hasFormat("bold"));
       setIsItalic(selection.hasFormat("italic"));

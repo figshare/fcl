@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
@@ -16,19 +16,18 @@ import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { TRANSFORMERS } from "@lexical/markdown";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $generateNodesFromDOM } from "@lexical/html";
+import { $generateNodesFromDOM, $generateHtmlFromNodes } from "@lexical/html";
 import {
   $getRoot,
   $getSelection,
 } from "lexical";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { $generateHtmlFromNodes } from "@lexical/html";
 
 
 import ToolbarPlugin from "./plugins/Toolbar/ToolbarPlugin";
 import { WarningPlugin } from "./plugins/Warning";
 import DefaultTheme from "./themes/DefaultTheme";
-import styles from "./editor.css";
+import styles from "./editor.css"; // eslint-disable-line css-modules/no-unused-class
 
 
 const DEFAULT_MAX_TEXT_LENGTH = 10000;
@@ -90,7 +89,7 @@ const Editor = (props) => {
 
   return (<>
     <div className={styles.container}>
-      <div className={styles.inner}>
+      <div className={styles.inner} >
         <RichTextPlugin
           ErrorBoundary={LexicalErrorBoundary}
           contentEditable={<ContentEditable className={styles.input} />}
