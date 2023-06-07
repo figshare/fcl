@@ -59,31 +59,7 @@
   margin: 2px;
 }
 
-
-.blockControls span.block-type.quote {
-  background-image: url(../../images/icons/chat-square-quote.svg);
-}
-
-.blockControls span.block-type.code {
-  background-image: url(../../images/icons/code.svg);
-}
-
-.italic {
-  background-image: url(../../images/icons/type-italic.svg);
-}
-
-.bold {
-  background-image: url(../../images/icons/type-bold.svg);
-}
-
-.underline {
-  background-image: url(../../images/icons/type-underline.svg);
-}
-
-.strikethrough {
-  background-image: url(../../images/icons/type-strikethrough.svg);
-}
-
-.link {
-  background-image: url(../../images/icons/link.svg);
+.icon {
+  width: calc(var(--gridSize) * 5);
+  height: calc(var(--gridSize) * 5);
 }

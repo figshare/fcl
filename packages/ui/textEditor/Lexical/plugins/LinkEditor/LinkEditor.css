@@ -1,0 +1,109 @@
+.modalShadow {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+
+  border-radius: calc(var(--gridSize) / 2);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modalContainer {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  max-height: calc(75 * var(--gridSize) - 2);
+  margin: calc(2 * var(--gridSize) + 4);
+  padding: calc(4 * var(--gridSize)) calc(2 * var(--gridSize) + 4);
+
+  border-radius: calc(var(--gridSize) / 2);
+  background-color: var(--color-layout-secondary-background);
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+}
+
+.linkLabel {
+  margin-right: var(--gridSize);
+}
+
+.icon {
+  margin-right: calc(var(--gridSize) * 2);
+  margin-bottom: calc(var(--gridSize) / 4);
+}
+
+.title {
+  font-size: var(--typography-L-fontSize);
+  line-height: var(--typography-L-lineHeight);
+}
+
+.buttonOpenLink {
+  margin-left: calc(4 * var(--gridSize));
+}
+
+.input {
+  box-sizing: border-box;
+  height: calc(var(--gridSize) * 6);
+  margin: var(--gridSize) 0;
+  padding: var(--gridSize) calc(var(--gridSize) * 2);
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: calc(var(--gridSize) / 2);
+  box-shadow: inset 0 1px 4px rgba(135, 134, 134, 0.2);
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  margin-top: calc(var(--gridSize) * 2);
+}
+
+.buttonUnlink {
+  display: flex;
+  align-self: center;
+
+  margin-right: calc(var(--gridSize) * 5);
+}
+
+.buttonSave {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  padding: var(--gridSize) calc(var(--gridSize) * 2);
+}
+
+.focusBtn {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.buttonCancel {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  box-sizing: border-box;
+  margin-right: calc(2 * var(--gridSize) + 4);
+  padding: var(--gridSize) calc(var(--gridSize) * 2);
+
+  color: var(--color-button-primary-background);
+  border: 1px solid var(--color-border-primary);
+  border-radius: calc(var(--gridSize) / 2);
+  background: var(--color-layout-primary-background);
+}

@@ -6,17 +6,18 @@ import {
   REDO_COMMAND,
   UNDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
+  CLICK_COMMAND,
   FORMAT_TEXT_COMMAND,
   $getSelection,
   $isRangeSelection,
   $createParagraphNode,
 } from "lexical";
-import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
+import { $isLinkNode, $isAutoLinkNode } from "@lexical/link";
 import {
   $wrapNodes,
   $isAtNodeEnd,
 } from "@lexical/selection";
-import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
+import { $findMatchingParent, $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
 import {
   INSERT_ORDERED_LIST_COMMAND,
   INSERT_UNORDERED_LIST_COMMAND,
@@ -31,6 +32,9 @@ import {
 import classnames from "classnames";
 
 import { renderBlockTypes } from "../Toolbar/Types/Blocks";
+import useModal from "../LinkEditor/useModal";
+import { LinkEditor } from "../LinkEditor/LinkEditor";
+import icons from "../../../../icons/editor";
 
 import { renderTypes } from "./Types";
 import styles from "./Toolbar.css";
@@ -80,7 +84,6 @@ export default function ToolbarPlugin() {
   const [blockType, setBlockType] = useState("paragraph");
   const [listType, setListType] = useState("");
   const [scriptType, setScriptType] = useState("");
-  const [formatType, setFormatType] = useState("");
   const [activeEditor, setActiveEditor] = useState(editor);
 
   const [isLink, setIsLink] = useState(false);
@@ -89,15 +92,22 @@ export default function ToolbarPlugin() {
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const blocks = { isBold, isItalic, isUnderline, isStrikethrough };
+  const [modal, showModal] = useModal();
+  const [hasSelection, setHasSelection] = useState(false);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
+
     if ($isRangeSelection(selection)) {
       const anchorNode = selection.anchor.getNode();
+
+      setHasSelection((selection.focus.offset - selection.anchor.offset) !== 0);
+
       const element =
         anchorNode.getKey() === "root" ? anchorNode : anchorNode.getTopLevelElementOrThrow();
       const elementKey = element.getKey();
       const elementDOM = editor.getElementByKey(elementKey);
+
       if (elementDOM !== null) {
         if ($isListNode(element)) {
           const parentList = $getNearestNodeOfType(anchorNode, ListNode);
@@ -108,7 +118,7 @@ export default function ToolbarPlugin() {
           setBlockType(type);
         }
       }
-      console.log(selection.hasFormat("ol"));
+
       // Update text format
       setIsBold(selection.hasFormat("bold"));
       setIsItalic(selection.hasFormat("italic"));
@@ -121,6 +131,7 @@ export default function ToolbarPlugin() {
       // Update links
       const node = getSelectedNode(selection);
       const parent = node.getParent();
+
       if ($isLinkNode(parent) || $isLinkNode(node)) {
         setIsLink(true);
       } else {
@@ -129,6 +140,15 @@ export default function ToolbarPlugin() {
     }
   }, [editor]);
 
+  const insertLink = useCallback(() => {
+    showModal("Insert Link", (onClose) => (
+      <LinkEditor
+        activeEditor={activeEditor}
+        onClose={onClose}
+      />
+    ));
+  }, [activeEditor]);
+
   useEffect(() => mergeRegister(
     editor.registerUpdateListener(({ editorState }) => {
       editorState.read(() => {
@@ -136,14 +156,28 @@ export default function ToolbarPlugin() {
       });
     }),
     editor.registerCommand(
-      SELECTION_CHANGE_COMMAND,
-      (_payload, newEditor) => {
+      SELECTION_CHANGE_COMMAND, (_payload, newEditor) => {
         updateToolbar();
         setActiveEditor(newEditor);
 
+        editor.registerCommand(
+          CLICK_COMMAND, () => {
+            const selection = $getSelection();
+            const node = getSelectedNode(selection);
+            const linkParent = $findMatchingParent(node, $isLinkNode);
+            const autoLinkParent = $findMatchingParent(node, $isAutoLinkNode);
+
+            if (linkParent !== null && autoLinkParent === null &&
+              $isRangeSelection(selection) && !selection.anchor.offset) {
+              insertLink();
+            }
+
+            return false;
+          }, LowPriority
+        );
+
         return false;
-      },
-      LowPriority
+      }, LowPriority
     ),
     editor.registerCommand(
       CAN_UNDO_COMMAND,
@@ -164,15 +198,6 @@ export default function ToolbarPlugin() {
       LowPriority
     )
   ), [editor, updateToolbar]);
-
-  const insertLink = useCallback(() => {
-    // @todo - add link logic
-    if (!isLink) {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, "https://");
-    } else {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-    }
-  }, [editor, isLink]);
 
   const onBlockClick = (type) => () => {
     editor.update(() => {
@@ -234,8 +259,7 @@ export default function ToolbarPlugin() {
   // CLASSNAMES
   const { toolbarItem, spaced, format, active } = styles;
 
-  const linkClasses = classnames(styles.toolbarItem, styles.spaced, { [styles.active]: isLink });
-  const linkIconClasses = classnames(styles.format, styles.link);
+  const linkClasses = classnames(styles.toolbarItem, { [styles.active]: isLink });
 
   return (
     <div ref={toolbarRef} className={styles.toolbar}>
@@ -246,17 +270,19 @@ export default function ToolbarPlugin() {
       <button
         aria-label="Insert Link"
         className={linkClasses}
+        disabled={!hasSelection}
         onClick={insertLink}
       >
-        <i className={linkIconClasses} />
+        <icons.Link className={styles.icon} />
       </button>
       <Divider />
       {renderTypes({ toolbarItem, spaced, format, active }, "list", listType, onListClick)}
       {renderTypes({ toolbarItem, spaced, format, active }, "script", scriptType, onScriptClick)}
       <Divider />
-      {renderTypes({ toolbarItem, spaced, format, active }, "format", formatType, onFormatClick)}
+      {renderTypes({ toolbarItem, spaced, format, active }, "format", null, onFormatClick)}
       <Divider />
       {renderTypes({ toolbarItem, spaced, format, active, canUndo, canRedo }, "history", null, onHistoryClick)}
+      {modal}
     </div>
   );
 }
