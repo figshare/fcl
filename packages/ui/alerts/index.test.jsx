@@ -50,6 +50,16 @@ describe("<Alerts />", () => {
     component.unmount();
   });
 
+  it("renders alerts with toast styling if specified", () => {
+    const component = mount(
+      <Alerts id="alerts" isToast={true} />
+    );
+
+    expect(component.find(".isToast")).toHaveLength(1);
+
+    component.unmount();
+  });
+
   it("subscribes to form-alerts:message, to push messages to it's own list", async() => {
     const component = mount(
       <Alerts id="alerts" />
@@ -204,6 +214,34 @@ describe("<Alerts />", () => {
 
     expect(component.find(".empty")).toHaveLength(1);
     expect(component.find("div.alert.warning")).toHaveLength(0);
+
+    component.unmount();
+  });
+  it("allows alerts to have titles or custom attributes", async() => {
+    const component = mount(
+      <Alerts id="alerts" />
+    );
+
+    expect(component.find(".alerts")).toHaveLength(1);
+    expect(component.find(".empty")).toHaveLength(1);
+
+    act(() => {
+      pushAlert({
+        channel: "alerts",
+        type: "warning",
+        content: "Some message",
+        title: "Some title",
+        identifier: "form-alert",
+        attributes: { "data-is-publish-alert": true },
+      });
+    });
+
+    await wait(() => component.update());
+
+    expect(component.find(".shown")).toHaveLength(1);
+    expect(component.find("div.alert.warning")).toHaveLength(1);
+    expect(component.find("div[data-is-publish-alert]")).toHaveLength(1);
+    expect(component.find("div.alertTitle")).toHaveLength(1);
 
     component.unmount();
   });

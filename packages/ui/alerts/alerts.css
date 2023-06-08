@@ -1,4 +1,6 @@
 .alerts {
+  --corner-radius: var(--gridSize);
+
   display: flex;
   flex-direction: column;
 
@@ -10,6 +12,8 @@
 }
 
 .isFixed {
+  --corner-radius: 0;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -68,6 +72,8 @@
 
   margin: 0;
   padding: 0;
+
+  border-radius: var(--corner-radius);
 }
 
 .success {
@@ -75,7 +81,7 @@
 }
 
 .error {
-  --color-icon: var(--color-icon-error);
+  --color-icon: var(--color-typography-error);
 }
 
 .warning {
@@ -88,6 +94,31 @@
 
 div.alert {
   padding: 0;
+}
+
+.isToast .alert {
+  position: relative;
+
+  background-color: var(--color-layout-background-primary) !important;
+  box-shadow: 2px 2px 7px 2px rgba(0, 0, 0, 0.14);
+}
+
+.isToast .alert::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: var(--gridSize);
+  height: 100%;
+
+  content: "";
+
+  border-top-left-radius: var(--corner-radius);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: var(--corner-radius);
+
+  background: var(--color-icon);
 }
 
 .alert > div {
@@ -103,6 +134,14 @@ div.alert {
   gap: var(--gridSize);
   align-items: flex-start;
   justify-content: flex-start;
+}
+
+.alert.withTitle > div {
+  flex-direction: column;
+}
+
+.isToast .alert > div {
+  padding-left: calc(3 * var(--gridSize));
 }
 
 .alertIcon {
@@ -161,6 +200,24 @@ div.alert {
   height: calc(3 * var(--gridSize));
   margin-right: 0;
   margin-left: auto;
+}
+
+.alertHeader {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  min-width: 100%;
+  flex: 1 0;
+  gap: calc(2 * var(--gridSize));
+  justify-content: space-between;
+}
+
+.alertTitle {
+  display: flex;
+  flex-direction: row;
+  gap: calc(2 * var(--gridSize));
+  justify-content: flex-start;
 }
 
 /* stylelint-disable-next-line a11y/no-display-none */
