@@ -1,70 +1,15 @@
 import React from "react";
 import classnames from "classnames";
 
+import { getToolbarMainSections } from "../../../utils";
 import icons from "../../../../../icons/editor";
 
 import styles from "./Types.css"; // eslint-disable-line css-modules/no-unused-class
 
 
-const ToolbarSections = {
-  block: {
-    types: [
-      "h2",
-      "h3",
-      "h4",
-      "paragraph",
-    ],
-    names: {
-      h2: "H2",
-      h3: "H3",
-      h4: "H4",
-      paragraph: "P",
-    },
-  },
-  list: {
-    types: [
-      "ul",
-      "ol",
-    ],
-    names: {
-      ul: "Unordered List",
-      ol: "Ordered List",
-    },
-  },
-  script: {
-    types: [
-      "subscript",
-      "superscript",
-    ],
-    names: {
-      subscript: "Subscript",
-      superscript: "Superscript",
-    },
-  },
-  history: {
-    types: [
-      "undo",
-      "redo",
-    ],
-    names: {
-      undo: "Undo",
-      redo: "Redo",
-    },
-  },
-  format: {
-    types: [
-      "clearFormatting",
-      "pasteWithoutFormat",
-    ],
-    names: {
-      clearFormatting: "Clear Formatting",
-      pasteWithoutFormat: "Paste Without Format",
-    },
-  },
-};
+export const renderTypes = (config, toolbarStyles = {}, section, activeType, onClick) => {
+  const ToolbarSections = getToolbarMainSections(config);
 
-
-export const renderTypes = (toolbarStyles = {}, section, activeType, onClick) => {
   const setWrapperClass = (type) => classnames(toolbarStyles.toolbarItem,
     toolbarStyles.spaced, { [toolbarStyles.active]: activeType === type });
 

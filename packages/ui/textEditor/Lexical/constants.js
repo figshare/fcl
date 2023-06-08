@@ -1,0 +1,50 @@
+export const LowPriority = 1;
+
+export const ToolbarItem = {
+  Heading2: "h2",
+  Heading3: "h3",
+  Heading4: "h4",
+  Paragraph: "paragraph",
+  Bold: "bold",
+  Italic: "italic",
+  StrikeThrough: "strikethrough",
+  Underline: "underline",
+  OrderedList: "ol",
+  UnorderedList: "ul",
+  Subscript: "subscript",
+  Superscript: "superscript",
+  Undo: "undo",
+  Redo: "redo",
+  ClearFormatting: "clearFormatting",
+  PasteWithoutFormat: "pasteWithoutFormat",
+  Link: "link",
+};
+export const ToolbarItemType = {
+  Block: "block",
+  List: "list",
+  Script: "script",
+  History: "history",
+  Format: "format",
+  RichText: "richText",
+  Link: "link",
+};
+
+export const DefaultToolbarConfig = [
+  { name: ToolbarItem.Heading2, type: ToolbarItemType.Block },
+  { name: ToolbarItem.Heading3, type: ToolbarItemType.Block },
+  { name: ToolbarItem.Heading4, type: ToolbarItemType.Block },
+  { name: ToolbarItem.Paragraph, type: ToolbarItemType.Block },
+  { name: ToolbarItem.Bold, type: ToolbarItemType.RichText },
+  { name: ToolbarItem.Italic, type: ToolbarItemType.RichText },
+  { name: ToolbarItem.Underline, type: ToolbarItemType.RichText },
+  { name: ToolbarItem.StrikeThrough, type: ToolbarItemType.RichText },
+  { name: ToolbarItem.Link, type: ToolbarItemType.Link },
+  { name: ToolbarItem.OrderedList, type: ToolbarItemType.List },
+  { name: ToolbarItem.UnorderedList, type: ToolbarItemType.List },
+  { name: ToolbarItem.Subscript, type: ToolbarItemType.Script },
+  { name: ToolbarItem.Superscript, type: ToolbarItemType.Script },
+  { name: ToolbarItem.ClearFormatting, type: ToolbarItemType.Format },
+  { name: ToolbarItem.PasteWithoutFormat, type: ToolbarItemType.Format },
+  { name: ToolbarItem.Undo, type: ToolbarItemType.History },
+  { name: ToolbarItem.Redo, type: ToolbarItemType.History },
+];

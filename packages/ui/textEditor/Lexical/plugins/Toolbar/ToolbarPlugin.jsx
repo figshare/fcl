@@ -1,4 +1,5 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   CAN_REDO_COMMAND,
@@ -40,7 +41,8 @@ import {
 import classnames from "classnames";
 import { $isDecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
 
-import { renderBlockTypes } from "../Toolbar/Types/Blocks";
+import { DefaultToolbarConfig, LowPriority, ToolbarItemType } from "../../constants";
+import { renderRichText } from "../Toolbar/Types/Blocks";
 import useModal from "../LinkEditor/useModal";
 import { LinkEditor } from "../LinkEditor/LinkEditor";
 import icons from "../../../../icons/editor";
@@ -48,8 +50,6 @@ import icons from "../../../../icons/editor";
 import { renderTypes } from "./Types";
 import styles from "./Toolbar.css"; // eslint-disable-line css-modules/no-unused-class
 
-
-const LowPriority = 1;
 
 function Divider() {
   return <div className={styles.divider} />;
@@ -85,7 +85,7 @@ const getScriptType = (selection) => {
   return "";
 };
 
-export default function ToolbarPlugin() {
+export default function ToolbarPlugin({ config }) {
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
   const [canUndo, setCanUndo] = useState(false);
@@ -320,30 +320,61 @@ export default function ToolbarPlugin() {
   const { toolbarItem, spaced, format, active } = styles;
 
   const linkClasses = classnames(styles.toolbarItem, { [styles.active]: isLink });
+  const allowedToolbarBlocks = config.map((item) => (item.type));
 
   return (
     <div ref={toolbarRef} className={styles.toolbar}>
-      {renderTypes({ toolbarItem, spaced, format, active }, "block", blockType, onBlockClick)}
-      <Divider />
-      {renderBlockTypes(editor, blocks)}
-      <Divider />
-      <button
-        aria-label="Insert Link"
-        className={linkClasses}
-        disabled={!hasSelection}
-        onClick={insertLink}
-      >
-        <icons.Link className={styles.icon} />
-      </button>
-      <Divider />
-      {renderTypes({ toolbarItem, spaced, format, active }, "list", listType, onListClick)}
-      {renderTypes({ toolbarItem, spaced, format, active }, "script", scriptType, onScriptClick)}
-      <Divider />
-      {renderTypes({ toolbarItem, spaced, format, active }, "format", null, onFormat)}
-      <Divider />
-      {renderTypes({ toolbarItem, spaced, format, active, canUndo, canRedo }, "history", null, onHistoryClick)}
+      {allowedToolbarBlocks.includes(ToolbarItemType.Block) &&
+      renderTypes(config, { toolbarItem, spaced, format, active }, ToolbarItemType.Block, blockType, onBlockClick)}
+
+      {allowedToolbarBlocks.includes(ToolbarItemType.RichText) &&
+        <>
+          <Divider />
+          {renderRichText(editor, blocks, config)}
+        </>
+      }
+
+      {allowedToolbarBlocks.includes(ToolbarItemType.Link) && <>
+        <Divider />
+        <button
+          aria-label="Insert Link"
+          className={linkClasses}
+          disabled={!hasSelection}
+          onClick={insertLink}
+        >
+          <icons.Link className={styles.icon} />
+        </button>
+      </>}
+      {allowedToolbarBlocks.includes(ToolbarItemType.List) &&
+      <>
+        <Divider />
+        {renderTypes(config, { toolbarItem, spaced, format, active }, ToolbarItemType.List, listType, onListClick)}
+      </>}
+      {allowedToolbarBlocks.includes(ToolbarItemType.Script) &&
+
+      <>
+        {renderTypes(
+          config,
+          { toolbarItem, spaced, format, active },
+          ToolbarItemType.Script, scriptType,
+          onScriptClick)}
+        <Divider />
+      </>
+      }
+
+      {allowedToolbarBlocks.includes(ToolbarItemType.Format) &&
+      <>
+        {renderTypes(config, { toolbarItem, spaced, format, active }, ToolbarItemType.Format, null, onFormat)}
+        <Divider />
+      </>}
+      {allowedToolbarBlocks.includes(ToolbarItemType.History) &&
+      renderTypes(config,
+        { toolbarItem, spaced, format, active, canUndo, canRedo },
+        ToolbarItemType.History, null, onHistoryClick)}
       {modal}
     </div>
   );
 }
 
+ToolbarPlugin.propTypes = { config: PropTypes.any };
+ToolbarPlugin.defaultProps = { config: DefaultToolbarConfig };

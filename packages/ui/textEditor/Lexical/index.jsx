@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -20,10 +21,13 @@ import { $generateNodesFromDOM, $generateHtmlFromNodes } from "@lexical/html";
 import {
   $getRoot,
   $getSelection,
+  BLUR_COMMAND,
+  FOCUS_COMMAND,
 } from "lexical";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import { mergeRegister } from "@lexical/utils";
 
-
+import { LowPriority, DefaultToolbarConfig } from "./constants";
 import ToolbarPlugin from "./plugins/Toolbar/ToolbarPlugin";
 import { WarningPlugin } from "./plugins/Warning";
 import DefaultTheme from "./themes/DefaultTheme";
@@ -33,7 +37,7 @@ import styles from "./editor.css"; // eslint-disable-line css-modules/no-unused-
 const DEFAULT_MAX_TEXT_LENGTH = 10000;
 const DEFAULT_MIN_TEXT_LENGTH = 5000;
 
-const editorConfig = {
+const defaultConfig = {
   // The editor theme
   theme: DefaultTheme,
   // Handling of errors during update
@@ -56,16 +60,26 @@ const editorConfig = {
   ],
 };
 
-export default function TextEditor(props) {
+export default function EditorContainer(props) {
+  const { disabled } = props;
+
   return (
-    <LexicalComposer initialConfig={editorConfig} >
+    <LexicalComposer initialConfig={ { ...defaultConfig, editable: !disabled } } >
       <Editor {...props} />
     </LexicalComposer>
   );
 }
 
 const Editor = (props) => {
-  const { value, minTextLength, maxTextLength } = props;
+  const {
+    onBlur,
+    onFocus,
+    value,
+    minTextLength,
+    maxTextLength,
+    className,
+    toolbarConfig,
+  } = props;
 
   const [editor] = useLexicalComposerContext();
   const [contentLength, setContentLength] = useState(value.length);
@@ -85,8 +99,25 @@ const Editor = (props) => {
     });
   }, [editor]);
 
+  useLayoutEffect(() =>
+    mergeRegister(
+      editor.registerCommand(FOCUS_COMMAND, () => {
+        if (typeof onFocus === "function") {
+          onFocus(event);
+        }
+      }, LowPriority),
+      editor.registerCommand(BLUR_COMMAND, (event) => {
+        if (typeof onBlur === "function") {
+          onBlur(event);
+        }
+      }, LowPriority),
+    )
+  , [editor]);
+
+  const editorClasses = classnames(styles.container, className);
+
   return (<>
-    <div className={styles.container} data-id="editor-content-editable" >
+    <div className={editorClasses} data-id="editor-content-editable" >
       <RichTextPlugin
         ErrorBoundary={LexicalErrorBoundary}
         contentEditable={<ContentEditable className={styles.input} />}
@@ -112,10 +143,17 @@ const Editor = (props) => {
       <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
       <ListPlugin />
       <LinkPlugin />
-      <ToolbarPlugin props={props} />
+      <ToolbarPlugin config={toolbarConfig} />
     </div>
     <WarningPlugin contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
   </>);
+};
+
+EditorContainer.propTypes = {
+  /**
+    Disables the editor.
+  */
+  disabled: PropTypes.bool,
 };
 
 Editor.propTypes = {
@@ -129,24 +167,21 @@ Editor.propTypes = {
   /**
     Optional class to append to the text editor wrapper node.
   */
-  className: PropTypes.string, //eslint-disable-line
-  /**
-    Disables the editor.
-  */
-  disabled: PropTypes.bool, //eslint-disable-line
+  className: PropTypes.string,
+
   /**
     Identify the editor through a unique field name. Will be passed to the `onChange` function as the first argument.
   */
-  name: PropTypes.string, //eslint-disable-line
-  id: PropTypes.string, //eslint-disable-line
+  id: PropTypes.string,
   /**
     Maximum number of characters for the editor text value. Includes markup.
   */
-  maxTextLength: PropTypes.number, //eslint-disable-line
+  maxTextLength: PropTypes.number,
   /**
     Minimum number of characters for the editor text value. Includes markup.
   */
-  minTextLength: PropTypes.number, //eslint-disable-line
+  minTextLength: PropTypes.number,
+  name: PropTypes.string,
   /**
     Placeholder text for the editor.
   */
@@ -154,7 +189,7 @@ Editor.propTypes = {
   /**
     Configuration options for the editor toolbar.
   */
-  toolbarConfig: PropTypes.array, //eslint-disable-line
+  toolbarConfig: PropTypes.array,
   /**
     Editor text value.
   */
@@ -162,16 +197,15 @@ Editor.propTypes = {
   /**
     Callback called when the editor looses focus.
   */
-  onBlur: PropTypes.func, //eslint-disable-line
+  onBlur: PropTypes.func,
   /**
     Callback called when the editor gains focus.
   */
-  onFocus: PropTypes.func, //eslint-disable-line
+  onFocus: PropTypes.func,
 };
 
 Editor.defaultProps = {
   className: undefined,
-  disabled: false,
   placeholder: "",
   fieldName: "",
   maxTextLength: DEFAULT_MAX_TEXT_LENGTH,
@@ -179,5 +213,9 @@ Editor.defaultProps = {
   value: "",
   onBlur: undefined,
   onFocus: undefined,
-  toolbarConfig: [],
+  toolbarConfig: DefaultToolbarConfig,
+  name: "text-editor",
+  id: "",
 };
+
+EditorContainer.defaultProps = { disabled: false };
