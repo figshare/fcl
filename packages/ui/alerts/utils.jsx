@@ -11,7 +11,7 @@ const defaultOptions = {
 
 export function pushAlert(options = {}) {
   const config = { ...defaultOptions, ...options };
-  const { type, channel, content, persistent, identifier, timeout, attributes } = config;
+  const { type, channel, content, persistent, identifier, timeout, title, attributes } = config;
 
   const event = new CustomEvent("form-alerts:message", {
     detail: {
@@ -24,6 +24,7 @@ export function pushAlert(options = {}) {
         content,
         persistent,
         attributes,
+        title,
       },
     },
   });

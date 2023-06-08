@@ -39,13 +39,17 @@ export class Alerts extends React.PureComponent {
     */
     isFixed: bool,
     /**
+      * Optional flag to show alerts as a toaster.
+    */
+    isToast: bool,
+    /**
       * Optional flag to hide Alert `type` icons.
       * If true, content will also be visually centered.
     */
     noTypeIcon: bool,
   }
 
-  static defaultProps = { id: "global-alerts", className: undefined, isFixed: false, noTypeIcon: false }
+  static defaultProps = { id: "global-alerts", className: undefined, isFixed: false, isToast: false, noTypeIcon: false }
 
   state = { messages: [], id: this.props.id }
 
@@ -59,7 +63,7 @@ export class Alerts extends React.PureComponent {
 
   render() {
     const { id, messages } = this.state;
-    const { className, isFixed, noTypeIcon } = this.props;
+    const { className, isFixed, isToast, noTypeIcon } = this.props;
 
     const empty = !messages?.length;
 
@@ -72,6 +76,7 @@ export class Alerts extends React.PureComponent {
             {
               [styles.isFixed]: isFixed,
               [styles.noTypeIcon]: noTypeIcon,
+              [styles.isToast]: isToast,
             },
             className,
           )
@@ -85,26 +90,47 @@ export class Alerts extends React.PureComponent {
   }
 
   renderAlert = (alert) => {
-    const { id, type, content, attributes = NO_ATTRIBUTES } = alert;
+    const { id, type, content, title, attributes = NO_ATTRIBUTES } = alert;
     const Icon = IconsByType[type];
+    const withTitle = !!title;
+    const renderer = () => {
+      if (withTitle) {
+        return this.renderContentAndTitle(Icon, title, content);
+      }
+
+      return this.renderContentOnly(Icon, content);
+    };
 
     return (
       <Alert
         key={id}
-        className={`${styles.alert} ${styles[type]}`}
+        className={classnames(styles.alert, styles[type], { [styles.withTitle]: withTitle })}
         data-id={`form-alert:${this.state.id}-${id}`}
         variant={type}
         {...attributes}
         data-alert-type={type}
       >
-        {() => (<>
-          <div className={styles.alertIcon}><Icon /></div>
-          <div className={styles.alertText}>{content}</div>
-          {this.renderCloseBtn(alert)}
-        </>)}
+        {renderer}
       </Alert>
     );
   }
+
+  renderContentOnly = (Icon, content) => (<>
+    <div className={styles.alertIcon}><Icon /></div>
+    <div className={styles.alertText}>{content}</div>
+    {this.renderCloseBtn(alert)}
+  </>);
+
+  renderContentAndTitle = (Icon, title, content) => (<>
+    <div className={styles.alertHeader}>
+      <div className={styles.alertTitle}>
+        <div className={styles.alertIcon}><Icon /></div>
+        <b>{title}</b>
+      </div>
+      {this.renderCloseBtn(alert)}
+    </div>
+    <div className={styles.alertText}>{content}</div>
+  </>);
 
   renderCloseBtn = (alert) => {
     const { persistent } = alert;
