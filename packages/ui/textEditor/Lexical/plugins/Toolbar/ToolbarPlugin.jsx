@@ -8,6 +8,7 @@ import {
   SELECTION_CHANGE_COMMAND,
   CLICK_COMMAND,
   FORMAT_TEXT_COMMAND,
+  PASTE_COMMAND,
   $getSelection,
   $isRangeSelection,
   $createParagraphNode,
@@ -260,44 +261,59 @@ export default function ToolbarPlugin() {
     editor.dispatchCommand(commands[type]);
   });
 
-  const onClearFormat = () => useCallback(() => {
-    activeEditor.update(() => {
-      const selection = $getSelection();
-      if ($isRangeSelection(selection)) {
-        const { anchor } = selection;
-        const { focus } = selection;
-        const nodes = selection.getNodes();
+  const onFormat = (type) => useCallback(async() => {
+    if (type === "clearFormatting") {
+      activeEditor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          const { anchor } = selection;
+          const { focus } = selection;
+          const nodes = selection.getNodes();
 
-        if (anchor.key === focus.key && anchor.offset === focus.offset) {
-          return;
-        }
-
-        nodes.forEach((node, idx) => {
-          // We split the first and last node by the selection
-          // So that we don't format unselected text inside those nodes
-          if ($isTextNode(node)) {
-            if (idx === 0 && anchor.offset !== 0) {
-              node = node.splitText(anchor.offset)[1] || node; //eslint-disable-line
-            }
-            if (idx === nodes.length - 1) {
-              node = node.splitText(focus.offset)[0] || node; //eslint-disable-line
-            }
-
-            if (node.__style !== "") {
-              node.setStyle("");
-            }
-            if (node.__format !== 0) {
-              node.setFormat(0);
-              $getNearestBlockElementAncestorOrThrow(node).setFormat("");
-            }
-          } else if ($isHeadingNode(node) || $isQuoteNode(node)) {
-            node.replace($createParagraphNode(), true);
-          } else if ($isDecoratorBlockNode(node)) {
-            node.setFormat("");
+          if (anchor.key === focus.key && anchor.offset === focus.offset) {
+            return;
           }
-        });
-      }
-    });
+
+          nodes.forEach((node, idx) => {
+            // We split the first and last node by the selection
+            // So that we don't format unselected text inside those nodes
+            if ($isTextNode(node)) {
+              if (idx === 0 && anchor.offset !== 0) {
+                node = node.splitText(anchor.offset)[1] || node; //eslint-disable-line
+              }
+              if (idx === nodes.length - 1) {
+                node = node.splitText(focus.offset)[0] || node; //eslint-disable-line
+              }
+
+              if (node.__style !== "") {
+                node.setStyle("");
+              }
+              if (node.__format !== 0) {
+                node.setFormat(0);
+                $getNearestBlockElementAncestorOrThrow(node).setFormat("");
+              }
+            } else if ($isHeadingNode(node) || $isQuoteNode(node)) {
+              node.replace($createParagraphNode(), true);
+            } else if ($isDecoratorBlockNode(node)) {
+              node.setFormat("");
+            }
+          });
+        }
+      });
+    } else {
+      const text = await navigator.clipboard.readText();
+
+      const dataTransfer = new DataTransfer();
+      dataTransfer.setData("text/plain", text);
+
+      const event = new ClipboardEvent("paste", {
+        bubbles: true,
+        cancelable: true,
+        clipboardData: dataTransfer,
+      });
+
+      activeEditor.dispatchCommand(PASTE_COMMAND, event);
+    }
   }, [activeEditor]);
 
   // CLASSNAMES
@@ -323,7 +339,7 @@ export default function ToolbarPlugin() {
       {renderTypes({ toolbarItem, spaced, format, active }, "list", listType, onListClick)}
       {renderTypes({ toolbarItem, spaced, format, active }, "script", scriptType, onScriptClick)}
       <Divider />
-      {renderTypes({ toolbarItem, spaced, format, active }, "format", null, onClearFormat)}
+      {renderTypes({ toolbarItem, spaced, format, active }, "format", null, onFormat)}
       <Divider />
       {renderTypes({ toolbarItem, spaced, format, active, canUndo, canRedo }, "history", null, onHistoryClick)}
       {modal}
