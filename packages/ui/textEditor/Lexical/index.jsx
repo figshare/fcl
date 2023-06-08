@@ -151,13 +151,6 @@ const Editor = (props) => {
 
 EditorContainer.propTypes = {
   /**
-    Disables the editor.
-  */
-  disabled: PropTypes.bool,
-};
-
-Editor.propTypes = {
-  /**
     Callback called when the editor contents are edited or changed.
     Called with the new `value` as the first argument by default.
     If `fieldName` is specified, the `fieldName` will be the first argument,
@@ -169,6 +162,10 @@ Editor.propTypes = {
   */
   className: PropTypes.string,
 
+  /**
+    Disables the editor.
+  */
+  disabled: PropTypes.bool,
   /**
     Identify the editor through a unique field name. Will be passed to the `onChange` function as the first argument.
   */
@@ -188,8 +185,16 @@ Editor.propTypes = {
   placeholder: PropTypes.string,
   /**
     Configuration options for the editor toolbar.
+    Ex: For adding the Bold button, the config object would be something like:
+
+    .[{ name: "bold", type: "richText" }].
+
+    The full list of supported items can be found in ./constants
   */
-  toolbarConfig: PropTypes.array,
+  toolbarConfig: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+  })),
   /**
     Editor text value.
   */
@@ -202,15 +207,17 @@ Editor.propTypes = {
     Callback called when the editor gains focus.
   */
   onFocus: PropTypes.func,
+
 };
 
-Editor.defaultProps = {
+EditorContainer.defaultProps = {
   className: undefined,
   placeholder: "",
   fieldName: "",
   maxTextLength: DEFAULT_MAX_TEXT_LENGTH,
   minTextLength: DEFAULT_MIN_TEXT_LENGTH,
   value: "",
+  disabled: false,
   onBlur: undefined,
   onFocus: undefined,
   toolbarConfig: DefaultToolbarConfig,
@@ -218,4 +225,4 @@ Editor.defaultProps = {
   id: "",
 };
 
-EditorContainer.defaultProps = { disabled: false };
+Editor.propTypes = EditorContainer.propTypes; // eslint-disable-line
