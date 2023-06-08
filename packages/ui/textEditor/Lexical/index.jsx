@@ -117,7 +117,7 @@ const Editor = (props) => {
   const editorClasses = classnames(styles.container, className);
 
   return (<>
-    <div className={editorClasses} data-id="editor-content-editable" >
+    <div className={editorClasses}>
       <RichTextPlugin
         ErrorBoundary={LexicalErrorBoundary}
         contentEditable={<ContentEditable className={styles.input} />}

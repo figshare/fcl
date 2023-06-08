@@ -17,14 +17,12 @@ export default function useModal() {
       return null;
     }
 
-    const { title, content, isVisible } = modalContent;
+    const { content, isVisible } = modalContent;
 
     return (
       <Overlay
-        classNameContainer={styles.editorOverlayContainer}
+        className={styles.editorOverlay}
         isVisible={isVisible}
-        portalNode='div[data-id="editor-content-editable"]'
-        title={title}
         onClose={onClose}
       >
         {content}
@@ -34,14 +32,12 @@ export default function useModal() {
 
   const showModal = useCallback(
     (
-      title,
       getContent,
       isVisible = true,
     ) => {
       setModalContent({
         isVisible,
         content: getContent(onClose),
-        title,
       });
     },
     [onClose],

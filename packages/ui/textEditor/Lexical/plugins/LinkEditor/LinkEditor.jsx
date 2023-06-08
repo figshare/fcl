@@ -1,14 +1,16 @@
 import { $getSelection, $isRangeSelection } from "lexical";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import * as React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 import { Button } from "@figshare/fcl/button";
+import { OverlayContent, OverlayFooter } from "@figshare/fcl/overlay";
+import { OverlayContext } from "@figshare/fcl/overlay/overlay";
+import Input from "@figshare/fcl/input";
+import GoToLinkLarge from "@figshare/fcl/icons/goToLink/large";
+import LinkUnlinked from "@figshare/fcl/icons/link/unlinked";
 
 import { getSelectedNode, sanitizeUrl } from "./utils";
-import OpenLinkIcon from "./components/OpenLinkIcon";
-import UnlinkIcon from "./components/UnlinkIcon";
 import styles from "./LinkEditor.css";
 
 
@@ -16,10 +18,10 @@ export function LinkEditor({
   activeEditor,
   onClose,
 }) {
-  const editorRef = useRef(null);
-  const inputRef = useRef(null);
+  const context = useContext(OverlayContext);
   const [linkUrl, setLinkUrl] = useState("");
   const [editedLinkUrl, setEditedLinkUrl] = useState("");
+  const [textSelection, setTextSelection] = useState("");
   const [isEditMode, setEditMode] = useState(false);
 
   const title = isEditMode ? "Edit link" : "Add link";
@@ -30,6 +32,9 @@ export function LinkEditor({
     if ($isRangeSelection(selection)) {
       const node = getSelectedNode(selection);
       const parent = node.getParent();
+
+      setTextSelection(selection.getTextContent());
+
       if ($isLinkNode(parent)) {
         setLinkUrl(parent.getURL());
       } else if ($isLinkNode(node)) {
@@ -54,40 +59,10 @@ export function LinkEditor({
     }
   }, [linkUrl]);
 
-  useEffect(() => {
-    if (isEditMode && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isEditMode]);
-
-  const renderOpenLinkButton = () => {
-    if (!isEditMode) {
-      return null;
-    }
-
-    return (
-      <Button className={styles.buttonOpenLink} href={editedLinkUrl || linkUrl} target="_blank">
-        <OpenLinkIcon className={styles.icon} /> Open link
-      </Button>
-    );
-  };
-
   const onUnlink = () => {
     activeEditor?.dispatchCommand(TOGGLE_LINK_COMMAND, null);
     setEditedLinkUrl("");
     onClose();
-  };
-
-  const renderUnlinkButton = () => {
-    if (!isEditMode) {
-      return null;
-    }
-
-    return (
-      <Button className={styles.buttonUnlink} onClick={onUnlink}>
-        <UnlinkIcon className="icon" /> Unlink
-      </Button>
-    );
   };
 
   const onURLChange = (event) => {
@@ -100,8 +75,10 @@ export function LinkEditor({
   };
 
   const onSave = () => {
-    activeEditor?.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(editedLinkUrl));
-    setLinkUrl(editedLinkUrl);
+    if (editedLinkUrl) {
+      activeEditor?.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(editedLinkUrl));
+      setLinkUrl(editedLinkUrl);
+    }
     onClose();
   };
 
@@ -115,40 +92,66 @@ export function LinkEditor({
     }
   };
 
+  const overlayId = context?.id ?? 0;
+  const ariaTitle = `dialog-${overlayId}-title`;
+
   return (
-    <div ref={editorRef} className={styles.modalShadow}>
-      <div className={styles.modalContainer}>
-        <div>
-          <span className={styles.title}>{title}</span>
-          <div className={styles.linkContainer}>
-            <span className={styles.linkLabel}>Link</span>
-            {renderOpenLinkButton()}
-          </div>
+    <>
+      <OverlayContent>
+        <div className={styles.header}>
+          <h1 className={styles.title} id={ariaTitle}>{title}</h1>
+          <Button
+            Icon={GoToLinkLarge}
+            disabled={!isEditMode}
+            href={editedLinkUrl || linkUrl}
+            id="open-link-button"
+            target="_blank"
+            theme="secondaryAlt"
+          >
+            Open link
+          </Button>
         </div>
-        <input
-          ref={inputRef}
-          className={styles.input}
-          placeholder="add link url here"
-          type="text"
-          value={editedLinkUrl ? editedLinkUrl : linkUrl}
-          onChange={onURLChange}
-          onKeyDown={monitorInputInteraction}
-        />
-        <div className={styles.buttonsContainer}>
-          {renderUnlinkButton()}
-          <Button className={styles.buttonCancel} onClick={onCancel}>
+        <div className={styles.section}>
+          <span className={styles.label}>Text</span>
+          {textSelection}
+        </div>
+        <div className={styles.section}>
+          <span className={styles.label}>Link</span>
+          <Input
+            className={styles.input}
+            placeholder="Add link URL here"
+            type="text"
+            value={editedLinkUrl ? editedLinkUrl : linkUrl}
+            onChange={onURLChange}
+            onKeyDown={monitorInputInteraction}
+          />
+        </div>
+      </OverlayContent>
+      <OverlayFooter className={styles.buttonsContainer}>
+        <Button
+          Icon={LinkUnlinked}
+          disabled={!isEditMode}
+          id="unlink-button"
+          theme="tertiary"
+          onClick={onUnlink}
+        >
+          Unlink
+        </Button>
+        <div>
+          <Button id="cancel-button" theme="secondaryAlt" onClick={onCancel}>
             Cancel
           </Button>
           <Button
-            className={classnames(styles.buttonSave, { [styles.focusBtn]: !hasMinimumLength })}
+            className={styles.saveButton}
             disabled={!hasMinimumLength}
+            theme="primary"
             onClick={onSave}
           >
-            Save
+            Save changes
           </Button>
         </div>
-      </div>
-    </div>
+      </OverlayFooter>
+    </>
   );
 }
 

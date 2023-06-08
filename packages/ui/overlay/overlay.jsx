@@ -37,10 +37,6 @@ export default class Overlay extends Component {
      */
     className: PropTypes.string,
     /**
-      Optionally append a custom class to the Overlay container.
-     */
-    classNameContainer: PropTypes.string,
-    /**
       If set to `true`, when the `Overlay` is opened,
       it will move focus to the first focusable element it contains.
      */
@@ -92,7 +88,6 @@ export default class Overlay extends Component {
 
   static defaultProps = {
     className: undefined,
-    classNameContainer: undefined,
     focusIn: true,
     id: undefined,
     isVisible: true,
@@ -141,7 +136,7 @@ export default class Overlay extends Component {
       return null;
     }
 
-    const { classNameContainer, variant, background, overlayBackground, returnFocus, focusIn, status, trapFocus }
+    const { variant, background, overlayBackground, returnFocus, focusIn, status, trapFocus }
       = this.props;
     const overlayStyle = { zIndex: OverlayStack.getZIndex(this.id) };
     const context = {
@@ -160,7 +155,7 @@ export default class Overlay extends Component {
       <RenderInPortal portalNode={portalNode}>
         <aside
           ref={this.setOverlayRef}
-          className={classnames(styles.overlay, styles[overlayBackground], classNameContainer)}
+          className={classnames(styles.overlay, styles[overlayBackground])}
           data-node-id={`overlay-background-for-${this.id}`}
           role="presentation"
           style={overlayStyle}
