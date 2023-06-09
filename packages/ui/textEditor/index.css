@@ -36,6 +36,10 @@
   box-shadow: inset 0 1px 4px rgba(135, 134, 134, 0.2);
 }
 
+.titleEditorContainer {
+  min-height: calc(12 * var(--gridSize));
+}
+
 .editorContainer::-webkit-resizer {
   display: none;
 }
@@ -49,6 +53,10 @@
   min-height: calc(30 * var(--gridSize));
 
   cursor: text;
+}
+
+.titleEditor {
+  min-height: calc(6 * var(--gridSize));
 }
 
 :global(.DraftEditor-root) {

@@ -61,6 +61,10 @@ export default class TextEditor extends React.Component {
      */
     fieldName: PropTypes.string,
     /**
+      Optional flag to show the editor with styles for the title.
+     */
+    isTitleEditor: PropTypes.bool,
+    /**
       Maximum number of characters for the editor text value. Includes markup.
      */
     maxTextLength: PropTypes.number,
@@ -92,6 +96,7 @@ export default class TextEditor extends React.Component {
 
   static defaultProps = {
     className: undefined,
+    isTitleEditor: false,
     disabled: false,
     placeholder: "",
     fieldName: "",
@@ -128,7 +133,16 @@ export default class TextEditor extends React.Component {
   decorator = new CompositeDecorator(decorators);
 
   render() {
-    const { className, disabled, placeholder, minTextLength, toolbarConfig, onBlur, onFocus } = this.props;
+    const {
+      className,
+      isTitleEditor,
+      disabled,
+      placeholder,
+      minTextLength,
+      toolbarConfig,
+      onBlur,
+      onFocus,
+    } = this.props;
     const { editorState, urlValue, showURLInput } = this.state;
     const editorStyle = {
       height: "calc(100% - 80px)",
@@ -139,9 +153,13 @@ export default class TextEditor extends React.Component {
     return (
       <div className={className}>
         <div className={styles.componentContainer}>
-          <div className={classnames(styles.editorContainer, { [styles.disabled]: disabled })}>
+          <div
+            className={classnames(styles.editorContainer,
+              { [styles.disabled]: disabled },
+              { [styles.titleEditorContainer]: isTitleEditor })}
+          >
             <div
-              className={styles.editor}
+              className={classnames(styles.editor, { [styles.titleEditor]: isTitleEditor })}
               role="presentation"
               style={editorStyle}
               onClick={this.onClickEditor}
