@@ -1,0 +1,22 @@
+@media screen and (prefers-reduced-motion: reduce) {
+  .animate {
+    margin: 0 calc(6 * var(--gridSize));
+
+    animation: none;
+    animation-direction: reverse;
+  }
+}
+
+.animate {
+  animation: spin 1s linear infinite;
+  animation-direction: reverse;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner {
+  margin: auto;
+}
