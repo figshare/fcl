@@ -63,7 +63,7 @@ export default class TextEditor extends React.Component {
     /**
       Optional flag to show the editor with styles for the title.
      */
-    isTitleEditor: PropTypes.bool,
+    isSingleRow: PropTypes.bool,
     /**
       Maximum number of characters for the editor text value. Includes markup.
      */
@@ -96,7 +96,7 @@ export default class TextEditor extends React.Component {
 
   static defaultProps = {
     className: undefined,
-    isTitleEditor: false,
+    isSingleRow: false,
     disabled: false,
     placeholder: "",
     fieldName: "",
@@ -135,7 +135,7 @@ export default class TextEditor extends React.Component {
   render() {
     const {
       className,
-      isTitleEditor,
+      isSingleRow,
       disabled,
       placeholder,
       minTextLength,
@@ -156,10 +156,10 @@ export default class TextEditor extends React.Component {
           <div
             className={classnames(styles.editorContainer,
               { [styles.disabled]: disabled },
-              { [styles.titleEditorContainer]: isTitleEditor })}
+              { [styles.titleEditorContainer]: isSingleRow })}
           >
             <div
-              className={classnames(styles.editor, { [styles.titleEditor]: isTitleEditor })}
+              className={classnames(styles.editor, { [styles.titleEditor]: isSingleRow })}
               role="presentation"
               style={editorStyle}
               onClick={this.onClickEditor}
