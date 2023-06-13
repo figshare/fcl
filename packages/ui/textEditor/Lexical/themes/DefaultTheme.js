@@ -1,3 +1,6 @@
+import "./theme.css";
+
+
 const defaultTheme = {
   ltr: "ltr",
   rtl: "rtl",

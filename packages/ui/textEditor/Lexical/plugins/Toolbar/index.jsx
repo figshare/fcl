@@ -66,7 +66,7 @@ export default function ToolbarPlugin({ config }) {
   }, [editor]);
 
   const insertLink = useCallback(() => {
-    showModal("Insert Link", (onClose) => (
+    showModal((onClose) => (
       <LinkEditor
         activeEditor={activeEditor}
         onClose={onClose}
