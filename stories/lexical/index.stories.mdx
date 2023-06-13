@@ -3,8 +3,6 @@ import {useState} from 'react';
 
 import Editor from "@figshare/fcl/textEditor/Lexical";
 
-import styles from "./index.stories.css";
-
 export const canvasStyle = {
   display: "flex",
   flexDirection: "column",
@@ -72,7 +70,6 @@ class MyTextEditor extends React.Component {
   <div style={canvasStyle}>
     <p>Basic - empty</p>
     <Editor
-      className={styles.editorWrapper}
       placeholder="Type a text..."
       onChange={() => {}}
     />
