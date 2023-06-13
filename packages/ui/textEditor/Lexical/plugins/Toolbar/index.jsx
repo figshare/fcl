@@ -196,5 +196,5 @@ export default function ToolbarPlugin({ config }) {
   );
 }
 
-ToolbarPlugin.propTypes = { config: PropTypes.shape };
+ToolbarPlugin.propTypes = { config: PropTypes.array };
 ToolbarPlugin.defaultProps = { config: DefaultToolbarConfig };

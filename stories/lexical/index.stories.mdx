@@ -1,5 +1,5 @@
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 
 import Editor from "@figshare/fcl/textEditor/Lexical";
 
@@ -40,8 +40,13 @@ Users can mark portions or the whole content as paragraphs, headings or emphasis
   }}
 >
   {() => {
-      const [text, setText] = useState("");
-      return <Editor onChange={() => {}} value="test default value" />;
+      const [text, setText] = useState("<b>Initial text or markup</b>");
+      useEffect(() => {
+        console.log("[Text]:", text);
+      },[text]);
+      return <Editor onChange={(e) => {
+        setText(e.target.value);
+      }} value={text} />;
   }}
 </Story>
 
@@ -53,8 +58,10 @@ import Editor from "@figshare/fcl/textEditor";
 class MyTextEditor extends React.Component {
   render() {
     return (
-      <Editor onChange={(newValue) => {}} />
-      <Editor fieldName="description" onChange={(fieldName, newValue) => {}} />
+      const [text, setText] = useState("<b>Initial text or markup</b>");
+      return <Editor onChange={(e) => {
+        setText(e.target.value);
+      }} value={text} />;
     );
   }
 }

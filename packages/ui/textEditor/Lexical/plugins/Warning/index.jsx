@@ -13,8 +13,7 @@ export const WarningPlugin = ({ contentLength, minLength, maxLength }) => {
 
   return (
     <div className={styles.editorTextLength}>
-      <span>{contentLength}</span>
-      <span>{` out of a total of ${maxLength} characters (includes html tags)`}</span>
+      <span>{`${contentLength} out of a total of ${maxLength} characters (includes html tags)`}</span>
     </div>
   );
 };

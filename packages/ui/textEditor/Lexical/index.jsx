@@ -20,7 +20,6 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { $generateNodesFromDOM, $generateHtmlFromNodes } from "@lexical/html";
 import {
   $getRoot,
-  $getSelection,
   BLUR_COMMAND,
   FOCUS_COMMAND,
 } from "lexical";
@@ -96,15 +95,12 @@ const Editor = (props) => {
       const parser = new DOMParser();
       const dom = parser.parseFromString(value, "text/html");
       const nodes = $generateNodesFromDOM(editor, dom);
-
       // Select the root
-      $getRoot().select();
+      const root = $getRoot().select();
 
-      // // Insert them at a selection.
-      const selection = $getSelection();
-      selection.insertNodes(nodes);
+      root.insertNodes(nodes);
     });
-  }, [editor]);
+  }, []);
 
   useEffect(() => {
     callbacks.current.onChange = onChange;
@@ -115,12 +111,12 @@ const Editor = (props) => {
   useLayoutEffect(() =>
     mergeRegister(
       editor.registerCommand(FOCUS_COMMAND, () => {
-        if (typeof onFocus === "function") {
+        if (typeof callbacks.current.onFocus === "function") {
           onFocus(event);
         }
       }, LowPriority),
       editor.registerCommand(BLUR_COMMAND, (event) => {
-        if (typeof onBlur === "function") {
+        if (typeof callbacks.current.onBlur === "function") {
           onBlur(event);
         }
       }, LowPriority),
@@ -129,15 +125,16 @@ const Editor = (props) => {
 
   const handleChange = useCallback((editorState) => {
     editorState.read(() => {
-      if (typeof onChange === "function") {
+      if (typeof callbacks.current.onChange === "function") {
         const serializedHTML = $generateHtmlFromNodes(editor);
-        onChange({ target: { value: serializedHTML, id, name } });
+
+        callbacks.current.onChange({ target: { value: serializedHTML, id, name } });
 
         const strippedHTML = stripHtmlTags(serializedHTML);
         setContentLength(strippedHTML.length);
       }
     });
-  }, [editor, onChange, name, id]);
+  }, [editor, callbacks, name, id]);
 
   const editorClasses = classnames(styles.container, className);
 
@@ -150,7 +147,7 @@ const Editor = (props) => {
       />
       <HistoryPlugin />
       <AutoFocusPlugin />
-      <OnChangePlugin onChange={handleChange} />
+      <OnChangePlugin ignoreSelectionChange={true} onChange={handleChange} />
 
       <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
       <ListPlugin />
