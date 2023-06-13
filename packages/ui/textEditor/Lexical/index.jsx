@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect, useCallback } from "react";
+import React, { useEffect, useState, useLayoutEffect, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -88,6 +88,9 @@ const Editor = (props) => {
   const [editor] = useLexicalComposerContext();
   const [contentLength, setContentLength] = useState(value.length);
 
+  const callbacks = useRef({ onChange, onBlur, onFocus });
+
+
   useEffect(() => {
     editor.update(() => {
       const parser = new DOMParser();
@@ -103,6 +106,12 @@ const Editor = (props) => {
     });
   }, [editor]);
 
+  useEffect(() => {
+    callbacks.current.onChange = onChange;
+    callbacks.current.onFocus = onFocus;
+    callbacks.current.onBlur = onBlur;
+  }, [callbacks, onChange, onBlur, onFocus]);
+
   useLayoutEffect(() =>
     mergeRegister(
       editor.registerCommand(FOCUS_COMMAND, () => {
@@ -116,7 +125,7 @@ const Editor = (props) => {
         }
       }, LowPriority),
     )
-  , [editor]);
+  , [editor, callbacks]);
 
   const handleChange = useCallback((editorState) => {
     editorState.read(() => {
@@ -155,9 +164,7 @@ const Editor = (props) => {
 EditorContainer.propTypes = {
   /**
     Callback called when the editor contents are edited or changed.
-    Called with the new `value` as the first argument by default.
-    If `fieldName` is specified, the `fieldName` will be the first argument,
-    followed by the new `value`.
+    Called with: target: { value: serializedHTML, id, name }
   */
   onChange: PropTypes.func.isRequired,
   /**
@@ -216,7 +223,6 @@ EditorContainer.propTypes = {
 EditorContainer.defaultProps = {
   className: undefined,
   placeholder: "",
-  fieldName: "",
   maxTextLength: DEFAULT_MAX_TEXT_LENGTH,
   minTextLength: DEFAULT_MIN_TEXT_LENGTH,
   value: "",
@@ -224,7 +230,7 @@ EditorContainer.defaultProps = {
   onBlur: undefined,
   onFocus: undefined,
   toolbarConfig: DefaultToolbarConfig,
-  name: "text-editor",
+  name: undefined,
   id: "",
 };
 
