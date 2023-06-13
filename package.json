@@ -108,10 +108,8 @@
   },
   "dependencies": {
     "@figshare/fcl": "file:./packages/ui",
-    "@lexical/react": "^0.10.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "core-js": "3.26.1",
-    "lexical": "^0.10.0",
     "regenerator-runtime": "0.13.11"
   }
 }
