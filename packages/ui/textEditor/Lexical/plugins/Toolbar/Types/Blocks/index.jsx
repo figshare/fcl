@@ -8,11 +8,12 @@ import icons from "../../../../../../icons/editor";
 import styles from "./Blocks.css";
 
 
-export const renderRichText = (editor, { isBold, isUnderline, isItalic, isStrikethrough }, config) => {
-  const boldClasses = classnames(styles.toolbarItem, { [styles.active]: isBold });
-  const italicClasses = classnames(styles.toolbarItem, { [styles.active]: isItalic });
-  const underlineClasses = classnames(styles.toolbarItem, { [styles.active]: isUnderline });
-  const strikeThroughClasses = classnames(styles.toolbarItem, { [styles.active]: isStrikethrough });
+export const renderRichText = (editor, config, editorSelection) => {
+  const boldClasses = classnames(styles.toolbarItem, { [styles.active]: editorSelection.hasFormat("bold") });
+  const italicClasses = classnames(styles.toolbarItem, { [styles.active]: editorSelection.hasFormat("italic") });
+  const underlineClasses = classnames(styles.toolbarItem, { [styles.active]: editorSelection.hasFormat("underline") });
+  const strikeThroughClasses = classnames(styles.toolbarItem,
+    { [styles.active]: editorSelection.hasFormat("strikethrough") });
 
   const { Bold, Strikethrough, Italic, Underline } = icons;
   const richTextItems = config.filter((item) => item.type === ToolbarItemType.RichText).map((item) => item.name);

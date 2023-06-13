@@ -1,3 +1,6 @@
+import { $isAtNodeEnd } from "@lexical/selection";
+
+
 const ToolbarSections = {
   block: {
     types: [
@@ -70,3 +73,37 @@ export const getToolbarMainSections = (config) => config.reduce((acc, item) => {
 
   return acc;
 }, {});
+
+export const stripHtmlTags = (html) => {
+  const regexp = /(<([^>]+)>)/gi;
+
+  return html.replace(regexp, "");
+};
+
+export const getScriptType = (selection) => {
+  if (selection.hasFormat("subscript")) {
+    return "subscript";
+  }
+
+  if (selection.hasFormat("superscript")) {
+    return "superscript";
+  }
+
+  return "";
+};
+
+export const getSelectedNode = (selection) => {
+  const { anchor } = selection;
+  const { focus } = selection;
+  const anchorNode = selection.anchor.getNode();
+  const focusNode = selection.focus.getNode();
+  if (anchorNode === focusNode) {
+    return anchorNode;
+  }
+  const isBackward = selection.isBackward();
+  if (isBackward) {
+    return $isAtNodeEnd(focus) ? anchorNode : focusNode;
+  }
+
+  return $isAtNodeEnd(anchor) ? focusNode : anchorNode;
+};

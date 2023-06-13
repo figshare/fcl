@@ -7,12 +7,8 @@ import icons from "../../../../../icons/editor";
 import styles from "./Types.css"; // eslint-disable-line css-modules/no-unused-class
 
 
-export const renderTypes = (config, toolbarStyles = {}, section, activeType, onClick) => {
+export const renderTypes = (config, toolbarStyles = {}, section, selection, onClick) => {
   const ToolbarSections = getToolbarMainSections(config);
-
-  const setWrapperClass = (type) => classnames(toolbarStyles.toolbarItem,
-    toolbarStyles.spaced, { [toolbarStyles.active]: activeType === type });
-
   const selectedToolbarSection = ToolbarSections[section];
 
   return selectedToolbarSection?.types.map((type) => {
@@ -23,16 +19,23 @@ export const renderTypes = (config, toolbarStyles = {}, section, activeType, onC
       return "";
     }
 
+    const handleClick = () => {
+      onClick(type);
+    };
+
+    const classNames = classnames(toolbarStyles.toolbarItem,
+      toolbarStyles.spaced, { [toolbarStyles.active]: selection?.hasFormat(type) });
+
     return (<div key={type}>
       <button
-        aria-label={selectedToolbarSection.names[activeType]}
-        className={setWrapperClass(type)}
-        onClick={onClick(type)}
+        aria-label={selectedToolbarSection.names[type]}
+        className={classNames}
+        data-control-group={"editor-toolbar-button"}
+        onClick={handleClick}
       >
         <Icon className={styles.icon} />
       </button>
     </div>);
-
   });
 };
 

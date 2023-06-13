@@ -1,11 +1,13 @@
-import { renderBlockTypes } from "./";
+import { DefaultToolbarConfig } from "../../../../constants";
+
+import { renderRichText } from "./";
 
 
 describe("Toolbar Blocks component", () => {
   const editor = jest.fn();
 
   it("renders the correct blocks", () => {
-    const renderedBlocks = renderBlockTypes(editor, {});
+    const renderedBlocks = renderRichText(editor, {}, DefaultToolbarConfig);
     const children = renderedBlocks.props?.children;
 
     expect(children).toHaveLength(4);
@@ -22,7 +24,7 @@ describe("Toolbar Blocks component", () => {
   });
 
   it("renders the active block based on the active prop", () => {
-    const renderedBlocks = renderBlockTypes(editor, { isBold: true });
+    const renderedBlocks = renderRichText(editor, { isBold: true }, DefaultToolbarConfig);
     const children = renderedBlocks.props?.children;
 
 

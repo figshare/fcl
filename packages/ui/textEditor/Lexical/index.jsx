@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState, useLayoutEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -27,8 +27,9 @@ import {
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
 
+import { stripHtmlTags } from "./utils";
 import { LowPriority, DefaultToolbarConfig } from "./constants";
-import ToolbarPlugin from "./plugins/Toolbar/ToolbarPlugin";
+import ToolbarPlugin from "./plugins/Toolbar";
 import { WarningPlugin } from "./plugins/Warning";
 import DefaultTheme from "./themes/DefaultTheme";
 import styles from "./editor.css"; // eslint-disable-line css-modules/no-unused-class
@@ -79,6 +80,9 @@ const Editor = (props) => {
     maxTextLength,
     className,
     toolbarConfig,
+    onChange,
+    id,
+    name,
   } = props;
 
   const [editor] = useLexicalComposerContext();
@@ -114,6 +118,18 @@ const Editor = (props) => {
     )
   , [editor]);
 
+  const handleChange = useCallback((editorState) => {
+    editorState.read(() => {
+      if (typeof onChange === "function") {
+        const serializedHTML = $generateHtmlFromNodes(editor);
+        onChange({ target: { value: serializedHTML, id, name } });
+
+        const strippedHTML = stripHtmlTags(serializedHTML);
+        setContentLength(strippedHTML.length);
+      }
+    });
+  }, [editor, onChange, name, id]);
+
   const editorClasses = classnames(styles.container, className);
 
   return (<>
@@ -125,20 +141,7 @@ const Editor = (props) => {
       />
       <HistoryPlugin />
       <AutoFocusPlugin />
-      <OnChangePlugin
-        onChange={(editorState) => {
-          editorState.read(() => {
-            const { onChange, id, name } = props;
-
-            if (typeof onChange === "function") {
-              const serializedHTML = $generateHtmlFromNodes(editor);
-              onChange({ target: { value: serializedHTML, id, name } });
-
-              setContentLength(serializedHTML.length);
-            }
-          });
-        }}
-      />
+      <OnChangePlugin onChange={handleChange} />
 
       <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
       <ListPlugin />
