@@ -1,7 +1,7 @@
 import { $isAtNodeEnd } from "@lexical/selection";
 
 
-const ToolbarSections = {
+export const ToolbarSections = {
   block: {
     types: [
       "h2",
@@ -16,6 +16,20 @@ const ToolbarSections = {
       paragraph: "P",
     },
   },
+  richText: {
+    types: [
+      "bold",
+      "italic",
+      "underline",
+      "strikethrough",
+    ],
+    names: {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strikethrough": "Strikethrough",
+    },
+  },
   list: {
     types: [
       "ul",
@@ -25,6 +39,10 @@ const ToolbarSections = {
       ul: "Unordered List",
       ol: "Ordered List",
     },
+  },
+  link: {
+    types: ["link"],
+    names: { link: "Hyperlink" },
   },
   script: {
     types: [
@@ -58,38 +76,10 @@ const ToolbarSections = {
   },
 };
 
-export const getToolbarMainSections = (config) => config.reduce((acc, item) => {
-  if (ToolbarSections[item.type]?.types.includes(item.name)) {
-    if (!acc[item.type]) {
-      acc[item.type] = { types: [], names: {} };
-    }
-
-    acc[item.type].types = [...(acc[item.type].types), item.name];
-    acc[item.type].names = {
-      ...acc[item.type].names,
-      ...{ [item.name]: ToolbarSections[item.type].names[item.name] },
-    };
-  }
-
-  return acc;
-}, {});
-
 export const stripHtmlTags = (html) => {
   const regexp = /(<([^>]+)>)/gi;
 
   return html.replace(regexp, "");
-};
-
-export const getScriptType = (selection) => {
-  if (selection.hasFormat("subscript")) {
-    return "subscript";
-  }
-
-  if (selection.hasFormat("superscript")) {
-    return "superscript";
-  }
-
-  return "";
 };
 
 export const getSelectedNode = (selection) => {
@@ -107,3 +97,9 @@ export const getSelectedNode = (selection) => {
 
   return $isAtNodeEnd(anchor) ? focusNode : anchorNode;
 };
+
+
+export function debug(...args) {
+  // eslint-disable-next-line no-console
+  console.log(...args);
+}

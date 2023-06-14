@@ -1,0 +1,13 @@
+.toolbar {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  height: fit-content;
+  margin-top: calc(0.5 * var(--gridSize));
+  margin-bottom: 2px;
+  margin-left: 2px;
+
+  user-select: none;
+  flex-wrap: wrap;
+}

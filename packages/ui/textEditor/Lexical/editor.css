@@ -35,6 +35,31 @@
   padding: calc(2 * var(--gridSize));
 }
 
+.input u {
+  text-decoration: underline;
+}
+
+.input s {
+  text-decoration: line-through;
+}
+
+.input u > s,
+.input s > u {
+  text-decoration: underline line-through;
+}
+
+.input ol {
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+}
+
+.input ul {
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+}
+
 .input:focus {
   box-shadow: none;
 }

@@ -9,15 +9,14 @@ import { OverlayContext } from "@figshare/fcl/overlay/overlay";
 import Input from "@figshare/fcl/input";
 import GoToLinkLarge from "@figshare/fcl/icons/goToLink/large";
 import LinkUnlinked from "@figshare/fcl/icons/link/unlinked";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 import { getSelectedNode, sanitizeUrl } from "./utils";
 import styles from "./LinkEditor.css";
 
 
-export function LinkEditor({
-  activeEditor,
-  onClose,
-}) {
+export function LinkEditor({ onClose }) {
+  const [editor] = useLexicalComposerContext();
   const context = useContext(OverlayContext);
   const [linkUrl, setLinkUrl] = useState("");
   const [editedLinkUrl, setEditedLinkUrl] = useState("");
@@ -43,13 +42,13 @@ export function LinkEditor({
         setLinkUrl("");
       }
     }
-  }, [activeEditor]);
+  }, [editor]);
 
   useEffect(() => {
-    activeEditor?.getEditorState().read(() => {
+    editor?.getEditorState().read(() => {
       updateLinkEditor();
     });
-  }, [activeEditor, updateLinkEditor]);
+  }, [editor, updateLinkEditor]);
 
   useEffect(() => {
     if (!linkUrl) {
@@ -60,7 +59,7 @@ export function LinkEditor({
   }, [linkUrl]);
 
   const onUnlink = () => {
-    activeEditor?.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+    editor?.dispatchCommand(TOGGLE_LINK_COMMAND, null);
     setEditedLinkUrl("");
     onClose();
   };
@@ -76,7 +75,7 @@ export function LinkEditor({
 
   const onSave = () => {
     if (editedLinkUrl) {
-      activeEditor?.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(editedLinkUrl));
+      editor?.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(editedLinkUrl));
       setLinkUrl(editedLinkUrl);
     }
     onClose();
@@ -156,12 +155,6 @@ export function LinkEditor({
 }
 
 
-LinkEditor.propTypes = {
-  activeEditor: PropTypes.object,
-  onClose: PropTypes.func,
-};
+LinkEditor.propTypes = { onClose: PropTypes.func };
 
-LinkEditor.defaultProps = {
-  activeEditor: {},
-  onClose: undefined,
-};
+LinkEditor.defaultProps = { onClose: undefined };

@@ -48,3 +48,78 @@ export const DefaultToolbarConfig = [
   { name: ToolbarItem.Undo, type: ToolbarItemType.History },
   { name: ToolbarItem.Redo, type: ToolbarItemType.History },
 ];
+
+export const ToolbarSections = {
+  block: {
+    types: [
+      "h2",
+      "h3",
+      "h4",
+      "paragraph",
+    ],
+    names: {
+      h2: "H2",
+      h3: "H3",
+      h4: "H4",
+      paragraph: "P",
+    },
+  },
+  richText: {
+    types: [
+      "bold",
+      "italic",
+      "underline",
+      "strikethrough",
+    ],
+    names: {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strikethrough": "Strikethrough",
+    },
+  },
+  list: {
+    types: [
+      "ul",
+      "ol",
+    ],
+    names: {
+      ul: "Unordered List",
+      ol: "Ordered List",
+    },
+  },
+  link: {
+    types: ["link"],
+    names: { link: "Hyperlink" },
+  },
+  script: {
+    types: [
+      "subscript",
+      "superscript",
+    ],
+    names: {
+      subscript: "Subscript",
+      superscript: "Superscript",
+    },
+  },
+  history: {
+    types: [
+      "undo",
+      "redo",
+    ],
+    names: {
+      undo: "Undo",
+      redo: "Redo",
+    },
+  },
+  format: {
+    types: [
+      "clearFormatting",
+      "pasteWithoutFormat",
+    ],
+    names: {
+      clearFormatting: "Clear Formatting",
+      pasteWithoutFormat: "Paste Without Format",
+    },
+  },
+};

@@ -2,9 +2,21 @@ import Enzyme, { mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import React from "react";
 import { OverlayContent, OverlayFooter } from "@figshare/fcl/overlay";
+import { LexicalComposer } from "@lexical/react/LexicalComposer";
+
+import defaultTheme from "../../themes/DefaultTheme";
 
 import { LinkEditor } from "./LinkEditor";
 
+
+const defaultConfig = {
+  // The editor theme
+  theme: defaultTheme,
+  // Handling of errors during update
+  onError(error) {
+    throw error;
+  },
+};
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -15,14 +27,22 @@ describe("<LinkEditor />", () => {
   };
 
   it("renders the component", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     expect(tested.find(OverlayContent)).toHaveLength(1);
     expect(tested.find(OverlayFooter)).toHaveLength(1);
   });
 
   it("renders enabled edit mode buttons when there is a set linkUrl", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     tested.find("input").simulate("change", { target: { value: "1234" } });
     tested.find(".saveButton").at(0).simulate("click");
@@ -32,7 +52,11 @@ describe("<LinkEditor />", () => {
   });
 
   it("renders disabled edit mode buttons when there is no set linkUrl", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     tested.find("input").simulate("change", { target: { value: null } });
     tested.find(".saveButton").at(0).simulate("click");
@@ -42,7 +66,11 @@ describe("<LinkEditor />", () => {
   });
 
   it("renders save button as disabled", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     tested.find("input").simulate("change", { target: { value: "12" } });
 
@@ -50,7 +78,11 @@ describe("<LinkEditor />", () => {
   });
 
   it("renders save button as enabled", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     tested.find("input").simulate("change", { target: { value: "123" } });
 
@@ -58,7 +90,11 @@ describe("<LinkEditor />", () => {
   });
 
   it("displays edited link value in input instead of link value", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     tested.find("input").simulate("change", { target: { value: "123" } });
     tested.find(".saveButton").at(0).simulate("click");
@@ -69,7 +105,11 @@ describe("<LinkEditor />", () => {
   });
 
   it("keeps the previous value of the input to onClose", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     tested.find("input").simulate("change", { target: { value: "123" } });
     tested.find(".saveButton").at(0).simulate("click");
@@ -81,29 +121,37 @@ describe("<LinkEditor />", () => {
   });
 
   it("calls onClose on unlink", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     tested.find("input").simulate("change", { target: { value: "123" } });
     tested.find(".saveButton").at(0).simulate("click");
 
     tested.find("#unlink-button").at(0).simulate("click");
 
-    expect(tested.props().onClose).toHaveBeenCalled();
+    expect(tested.find(LinkEditor).props().onClose).toHaveBeenCalled();
   });
 
   it("monitors input interaction to onKeyDown", () => {
-    const tested = mount(<LinkEditor {...defaultProps} />);
+    const tested = mount(
+      <LexicalComposer initialConfig={defaultConfig}>
+        <LinkEditor {...defaultProps} />
+      </LexicalComposer>
+    );
 
     tested.find("input").simulate("change", { target: { value: "123" } });
     tested.find("input").simulate("keyDown", { key: "Enter" });
 
-    expect(tested.props().onClose).toHaveBeenCalled();
+    expect(tested.find(LinkEditor).props().onClose).toHaveBeenCalled();
     expect(tested.find("input").props().value).toBe("123");
 
     tested.find("input").simulate("change", { target: { value: "1234" } });
     tested.find("input").simulate("keyDown", { key: "Escape" });
 
-    expect(tested.props().onClose).toHaveBeenCalled();
+    expect(tested.find(LinkEditor).props().onClose).toHaveBeenCalled();
     expect(tested.find("input").props().value).toBe("123");
   });
 });

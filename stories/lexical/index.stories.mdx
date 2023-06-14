@@ -40,7 +40,7 @@ Users can mark portions or the whole content as paragraphs, headings or emphasis
   }}
 >
   {() => {
-      const [text, setText] = useState("<b>Initial text or markup</b>");
+      const [text, setText] = useState("<ol><li>Two</li><li>Three</li></ol>");
       useEffect(() => {
         console.log("[Text]:", text);
       },[text]);

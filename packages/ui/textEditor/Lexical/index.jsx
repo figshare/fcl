@@ -22,16 +22,18 @@ import {
   $getRoot,
   BLUR_COMMAND,
   FOCUS_COMMAND,
+  TextNode,
 } from "lexical";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
 
 import { stripHtmlTags } from "./utils";
 import { LowPriority, DefaultToolbarConfig } from "./constants";
-import ToolbarPlugin from "./plugins/Toolbar";
-import { WarningPlugin } from "./plugins/Warning";
+import Toolbar from "./components/Toolbar";
+import { Warning } from "./components/Warning";
 import DefaultTheme from "./themes/DefaultTheme";
 import styles from "./editor.css"; // eslint-disable-line css-modules/no-unused-class
+import { CustomTextNode } from "./nodes/CustomTextNode";
 
 
 const DEFAULT_MAX_TEXT_LENGTH = 10000;
@@ -57,6 +59,11 @@ const defaultConfig = {
     TableRowNode,
     AutoLinkNode,
     LinkNode,
+    CustomTextNode,
+    {
+      replace: TextNode,
+      with: (node) => new CustomTextNode(node.__text),
+    },
   ],
 };
 
@@ -127,7 +134,6 @@ const Editor = (props) => {
     editorState.read(() => {
       if (typeof callbacks.current.onChange === "function") {
         const serializedHTML = $generateHtmlFromNodes(editor);
-
         callbacks.current.onChange({ target: { value: serializedHTML, id, name } });
 
         const strippedHTML = stripHtmlTags(serializedHTML);
@@ -152,9 +158,9 @@ const Editor = (props) => {
       <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
       <ListPlugin />
       <LinkPlugin />
-      <ToolbarPlugin config={toolbarConfig} />
+      <Toolbar config={toolbarConfig} />
     </div>
-    <WarningPlugin contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
+    <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
   </>);
 };
 
