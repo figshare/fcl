@@ -1,6 +1,12 @@
+import { $isRangeSelection } from "lexical";
+import { $isLinkNode } from "@lexical/link";
+import { $isListNode, ListNode } from "@lexical/list";
+import { $isHeadingNode } from "@lexical/rich-text";
+import { $getNearestNodeOfType } from "@lexical/utils";
 
 import IconSet from "../../../../icons/editor";
 import { ToolbarItemType, ToolbarSections } from "../../constants";
+import { getSelectedNode } from "../../utils";
 
 
 export function getToolLabelAndIcon(type, group) {
@@ -42,26 +48,6 @@ export function describeToolsFromConfig(config) {
   }, { order: [], sections: {} });
 }
 
-export function describeSelectionFormats(selection) {
-  const formats = [];
-  const supported = [...ToolbarSections.richText.types, ...ToolbarSections.script.types];
-
-  supported.forEach((format) => {
-    try {
-      const has = selection.hasFormat(format);
-
-      if (has) {
-        formats.push(format);
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log("hasFormat does not have format", format, selection);
-    }
-  });
-
-  return formats;
-}
-
 export function checkIfToolIsActive(tool, state) {
   switch (tool.group) {
     case "script":
@@ -93,4 +79,64 @@ export function describeExcludedTypes(type, group, selectionFormats) {
   }
 
   return [];
+}
+
+export function describeHasSelection({ selection }) {
+  return selection !== null && (selection.focus.offset - selection.anchor.offset) !== 0;
+}
+
+export function describeSelectionFormats({ selection }) {
+  const formats = [];
+  const supported = [...ToolbarSections.richText.types, ...ToolbarSections.script.types];
+
+  supported.forEach((format) => {
+    try {
+      const has = selection.hasFormat(format);
+
+      if (has) {
+        formats.push(format);
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log("hasFormat does not have format", format, selection);
+    }
+  });
+
+  return formats;
+}
+
+export function describeListState({ selection, editor }) {
+  const anchorNode = selection.anchor.getNode();
+  const element =
+    anchorNode.getKey() === "root" ? anchorNode : anchorNode.getTopLevelElementOrThrow();
+  const elementKey = element.getKey();
+  const elementDOM = editor.getElementByKey(elementKey);
+
+  if (elementDOM !== null && $isListNode(element)) {
+    const parentList = $getNearestNodeOfType(anchorNode, ListNode);
+
+    return parentList ? parentList.getTag() : element.getTag();
+  }
+
+  return undefined;
+}
+
+export function describeBlockState({ selection }) {
+  const anchorNode = selection.anchor.getNode();
+
+  const element =
+    anchorNode.getKey() === "root" ? anchorNode : anchorNode.getTopLevelElementOrThrow();
+
+  return $isHeadingNode(element) ? element.getTag() : element.getType();
+}
+
+export function describeLinkState({ selection }) {
+  if ($isRangeSelection(selection)) {
+    const node = getSelectedNode(selection);
+    const parent = node.getParent();
+
+    return $isLinkNode(parent) || $isLinkNode(node);
+  }
+
+  return false;
 }

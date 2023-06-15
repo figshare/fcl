@@ -61,6 +61,9 @@ export class CustomTextNode extends TextNode {
       if (this.hasFormat("underline")) {
         element = wrapElementWith(element, "u");
       }
+      if (this.hasFormat("italic") && this.hasFormat("bold")) {
+        element = wrapElementWith(element, "em");
+      }
     }
 
     return { element };
