@@ -1,7 +1,12 @@
 .tool {
   display: flex;
 
+  width: calc(var(--gridSize) * 5);
+  height: calc(var(--gridSize) * 6);
+  margin: 0;
+
   padding: var(--gridSize);
+  padding: 0;
 
   cursor: pointer;
 
@@ -11,14 +16,16 @@
 
   border-radius: var(--gridSize);
 
+  border-radius: calc(var(--gridSize) / 2);
+
   background: none;
 }
 
-.tool[data-tool-active="true"] {
-  background-color: rgba(223, 232, 250, 0.3);
+.tool[data-tool-active="true"],
+.tool:active {
+  background-color: var(--color-layout-secondary-background);
 }
 
-/* .icon {
-  width: calc(var(--gridSize) * 5);
-  height: calc(var(--gridSize) * 5);
-} */
+.tool > svg {
+  width: calc(var(--gridSize) * 4);
+}

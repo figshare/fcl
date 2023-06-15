@@ -2,9 +2,9 @@ import icons from "../../icons/editor";
 
 
 export const controlButtons = [
-  { icon: icons.HeadingTwo, style: "header-two", type: "block", key: "h2" },
-  { icon: icons.HeadingThree, style: "header-three", type: "block", key: "h3" },
-  { icon: icons.HeadingFour, style: "header-four", type: "block", key: "h4" },
+  { icon: icons.H2, style: "header-two", type: "block", key: "h2" },
+  { icon: icons.H3, style: "header-three", type: "block", key: "h3" },
+  { icon: icons.H4, style: "header-four", type: "block", key: "h4" },
   {
     icon: icons.Paragraph,
     style: "unstyled",
@@ -26,8 +26,8 @@ export const controlButtons = [
 
   { icon: icons.Link, style: "link", type: "link", hasSeparator: true, key: "link" },
 
-  { icon: icons.BulletList, style: "unordered-list-item", type: "block", key: "ul" },
-  { icon: icons.NumberedList, style: "ordered-list-item", type: "block", key: "ol" },
+  { icon: icons.Ul, style: "unordered-list-item", type: "block", key: "ul" },
+  { icon: icons.Ol, style: "ordered-list-item", type: "block", key: "ol" },
   { icon: icons.Subscript, style: "unstyled", type: "sub", key: "sub" },
   {
     icon: icons.Superscript,
@@ -39,7 +39,7 @@ export const controlButtons = [
 
   { icon: icons.ClearFormatting, isAction: true, type: "clear", key: "clear" },
   {
-    icon: icons.PasteAsPlainText,
+    icon: icons.PasteWithoutFormat,
     isAction: true,
     type: "paste",
     hasSeparator: true,

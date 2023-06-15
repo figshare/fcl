@@ -1,4 +1,7 @@
 .container {
+  --border-color: var(--color-border-primary);
+  --border-width: calc(var(--gridSize) / 6);
+
   position: relative;
 
   display: flex;
@@ -9,13 +12,12 @@
 
   width: 100%;
 
-  min-width: calc(62 * var(--gridSize));
   min-height: calc(45.5 * var(--gridSize));
   max-height: calc(100 * var(--gridSize));
 
   resize: vertical;
 
-  border: 2px solid transparent;
+  border: calc(var(--gridSize) / 6) solid var(--border-color);
   border-radius: var(--gridSize);
 
   background-color: var(--color-layout-primary-background);
@@ -24,7 +26,30 @@
 }
 
 .container:focus-within {
-  border: 2px solid var(--color-border-active);
+  --border-color: var(--color-border-active);
+}
+
+.container:focus-within::before {
+  position: absolute;
+  z-index: 1;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+
+  content: " ";
+  pointer-events: none;
+
+  border: calc(2 * var(--border-width)) solid var(--border-color);
+  border-radius: inherit;
+}
+
+.container.error {
+  --border-color: var(--color-border-error);
+}
+
+.container.singleRow {
+  min-height: calc(14 * var(--gridSize));
 }
 
 .input {
@@ -33,6 +58,9 @@
   overflow: auto;
 
   padding: calc(2 * var(--gridSize));
+
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
 }
 
 .input u {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect, useCallback, useRef } from "react";
+import React, { useEffect, useState, useMemo, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -69,15 +69,18 @@ const defaultConfig = {
 
 export default function EditorContainer(props) {
   const { disabled } = props;
+  const initialConfig = useMemo(() => {
+    return { ...defaultConfig, editable: !disabled };
+  }, [defaultConfig, disabled]);
 
   return (
-    <LexicalComposer initialConfig={ { ...defaultConfig, editable: !disabled } } >
+    <LexicalComposer initialConfig={initialConfig} >
       <Editor {...props} />
     </LexicalComposer>
   );
 }
 
-const Editor = (props) => {
+export function Editor(props) {
   const {
     onBlur,
     onFocus,
@@ -85,6 +88,8 @@ const Editor = (props) => {
     minTextLength,
     maxTextLength,
     className,
+    error,
+    isSingleRow,
     toolbarConfig,
     onChange,
     id,
@@ -115,7 +120,7 @@ const Editor = (props) => {
     callbacks.current.onBlur = onBlur;
   }, [callbacks, onChange, onBlur, onFocus]);
 
-  useLayoutEffect(() =>
+  useEffect(() =>
     mergeRegister(
       editor.registerCommand(FOCUS_COMMAND, () => {
         if (typeof callbacks.current.onFocus === "function") {
@@ -142,7 +147,11 @@ const Editor = (props) => {
     });
   }, [editor, callbacks, name, id]);
 
-  const editorClasses = classnames(styles.container, className);
+  const editorClasses = classnames(
+    styles.container,
+    { [styles.error]: error, [styles.singleRow]: isSingleRow },
+    className
+  );
 
   return (<>
     <div className={editorClasses} data-id="editor-content-editable">
@@ -162,7 +171,7 @@ const Editor = (props) => {
     </div>
     <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
   </>);
-};
+}
 
 EditorContainer.propTypes = {
   /**
@@ -174,15 +183,22 @@ EditorContainer.propTypes = {
     Optional class to append to the text editor wrapper node.
   */
   className: PropTypes.string,
-
   /**
     Disables the editor.
   */
   disabled: PropTypes.bool,
   /**
+    Visually marks the editor as being in an error state.
+  */
+  error: PropTypes.bool,
+  /**
     Identify the editor through a unique field name. Will be passed to the `onChange` function as the first argument.
   */
   id: PropTypes.string,
+  /**
+    Visually sets the editor as being a single row input. Can still be resized.
+  */
+  isSingleRow: PropTypes.bool,
   /**
     Maximum number of characters for the editor text value. Includes markup.
   */
@@ -191,6 +207,9 @@ EditorContainer.propTypes = {
     Minimum number of characters for the editor text value. Includes markup.
   */
   minTextLength: PropTypes.number,
+  /**
+    form input name for the editor.
+  */
   name: PropTypes.string,
   /**
     Placeholder text for the editor.
@@ -225,6 +244,8 @@ EditorContainer.propTypes = {
 
 EditorContainer.defaultProps = {
   className: undefined,
+  error: false,
+  isSingleRow: false,
   placeholder: "",
   maxTextLength: DEFAULT_MAX_TEXT_LENGTH,
   minTextLength: DEFAULT_MIN_TEXT_LENGTH,
