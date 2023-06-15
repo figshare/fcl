@@ -2,6 +2,14 @@ import { TextNode, $createTextNode } from "lexical";
 
 
 function wrapElementWith(element, tag) {
+  if (element.tagName === "SPAN") {
+    const el = document.createElement(tag);
+
+    el.innerHTML = element.innerHTML;
+
+    return el;
+  }
+
   const el = document.createElement(tag);
   el.appendChild(element);
 
@@ -53,6 +61,10 @@ export class CustomTextNode extends TextNode {
     // <b>, <u>, <s>, <i> elements.
 
     element.removeAttribute("class");
+
+    Array.prototype.forEach.call(element.children, (child) => {
+      child?.removeAttribute?.("class");
+    });
 
     if (element !== null) {
       if (this.hasFormat("strikethrough")) {

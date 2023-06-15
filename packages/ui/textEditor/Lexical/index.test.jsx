@@ -1,41 +1,86 @@
 import React from "react";
 import { mount } from "enzyme";
-import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { act } from "react-dom/test-utils";
 
 import Editor from "./";
 
 
-jest.mock("@lexical/html", () => {
-  const actualHtmlModule = jest.requireActual("@lexical/html");
+const wait = (delay = 100) => new Promise((resolve) => setTimeout(resolve, delay));
 
-  return { ...actualHtmlModule, $generateHtmlFromNodes: () => "<div>testerino</div>" };
-});
+const fixtures = {
+  expectOnChangeValue: (value = "") => expect.objectContaining(
+    { target: expect.objectContaining({ value }) }
+  ),
+  focusOnEditor: ({ component }) => {
+    const editor = component.find({ "data-id": "editor-content-editable" });
+
+    editor.simulate("focus");
+  },
+  typeIn: ({ text, component }) => {
+    const editor = component.find({ "data-id": "editor-content-editable" });
+
+    for (let i = 0; i < text.length; i += 1) {
+      editor.simulate("keydown", { key: text.charAt(i) });
+    }
+  },
+};
 
 describe("Lexical Text Editor", () => {
-  const props = { value: "<div><sub>testerino</sub></div>", onChange: jest.fn() };
+  const props = {
+    value: "<p><b><sub>sub-bold</sub></b><i>italic</i><strong>strong</strong>" +
+    "<em>emphasis</em><s>strikethrough</s><u>underline</u></p>",
+    onChange: jest.fn(),
+  };
 
-  it("renders the text editor", () => {
-    const component = mount(<Editor {...props} />);
-
-    expect(component.find({ "data-id": "editor-content-editable" })).toHaveLength(1);
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
+  it("renders and updates with initial value", async() => {
+    let component = null;
 
-  it("calls onChange correctly", () => {
-    const component = mount(<Editor {...props} />);
-    const changePlugin = component.find(OnChangePlugin);
-    const handleChangeMock = changePlugin.prop("onChange");
+    await act(async() => {
+      component = mount(<Editor {...props} />);
 
-    const editorStateMock = {
-      read: jest.fn((callback) => {
-        callback();
-      }),
-    };
-
-    act(() => {
-      handleChangeMock(editorStateMock);
+      await wait();
     });
 
-    expect(props.onChange).toBeCalled();
+    await act(async() => {
+      fixtures.focusOnEditor({ component });
+      fixtures.typeIn({ text: "hello", component });
+
+      await wait();
+    });
+
+    expect(props.onChange).toHaveBeenCalledWith(
+      fixtures.expectOnChangeValue(
+        "<p dir=\"ltr\"><sub><strong>sub-bold</strong></sub><em>italic</em>" +
+        "<strong>strong</strong><em>emphasis</em><s>strikethrough</s><u>underline</u></p>"
+      )
+    );
+  });
+
+  it("updates as user types in the editor", async() => {
+    let component = null;
+
+    await act(async() => {
+      component = mount(<Editor {...props} />);
+
+      await wait();
+    });
+
+    await act(async() => {
+      fixtures.focusOnEditor({ component });
+      fixtures.typeIn({ text: "hello", component });
+
+      await wait();
+    });
+
+    expect(props.onChange).toHaveBeenCalledWith(
+      fixtures.expectOnChangeValue(
+        "<p dir=\"ltr\"><sub><strong>sub-bold</strong></sub><em>italic</em>" +
+        "<strong>strong</strong><em>emphasis</em><s>strikethrough</s><u>underline</u></p>"
+      )
+    );
   });
 });
+
