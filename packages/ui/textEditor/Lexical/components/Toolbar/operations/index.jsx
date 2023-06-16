@@ -1,5 +1,4 @@
 import { ToolbarItemType } from "../../../constants";
-import { debug } from "../../../utils";
 
 import blockOperation from "./block";
 import formatOperation from "./format";
@@ -25,8 +24,8 @@ export function runTool({ tool, state, editor, callbacks }) {
 
   try {
     runner({ tool, state, editor, callbacks });
-  } catch (e) {
-    debug("runTool() failed running tool, or running unregistered tool group", tool, state, editor);
+  } catch {
+    // log("runTool() failed running tool, or running unregistered tool group", tool, state, editor);
   }
 }
 

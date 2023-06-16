@@ -22,9 +22,3 @@ export const getSelectedNode = (selection) => {
 
   return $isAtNodeEnd(anchor) ? focusNode : anchorNode;
 };
-
-
-export function debug(...args) {
-  // eslint-disable-next-line no-console
-  console.log(...args);
-}

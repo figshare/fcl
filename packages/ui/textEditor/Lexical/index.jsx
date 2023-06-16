@@ -68,10 +68,10 @@ const defaultConfig = {
 };
 
 export default function EditorContainer(props) {
-  const { disabled } = props;
+  const { disabled, onError } = props;
   const initialConfig = useMemo(() => {
-    return { ...defaultConfig, editable: !disabled };
-  }, [defaultConfig, disabled]);
+    return { ...defaultConfig, editable: !disabled, onError };
+  }, [defaultConfig, onError, disabled]);
 
   return (
     <LexicalComposer initialConfig={initialConfig} >
@@ -84,6 +84,7 @@ export function Editor(props) {
   const {
     onBlur,
     onFocus,
+    onEditorChange,
     value,
     minTextLength,
     maxTextLength,
@@ -99,7 +100,11 @@ export function Editor(props) {
   const [editor] = useLexicalComposerContext();
   const [contentLength, setContentLength] = useState(value.length);
 
-  const callbacks = useRef({ onChange, onBlur, onFocus });
+  const callbacks = useRef({ onChange, onBlur, onFocus, onEditorChange });
+
+  useEffect(() => {
+    callbacks.current.onEditorChange?.(editor);
+  }, [editor, callbacks]);
 
 
   useEffect(() => {
@@ -122,7 +127,7 @@ export function Editor(props) {
 
   useEffect(() =>
     mergeRegister(
-      editor.registerCommand(FOCUS_COMMAND, () => {
+      editor.registerCommand(FOCUS_COMMAND, (event) => {
         if (typeof callbacks.current.onFocus === "function") {
           onFocus(event);
         }
@@ -236,15 +241,23 @@ EditorContainer.propTypes = {
   */
   onBlur: PropTypes.func,
   /**
+   * Callback called with the lexical editor instance when it is initialized or changes.
+   */
+  onEditorChange: PropTypes.func,
+  /**
+    Callback called when the editor gains focus.
+  */
+  onError: PropTypes.func,
+  /**
     Callback called when the editor gains focus.
   */
   onFocus: PropTypes.func,
-
 };
 
 EditorContainer.defaultProps = {
   className: undefined,
   error: false,
+  onEditorChange: undefined,
   isSingleRow: false,
   placeholder: "",
   maxTextLength: DEFAULT_MAX_TEXT_LENGTH,
@@ -253,6 +266,10 @@ EditorContainer.defaultProps = {
   disabled: false,
   onBlur: undefined,
   onFocus: undefined,
+  onError: (e) => {
+    // eslint-disable-next-line no-console
+    console.log("Editor update error", e);
+  },
   toolbarConfig: DefaultToolbarConfig,
   name: undefined,
   id: "",

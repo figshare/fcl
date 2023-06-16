@@ -11,7 +11,6 @@ import { mergeRegister } from "@lexical/utils";
 
 import { DefaultToolbarConfig, LowPriority } from "../../constants";
 import useModal from "../LinkEditor/useModal";
-import { debug } from "../../utils";
 
 import styles from "./Toolbar.css"; // eslint-disable-line css-modules/no-unused-class
 import Tool from "./components/Tool";
@@ -65,7 +64,7 @@ export default function Toolbar({ config }) {
       payload.list = describeListState(context);
       payload.block = describeBlockState(context);
     } catch (e) {
-      debug("updateToolbar, failed to parse state", payload, e);
+      // log("updateToolbar, failed to parse state", payload, e);
     }
 
     dispatch({

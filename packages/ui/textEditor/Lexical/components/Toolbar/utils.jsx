@@ -96,9 +96,8 @@ export function describeSelectionFormats({ selection }) {
       if (has) {
         formats.push(format);
       }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log("hasFormat does not have format", format, selection);
+    } catch {
+      // "hasFormat does not have format", format, selection;
     }
   });
 
