@@ -1,0 +1,16 @@
+.toolbar {
+  display: flex;
+  flex-direction: row;
+
+  width: calc(100% - var(--gridSize));
+  height: fit-content;
+  margin: calc(0.5 * var(--gridSize));
+
+  user-select: none;
+
+  border-bottom-right-radius: inherit;
+
+  border-bottom-left-radius: inherit;
+  flex-wrap: wrap;
+  gap: calc(0.5 * var(--gridSize));
+}

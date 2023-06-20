@@ -1,0 +1,9 @@
+.divider {
+  display: inline-flex;
+
+  width: 1px;
+  height: calc(var(--gridSize) * 3);
+  margin: calc(2 * var(--gridSize)) var(--gridSize) var(--gridSize) var(--gridSize);
+
+  background-color: var(--color-border-primary);
+}

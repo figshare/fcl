@@ -2,9 +2,9 @@
 import React, { PureComponent } from "react";
 
 
-export default class HeadingFour extends PureComponent {
+export default class H4 extends PureComponent {
 
-  static name = "icons/HeadingFour";
+  static name = "icons/H4";
 
   render() {
     return (
@@ -13,7 +13,7 @@ export default class HeadingFour extends PureComponent {
         fill="transparent"
         preserveAspectRatio="xMidYMid meet"
         {...this.props}
-        data-component={HeadingFour.name}
+        data-component={H4.name}
         focusable={false}
         viewBox="0 0 30 36"
         xmlns="http://www.w3.org/2000/svg"

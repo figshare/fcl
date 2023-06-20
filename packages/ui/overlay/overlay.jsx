@@ -136,7 +136,8 @@ export default class Overlay extends Component {
       return null;
     }
 
-    const { variant, background, overlayBackground, returnFocus, focusIn, status, trapFocus } = this.props;
+    const { variant, background, overlayBackground, returnFocus, focusIn, status, trapFocus }
+      = this.props;
     const overlayStyle = { zIndex: OverlayStack.getZIndex(this.id) };
     const context = {
       id: this.id,

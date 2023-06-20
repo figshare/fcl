@@ -1,0 +1,31 @@
+.tool {
+  display: flex;
+
+  width: calc(var(--gridSize) * 5);
+  height: calc(var(--gridSize) * 6);
+  margin: 0;
+
+  padding: var(--gridSize);
+  padding: 0;
+
+  cursor: pointer;
+
+  vertical-align: middle;
+
+  border: 0;
+
+  border-radius: var(--gridSize);
+
+  border-radius: calc(var(--gridSize) / 2);
+
+  background: none;
+}
+
+.tool[data-tool-active="true"],
+.tool:active {
+  background-color: var(--color-layout-secondary-background);
+}
+
+.tool > svg {
+  width: calc(var(--gridSize) * 4);
+}

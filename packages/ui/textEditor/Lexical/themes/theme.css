@@ -1,0 +1,31 @@
+:global(.editor-underline) {
+  text-decoration: underline;
+}
+
+:global(.editor-italic) {
+  font-style: italic;
+}
+
+:global(.editor-strikethrough) {
+  text-decoration: line-through;
+}
+
+:global(.editor-underlineStrikethrough) {
+  text-decoration: underline line-through;
+}
+
+:global(.editor-bold) {
+  font-weight: bold;
+}
+
+:global(.editor-ol) {
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+}
+
+:global(.editor-ul) {
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+}

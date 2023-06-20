@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: calc(var(--gridSize) * 2);
+}
+
+.title {
+  font-size: var(--typography-XL-fontSize);
+  line-height: var(--typography-XL-lineHeight);
+}
+
+.label {
+  font-weight: 700;
+
+  margin-top: calc(5 * var(--gridSize));
+  margin-bottom: var(--gridSize);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.saveButton {
+  margin-left: calc(var(--gridSize) * 4);
+}
