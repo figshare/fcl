@@ -36,8 +36,8 @@ import styles from "./editor.css"; // eslint-disable-line css-modules/no-unused-
 import { CustomTextNode } from "./nodes/CustomTextNode";
 
 
-const DEFAULT_MAX_TEXT_LENGTH = 10000;
-const DEFAULT_MIN_TEXT_LENGTH = 5000;
+export const DEFAULT_MAX_TEXT_LENGTH = 10000;
+export const DEFAULT_MIN_TEXT_LENGTH = 5000;
 
 const defaultConfig = {
   // The editor theme
