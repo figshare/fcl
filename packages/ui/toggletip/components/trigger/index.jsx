@@ -97,6 +97,8 @@ export default class Trigger extends Component {
       return;
     }
 
+    e?.stopPropagation?.();
+
     onClick?.(e);
     onToggle?.(e);
   }

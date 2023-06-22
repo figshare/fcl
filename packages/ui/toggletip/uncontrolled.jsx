@@ -36,6 +36,8 @@ export default class UncontrolledToggletip extends Component {
   onToggle = (e) => {
     const { onToggle } = this.props;
 
+    e?.stopPropagation?.();
+
     this.setState((prevState) => {
       return { isVisible: !prevState.isVisible };
     }, () => onToggle?.(e, this.state.isVisible));
