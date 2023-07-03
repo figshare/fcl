@@ -22,3 +22,24 @@ export const getSelectedNode = (selection) => {
 
   return $isAtNodeEnd(anchor) ? focusNode : anchorNode;
 };
+
+
+const Processors = {
+  "no-ltr-root": (markup) => markup,
+  "no-paragraph-root": (markup) => markup,
+  "no-inner-span": (markup) => markup.replace(/((<span>)|(<span dir="ltr">))/gm, "").replace(/<\/span>/gm, ""),
+};
+
+export const applyMarkupProcessors = (markup, processorsToRun) => {
+  let newMarkup = markup.slice();
+
+  processorsToRun.forEach((key) => {
+    const processor = Processors[key];
+
+    if (processor) {
+      newMarkup = processor(newMarkup);
+    }
+  });
+
+  return newMarkup;
+};
