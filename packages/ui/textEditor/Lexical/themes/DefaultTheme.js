@@ -2,6 +2,7 @@ import "./theme.css";
 
 
 const defaultTheme = {
+  root: "root",
   ltr: "ltr",
   rtl: "rtl",
   placeholder: "editor-placeholder",

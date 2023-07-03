@@ -68,6 +68,16 @@ export function checkIfToolIsDisabled(tool, state) {
       return !state.hasSelection;
     case ToolbarItemType.History:
       return !state[tool.type];
+    case ToolbarItemType.List: {
+      const block = state.block ?? "";
+
+      return ["h1", "h2", "h3"].includes(block);
+    }
+    case ToolbarItemType.Block: {
+      const block = state.block ?? "";
+
+      return block === "list";
+    }
     default:
       return false;
   }

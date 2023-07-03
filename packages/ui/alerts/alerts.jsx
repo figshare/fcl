@@ -95,10 +95,10 @@ export class Alerts extends React.PureComponent {
     const withTitle = !!title;
     const renderer = () => {
       if (withTitle) {
-        return this.renderContentAndTitle(Icon, title, content);
+        return this.renderContentAndTitle(Icon, title, content, alert);
       }
 
-      return this.renderContentOnly(Icon, content);
+      return this.renderContentOnly(Icon, content, alert);
     };
 
     return (
@@ -115,13 +115,13 @@ export class Alerts extends React.PureComponent {
     );
   }
 
-  renderContentOnly = (Icon, content) => (<>
+  renderContentOnly = (Icon, content, alert) => (<>
     <div className={styles.alertIcon}><Icon /></div>
     <div className={styles.alertText}>{content}</div>
     {this.renderCloseBtn(alert)}
   </>);
 
-  renderContentAndTitle = (Icon, title, content) => (<>
+  renderContentAndTitle = (Icon, title, content, alert) => (<>
     <div className={styles.alertHeader}>
       <div className={styles.alertTitle}>
         <div className={styles.alertIcon}><Icon /></div>
