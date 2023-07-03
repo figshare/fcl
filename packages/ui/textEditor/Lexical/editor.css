@@ -57,8 +57,6 @@
 
   overflow: auto;
 
-  max-height: calc(62 * var(--gridSize));
-
   padding: calc(2 * var(--gridSize));
 
   border-top-left-radius: inherit;

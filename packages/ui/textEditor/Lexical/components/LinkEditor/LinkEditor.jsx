@@ -11,7 +11,7 @@ import GoToLinkLarge from "@figshare/fcl/icons/goToLink/large";
 import LinkUnlinked from "@figshare/fcl/icons/link/unlinked";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
-import { getSelectedNode, sanitizeUrl } from "./utils";
+import { getSelectedNode, sanitizeUrl, makeURLAbsolute } from "./utils";
 import styles from "./LinkEditor.css";
 
 
@@ -75,7 +75,13 @@ export function LinkEditor({ onClose }) {
 
   const onSave = () => {
     if (editedLinkUrl) {
-      editor?.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(editedLinkUrl));
+      editor?.dispatchCommand(
+        TOGGLE_LINK_COMMAND,
+        {
+          url: makeURLAbsolute(sanitizeUrl(editedLinkUrl)),
+          target: "_blank",
+        }
+      );
       setLinkUrl(editedLinkUrl);
     }
     onClose();
@@ -102,7 +108,7 @@ export function LinkEditor({ onClose }) {
           <Button
             Icon={GoToLinkLarge}
             disabled={!isEditMode}
-            href={editedLinkUrl || linkUrl}
+            href={makeURLAbsolute(editedLinkUrl || linkUrl)}
             id="open-link-button"
             target="_blank"
             theme="secondaryAlt"

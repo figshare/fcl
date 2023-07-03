@@ -26,3 +26,7 @@ export function getSelectedNode(selection) {
 export function sanitizeUrl(str) {
   return str.replace(/data:/gi, "").replace(/javascript:/gi, "");
 }
+
+export function makeURLAbsolute(url) {
+  return url.includes("//") ? url : `http://${url}`;
+}
