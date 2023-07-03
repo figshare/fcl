@@ -95,11 +95,14 @@
 }
 
 .placeholder {
-  font-size: var(--typography-S-fontSize);
+  font-size: var(--typography-M-fontSize);
+  line-height: inherit;
 
   position: absolute;
 
-  margin: var(--gridSize) calc(var(--gridSize) * 2);
+  margin: calc(2 * var(--gridSize));
+
+  pointer-events: none;
 
   color: var(--color-typography-tertiary);
 }

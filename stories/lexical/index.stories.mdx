@@ -48,9 +48,15 @@ Users can mark portions or the whole content as paragraphs, headings or emphasis
         console.log("[Text]:", text);
       },[text]);
       return (<div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-                <Editor onChange={(e) => {
+                <Editor 
+                  onChange={(e) => {
                   setText(e.target.value);
-                }} value={text} error={error} isSingleRow={singleRow} />
+                  }} 
+                  value={text} 
+                  error={error} 
+                  isSingleRow={singleRow}
+                  placeholder="Type in the editor..."
+                  />
                 <div>
                   <div>Modifiers:</div>
                   <div style={{ display: "flex", flexDirection: "row", gap: "12px" }}>
