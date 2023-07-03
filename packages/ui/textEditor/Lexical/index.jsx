@@ -26,7 +26,7 @@ import {
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
 
-import { stripHtmlTags } from "./utils";
+import { applyMarkupProcessors, stripHtmlTags } from "./utils";
 import { LowPriority, DefaultToolbarConfig } from "./constants";
 import Toolbar from "./components/Toolbar";
 import { Warning } from "./components/Warning";
@@ -94,12 +94,18 @@ export function Editor(props) {
     onChange,
     id,
     name,
+    processors,
   } = props;
 
   const [editor] = useLexicalComposerContext();
   const [contentLength, setContentLength] = useState(value.length);
 
   const callbacks = useRef({ onChange, onBlur, onFocus, onEditorChange });
+  const processorsRef = useRef(processors);
+
+  useEffect(() => {
+    processorsRef.current = processors;
+  }, [processors]);
 
   useEffect(() => {
     callbacks.current.onEditorChange?.(editor);
@@ -142,7 +148,10 @@ export function Editor(props) {
   const handleChange = useCallback((editorState) => {
     editorState.read(() => {
       if (typeof callbacks.current.onChange === "function") {
-        const serializedHTML = $generateHtmlFromNodes(editor);
+        const serializedHTML = applyMarkupProcessors(
+          $generateHtmlFromNodes(editor),
+          processorsRef.current
+        );
         callbacks.current.onChange({ target: { value: serializedHTML, id, name } });
 
         const strippedHTML = stripHtmlTags(serializedHTML);
@@ -166,7 +175,6 @@ export function Editor(props) {
       />
       <HistoryPlugin />
       <OnChangePlugin ignoreSelectionChange={true} onChange={handleChange} />
-
       <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
       <ListPlugin />
       <LinkPlugin />
@@ -218,6 +226,10 @@ EditorContainer.propTypes = {
     Placeholder text for the editor.
   */
   placeholder: PropTypes.string,
+  /**
+    A list of additional processing to apply to the final markup value returned for `onChange`
+  */
+  processors: PropTypes.arrayOf(PropTypes.oneOf(["no-inner-span", "no-paragraph-root", "no-ltr-root"])),
   /**
     Configuration options for the editor toolbar.
     Ex: For adding the Bold button, the config object would be something like:
@@ -271,6 +283,7 @@ EditorContainer.defaultProps = {
   toolbarConfig: DefaultToolbarConfig,
   name: undefined,
   id: "",
+  processors: ["no-ltr-root", "no-inner-span", "no-paragraph-root"],
 };
 
 Editor.propTypes = EditorContainer.propTypes; // eslint-disable-line

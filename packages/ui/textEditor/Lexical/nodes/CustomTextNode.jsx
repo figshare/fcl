@@ -16,6 +16,36 @@ function wrapElementWith(element, tag) {
   return el;
 }
 
+function wrapContentWith(element, tag) {
+  if (element.tagName === "SPAN") {
+    const el = document.createElement(tag);
+
+    el.innerHTML = element.innerHTML;
+
+    return el;
+  }
+
+  const el = element.cloneNode(false);
+
+  const inner = document.createElement(tag);
+
+  inner.innerHTML = element.innerHTML;
+
+  el.appendChild(inner);
+
+  return el;
+}
+
+function replaceWith(element, tag) {
+  const el = document.createElement(tag);
+
+  Array.prototype.forEach.call(element.childNodes, (child) => {
+    el.appendChild(child);
+  });
+
+  return el;
+}
+
 export class CustomTextNode extends TextNode {
 
   static getType() {
@@ -68,13 +98,22 @@ export class CustomTextNode extends TextNode {
 
     if (element !== null) {
       if (this.hasFormat("strikethrough")) {
-        element = wrapElementWith(element, "s");
+        element = wrapContentWith(element, "s");
       }
       if (this.hasFormat("underline")) {
-        element = wrapElementWith(element, "u");
+        element = wrapContentWith(element, "u");
       }
+
+      if (["STRONG", "BOLD", "B"].includes(element.tagName)) {
+        element = replaceWith(element, "b");
+      }
+
+      if (["EM", "ITALIC", "I"].includes(element.tagName)) {
+        element = replaceWith(element, "i");
+      }
+
       if (this.hasFormat("italic") && this.hasFormat("bold")) {
-        element = wrapElementWith(element, "em");
+        element = wrapElementWith(element, "i");
       }
     }
 
