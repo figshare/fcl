@@ -1,9 +1,4 @@
-import { $getNearestBlockElementAncestorOrThrow } from "@lexical/utils";
-import { $createTextNode, $getSelection, $isRangeSelection, $isTextNode, PASTE_COMMAND } from "lexical"; import {
-  $isHeadingNode,
-  $isQuoteNode,
-} from "@lexical/rich-text";
-import { $isDecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
+import { $getSelection, $isRangeSelection, $isTextNode, PASTE_COMMAND } from "lexical";
 
 
 export default function operation({ tool, editor }) {
@@ -22,7 +17,9 @@ export default function operation({ tool, editor }) {
 
       editor.dispatchCommand(PASTE_COMMAND, event);
     }());
-  } else {
+  }
+
+  if (tool.type === "clearFormatting") {
     editor.update(() => {
       const selection = $getSelection();
       if ($isRangeSelection(selection)) {
@@ -34,28 +31,13 @@ export default function operation({ tool, editor }) {
           return;
         }
 
-        nodes.forEach((node, idx) => {
-          // We split the first and last node by the selection
-          // So that we don't format unselected text inside those nodes
+        nodes.forEach((node) => {
           if ($isTextNode(node)) {
-            if (idx === 0 && anchor.offset !== 0) {
-              node = node.splitText(anchor.offset)[1] || node; //eslint-disable-line
-            }
-            if (idx === nodes.length - 1) {
-              node = node.splitText(focus.offset)[0] || node; //eslint-disable-line
-            }
-
-            if (node.__style !== "") {
-              node.setStyle("");
-            }
-            if (node.__format !== 0) {
-              node.setFormat(0);
-              $getNearestBlockElementAncestorOrThrow(node).setFormat("");
-            }
-          } else if ($isHeadingNode(node) || $isQuoteNode(node)) {
-            node.replace($createTextNode(), true);
-          } else if ($isDecoratorBlockNode(node)) {
-            node.setFormat("");
+            ["bold", "italic", "strikethrough", "underline"].forEach((formatStr) => {
+              if (node.hasFormat(formatStr)) {
+                node.toggleFormat(formatStr);
+              }
+            });
           }
         });
       }

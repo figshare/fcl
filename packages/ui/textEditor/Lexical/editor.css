@@ -112,3 +112,101 @@
 .editor-listitem {
   margin: calc(1.5 * var(--gridSize)) calc(4 * var(--gridSize)) calc(1.5 * var(--gridSize)) calc(4 * var(--gridSize));
 }
+
+/** Extend `typography.css` `not([class])` styling inside editor input **/
+.input h1 {
+  font-size: var(--typography-XXL-fontSize);
+  line-height: var(--typography-XXL-lineHeight);
+
+  margin: 0 0 calc(7 * var(--gridSize)) 0;
+}
+
+.input h2 {
+  font-size: var(--typography-XL-fontSize);
+  line-height: var(--typography-XL-lineHeight);
+
+  margin: calc(7 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+}
+
+.input h3 {
+  font-size: var(--typography-L-fontSize);
+  line-height: var(--typography-L-lineHeight);
+
+  margin: calc(5 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+}
+
+.input h4 {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  margin: calc(4 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+}
+
+.input h5 {
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+
+  margin: calc(4 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+
+  text-transform: uppercase;
+}
+
+.input h6 {
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+
+  margin: calc(4 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
+}
+
+.input h2 + h3,
+.input h2 + h4,
+.input h2 + h5,
+.input h2 + h6,
+.input h3 + h4,
+.input h3 + h5,
+.input h3 + h6,
+.input h4 + h5,
+.input h4 + h6,
+.input h5 + h6 {
+  margin-top: calc(2 * var(--gridSize));
+}
+
+.input p {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  margin: 0 0 calc(4 * var(--gridSize)) 0;
+}
+
+.input ul,
+.input ol {
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  margin: 0 0 calc(4 * var(--gridSize)) 0;
+  padding: 0 0 0 calc(4 * var(--gridSize));
+}
+
+.input p + ul,
+.input p + ol {
+  margin-top: calc(-3 * var(--gridSize));
+}
+
+.input ul ul,
+.input ol ol,
+.input ol ul,
+.input ul ol {
+  margin: 0;
+}
+
+.input ol ol,
+.input ul ol {
+  list-style-type: lower-roman;
+}
+
+.input ol ol ol,
+.input ol ul ol,
+.input ul ol ol,
+.input ul ul ol {
+  list-style-type: lower-alpha;
+}
