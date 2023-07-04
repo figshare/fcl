@@ -5,7 +5,7 @@ import { $isHeadingNode } from "@lexical/rich-text";
 import { $getNearestNodeOfType } from "@lexical/utils";
 
 import IconSet from "../../../../icons/editor";
-import { ToolbarItemType, ToolbarSections } from "../../constants";
+import { ToolbarItem, ToolbarItemType, ToolbarSections } from "../../constants";
 import { getSelectedNode } from "../../utils";
 
 
@@ -77,6 +77,13 @@ export function checkIfToolIsDisabled(tool, state) {
       const block = state.block ?? "";
 
       return block === "list";
+    }
+    case ToolbarItemType.Format: {
+      if (tool.type === ToolbarItem.ClearFormatting) {
+        return !state.hasSelection;
+      }
+
+      return false;
     }
     default:
       return false;

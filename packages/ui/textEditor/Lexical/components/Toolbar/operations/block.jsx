@@ -1,5 +1,6 @@
-import { $getSelection, $isRangeSelection, $createParagraphNode } from "lexical";
-import { $wrapNodes } from "@lexical/selection";
+/* eslint-disable new-cap, camelcase */
+import { $getSelection, $isRangeSelection, $createParagraphNode, DEPRECATED_$isGridSelection } from "lexical";
+import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode } from "@lexical/rich-text";
 
 
@@ -8,11 +9,14 @@ export default function operation({ tool, editor }) {
 
   editor.update(() => {
     const selection = $getSelection();
-    if ($isRangeSelection(selection)) {
+    if (
+      $isRangeSelection(selection) ||
+      DEPRECATED_$isGridSelection(selection)
+    ) {
       if (type === "paragraph") {
-        $wrapNodes(selection, () => $createParagraphNode(type));
+        $setBlocksType(selection, () => $createParagraphNode());
       } else {
-        $wrapNodes(selection, () => $createHeadingNode(type));
+        $setBlocksType(selection, () => $createHeadingNode(type));
       }
     }
   });

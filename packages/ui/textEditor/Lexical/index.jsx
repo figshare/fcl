@@ -14,6 +14,7 @@ import { AutoLinkNode, LinkNode } from "@lexical/link";
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
+import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { TRANSFORMERS } from "@lexical/markdown";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $generateNodesFromDOM, $generateHtmlFromNodes } from "@lexical/html";
@@ -179,6 +180,7 @@ export function Editor(props) {
       <ListPlugin />
       <LinkPlugin />
       <Toolbar config={toolbarConfig} />
+      <TabIndentationPlugin />
     </div>
     <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
   </>);
