@@ -210,3 +210,12 @@
 .input ul ul ol {
   list-style-type: lower-alpha;
 }
+
+.input li:has(ol),
+.input li:has(ul) {
+  list-style: none;
+}
+
+.input li[data-indent] {
+  list-style: none;
+}

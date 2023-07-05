@@ -124,3 +124,12 @@ ul:not([class]) ol:not([class]) ol:not([class]),
 ul:not([class]) ul:not([class]) ol:not([class]) {
   list-style-type: lower-alpha;
 }
+
+li:has(ol),
+li:has(ul) {
+  list-style: none;
+}
+
+li[data-indent] {
+  list-style: none;
+}
