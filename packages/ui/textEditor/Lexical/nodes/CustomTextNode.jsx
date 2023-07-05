@@ -98,7 +98,7 @@ export class CustomTextNode extends TextNode {
 
     if (element !== null) {
       if (this.hasFormat("strikethrough")) {
-        element = wrapContentWith(element, "s");
+        element = wrapContentWith(element, "del");
       }
       if (this.hasFormat("underline")) {
         element = wrapContentWith(element, "u");
