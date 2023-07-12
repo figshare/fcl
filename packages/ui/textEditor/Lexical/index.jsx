@@ -23,6 +23,8 @@ import {
   BLUR_COMMAND,
   FOCUS_COMMAND,
   TextNode,
+  $createParagraphNode,
+  $createTextNode,
 } from "lexical";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
@@ -67,10 +69,37 @@ const defaultConfig = {
   ],
 };
 
+const NodeTypes = {
+  customText: "custom-text",
+  paragraph: "paragraph",
+};
+
+function populateEditorState(value) {
+  return (editor) => {
+    const root = $getRoot();
+    if (root.getFirstChild() === null) {
+      const parser = new DOMParser();
+      const dom = parser.parseFromString(value, "text/html");
+      let nodes = $generateNodesFromDOM(editor, dom);
+      // Select the root
+      const selection = $getRoot().select();
+
+      if (nodes[0]?.getType?.() === NodeTypes.customText) {
+        const paragraphNode = $createParagraphNode();
+        paragraphNode.append($createTextNode(value));
+        nodes = [paragraphNode];
+      }
+
+      selection.insertNodes(nodes);
+    }
+  };
+}
+
 export default function EditorContainer(props) {
   const { disabled, onError } = props;
+
   const initialConfig = useMemo(() => {
-    return { ...defaultConfig, editable: !disabled, onError };
+    return { ...defaultConfig, editable: !disabled, onError, editorState: populateEditorState(props.value) };
   }, [defaultConfig, onError, disabled]);
 
   return (
@@ -111,19 +140,6 @@ export function Editor(props) {
   useEffect(() => {
     callbacks.current.onEditorChange?.(editor);
   }, [editor, callbacks]);
-
-
-  useEffect(() => {
-    editor.update(() => {
-      const parser = new DOMParser();
-      const dom = parser.parseFromString(value, "text/html");
-      const nodes = $generateNodesFromDOM(editor, dom);
-      // Select the root
-      const root = $getRoot().select();
-
-      root.insertNodes(nodes);
-    });
-  }, []);
 
   useEffect(() => {
     callbacks.current.onChange = onChange;
