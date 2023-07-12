@@ -198,6 +198,7 @@ div.alert {
 .alertClose {
   width: calc(3 * var(--gridSize));
   height: calc(3 * var(--gridSize));
+  margin-top: calc(0.5 * var(--gridSize));
   margin-right: 0;
   margin-left: auto;
 }
