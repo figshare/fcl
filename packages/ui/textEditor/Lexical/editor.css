@@ -13,6 +13,8 @@
   min-height: calc(45.5 * var(--gridSize));
   max-height: calc(100 * var(--gridSize));
 
+  padding: var(--gridSize) calc(2 * var(--gridSize)) 0;
+
   resize: vertical;
 
   border: calc(var(--gridSize) / 6) solid var(--border-color);
@@ -45,13 +47,11 @@
 }
 
 .container.singleRow {
-  min-height: calc(14 * var(--gridSize));
+  min-height: calc(12 * var(--gridSize));
 }
 
 .input {
   overflow: auto;
-
-  padding: calc(2 * var(--gridSize));
 
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
@@ -96,7 +96,7 @@
 
   position: absolute;
 
-  margin: calc(2 * var(--gridSize));
+  padding-right: inherit;
 
   pointer-events: none;
 
@@ -170,6 +170,10 @@
   line-height: var(--typography-M-lineHeight);
 
   margin: 0 0 calc(4 * var(--gridSize)) 0;
+}
+
+.container.singleRow p {
+  margin: 0;
 }
 
 .input ul,
