@@ -5,13 +5,11 @@
   position: relative;
 
   display: flex;
-
   overflow: hidden;
-
   flex-direction: column;
+  justify-content: space-between;
 
   width: 100%;
-
   min-height: calc(45.5 * var(--gridSize));
   max-height: calc(100 * var(--gridSize));
 
@@ -19,9 +17,7 @@
 
   border: calc(var(--gridSize) / 6) solid var(--border-color);
   border-radius: var(--gridSize);
-
   background-color: var(--color-layout-primary-background);
-
   box-shadow: inset 0 1px 4px rgba(135, 134, 134, 0.2);
 }
 
@@ -53,8 +49,6 @@
 }
 
 .input {
-  flex: 1 0;
-
   overflow: auto;
 
   padding: calc(2 * var(--gridSize));
