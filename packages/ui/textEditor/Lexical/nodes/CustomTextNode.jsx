@@ -1,4 +1,4 @@
-import { TextNode, $createTextNode } from "lexical";
+import { TextNode, $createTextNode, $isTextNode } from "lexical";
 
 
 function wrapElementWith(element, tag) {
@@ -120,4 +120,38 @@ export class CustomTextNode extends TextNode {
     return { element };
   }
 
+  static importDOM() {
+    const result = TextNode.importDOM();
+
+    return {
+      ...result,
+      del: () => {
+        return {
+          conversion: convertDelToStriketrough,
+          priority: 0,
+        };
+      },
+    };
+  }
+}
+
+const nodeNameToTextFormat = { del: "striketrough" };
+
+function convertDelToStriketrough(node) {
+  const format = nodeNameToTextFormat[node.nodeName.toLowerCase()];
+
+  if (format === undefined) {
+    return { node: null };
+  }
+
+  return {
+    forChild: (lexicalNode) => {
+      if ($isTextNode(lexicalNode) && !lexicalNode.hasFormat(format)) {
+        lexicalNode.setFormat(4);
+      }
+
+      return lexicalNode;
+    },
+    node: null,
+  };
 }
