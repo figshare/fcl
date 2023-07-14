@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-import { getTextDirection } from "./utils";
 import styles from "./index.css";
 
 
@@ -69,14 +68,11 @@ export default class TextInput extends Component {
     onFocus: undefined,
   }
 
-  state = {
-    direction: null,
-    isInputFocused: false,
-  }
+  state = { isInputFocused: false }
 
   render() {
     const { className, children, disabled, error, theme, ...props } = this.props;
-    const { direction, isInputFocused } = this.state;
+    const { isInputFocused } = this.state;
 
     const classNames = [
       styles.container,
@@ -94,7 +90,6 @@ export default class TextInput extends Component {
           aria-disabled={disabled || undefined}
           aria-invalid={error || undefined}
           className={styles.input}
-          dir={direction}
           onBlur={this.onBlur}
           onChange={this.onChange}
           onFocus={this.onFocus}
@@ -120,9 +115,6 @@ export default class TextInput extends Component {
     if (disabled) {
       return;
     }
-
-    const direction = getTextDirection(e.target.value);
-    this.setState({ direction });
 
     onChange?.(e);
   }
