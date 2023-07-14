@@ -217,11 +217,3 @@
 .input li[data-indent] {
   list-style: none;
 }
-
-:global(.ltr) {
-  text-align: left;
-}
-
-:global(.rtl) {
-  text-align: right;
-}

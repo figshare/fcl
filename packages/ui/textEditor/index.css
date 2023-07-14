@@ -94,18 +94,6 @@
   margin-left: calc(4 * var(--gridSize));
 }
 
-:global(.public-DraftStyleDefault-rtl) {
-  direction: rtl;
-
-  text-align: right;
-}
-
-:global(.public-DraftStyleDefault-ltr) {
-  direction: ltr;
-
-  text-align: left;
-}
-
 :global(.public-DraftEditor-content):focus {
   box-shadow: none;
 }
