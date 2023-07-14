@@ -1,21 +1,6 @@
 import { TextNode, $createTextNode, $isTextNode } from "lexical";
 
 
-function wrapElementWith(element, tag) {
-  if (element.tagName === "SPAN") {
-    const el = document.createElement(tag);
-
-    el.innerHTML = element.innerHTML;
-
-    return el;
-  }
-
-  const el = document.createElement(tag);
-  el.appendChild(element);
-
-  return el;
-}
-
 function wrapContentWith(element, tag) {
   if (element.tagName === "SPAN") {
     const el = document.createElement(tag);
@@ -97,13 +82,6 @@ export class CustomTextNode extends TextNode {
     });
 
     if (element !== null) {
-      if (this.hasFormat("strikethrough")) {
-        element = wrapContentWith(element, "del");
-      }
-      if (this.hasFormat("underline")) {
-        element = wrapContentWith(element, "u");
-      }
-
       if (["STRONG", "BOLD", "B"].includes(element.tagName)) {
         element = replaceWith(element, "b");
       }
@@ -112,8 +90,16 @@ export class CustomTextNode extends TextNode {
         element = replaceWith(element, "i");
       }
 
+      if (this.hasFormat("strikethrough")) {
+        element = wrapContentWith(element, "del");
+      }
+
+      if (this.hasFormat("underline")) {
+        element = wrapContentWith(element, "u");
+      }
+
       if (this.hasFormat("italic") && this.hasFormat("bold")) {
-        element = wrapElementWith(element, "i");
+        element = wrapContentWith(element, "i");
       }
     }
 

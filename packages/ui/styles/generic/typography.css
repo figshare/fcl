@@ -133,3 +133,17 @@ li:has(ul) {
 li[data-indent] {
   list-style: none;
 }
+
+a:hover:has(sub),
+a:focus:has(sub),
+a:hover:has(sup),
+a:focus:has(sup) {
+  text-decoration: none;
+}
+
+a:hover > sub,
+a:focus > sub,
+a:hover > sup,
+a:focus > sup {
+  text-decoration: underline;
+}
