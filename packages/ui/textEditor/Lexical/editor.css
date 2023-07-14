@@ -61,12 +61,12 @@
   text-decoration: underline;
 }
 
-.input s {
+.input del {
   text-decoration: line-through;
 }
 
-.input u > s,
-.input s > u {
+.input u > del,
+.input del > u {
   text-decoration: underline line-through;
 }
 
@@ -216,4 +216,19 @@
 
 .input li[data-indent] {
   list-style: none;
+}
+
+.input a:hover,
+.input a:focus {
+  text-decoration: none;
+}
+
+.input a:hover > *:not(:global(.editor-strikethrough), :global(.editor-underlineStrikethrough)),
+.input a:focus > *:not(:global(.editor-strikethrough), :global(.editor-underlineStrikethrough)) {
+  text-decoration: underline;
+}
+
+.input a:hover > :global(.editor-strikethrough),
+.input a:focus > :global(.editor-strikethrough) {
+  text-decoration: underline line-through;
 }
