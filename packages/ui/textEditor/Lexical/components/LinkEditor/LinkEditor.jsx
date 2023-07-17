@@ -142,7 +142,7 @@ export function LinkEditor({ onClose }) {
         >
           Unlink
         </Button>
-        <div>
+        <div className={styles.buttons}>
           <Button id="cancel-button" theme="secondaryAlt" onClick={onCancel}>
             Cancel
           </Button>
