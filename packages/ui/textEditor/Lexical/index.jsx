@@ -25,12 +25,13 @@ import {
   TextNode,
   $createParagraphNode,
   $createTextNode,
+  KEY_TAB_COMMAND,
 } from "lexical";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
 
 import { applyMarkupProcessors, stripHtmlTags } from "./utils";
-import { LowPriority, DefaultToolbarConfig } from "./constants";
+import { LowPriority, HighPriority, DefaultToolbarConfig, FOCUSABLE_ELEMENTS } from "./constants";
 import Toolbar from "./components/Toolbar";
 import { Warning } from "./components/Warning";
 import DefaultTheme from "./themes/DefaultTheme";
@@ -159,6 +160,29 @@ export function Editor(props) {
           onBlur(event);
         }
       }, LowPriority),
+      editor.registerCommand(
+        KEY_TAB_COMMAND,
+        (event) => {
+          if (!event?.target?.querySelector("li")) {
+            event.preventDefault();
+            const focusableElements = Array.prototype.slice.call(document.querySelectorAll(FOCUSABLE_ELEMENTS));
+            const currentFocus = document.activeElement;
+            const currentIndex = focusableElements.indexOf(currentFocus);
+            if (event.shiftKey) {
+              focusableElements[currentIndex - 1].focus();
+
+              return true;
+            }
+
+            focusableElements[currentIndex + 1].focus();
+
+            return true;
+          }
+
+          return false;
+        },
+        HighPriority,
+      ),
     )
   , [editor, callbacks]);
 

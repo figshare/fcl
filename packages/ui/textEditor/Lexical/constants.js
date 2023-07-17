@@ -1,4 +1,13 @@
 export const LowPriority = 1;
+export const HighPriority = 2;
+
+export const FOCUSABLE_ELEMENTS = "button:not([tabindex=\"-1\"]), " +
+"[href]:not([tabindex=\"-1\"]), " +
+"input:not([disabled]):not([tabindex=\"-1\"]), " +
+"select:not([disabled]):not([tabindex=\"-1\"]), " +
+"textarea:not([disabled]):not([tabindex=\"-1\"]), " +
+"[tabindex]:not([tabindex=\"-1\"]), " +
+"div[contenteditable=\"true\"]:not([tabindex=\"-1\"])";
 
 export const ToolbarItem = {
   Heading2: "h2",
