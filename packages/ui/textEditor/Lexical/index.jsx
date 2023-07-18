@@ -60,7 +60,10 @@ const defaultConfig = {
     TableCellNode,
     TableRowNode,
     AutoLinkNode,
-    LinkNode,
+    {
+      replace: LinkNode,
+      with: (node) => new LinkNode(node.__url, { rel: node.__rel, target: "_blank", title: node.__title }, node.__key),
+    },
     CustomTextNode,
     {
       replace: TextNode,
