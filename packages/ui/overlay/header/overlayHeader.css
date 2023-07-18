@@ -10,6 +10,10 @@
   }
 }
 
+.headerInfo {
+  display: flex;
+}
+
 .partOfContent {
   padding: 0 0 calc(6 * var(--gridSize));
 
@@ -39,7 +43,7 @@
   line-height: var(--typography-XL-lineHeight);
 }
 
-.closeButton {
+.iconBtn {
   display: flex;
 
   width: calc(6 * var(--gridSize));
