@@ -71,9 +71,13 @@ export function checkIfToolIsDisabled(tool, state) {
     case ToolbarItemType.List: {
       const block = state.block ?? "";
 
-      return ["h1", "h2", "h3"].includes(block);
+      return ["h1", "h2", "h3", "h4"].includes(block);
     }
     case ToolbarItemType.Block: {
+      if (tool.type === ToolbarItem.Paragraph) {
+        return false;
+      }
+
       const block = state.block ?? "";
 
       return block === "list";
