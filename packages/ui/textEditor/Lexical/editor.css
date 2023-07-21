@@ -142,8 +142,6 @@
   line-height: var(--typography-S-lineHeight);
 
   margin: calc(4 * var(--gridSize)) 0 calc(2 * var(--gridSize)) 0;
-
-  text-transform: uppercase;
 }
 
 .input h6 {
