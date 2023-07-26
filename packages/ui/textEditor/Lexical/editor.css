@@ -222,6 +222,14 @@
   text-decoration: none;
 }
 
+:global(.ltr) {
+  text-align: left;
+}
+
+:global(.rtl) {
+  text-align: right;
+}
+
 .input a:hover > *:not(:global(.editor-strikethrough), :global(.editor-underlineStrikethrough)),
 .input a:focus > *:not(:global(.editor-strikethrough), :global(.editor-underlineStrikethrough)) {
   text-decoration: underline;
