@@ -1,5 +1,7 @@
 import { $isAtNodeEnd } from "@lexical/selection";
 
+import { NodeTypes } from "./constants";
+
 
 export const stripHtmlTags = (html) => {
   const regexp = /(<([^>]+)>)/gi;
@@ -42,4 +44,26 @@ export const applyMarkupProcessors = (markup, processorsToRun) => {
   });
 
   return newMarkup;
+};
+
+export const createBlocksForEditorState = (nodes) => {
+  let level = 0;
+  const blocks = [];
+
+  for (const node of nodes) {
+    if (node?.getType?.() === NodeTypes.customText) {
+      const block = blocks[level];
+
+      if (Array.isArray(block)) {
+        block.push(node);
+      } else {
+        blocks.push([node]);
+      }
+    } else {
+      blocks.push(node);
+      level += 1;
+    }
+  }
+
+  return blocks;
 };

@@ -1,6 +1,9 @@
 import { TextNode, $createTextNode, $isTextNode } from "lexical";
 
 
+const ALLOWED_TAGS = [
+  "address", "cite", "code", "blockquote", "pre", "dl", "dd", "dt", "lh", "table", "th", "td", "tr"];
+
 function wrapContentWith(element, tag) {
   if (element.tagName === "SPAN") {
     const el = document.createElement(tag);
@@ -93,7 +96,6 @@ export class CustomTextNode extends TextNode {
       if (this.hasFormat("strikethrough")) {
         element = wrapContentWith(element, "del");
       }
-
       if (this.hasFormat("underline")) {
         element = wrapContentWith(element, "u");
       }
@@ -108,6 +110,7 @@ export class CustomTextNode extends TextNode {
 
   static importDOM() {
     const result = TextNode.importDOM();
+    const tagsImport = importAllowedTags();
 
     return {
       ...result,
@@ -117,11 +120,25 @@ export class CustomTextNode extends TextNode {
           priority: 0,
         };
       },
+      ...tagsImport,
     };
   }
 }
 
 const nodeNameToTextFormat = { del: "striketrough" };
+
+function importAllowedTags() {
+  return ALLOWED_TAGS.reduce((acc, tag) => {
+    acc[tag] = () => {
+      return {
+        conversion: convertHTMLTagNodeToText,
+        priority: 0,
+      };
+    };
+
+    return acc;
+  }, {});
+}
 
 function convertDelToStriketrough(node) {
   const format = nodeNameToTextFormat[node.nodeName.toLowerCase()];
@@ -134,6 +151,21 @@ function convertDelToStriketrough(node) {
     forChild: (lexicalNode) => {
       if ($isTextNode(lexicalNode) && !lexicalNode.hasFormat(format)) {
         lexicalNode.setFormat(4);
+      }
+
+      return lexicalNode;
+    },
+    node: null,
+  };
+}
+
+function convertHTMLTagNodeToText(node) {
+  const tagName = node.nodeName.toLowerCase();
+
+  return {
+    forChild: (lexicalNode) => {
+      if ($isTextNode(lexicalNode) && ALLOWED_TAGS.includes(tagName)) {
+        lexicalNode.__text = node.outerHTML;
       }
 
       return lexicalNode;
