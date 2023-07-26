@@ -19,7 +19,6 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { $generateNodesFromDOM, $generateHtmlFromNodes } from "@lexical/html";
 import {
   $createParagraphNode,
-  $createTextNode,
   $getRoot,
   $getSelection,
   $isRangeSelection,
@@ -33,7 +32,7 @@ import {
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
 
-import { applyMarkupProcessors, stripHtmlTags } from "./utils";
+import { applyMarkupProcessors, stripHtmlTags, createBlocksForEditorState } from "./utils";
 import { LowPriority, HighPriority, DefaultToolbarConfig } from "./constants";
 import Toolbar from "./components/Toolbar";
 import { Warning } from "./components/Warning";
@@ -77,28 +76,31 @@ const defaultConfig = {
   ],
 };
 
-const NodeTypes = {
-  customText: "custom-text",
-  paragraph: "paragraph",
-};
-
 function populateEditorState(value) {
   return (editor) => {
     const root = $getRoot();
     if (root.getFirstChild() === null) {
       const parser = new DOMParser();
       const dom = parser.parseFromString(value, "text/html");
-      let nodes = $generateNodesFromDOM(editor, dom);
+
+      // const updatedNodes = [];
       // Select the root
       const selection = $getRoot().select();
 
-      if (nodes[0]?.getType?.() === NodeTypes.customText) {
-        const paragraphNode = $createParagraphNode();
-        paragraphNode.append($createTextNode(value));
-        nodes = [paragraphNode];
-      }
+      const blocks = createBlocksForEditorState($generateNodesFromDOM(editor, dom));
 
-      selection.insertNodes(nodes);
+      const editorNodes = blocks.map((block) => {
+        if (Array.isArray(block)) {
+          const paragraphNode = $createParagraphNode();
+          paragraphNode.append(...block);
+
+          return paragraphNode;
+        }
+
+        return block;
+      });
+
+      selection.insertNodes(editorNodes);
     }
   };
 }
@@ -246,7 +248,7 @@ export function Editor(props) {
       <LinkPlugin />
       <Toolbar config={toolbarConfig} />
     </div>
-    {!isSingleRow && <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} /> }
+    {!isSingleRow && <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />}
   </>);
 }
 

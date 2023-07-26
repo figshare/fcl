@@ -124,3 +124,8 @@ export const ToolbarSections = {
     },
   },
 };
+
+export const NodeTypes = {
+  customText: "custom-text",
+  paragraph: "paragraph",
+};
