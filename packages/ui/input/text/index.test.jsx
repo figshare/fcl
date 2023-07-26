@@ -73,6 +73,20 @@ describe("<Text />", () => {
     expect(onChange).toHaveReturnedWith(undefined);
   });
 
+  it("changes input direction correctly", () => {
+    const textInput = shallow(<TextInput disabled={false} onChange={onChange} />);
+
+    let event = { target: { value: "test" } };
+    textInput.find("input").simulate("change", event);
+
+    expect(textInput.find("input").props().dir).toEqual("ltr");
+
+    event = { target: { value: "\u0591" } };
+    textInput.find("input").simulate("change", event);
+
+    expect(textInput.find("input").props().dir).toEqual("rtl");
+  });
+
   it("triggers focus and blur correctly", () => {
     const textInput = shallow(<TextInput onBlur={onBlur} onChange={onChange} onFocus={onFocus} />);
 
