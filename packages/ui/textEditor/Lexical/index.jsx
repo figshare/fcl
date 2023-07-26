@@ -27,18 +27,20 @@ import {
   FOCUS_COMMAND,
   KEY_TAB_COMMAND,
   INDENT_CONTENT_COMMAND,
+  PASTE_COMMAND,
   TextNode,
 } from "lexical";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
 
 import { applyMarkupProcessors, stripHtmlTags } from "./utils";
-import { LowPriority, DefaultToolbarConfig } from "./constants";
+import { LowPriority, HighPriority, DefaultToolbarConfig } from "./constants";
 import Toolbar from "./components/Toolbar";
 import { Warning } from "./components/Warning";
 import DefaultTheme from "./themes/DefaultTheme";
 import styles from "./editor.css"; // eslint-disable-line css-modules/no-unused-class
 import { CustomTextNode } from "./nodes/CustomTextNode";
+import { definePasteCommand } from "./components/Toolbar/commands";
 
 
 export const DEFAULT_MAX_TEXT_LENGTH = 10000;
@@ -192,6 +194,20 @@ export function Editor(props) {
 
         return true;
       }, LowPriority),
+      editor.registerCommand(
+        PASTE_COMMAND,
+        (event) => {
+          event.preventDefault();
+          if (definePasteCommand(event)) {
+            editor.dispatchCommand(PASTE_COMMAND, definePasteCommand(event));
+
+            return true;
+          }
+
+          return false;
+        },
+        HighPriority,
+      ),
     )
   , [editor, callbacks]);
 
@@ -230,7 +246,7 @@ export function Editor(props) {
       <LinkPlugin />
       <Toolbar config={toolbarConfig} />
     </div>
-    <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
+    {!isSingleRow && <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} /> }
   </>);
 }
 

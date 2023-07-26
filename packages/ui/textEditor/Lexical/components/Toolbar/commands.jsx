@@ -8,6 +8,7 @@ import { $isLinkNode, $isAutoLinkNode } from "@lexical/link";
 
 import { getSelectedNode } from "../../utils";
 import { LinkEditor } from "../LinkEditor/LinkEditor";
+import { createPasteEventWithData, parsePastedLexicalContent } from "../../../utils/parsingUtils";
 
 
 export function defineClickCommandListener({ showModal }) {
@@ -39,4 +40,24 @@ export function defineUndoRedoCommandListeners({ dispatch, type }) {
 
     return false;
   };
+}
+
+export function definePasteCommand(event) {
+  const pastedText = event.clipboardData?.getData("text/html");
+  let processedText = pastedText;
+
+  if (pastedText?.includes("&lt;")) {
+    const doc = new DOMParser().parseFromString(pastedText, "text/html");
+    processedText = doc.body.textContent;
+  }
+
+  if (pastedText?.includes("text-decoration:underline line-through;")) {
+    processedText = parsePastedLexicalContent(processedText);
+  }
+
+  if (processedText !== pastedText) {
+    return createPasteEventWithData(processedText);
+  }
+
+  return false;
 }
