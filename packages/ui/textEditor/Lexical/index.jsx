@@ -14,17 +14,20 @@ import { AutoLinkNode, LinkNode } from "@lexical/link";
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
-import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { TRANSFORMERS } from "@lexical/markdown";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $generateNodesFromDOM, $generateHtmlFromNodes } from "@lexical/html";
 import {
-  $getRoot,
-  BLUR_COMMAND,
-  FOCUS_COMMAND,
-  TextNode,
   $createParagraphNode,
   $createTextNode,
+  $getRoot,
+  $getSelection,
+  $isRangeSelection,
+  BLUR_COMMAND,
+  FOCUS_COMMAND,
+  KEY_TAB_COMMAND,
+  INDENT_CONTENT_COMMAND,
+  TextNode,
 } from "lexical";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
@@ -150,6 +153,22 @@ export function Editor(props) {
     callbacks.current.onBlur = onBlur;
   }, [callbacks, onChange, onBlur, onFocus]);
 
+  const handleTab = (shiftKey) => {
+    const selection = $getSelection();
+    if (!$isRangeSelection(selection)) {
+      return null;
+    }
+
+    const selectionNodes = selection.getNodes();
+    const firstNode = selectionNodes[0];
+
+    if (firstNode.__prev && firstNode.__type === "listitem" && !shiftKey) {
+      return INDENT_CONTENT_COMMAND;
+    }
+
+    return null;
+  };
+
   useEffect(() =>
     mergeRegister(
       editor.registerCommand(FOCUS_COMMAND, (event) => {
@@ -161,6 +180,17 @@ export function Editor(props) {
         if (typeof callbacks.current.onBlur === "function") {
           onBlur(event);
         }
+      }, LowPriority),
+      editor.registerCommand(KEY_TAB_COMMAND, (event) => {
+        const command = handleTab(event.shiftKey);
+        if (command === null) {
+          return false;
+        }
+
+        event.preventDefault();
+        editor.dispatchCommand(command, undefined);
+
+        return true;
       }, LowPriority),
     )
   , [editor, callbacks]);
@@ -199,7 +229,6 @@ export function Editor(props) {
       <ListPlugin />
       <LinkPlugin />
       <Toolbar config={toolbarConfig} />
-      <TabIndentationPlugin />
     </div>
     <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
   </>);
