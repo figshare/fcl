@@ -8,6 +8,7 @@ import { moveSelectionToEnd } from "./selectionUtils";
 
 
 export const STRIKE_THROUGH_UNDERLINE = "text-decoration:underline line-through;";
+export const SCRIPT_STRIKE_THROUGH_UNDERLINE = "text-decoration: underline line-through";
 
 export const onConvertDraftToHTML = (editorState) => {
   const options = {
@@ -177,14 +178,33 @@ export const parsePastedContent = (editorState, html = "") => {
 
   return EditorState.push(editorState, newContent, "insert-characters");
 };
+export const flattenSpans = (html) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const spans = doc.getElementsByTagName("span");
 
+  for (const span of spans) {
+    const innerSpan = span.querySelector("span");
+    if (innerSpan) {
+      const text = innerSpan.innerText;
+
+      span.style.verticalAlign = innerSpan.style.verticalAlign;
+      span.style.fontSize = innerSpan.style.fontSize;
+
+      span.innerHTML = text;
+    }
+  }
+
+  return doc.body.innerHTML;
+};
 /* istanbul ignore next */
 export const parsePastedLexicalContent = (html = "") => {
+  const flattenHtml = flattenSpans(html);
 
-  const parsedHtmlChunk = html.split("</span>").map((chunk) => {
+  const parsedHtmlChunk = flattenHtml.split("</span>").map((chunk) => {
+    const parser = new DOMParser();
+    const element = parser.parseFromString(chunk, "text/html");
     if (chunk.includes(STRIKE_THROUGH_UNDERLINE)) {
-      const parser = new DOMParser();
-      const element = parser.parseFromString(chunk, "text/html");
       const text = (element.getElementsByTagName("span") || [])[0].innerText;
 
       return chunk.
@@ -192,6 +212,17 @@ export const parsePastedLexicalContent = (html = "") => {
         replace(
           `white-space:pre-wrap;">${text}`,
           `white-space:pre-wrap;"><u><s>${text}</s></u>`
+        );
+    }
+
+    if (chunk.includes(SCRIPT_STRIKE_THROUGH_UNDERLINE)) {
+      const text = (element.getElementsByTagName("span") || [])[0].innerText;
+
+      return chunk.
+        replace(SCRIPT_STRIKE_THROUGH_UNDERLINE, "").
+        replace(
+          `white-space: pre-wrap;">${text}`,
+          `white-space: pre-wrap;"><u><s>${text}</s></u>`
         );
     }
 
