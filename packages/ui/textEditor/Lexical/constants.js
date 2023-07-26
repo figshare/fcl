@@ -1,4 +1,5 @@
 export const LowPriority = 1;
+export const HighPriority = 3;
 
 export const ToolbarItem = {
   Heading2: "h2",

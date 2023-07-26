@@ -177,3 +177,38 @@ export const parsePastedContent = (editorState, html = "") => {
 
   return EditorState.push(editorState, newContent, "insert-characters");
 };
+
+/* istanbul ignore next */
+export const parsePastedLexicalContent = (html = "") => {
+
+  const parsedHtmlChunk = html.split("</span>").map((chunk) => {
+    if (chunk.includes(STRIKE_THROUGH_UNDERLINE)) {
+      const parser = new DOMParser();
+      const element = parser.parseFromString(chunk, "text/html");
+      const text = (element.getElementsByTagName("span") || [])[0].innerText;
+
+      return chunk.
+        replace(STRIKE_THROUGH_UNDERLINE, "").
+        replace(
+          `white-space:pre-wrap;">${text}`,
+          `white-space:pre-wrap;"><u><s>${text}</s></u>`
+        );
+    }
+
+    return chunk;
+  });
+
+  return parsedHtmlChunk.join("</span>");
+};
+
+export const createPasteEventWithData = (data) => {
+  const event = new Event("paste", {
+    bubbles: true,
+    cancelable: true,
+  });
+
+  event.clipboardData = new DataTransfer();
+  event.clipboardData.setData("text/html", data);
+
+  return event;
+};
