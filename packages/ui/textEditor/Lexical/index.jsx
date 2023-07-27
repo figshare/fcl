@@ -142,6 +142,7 @@ export function Editor(props) {
 
   const callbacks = useRef({ onChange, onBlur, onFocus, onEditorChange });
   const processorsRef = useRef(processors);
+  const editorRef = useRef();
 
   useEffect(() => {
     processorsRef.current = processors;
@@ -181,9 +182,14 @@ export function Editor(props) {
         }
       }, LowPriority),
       editor.registerCommand(BLUR_COMMAND, (event) => {
+        if (editorRef.current.contains(event.relatedTarget)) {
+          return true;
+        }
         if (typeof callbacks.current.onBlur === "function") {
           onBlur(event);
         }
+
+        return false;
       }, LowPriority),
       editor.registerCommand(KEY_TAB_COMMAND, (event) => {
         const command = handleTab(event.shiftKey);
@@ -235,7 +241,7 @@ export function Editor(props) {
   );
 
   return (<>
-    <div className={editorClasses} data-id="editor-content-editable">
+    <div ref={editorRef} className={editorClasses} data-id="editor-content-editable">
       <RichTextPlugin
         ErrorBoundary={LexicalErrorBoundary}
         contentEditable={<ContentEditable className={styles.input} />}
