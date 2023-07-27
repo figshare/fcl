@@ -102,7 +102,7 @@ export default class Checkbox extends Component {
     const Icon = componentTypes[variant];
 
     return (
-      <label className={styles.label}>
+      <label className={classnames(styles.label, className)}>
         <span className={classnames(containerClassNames)}>
           <input
             {...restProps}
