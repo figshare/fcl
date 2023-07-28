@@ -9,7 +9,7 @@ import {
 } from "lexical";
 import { mergeRegister } from "@lexical/utils";
 
-import { DefaultToolbarConfig, LowPriority } from "../../constants";
+import { DefaultToolbarConfig, LowPriority, ToolbarItem } from "../../constants";
 import useModal from "../LinkEditor/useModal";
 
 import styles from "./Toolbar.css"; // eslint-disable-line css-modules/no-unused-class
@@ -109,20 +109,26 @@ function renderToolbarSections(sectioned, onToolSelect, state) {
     {sectioned.order.map(((sectionKey, index, list) => {
       const section = sectioned.sections[sectionKey];
       const notLast = index !== list.length - 1;
-
+      const isFirefox = navigator.userAgent.indexOf("Firefox") > -1;
       const { type, tools } = section;
 
       return (
         <React.Fragment key={type}>
-          {tools.map((tool) => (
-            <Tool
-              key={`${tool.group}-${tool.type}`}
-              active={checkIfToolIsActive(tool, state)}
-              disabled={checkIfToolIsDisabled(tool, state)}
-              {...tool}
-              onToolSelect={onToolSelect}
-            />
-          ))}
+          {tools.map((tool) => {
+            if (tool.type === ToolbarItem.PasteWithoutFormat && isFirefox) {
+              return null;
+            }
+
+            return (
+              <Tool
+                key={`${tool.group}-${tool.type}`}
+                active={checkIfToolIsActive(tool, state)}
+                disabled={checkIfToolIsDisabled(tool, state)}
+                {...tool}
+                onToolSelect={onToolSelect}
+              />
+            );
+          })}
           {notLast && <Divider />}
         </React.Fragment>
       );
