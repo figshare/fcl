@@ -2,22 +2,29 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Manager as PopperManager } from "react-popper";
 
-import { LinkingProvider } from "../a11y/linking";
-import { Provider } from "../popup/context";
 import uncontrollable from "../helpers/uncontrollable";
+import { LinkingProvider } from "../a11y/linking";
+import { Provider } from "..//popup/context";
 
 
 export { Content, Trigger } from "../popup";
 
 
-export class Toggletip extends Component {
+const HIDE_DELAY = 500;
+
+export class Tooltip extends Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
+    hideDelay: PropTypes.number,
     isVisible: PropTypes.bool,
     onToggle: PropTypes.func,
   }
 
-  static defaultProps = { onToggle: () => undefined, isVisible: undefined }
+  static defaultProps = {
+    hideDelay: HIDE_DELAY,
+    onToggle: () => undefined,
+    isVisible: undefined,
+  }
 
   constructor(...args) {
     super(...args);
@@ -27,11 +34,16 @@ export class Toggletip extends Component {
       context: {
         contentRef: this.setContentRef,
         triggerRef: this.setTriggerRef,
-        events: { onClick: this.onToggle },
-        ariaRole: "alertdialog",
-        ariaAttributes: ["aria-describedby", "aria-labelledby"],
-        onClose: this.onToggle,
-        addEventsOnContent: false,
+        events: {
+          onBlur: this.onHide,
+          onFocus: this.onShow,
+          onMouseOver: this.onShow,
+          onMouseOut: this.onHide,
+        },
+        ariaRole: "tooltip",
+        ariaAttributes: "aria-describedby",
+        onClose: this.onClose,
+        addEventsOnContent: true,
         isVisible: false,
       },
     };
@@ -61,17 +73,33 @@ export class Toggletip extends Component {
     return { context: { ...state.context, triggerNode: node } };
   });
 
-  onToggle = (event) => {
-    event?.stopPropagation();
-    this.props.onToggle(event, { isVisible: !this.state.context.isVisible });
+  onToggle = (event, _visible) => {
+    this.props.onToggle(event, { isVisible: _visible });
+  }
+
+  onShow = (e) => {
+    if (this.state.timeoutId) {
+      clearTimeout(this.state.timeoutId);
+      this.setState({ timeoutId: 0 });
+    }
+
+    this.onToggle(e, true);
+  }
+
+  onHide = (e) => {
+    const timeoutId = setTimeout(() => {
+      this.onToggle(e, false);
+    }, this.props.hideDelay);
+
+    this.setState({ timeoutId });
   }
 
   onClose = (e) => {
-    this.onToggle(e);
+    this.onToggle(e, false);
   }
 }
 
-export const UncontrolledToggletip = uncontrollable(
-  Toggletip,
+export const UncontrolledTooltip = uncontrollable(
+  Tooltip,
   { isVisible: ["onToggle", (_, __, e) => e.isVisible] }
 );

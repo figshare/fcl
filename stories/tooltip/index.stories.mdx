@@ -1,0 +1,160 @@
+import { useState, useCallback } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Button, GenericButton } from "@figshare/fcl/button";
+import Info from "@figshare/fcl/icons/info/medium";
+
+import { Content, Trigger, UncontrolledTooltip as Tooltip } from "@figshare/fcl/tooltip";
+import styles from "./index.stories.css";
+
+<Meta
+  component={Tooltip}
+  title="UI/Tooltip"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: { 
+      canvas: { hidden: true } 
+     },
+  }}
+/>
+
+# Tooltip
+---
+
+## Overview
+
+A component that can be used to show a focusable, persistable tooltip tied to a any type of target node.
+The persistent tooltip will get revealed when users hover on the target or focus on it. 
+
+<Story
+  name="Tooltip"
+  parameters={{
+    layout: "centered",
+  }}
+>
+  {() => {
+    const [isVisible, setIsVisible] = useState(false);
+    const onToggle = useCallback(() => {
+      setIsVisible((visible) => !visible);
+    });
+    return (
+      <>
+        <h3>Tooltip will be bottom</h3>
+        <Tooltip>{()=>(
+          <span>
+            <Trigger>
+              {({ ...props })=>(<div className={styles.wrapperDiv} {...props}><Button>Button trigger</Button></div>)}
+            </Trigger>
+            <Content>
+              {({ ...props }) => (
+                  <div {...props}>
+                    Tooltip content
+                  </div>)}
+            </Content>
+          </span>
+          )}
+        </Tooltip>
+      </>
+    );
+  }}
+</Story>
+
+<br />
+
+<h3>Tooltip will be right</h3>
+
+<br />
+
+<Tooltip>{
+  ()=>(
+    <span>
+      <Trigger>
+       {({ ...triggerProps }) => {
+          const { ref: innerRef, ...props } = triggerProps;
+          return  <Button { ...props } innerRef={innerRef} >Button Trigger</Button>
+        }}
+      </Trigger>
+      <Content placement="right">
+        {({ ...props }) => (
+            <div {...props}>
+              Tooltip content
+            </div>)}
+      </Content>
+    </span>
+  )}
+</Tooltip>
+
+<br />
+
+<h3>Tooltip will be top</h3>
+
+<br />
+
+<Tooltip>{
+  ()=>(
+    <span>
+      <Trigger>
+       {({ ...triggerProps }) => {
+          const { ref: innerRef, ...props } = triggerProps;
+          return  <Button { ...props } innerRef={innerRef} >Button Trigger</Button>
+        }}
+      </Trigger>
+      <Content placement="top">
+        {({ ...props }) => (
+            <div {...props}>
+              Tooltip content
+            </div>)}
+      </Content>
+    </span>
+  )}
+</Tooltip>
+
+<br />
+
+<h3>Tooltip will be left</h3>
+
+<br />
+
+<Tooltip>{
+  ()=>(
+    <span>
+      <Trigger>
+       {({ ...triggerProps }) => {
+          const { ref: innerRef, ...props } = triggerProps;
+          return  <Button { ...props } innerRef={innerRef} >Button Trigger</Button>
+        }}
+      </Trigger>
+      <Content placement="left">
+        {({ ...props }) => (
+            <div {...props}>
+              Tooltip content
+            </div>)}
+      </Content>
+    </span>
+  )}
+</Tooltip>
+
+<br />
+
+<h3>Tooltip on text</h3>
+
+<br />
+
+<Tooltip>{
+  ()=>(
+    <span>
+      <Trigger>
+       {({ ...triggerProps }) => {
+          const { ref: innerRef, ...props } = triggerProps;
+          return  <GenericButton { ...props } innerRef={innerRef} >Button Trigger</GenericButton>
+        }}
+      </Trigger>
+      <Content>
+        {({ ...props }) => (
+            <div {...props}>
+              Tooltip content
+            </div>)}
+      </Content>
+    </span>
+  )}
+</Tooltip>
+

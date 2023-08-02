@@ -1,108 +1,86 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 
-import Toggletip, { Content, Trigger } from "./index";
+import { Content, Trigger } from "../popup/index.jsx";
+
+import { Toggletip, UncontrolledToggletip } from "./index.jsx";
 
 
-const onToggle = jest.fn();
-
-const baselineProps = {
-  isVisible: false,
-  onToggle,
-};
-
-const mountComponent = (props) => shallow(
-  <Toggletip {...baselineProps} {...props}>
-    {() => <span>Irelevant for now</span>}
-  </Toggletip>
-);
-
-describe("<Popup />", () => {
-  it("sets correct contentId and triggerId", () => {
-    let testedComponent = mountComponent();
-    let instance = testedComponent.instance();
-
-    expect(instance.contentId).toEqual("toggletip-content-a11y-1");
-    expect(instance.triggerId).toEqual("toggletip-trigger-a11y-1");
-
-    testedComponent = mountComponent({ triggerId: "testTriggerId", contentId: "testContentId" });
-    instance = testedComponent.instance();
-    expect(instance.contentId).toEqual("testContentId");
-    expect(instance.triggerId).toEqual("testTriggerId");
+describe("<Toggletip />", () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
   });
 
-  it("sets correct children", () => {
-    const children = jest.fn(() => <span>Irelevant for now</span>);
-    const contentId = "testContentId";
-    const triggerId = "testTriggerId";
-    shallow(
-      <Toggletip
-        {...baselineProps}
-        contentId={contentId}
-        isVisible={false}
-        triggerId={triggerId}
-        onToggle={onToggle}
-      >
-        {children}
-      </Toggletip>
-    );
-    expect(children).toHaveBeenCalledWith({
-      isVisible: false,
-      triggerId,
-      contentId,
-      onToggle,
-    });
-
-    const mountedComponent = mount(
-      <Toggletip
-        {...baselineProps}
-        contentId={contentId}
-        isVisible={false}
-        triggerId={triggerId}
-        onToggle={onToggle}
-      >
-        <Trigger>trigger</Trigger>
-        <Content>content</Content>
-      </Toggletip>
-    );
-    mountedComponent.update();
-
-    const triggerProps = mountedComponent.find(Trigger).props();
-    expect(triggerProps.triggerId).toEqual(triggerId);
-    expect(triggerProps.contentId).toEqual(contentId);
-    expect(triggerProps.isVisible).toEqual(false);
-    expect(triggerProps.onToggle).toEqual(onToggle);
-
-    const contentProps = mountedComponent.find(Content).props();
-    expect(contentProps.triggerId).toEqual(triggerId);
-    expect(contentProps.contentId).toEqual(contentId);
-    expect(contentProps.isVisible).toEqual(false);
-    expect(contentProps.onToggle).toEqual(onToggle);
+  afterEach(() => {
+    jest.clearAllTimers();
+    jest.useRealTimers();
   });
 
-  it("triggers onAfterOpen and onAfterClose", () => {
-    const onAfterOpen = jest.fn();
-    const onAfterClose = jest.fn();
-    const testedComponent = mount(
-      <Toggletip
-        {...baselineProps}
-        onAfterClose={onAfterClose}
-        onAfterOpen={onAfterOpen}
-      >
-        {() => <span>Irelevant for now</span>}
+  it("renders children", () => {
+    const triggerContent = jest.fn(({ ...props }) => <div {...props} id="trigger" />);
+    const toggletipContent = jest.fn(() => <div id="content" />);
+    const stopPropagation = jest.fn();
+
+    const toggletip = mount(
+      <Toggletip >
+        {() => (
+          <div>
+            <Trigger>
+              {triggerContent}
+            </Trigger>
+            <Content>
+              {toggletipContent}
+            </Content>
+          </div>
+        )}
       </Toggletip>
     );
 
-    testedComponent.setProps({ isVisible: false });
-    expect(onAfterOpen).not.toHaveBeenCalled();
-    expect(onAfterClose).not.toHaveBeenCalled();
+    expect(toggletip.type()).toEqual(Toggletip);
+    expect(toggletip.find(Trigger)).toHaveLength(1);
+    expect(toggletip.find(Content)).toHaveLength(1);
+    expect(toggletip.find("#trigger")).toHaveLength(1);
+    expect(toggletip.find("#content")).toHaveLength(1);
+    expect(toggletip.instance().constructor.defaultProps.onToggle()).toEqual(undefined);
+    expect(triggerContent).toHaveBeenCalled();
+    expect(toggletipContent).toHaveBeenCalled();
 
-    testedComponent.setProps({ isVisible: true });
-    expect(onAfterOpen).toHaveBeenCalled();
-    onAfterOpen.mockClear();
+    const onToggle = jest.fn();
+    toggletip.setProps({ onToggle });
 
-    testedComponent.setProps({ isVisible: false });
-    expect(onAfterClose).toHaveBeenCalled();
-    onAfterClose.mockClear();
+    expect(onToggle).not.toHaveBeenCalled();
+
+    toggletip.instance().onToggle({ stopPropagation });
+    expect(onToggle).toHaveBeenCalledWith({ stopPropagation }, { isVisible: true });
+
+    toggletip.setProps({ isVisible: true });
+    toggletip.instance().onToggle({ stopPropagation });
+    expect(onToggle).toHaveBeenCalledWith({ stopPropagation }, { isVisible: false });
+
+    toggletip.instance().onClose({ stopPropagation });
+    expect(onToggle).toHaveBeenCalledWith({ stopPropagation }, { isVisible: false });
+  });
+});
+
+describe("<UncontrolledToggletip />", () => {
+  it("renders children", () => {
+    const toggletip = mount(
+      <UncontrolledToggletip>
+        {() => (
+          <div />
+        )}
+      </UncontrolledToggletip>
+    );
+
+    expect(toggletip.type()).toEqual(UncontrolledToggletip);
+    expect(toggletip.find(Toggletip)).toHaveLength(1);
+
+    const onToggle = jest.fn();
+    toggletip.setProps({ onToggle });
+
+    expect(onToggle).not.toHaveBeenCalled();
+    toggletip.find(Toggletip).instance().onToggle({ stopPropagation: jest.fn() }, true);
+
+    expect(onToggle).toHaveBeenCalledWith(expect.any(Object), { isVisible: true });
   });
 });
