@@ -7,12 +7,12 @@ export default class DownloadLock extends PureComponent {
       <svg
         aria-hidden={true}
         fill="transparent"
-        height="36"
+        height="16"
         preserveAspectRatio="xMidYMid meet"
         width="16"
         {...this.props}
         focusable={false}
-        viewBox="0 0 16 36"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
