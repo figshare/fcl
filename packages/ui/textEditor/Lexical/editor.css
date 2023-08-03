@@ -48,8 +48,6 @@
 }
 
 .container.singleRow {
-  overflow-y: scroll;
-
   height: calc(14 * var(--gridSize));
   min-height: calc(14 * var(--gridSize));
 }
