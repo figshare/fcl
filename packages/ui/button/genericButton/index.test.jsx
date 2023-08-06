@@ -1,5 +1,6 @@
 import React, { createRef } from "react";
 import { shallow, mount } from "enzyme";
+import { act } from "react-dom/test-utils";
 
 import BaseButton from "./base";
 import GenericButton from "./index";
@@ -29,6 +30,7 @@ describe("<GenericButton />", () => {
   });
 
   it("renders tooltip on mouse over and hides on mouse out", () => {
+    jest.useFakeTimers();
     const genericButton = mount(
       <GenericButton classNameTooltip={classNameTooltip} tooltip="Extra info" >
         Click me
@@ -38,6 +40,13 @@ describe("<GenericButton />", () => {
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(false);
 
     genericButton.simulate("mouseOver");
+
+    act(() => {
+      jest.advanceTimersByTime(600);
+    });
+
+    genericButton.update();
+
     expect(genericButton.find(`.${classNameTooltip}`).prop("data-tooltip-visible")).toEqual(true);
 
     genericButton.simulate("mouseOut");
