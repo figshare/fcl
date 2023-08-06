@@ -89,6 +89,12 @@ export default class GenericButton extends PureComponent {
     isBelow: false,
     isActive: false,
     isVisible: false,
+    popperKey: 0,
+    tooltipDelay: 300,
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.tooltipTimeoutId);
   }
 
   render() {
@@ -162,6 +168,7 @@ export default class GenericButton extends PureComponent {
     return (
       <>
         <span
+          key={this.state.popperKey}
           ref={tooltipRef}
           aria-hidden={false}
           className={classnames(styles.tooltip, classNameTooltip)}
@@ -198,7 +205,9 @@ export default class GenericButton extends PureComponent {
   }
 
   onMouseOver = (event) => {
-    this.showTooltip();
+    this.tooltipTimeoutId = setTimeout(() => {
+      this.showTooltip();
+    }, this.state.tooltipDelay);
     this.props.onMouseOver?.(event);
   }
 
@@ -208,6 +217,7 @@ export default class GenericButton extends PureComponent {
   }
 
   onMouseOut = (event) => {
+    clearTimeout(this.tooltipTimeoutId);
     this.hideTooltip();
     this.props.onMouseOut?.(event);
   }
@@ -255,6 +265,7 @@ export default class GenericButton extends PureComponent {
       return;
     }
 
+    this.setState({ popperKey: this.state.popperKey + 1 });
     this.setState({ isActive: true });
   }
 
