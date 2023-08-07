@@ -32,7 +32,7 @@ import {
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
 
-import { applyMarkupProcessors, stripHtmlTags, createBlocksForEditorState } from "./utils";
+import { applyMarkupProcessors, createBlocksForEditorState } from "./utils";
 import { LowPriority, HighPriority, DefaultToolbarConfig } from "./constants";
 import Toolbar from "./components/Toolbar";
 import { Warning } from "./components/Warning";
@@ -83,7 +83,6 @@ function populateEditorState(value) {
       const parser = new DOMParser();
       const dom = parser.parseFromString(value, "text/html");
 
-      // const updatedNodes = [];
       // Select the root
       const selection = $getRoot().select();
 
@@ -228,8 +227,7 @@ export function Editor(props) {
         );
         callbacks.current.onChange({ target: { value: serializedHTML, id, name } });
 
-        const strippedHTML = stripHtmlTags(serializedHTML);
-        setContentLength(strippedHTML.length);
+        setContentLength(serializedHTML.length);
       }
     });
   }, [editor, callbacks, name, id]);
