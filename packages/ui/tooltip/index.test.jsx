@@ -1,5 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
+import { act } from "react-dom/test-utils";
 
 import { Content, Trigger } from "../popup/index.jsx";
 
@@ -17,6 +18,7 @@ describe("<Tooltip />", () => {
   });
 
   it("renders children", () => {
+    jest.useFakeTimers();
     const triggerChildren = jest.fn(({ ...props }) => <div {...props} id="trigger" />);
     const contentChildren = jest.fn(() => <div id="content" />);
 
@@ -50,6 +52,13 @@ describe("<Tooltip />", () => {
 
     expect(onToggle).not.toHaveBeenCalled();
     tooltip.instance().onShow({});
+
+    act(() => {
+      // eslint-disable-next-line no-magic-numbers
+      jest.advanceTimersByTime(600);
+    });
+
+    tooltip.update();
     expect(onToggle).toHaveBeenCalledWith(expect.any(Object), { "isVisible": true });
 
     tooltip.instance().onHide({});
@@ -93,5 +102,36 @@ describe("<UncontrolledTooltip />", () => {
     tooltip.find(Tooltip).instance().onToggle({}, true);
 
     expect(onToggle).toHaveBeenCalledWith(expect.any(Object), { isVisible: true });
+  });
+
+  it("clears timeout when component unmounts", () => {
+    const clearTimeoutSpy = jest.spyOn(window, "clearTimeout");
+
+    const triggerChildren = jest.fn(({ ...props }) => <div {...props} id="trigger" />);
+    const contentChildren = jest.fn(() => <div id="content" />);
+
+    const tooltip = mount(
+      <Tooltip>
+        {() => (
+          <div>
+            <Trigger>
+              {triggerChildren}
+            </Trigger>
+            <Content>
+              {contentChildren}
+            </Content>
+          </div>
+        )}
+      </Tooltip>
+    );
+
+    const tooltipInstance = tooltip.instance();
+    // eslint-disable-next-line no-magic-numbers, no-empty-function
+    tooltipInstance.tooltipTimeoutId = setTimeout(() => {}, 1000);
+    tooltip.unmount();
+
+    expect(clearTimeoutSpy).toHaveBeenCalledWith(tooltipInstance.tooltipTimeoutId);
+
+    clearTimeoutSpy.mockRestore();
   });
 });

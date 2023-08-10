@@ -37,17 +37,13 @@
 .container {
   z-index: 2;
 
-  padding: calc(2 * var(--gridSize));
+  padding: var(--gridSize) calc(2 * var(--gridSize));
   padding-bottom: 0;
 
   border-radius: calc(0.5 * var(--gridSize));
 
   &[data-placement*="top"] {
     margin-bottom: calc(2 * var(--gridSize));
-
-    & .arrow {
-      margin-top: calc(-1 * var(--gridSize));
-    }
 
     &.secondary .arrow::before {
       border-bottom: 1px solid var(--color-border-primary);
