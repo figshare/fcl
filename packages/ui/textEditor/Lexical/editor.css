@@ -187,6 +187,11 @@
   padding: 0 0 0 calc(4 * var(--gridSize));
 }
 
+.input ul[class="rtl"],
+.input ol[class="rtl"] {
+  padding: 0 calc(4 * var(--gridSize)) 0 0;
+}
+
 .input p + ul,
 .input p + ol {
   margin-top: calc(-3 * var(--gridSize));

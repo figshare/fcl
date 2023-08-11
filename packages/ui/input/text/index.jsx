@@ -121,8 +121,13 @@ export default class TextInput extends Component {
       return;
     }
 
-    const direction = getTextDirection(e.target.value);
-    this.setState({ direction });
+
+    if (!e.target.value.length) {
+      this.setState({ direction: "ltr" });
+    } else {
+      const direction = getTextDirection(e.target.value);
+      this.setState({ direction });
+    }
 
     onChange?.(e);
   }
