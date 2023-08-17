@@ -99,6 +99,8 @@ ol:not([class]) {
   padding: 0 0 0 calc(4 * var(--gridSize));
 }
 
+div[dir="rtl"] ol,
+div[dir="rtl"] ul,
 ul[class="rtl"],
 ol[class="rtl"] {
   padding: 0 calc(4 * var(--gridSize)) 0 0;

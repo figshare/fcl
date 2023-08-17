@@ -45,6 +45,10 @@
   &[data-placement*="top"] {
     margin-bottom: calc(2 * var(--gridSize));
 
+    & .arrow {
+      margin-top: calc(-1 * var(--gridSize));
+    }
+
     &.secondary .arrow::before {
       border-bottom: 1px solid var(--color-border-primary);
       border-left: 1px solid var(--color-border-primary);
