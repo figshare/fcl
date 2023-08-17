@@ -30,6 +30,13 @@ export default class TextInput extends Component {
       Mark the input as being in an error state, visually,
      */
     error: PropTypes.bool,
+
+    /**
+      Force the text direction to always be left to right.
+      To be used in example for email or url inputs
+     */
+    lockLTR: PropTypes.bool,
+
     /**
       Input style variation. Supported variations: `["default", "underline"]`
      */
@@ -54,6 +61,7 @@ export default class TextInput extends Component {
       Function called when input receives focus.
      */
     onFocus: PropTypes.func,
+
   }
 
   static defaultProps = {
@@ -67,6 +75,7 @@ export default class TextInput extends Component {
     onBlur: undefined,
     onChange: undefined,
     onFocus: undefined,
+    lockLTR: false,
   }
 
   state = {
@@ -75,8 +84,10 @@ export default class TextInput extends Component {
   }
 
   render() {
-    const { className, children, disabled, error, theme, ...props } = this.props;
+    const { className, children, disabled, error, lockLTR, theme, ...props } = this.props;
     const { direction, isInputFocused } = this.state;
+
+    const textDirection = lockLTR ? "ltr" : direction;
 
     const classNames = [
       styles.container,
@@ -94,7 +105,7 @@ export default class TextInput extends Component {
           aria-disabled={disabled || undefined}
           aria-invalid={error || undefined}
           className={styles.input}
-          dir={direction}
+          dir={textDirection}
           onBlur={this.onBlur}
           onChange={this.onChange}
           onFocus={this.onFocus}
@@ -115,14 +126,17 @@ export default class TextInput extends Component {
   }
 
   onChange = (e) => {
-    const { disabled, onChange } = this.props;
+    const { disabled, onChange, lockLTR } = this.props;
 
     if (disabled) {
       return;
     }
 
+    if (lockLTR) {
+      return;
+    }
 
-    if (!e.target.value.length) {
+    if (!e.target.value?.length) {
       this.setState({ direction: "ltr" });
     } else {
       const direction = getTextDirection(e.target.value);
