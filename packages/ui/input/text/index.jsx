@@ -98,6 +98,7 @@ export default class TextInput extends Component {
           onBlur={this.onBlur}
           onChange={this.onChange}
           onFocus={this.onFocus}
+          onKeyUp={this.onKeyUp}
         />
         {children}
       </div>
@@ -112,6 +113,12 @@ export default class TextInput extends Component {
   onBlur = (e) => {
     this.setState({ isInputFocused: false });
     this.props.onBlur?.(e);
+  }
+
+  onKeyUp = (e) => {
+    if (e.key === "Enter" && !e.target.value.length) {
+      this.setState({ direction: "ltr" });
+    }
   }
 
   onChange = (e) => {
