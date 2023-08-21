@@ -38,7 +38,6 @@
   z-index: 2;
 
   padding: var(--gridSize) calc(2 * var(--gridSize));
-  padding-bottom: 0;
 
   border-radius: calc(0.5 * var(--gridSize));
 
