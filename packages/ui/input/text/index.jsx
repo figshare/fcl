@@ -132,13 +132,9 @@ export default class TextInput extends Component {
       return;
     }
 
-    if (lockLTR) {
-      return;
-    }
-
     if (!e.target.value?.length) {
       this.setState({ direction: "ltr" });
-    } else {
+    } else if (!lockLTR) {
       const direction = getTextDirection(e.target.value);
       this.setState({ direction });
     }

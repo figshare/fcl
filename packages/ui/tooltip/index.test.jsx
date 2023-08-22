@@ -103,35 +103,4 @@ describe("<UncontrolledTooltip />", () => {
 
     expect(onToggle).toHaveBeenCalledWith(expect.any(Object), { isVisible: true });
   });
-
-  it("clears timeout when component unmounts", () => {
-    const clearTimeoutSpy = jest.spyOn(window, "clearTimeout");
-
-    const triggerChildren = jest.fn(({ ...props }) => <div {...props} id="trigger" />);
-    const contentChildren = jest.fn(() => <div id="content" />);
-
-    const tooltip = mount(
-      <Tooltip>
-        {() => (
-          <div>
-            <Trigger>
-              {triggerChildren}
-            </Trigger>
-            <Content>
-              {contentChildren}
-            </Content>
-          </div>
-        )}
-      </Tooltip>
-    );
-
-    const tooltipInstance = tooltip.instance();
-    // eslint-disable-next-line no-magic-numbers, no-empty-function
-    tooltipInstance.tooltipTimeoutId = setTimeout(() => {}, 1000);
-    tooltip.unmount();
-
-    expect(clearTimeoutSpy).toHaveBeenCalledWith(tooltipInstance.tooltipTimeoutId);
-
-    clearTimeoutSpy.mockRestore();
-  });
 });

@@ -37,7 +37,7 @@ export class Tooltip extends Component {
         events: {
           onBlur: this.onHide,
           onFocus: this.onShow,
-          onMouseEnter: this.onShow,
+          onMouseOver: this.onShow,
           onMouseOut: this.onHide,
         },
         ariaRole: "tooltip",
