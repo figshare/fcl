@@ -46,16 +46,11 @@ export class Tooltip extends Component {
         addEventsOnContent: true,
         isVisible: false,
       },
-      tooltipDelay: 500,
     };
   }
 
   static getDerivedStateFromProps({ isVisible }, prevState) {
     return { context: { ...prevState.context, isVisible } };
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.tooltipTimeoutId);
   }
 
   render() {
@@ -88,13 +83,10 @@ export class Tooltip extends Component {
       this.setState({ timeoutId: 0 });
     }
 
-    this.tooltipTimeoutId = setTimeout(() => {
-      this.onToggle(e, true);
-    }, this.state.tooltipDelay);
+    this.onToggle(e, true);
   }
 
   onHide = (e) => {
-    clearTimeout(this.tooltipTimeoutId);
     const timeoutId = setTimeout(() => {
       this.onToggle(e, false);
     }, this.props.hideDelay);
