@@ -122,6 +122,9 @@ export default class TextInput extends Component {
   };
 
   onBlur = (e) => {
+    if (!e.target.value?.length) {
+      this.setState({ direction: "ltr" });
+    }
     this.setState({ isInputFocused: false });
     this.props.onBlur?.(e);
   }
