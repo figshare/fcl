@@ -21,6 +21,7 @@ export function LinkEditor({ onClose }) {
   const [linkUrl, setLinkUrl] = useState("");
   const [editedLinkUrl, setEditedLinkUrl] = useState("");
   const [textSelection, setTextSelection] = useState("");
+  const [isInputInteracted, setInputInteracted] = useState(false);
   const [isEditMode, setEditMode] = useState(false);
 
   const title = isEditMode ? "Edit link" : "Add link";
@@ -65,6 +66,7 @@ export function LinkEditor({ onClose }) {
   };
 
   const onURLChange = (event) => {
+    setInputInteracted(true);
     setEditedLinkUrl(event.target.value);
   };
 
@@ -124,9 +126,10 @@ export function LinkEditor({ onClose }) {
           <span className={styles.label}>Link</span>
           <Input
             className={styles.input}
+            lockLTR={true}
             placeholder="Add link URL here"
             type="text"
-            value={editedLinkUrl ? editedLinkUrl : linkUrl}
+            value={isInputInteracted ? editedLinkUrl : (editedLinkUrl || linkUrl)}
             onChange={onURLChange}
             onKeyDown={monitorInputInteraction}
           />
