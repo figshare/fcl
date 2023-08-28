@@ -105,16 +105,32 @@ function populateEditorState(value) {
 }
 
 export default function EditorContainer(props) {
-  const { disabled, onError } = props;
+  const { disabled, onError, onBlur } = props;
 
   const initialConfig = useMemo(() => {
     return { ...defaultConfig, editable: !disabled, onError, editorState: populateEditorState(props.value) };
   }, [defaultConfig, onError, disabled]);
 
+  const containerRef = useRef(null);
+
+  const handleBlur = useCallback((event) => {
+    if (!containerRef.current.contains(event.relatedTarget)) {
+      if (typeof onBlur === "function") {
+        onBlur(event);
+      }
+    }
+  }, [onBlur]);
+
   return (
-    <LexicalComposer initialConfig={initialConfig} >
-      <Editor {...props} />
-    </LexicalComposer>
+    <div
+      ref={containerRef}
+      role="presentation"
+      onBlur={handleBlur}
+    >
+      <LexicalComposer initialConfig={initialConfig} >
+        <Editor {...props} />
+      </LexicalComposer>
+    </div>
   );
 }
 
