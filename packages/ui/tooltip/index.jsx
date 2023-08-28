@@ -11,16 +11,19 @@ export { Content, Trigger } from "../popup";
 
 
 const HIDE_DELAY = 500;
+const DISPLAY_DELAY = 700;
 
 export class Tooltip extends Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
+    displayDelay: PropTypes.number,
     hideDelay: PropTypes.number,
     isVisible: PropTypes.bool,
     onToggle: PropTypes.func,
   }
 
   static defaultProps = {
+    displayDelay: DISPLAY_DELAY,
     hideDelay: HIDE_DELAY,
     onToggle: () => undefined,
     isVisible: undefined,
@@ -53,6 +56,12 @@ export class Tooltip extends Component {
     return { context: { ...prevState.context, isVisible } };
   }
 
+  componentWillUnmount() {
+    if (this.state.timeoutId) {
+      clearTimeout(this.state.timeoutId);
+    }
+  }
+
   render() {
     return (
       <Provider value={this.state.context}>
@@ -74,7 +83,11 @@ export class Tooltip extends Component {
   });
 
   onToggle = (event, _visible) => {
-    this.props.onToggle(event, { isVisible: _visible });
+    const timeoutId = setTimeout(() => {
+      this.props.onToggle(event, { isVisible: _visible });
+    }, this.props.displayDelay);
+
+    this.setState({ timeoutId });
   }
 
   onShow = (e) => {
