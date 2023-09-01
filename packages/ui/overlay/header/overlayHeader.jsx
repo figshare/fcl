@@ -75,7 +75,6 @@ export default class OverlayHeader extends Component {
               Icon={ArrowLeftMedium}
               className={styles.iconBtn}
               size="M"
-              tabIndex={-1}
               theme="tertiary"
               onClick={backBtnFn}
             >
@@ -90,7 +89,7 @@ export default class OverlayHeader extends Component {
           Icon={Cancel}
           className={styles.iconBtn}
           size="M"
-          tabIndex={-1}
+          tabIndex={0}
           theme="tertiary"
           onClick={onClose ?? this.context.onClose}
         >
