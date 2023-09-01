@@ -14,8 +14,45 @@
   gap: calc(10 * var(--gridSize));
 
   @media (max-width: 443px) {
+    flex-direction: column;
+
     padding: calc(4 * var(--gridSize));
+
+    gap: calc(4 * var(--gridSize));
   }
+}
+
+.secondary,
+.primary {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(4 * var(--gridSize));
+}
+
+@media screen and (max-width: 443px) {
+  .secondary,
+  .primary {
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 100%;
+    flex: 1 0;
+  }
+
+  .secondary > *,
+  .primary > * {
+    width: 100%;
+  }
+}
+
+.secondary {
+  justify-content: flex-start;
+  justify-self: flex-start;
+}
+
+.primary {
+  justify-content: flex-end;
+  justify-self: flex-end;
 }
 
 .footer.singleControl {

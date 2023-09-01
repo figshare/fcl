@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
 import { Meta, Canvas, Story, ArgsTable } from "@storybook/addon-docs/blocks";
-import {Button} from '@figshare/fcl/button';
+import {Button, GenericButton} from '@figshare/fcl/button';
 import {Input} from '@figshare/fcl/input';
-import { Overlay, OverlayHeader, OverlayFooter, OverlayContent } from "@figshare/fcl/overlay";
+import { Overlay, OverlayHeader, OverlayFooter, OverlayContent, PrimaryActions, SecondaryActions } from "@figshare/fcl/overlay";
 import Toggletip, { Trigger, Content, UncontrolledToggletip } from "@figshare/fcl/toggletip";
 
 import style from './overlay.stories.css';
@@ -39,20 +39,26 @@ export const Example = ({ children }) => {
               <br />
               <UncontrolledToggletip>
                 <Trigger>
-                  Popup
+                  {({ ref, ...props}) => <Button {...props} innerRef={ref}>Popup</Button>}
                 </Trigger>
                 <Content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
-                  <button>Focusable element</button>
-                  Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
-                  <input value="static value, but focusable element" />
-                  pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+                  {(...props) => (
+                    <div>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+                    <button>Focusable element</button>
+                    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+                    <input value="static value, but focusable element" />
+                    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+                  </div>
+                  )}
                 </Content>
               </UncontrolledToggletip>
             </OverlayContent>
             <OverlayFooter>
-              <Button theme="tertiary" onClick={() => setOpened("")}>Close</Button>
-              <Button theme="primary" onClick={() => setOpened("")}>Confirm</Button>
+              <OverlayFooter.Primary>
+                <Button theme="secondary" onClick={() => setOpened("")}>Close</Button>
+                <Button theme="primary" onClick={() => setOpened("")}>Confirm</Button>
+              </OverlayFooter.Primary>
             </OverlayFooter>
           </Overlay>
           <Overlay background="warning" isVisible={opened.includes("warning-overlay")} onClose={() => setOpened(o => o.replace("warning-overlay", ""))}>
@@ -77,7 +83,13 @@ export const Example = ({ children }) => {
               {more && <MoreContent />}
             </OverlayContent>
             <OverlayFooter>
-              <Button theme="primary" onClick={() => setOpened(o => o.replace("form-overlay", ""))}>Close</Button>
+              <OverlayFooter.Secondary>
+                <GenericButton onClick={() => setMore(m => !m)}>Show more content</GenericButton>
+              </OverlayFooter.Secondary>
+              <OverlayFooter.Primary>
+                <Button theme="secondary" onClick={() => setOpened(o => o.replace("form-overlay", ""))}>Close</Button>
+                <Button theme="primary" onClick={() => setOpened(o => o.replace("form-overlay", ""))}>Confirm</Button>
+              </OverlayFooter.Primary>
             </OverlayFooter>
           </Overlay>
       </>);
@@ -103,6 +115,8 @@ export const Example = ({ children }) => {
     - [OverlayHeader](#overlayheader)
     - [OverlayContent](#overlaycontent)
     - [OverlayFooter](#overlayfooter)
+    - [OverlayFooter.Primary](#overlayfooterprimary)
+    - [OverlayFooter.Secondary](#overlayfootersecondary)
 - [Examples](#examples)
 
 ## Overview
@@ -162,8 +176,10 @@ function MyOverlay({ onSave }) {
             Main contents of the overlay.
           </OverlayContent>
           <OverlayFooter>
-            <Button theme="primary" onClick={() => { onSave(); setOpened(false); }}>Save</Button>
-            <Button theme="secondary" onClick={() => setOpened(false)}>Close</Button>
+            <OverlayFooter.Primary>
+              <Button theme="secondary" onClick={() => setOpened(false)}>Close</Button>
+              <Button theme="primary" onClick={() => { onSave(); setOpened(false); }}>Save</Button>
+            </OverlayFooter.Primary>
           </OverlayFooter>
         </Overlay>
       </div>
@@ -185,6 +201,13 @@ function MyOverlay({ onSave }) {
 
 ### OverlayFooter
 <ArgsTable of={OverlayFooter} />
+
+### OverlayFooter.Primary
+<ArgsTable of={PrimaryActions} />
+
+### OverlayFooter.Secondary
+<ArgsTable of={SecondaryActions} />
+
 
 ## Examples
 
@@ -223,14 +246,18 @@ export const Example = ({ children }) => {
               <Input type="date" onChange={() => undefined} />
               <UncontrolledToggletip>
                 <Trigger>
-                  Popup
+                  {({ ref, ...props}) => <Button {...props} innerRef={ref}>Popup</Button>}
                 </Trigger>
                 <Content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
-                  <button>Focusable element</button>
-                  Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
-                  <input value="static value, but focusable element" />
-                  pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+                  {(...props) => (
+                    <div>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at turpis quis nisi sollicitudin cursus.
+                    <button>Focusable element</button>
+                    Morbi tincidunt posuere leo. Maecenas eu justo imperdiet, tempor magna at, tempus dui. Quisque ante augue,
+                    <input value="static value, but focusable element" />
+                    pellentesque venenatis commodo et, viverra et lectus. Etiam id vehicula dui. Quisque ac massa faucibus,
+                  </div>
+                  )}
                 </Content>
               </UncontrolledToggletip>
             </OverlayContent>
