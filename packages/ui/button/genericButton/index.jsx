@@ -95,6 +95,7 @@ export default class GenericButton extends PureComponent {
 
   componentWillUnmount() {
     clearTimeout(this.tooltipTimeoutId);
+    clearTimeout(this.focusTimeoutId);
   }
 
   render() {
@@ -212,7 +213,10 @@ export default class GenericButton extends PureComponent {
   }
 
   onFocus = (event) => {
-    this.showTooltip();
+    this.focusTimeoutId = setTimeout(() => {
+      this.setState({ popperKey: this.state.popperKey + 1 });
+      this.showTooltip();
+    }, 100);
     this.props.onFocus?.(event);
   }
 
