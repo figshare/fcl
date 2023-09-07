@@ -46,9 +46,23 @@ export function definePasteCommand(event) {
   const pastedText = event.clipboardData?.getData("text/html");
   let processedText = pastedText;
 
+  const doc = new DOMParser().parseFromString(pastedText, "text/html");
+
   if (pastedText?.includes("&lt;")) {
-    const doc = new DOMParser().parseFromString(pastedText, "text/html");
     processedText = doc.body.textContent;
+  }
+
+  const anchorTags = doc.querySelectorAll("a");
+  let anchorModified = false;
+  anchorTags.forEach((a) => {
+    if (!a.getAttribute("target")) {
+      a.setAttribute("target", "_blank");
+      anchorModified = true;
+    }
+  });
+
+  if (anchorModified) {
+    processedText = doc.body.innerHTML;
   }
 
   if (pastedText?.includes("text-decoration:underline line-through;")) {
