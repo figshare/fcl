@@ -23,7 +23,11 @@ export default function Radio(
   const handler = useCallback((e) => onChange?.(e), [onChange]);
 
   return (
-    <div className={classnames(styles.radio, { [styles.error]: error }, className)}>
+    <div
+      aria-checked={checked}
+      className={classnames(styles.radio, { [styles.error]: error }, className)}
+      role="radio"
+    >
       <input
         checked={checked}
         disabled={disabled}

@@ -103,7 +103,12 @@ export default class Checkbox extends Component {
 
     return (
       <label className={classnames(styles.label, className)}>
-        <span className={classnames(containerClassNames)}>
+        <span
+          aria-checked={checked}
+          checked={checked}
+          className={classnames(containerClassNames)}
+          role="checkbox"
+        >
           <input
             {...restProps}
             ref={this.setRef}
