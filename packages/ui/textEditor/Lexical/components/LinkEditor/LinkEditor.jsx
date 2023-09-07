@@ -4,7 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import * as React from "react";
 import PropTypes from "prop-types";
 import { Button } from "@figshare/fcl/button";
-import { OverlayContent, OverlayFooter } from "@figshare/fcl/overlay";
+import { OverlayContent, OverlayFooter, OverlayHeader } from "@figshare/fcl/overlay";
 import { OverlayContext } from "@figshare/fcl/overlay/overlay";
 import Input from "@figshare/fcl/input";
 import GoToLinkLarge from "@figshare/fcl/icons/goToLink/large";
@@ -25,6 +25,7 @@ export function LinkEditor({ onClose }) {
   const [isEditMode, setEditMode] = useState(false);
 
   const title = isEditMode ? "Edit link" : "Add link";
+  const confirmationText = isEditMode ? "Apply changes" : "Add link";
   const hasMinimumLength = editedLinkUrl?.length >= 3;
 
   const updateLinkEditor = useCallback(() => {
@@ -104,35 +105,36 @@ export function LinkEditor({ onClose }) {
 
   return (
     <>
-      <OverlayContent>
-        <div className={styles.header}>
-          <h1 className={styles.title} id={ariaTitle}>{title}</h1>
-          <Button
-            Icon={GoToLinkLarge}
-            disabled={!isEditMode}
-            href={makeURLAbsolute(editedLinkUrl || linkUrl)}
-            id="open-link-button"
-            target="_blank"
-            theme="secondaryAlt"
-          >
-            Open link
-          </Button>
-        </div>
+      <OverlayHeader id={ariaTitle} title={title} onClose={onClose} />
+      <OverlayContent className={styles.contentContainer}>
         <div className={styles.section}>
           <span className={styles.label}>Text</span>
           {textSelection}
         </div>
         <div className={styles.section}>
           <span className={styles.label}>Link</span>
-          <Input
-            className={styles.input}
-            lockLTR={true}
-            placeholder="Add link URL here"
-            type="text"
-            value={isInputInteracted ? editedLinkUrl : (editedLinkUrl || linkUrl)}
-            onChange={onURLChange}
-            onKeyDown={monitorInputInteraction}
-          />
+          <div className={styles.inputWrapper} >
+            <Input
+              className={styles.input}
+              lockLTR={true}
+              placeholder="Add link URL here"
+              type="text"
+              value={isInputInteracted ? editedLinkUrl : (editedLinkUrl || linkUrl)}
+              onChange={onURLChange}
+              onKeyDown={monitorInputInteraction}
+            />
+            <Button
+              Icon={GoToLinkLarge}
+              className={styles.linkButton}
+              disabled={!isEditMode}
+              href={makeURLAbsolute(editedLinkUrl || linkUrl)}
+              id="open-link-button"
+              target="_blank"
+              theme="secondaryAlt"
+            >
+              Open link
+            </Button>
+          </div>
         </div>
       </OverlayContent>
       <OverlayFooter className={styles.buttonsContainer}>
@@ -155,7 +157,7 @@ export function LinkEditor({ onClose }) {
             theme="primary"
             onClick={onSave}
           >
-            Save changes
+            {confirmationText}
           </Button>
         </div>
       </OverlayFooter>
