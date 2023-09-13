@@ -40,10 +40,6 @@ export class CustomTextNode extends TextNode {
     return "custom-text";
   }
 
-  static clone(node) {
-    return new CustomTextNode(node.__text);
-  }
-
   static importJSON(serializedNode) {
     const node = $createTextNode(serializedNode.text);
     node.setFormat(serializedNode.format);
