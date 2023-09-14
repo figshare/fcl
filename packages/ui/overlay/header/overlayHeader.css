@@ -12,6 +12,8 @@
 
 .headerInfo {
   display: flex;
+
+  max-width: 95%;
 }
 
 .partOfContent {
