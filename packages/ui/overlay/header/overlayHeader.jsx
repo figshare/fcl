@@ -89,7 +89,6 @@ export default class OverlayHeader extends Component {
           Icon={Cancel}
           className={styles.iconBtn}
           size="M"
-          tabIndex={0}
           theme="tertiary"
           onClick={onClose ?? this.context.onClose}
         >
