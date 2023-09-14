@@ -47,5 +47,11 @@
   display: flex;
 
   width: calc(6 * var(--gridSize));
+  min-width: calc(6 * var(--gridSize));
   height: calc(6 * var(--gridSize));
+
+  @media (max-width: 1023px) {
+    width: calc(8 * var(--gridSize));
+    height: calc(8 * var(--gridSize));
+  }
 }
