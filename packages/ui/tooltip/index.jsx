@@ -34,6 +34,7 @@ export class Tooltip extends Component {
 
     this.state = {
       timeoutId: 0,
+      timeoutDisplayId: 0,
       context: {
         contentRef: this.setContentRef,
         triggerRef: this.setTriggerRef,
@@ -57,8 +58,8 @@ export class Tooltip extends Component {
   }
 
   componentWillUnmount() {
-    if (this.state.timeoutId) {
-      clearTimeout(this.state.timeoutId);
+    if (this.state.timeoutDisplayId) {
+      clearTimeout(this.state.timeoutDisplayId);
     }
   }
 
@@ -83,11 +84,7 @@ export class Tooltip extends Component {
   });
 
   onToggle = (event, _visible) => {
-    const timeoutId = setTimeout(() => {
-      this.props.onToggle(event, { isVisible: _visible });
-    }, this.props.displayDelay);
-
-    this.setState({ timeoutId });
+    this.props.onToggle(event, { isVisible: _visible });
   }
 
   onShow = (e) => {
@@ -96,10 +93,19 @@ export class Tooltip extends Component {
       this.setState({ timeoutId: 0 });
     }
 
-    this.onToggle(e, true);
+    const timeoutId = setTimeout(() => {
+      this.onToggle(e, true);
+    }, this.props.displayDelay);
+
+    this.setState({ timeoutDisplayId: timeoutId });
   }
 
   onHide = (e) => {
+    if (this.state.timeoutDisplayId) {
+      clearTimeout(this.state.timeoutDisplayId);
+      this.setState({ timeoutDisplayId: 0 });
+    }
+
     const timeoutId = setTimeout(() => {
       this.onToggle(e, false);
     }, this.props.hideDelay);
