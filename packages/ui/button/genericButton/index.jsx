@@ -214,8 +214,10 @@ export default class GenericButton extends PureComponent {
 
   onFocus = (event) => {
     this.focusTimeoutId = setTimeout(() => {
-      this.setState({ popperKey: this.state.popperKey + 1 });
-      this.showTooltip();
+      if (event.target === document.activeElement) {
+        this.setState({ popperKey: this.state.popperKey + 1 });
+        this.showTooltip();
+      }
     }, 100);
     this.props.onFocus?.(event);
   }
