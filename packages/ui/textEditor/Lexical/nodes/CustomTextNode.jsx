@@ -114,9 +114,21 @@ export class CustomTextNode extends TextNode {
 
     return {
       ...result,
+      sub: () => {
+        return {
+          conversion: createMissedFormatConverter("subscript"),
+          priority: 0,
+        };
+      },
+      sup: () => {
+        return {
+          conversion: createMissedFormatConverter("superscript"),
+          priority: 0,
+        };
+      },
       del: () => {
         return {
-          conversion: convertDelToStriketrough,
+          conversion: createMissedFormatConverter("strikethrough"),
           priority: 0,
         };
       },
@@ -125,7 +137,20 @@ export class CustomTextNode extends TextNode {
   }
 }
 
-const nodeNameToTextFormat = { del: "striketrough" };
+function createMissedFormatConverter(format) {
+  return () => {
+    return {
+      forChild: (lexicalNode) => {
+        if ($isTextNode(lexicalNode)) {
+          lexicalNode.toggleFormat(format);
+        }
+
+        return lexicalNode;
+      },
+      node: null,
+    };
+  };
+}
 
 function importAllowedTags() {
   return ALLOWED_TAGS.reduce((acc, tag) => {
@@ -140,24 +165,6 @@ function importAllowedTags() {
   }, {});
 }
 
-function convertDelToStriketrough(node) {
-  const format = nodeNameToTextFormat[node.nodeName.toLowerCase()];
-
-  if (format === undefined) {
-    return { node: null };
-  }
-
-  return {
-    forChild: (lexicalNode) => {
-      if ($isTextNode(lexicalNode) && !lexicalNode.hasFormat(format)) {
-        lexicalNode.setFormat(4);
-      }
-
-      return lexicalNode;
-    },
-    node: null,
-  };
-}
 
 function convertHTMLTagNodeToText(node) {
   const tagName = node.nodeName.toLowerCase();
