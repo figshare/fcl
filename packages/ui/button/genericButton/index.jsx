@@ -58,11 +58,11 @@ export default class GenericButton extends PureComponent {
      */
     onLongPress: PropTypes.func,
     /**
-      Called when the user hovers into the button's visible/clip area
+      Called when the user hovers out-of the button's visible/clip area
      */
     onMouseOut: PropTypes.func,
     /**
-      Called when the user hovers out-of the button's visible/clip area
+      Called when the user hovers into the button's visible/clip area
      */
     onMouseOver: PropTypes.func,
   }
