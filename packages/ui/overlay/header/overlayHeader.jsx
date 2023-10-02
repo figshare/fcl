@@ -43,6 +43,11 @@ export default class OverlayHeader extends Component {
      If not provided, will be inherited from the `Overlay` component context.
      */
     onClose: PropTypes.func,
+    /**
+     Triggered when the "Go Back" header button is clicked.
+     If not provided, the button will not be shown.
+     */
+    onGoBack: PropTypes.func,
   }
 
   static defaultProps = {
@@ -51,15 +56,20 @@ export default class OverlayHeader extends Component {
     description: undefined,
     isPartOfContent: false,
     title: undefined,
+    onGoBack: undefined,
     onClose: undefined,
   }
 
+  state = { firstFocusIn: true }
+
   render() {
-    const { backBtnFn, className, isPartOfContent, description, title, onClose, ...props } = this.props;
+    const { backBtnFn, className, isPartOfContent, description, title, onClose, onGoBack, ...props } = this.props;
+    const { firstFocusIn } = this.state;
     const overlayId = this.context?.id ?? 0;
     const isForConfirmationOverlay = CONFIRMATION_OVERLAYS.includes(this.context?.background);
     const ariaTitle = `dialog-${overlayId}-title`;
     const ariaDescription = `dialog-${overlayId}-description`;
+    const onGoBackFn = backBtnFn || onGoBack;
 
     return (
       <div
@@ -70,15 +80,17 @@ export default class OverlayHeader extends Component {
         }, className)}
       >
         <div className={styles.headerInfo}>
-          {backBtnFn && (
+          {onGoBackFn && (
             <IconButton
               Icon={ArrowLeftMedium}
               className={styles.iconBtn}
               size="M"
               theme="tertiary"
-              onClick={backBtnFn}
+              onBlur={this.onFirstFocus}
+              onClick={onGoBackFn}
+              onMouseEnter={this.onFirstFocus}
             >
-              Go back
+              {firstFocusIn ? undefined : "Go back"}
             </IconButton>)}
           <div>
             <h1 className={styles.title} id={ariaTitle}>{title}</h1>
@@ -90,11 +102,17 @@ export default class OverlayHeader extends Component {
           className={styles.iconBtn}
           size="M"
           theme="tertiary"
+          onBlur={this.onFirstFocus}
           onClick={onClose ?? this.context.onClose}
+          onMouseEnter={this.onFirstFocus}
         >
-          Close
+          {firstFocusIn ? undefined : "Close"}
         </IconButton>
       </div>
     );
+  }
+
+  onFirstFocus = () => {
+    this.setState({ firstFocusIn: false });
   }
 }

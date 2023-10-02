@@ -92,4 +92,63 @@ describe("<OverlayHeader />", () => {
     expect(onClose).toHaveBeenCalled();
     component.unmount();
   });
+
+  it("should render a Go Back button if backBtnFn is provided", () => {
+    const onClose = jest.fn();
+    const onGoBack = jest.fn();
+    const component = shallow(
+      <OverlayHeader
+        backBtnFn={onGoBack}
+        description="Description"
+        title="Title"
+        onClose={onClose}
+      />);
+
+    expect(component.find(IconButton)).toHaveLength(2);
+    component.find(IconButton).at(0).simulate("click");
+    expect(onGoBack).toHaveBeenCalled();
+    expect(onClose).not.toHaveBeenCalled();
+    component.unmount();
+  });
+
+  it("should not show tooltips on first focus of back or close buttons", () => {
+    let component = shallow(
+      <OverlayHeader
+        description="Description"
+        title="Title"
+        onClose={jest.fn()}
+        onGoBack={jest.fn()}
+      />);
+
+    expect(component.state().firstFocusIn).toEqual(true);
+
+    let button = component.find(IconButton).at(0);
+    expect(button.props().children).toBe(undefined);
+    button.simulate("blur");
+
+    expect(component.state().firstFocusIn).toEqual(false);
+    component.update();
+
+    expect(component.find(IconButton).at(0).props().children).toBe("Go back");
+
+    component = shallow(
+      <OverlayHeader
+        description="Description"
+        title="Title"
+        onClose={jest.fn()}
+        onGoBack={jest.fn()}
+      />);
+
+    expect(component.state().firstFocusIn).toEqual(true);
+    expect(button.props().children).toBe(undefined);
+
+
+    button = component.find(IconButton).at(1);
+    button.simulate("blur");
+
+    expect(component.state().firstFocusIn).toEqual(false);
+    component.update();
+
+    expect(component.find(IconButton).at(1).props().children).toBe("Close");
+  });
 });
