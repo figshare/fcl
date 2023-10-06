@@ -243,7 +243,8 @@ export function Editor(props) {
         );
         callbacks.current.onChange({ target: { value: serializedHTML, id, name } });
 
-        setContentLength(serializedHTML.length);
+        // Remove wrapping LTR paragraph tag before setting editor content length
+        setContentLength(serializedHTML.replace(/^<[^>]+>/, "").replace(/<\/[^>]+>$/, "").length);
       }
     });
   }, [editor, callbacks, name, id]);
