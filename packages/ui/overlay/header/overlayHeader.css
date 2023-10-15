@@ -52,6 +52,5 @@
 
   @media (max-width: 1023px) {
     width: calc(8 * var(--gridSize));
-    height: calc(8 * var(--gridSize));
   }
 }
