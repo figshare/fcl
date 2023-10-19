@@ -10,6 +10,10 @@ import { moveSelectionToEnd } from "./selectionUtils";
 export const STRIKE_THROUGH_UNDERLINE = "text-decoration:underline line-through;";
 export const SCRIPT_STRIKE_THROUGH_UNDERLINE = "text-decoration: underline line-through";
 
+export const ALLOWED_HTML_TAGS = ["em", "strong", "b", "i", "big", "small", "sub", "sup", "a", "address", "cite",
+  "code", "ul", "ol", "li", "dl", "lh", "dt", "dd", "table", "th", "td", "tr",
+  "blockquote", "hr", "h2", "h3", "h4", "h5", "h6", "dev", "pre", "u"];
+
 export const onConvertDraftToHTML = (editorState) => {
   const options = {
     entityStyleFn: (entity) => {
@@ -81,6 +85,14 @@ export const onConvertDraftToHTML = (editorState) => {
 };
 
 export const onConvertHTMLtoDraft = (html) => {
+  let parsedHtml = html;
+
+  ALLOWED_HTML_TAGS.forEach((tag) => {
+    if (html.includes(`<${tag}>`) || html.includes(`</${tag}>`)) {
+      parsedHtml = parsedHtml.replaceAll(`<${tag}>`, `&lt;${tag}&gt;`).replaceAll(`</${tag}>`, `&lt;/${tag}&gt;`);
+    }
+  });
+
   const options = {
     customInlineFn: (element, { Entity: entity }) => {
       if (element.tagName === DraftEntity.SUB) {
@@ -92,7 +104,7 @@ export const onConvertHTMLtoDraft = (html) => {
       }
 
       if (element.tagName === "A") {
-        const entityForLink = getEntityForLink(html, element.outerHTML);
+        const entityForLink = getEntityForLink(parsedHtml, element.outerHTML);
 
         return entity(entityForLink, { url: element.href });
       }
@@ -101,7 +113,7 @@ export const onConvertHTMLtoDraft = (html) => {
     },
   };
 
-  return stateFromHTML(html, options);
+  return stateFromHTML(parsedHtml, options);
 };
 
 // To toggle sub/superscript we insert a special character (\u0000)
