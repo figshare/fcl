@@ -1,8 +1,9 @@
 import { TextNode, $createTextNode, $isTextNode } from "lexical";
 
 
-const ALLOWED_TAGS = [
-  "address", "cite", "code", "blockquote", "pre", "dl", "dd", "dt", "lh", "table", "th", "td", "tr"];
+export const ALLOWED_TAGS = ["em", "strong", "b", "i", "big", "small", "sub", "sup", "a", "address", "cite",
+  "code", "ul", "ol", "li", "dl", "lh", "dt", "dd", "br", "p", "table", "th", "td", "tr",
+  "blockquote", "hr", "h2", "h3", "h4", "h5", "h6", "dev", "div", "pre", "u"];
 
 function wrapContentWith(element, tag) {
   if (element.tagName === "SPAN") {
@@ -172,7 +173,7 @@ function convertHTMLTagNodeToText(node) {
   return {
     forChild: (lexicalNode) => {
       if ($isTextNode(lexicalNode) && ALLOWED_TAGS.includes(tagName)) {
-        lexicalNode.__text = node.outerHTML;
+        lexicalNode.__text = ` ${node.outerHTML} `;
       }
 
       return lexicalNode;

@@ -61,7 +61,7 @@ export const createBlocksForEditorState = (nodes) => {
       }
     } else {
       blocks.push(node);
-      level += 1;
+      level = blocks.length;
     }
   }
 
