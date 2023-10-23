@@ -151,6 +151,7 @@ export default class Date extends Component {
 
     return (
       <ReactDatepicker
+        key={this.datepicker?.state?.open}
         ref={this.setRef}
         placeholderText={placeholder ?? dateFormat.toUpperCase()}
         {...rest}
@@ -270,8 +271,7 @@ export default class Date extends Component {
       return;
     }
 
-    if (event.target === this.datepicker?.input && !this.datepicker.isCalendarOpen()) {
-
+    if (event.target === this.datepicker?.input && !this.datepicker.isCalendarOpen() && event.relatedTarget) {
       this.datepicker.setOpen(true);
     }
   }
@@ -324,7 +324,9 @@ export default class Date extends Component {
         this.datepicker.setOpen(!this.datepicker.isCalendarOpen());
         break;
       case "Escape":
-        this.datepicker.input?.focus?.();
+        setTimeout(() => {
+          this.datepicker.input?.focus?.();
+        }, FOCUS_DELAY);
         break;
       default:
         break;
