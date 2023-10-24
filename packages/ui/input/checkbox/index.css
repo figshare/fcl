@@ -24,6 +24,11 @@
   flex-basis: calc(5 * var(--gridSize));
 }
 
+.checkbox svg {
+  width: 100%;
+  height: 100%;
+}
+
 .checkbox::before {
   position: absolute;
 
@@ -68,4 +73,5 @@
 
 .switch .input {
   border-radius: calc(2.5 * var(--gridSize));
+  outline-offset: 0;
 }

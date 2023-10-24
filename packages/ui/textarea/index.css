@@ -1,3 +1,4 @@
+/* stylelint-disable a11y/no-outline-none */
 .textarea {
   position: relative;
 
@@ -42,12 +43,12 @@
 
   &:active,
   &:focus {
-    padding: calc(var(--gridSize) - 1px) calc(2 * var(--gridSize) - 1px);
-
-    border: 2px solid var(--color-border-active);
+    outline: 2px solid var(--color-border-active);
+    outline-width: 2px;
+    outline-offset: -2px;
 
     &[aria-invalid] {
-      border: 2px solid var(--color-border-error);
+      outline-color: var(--color-border-error);
     }
   }
 }
@@ -65,17 +66,25 @@
   }
 
   &[aria-invalid] {
-    border-bottom: 1px solid var(--color-border-error);
+    border-color: var(--color-border-error);
   }
 
   &:active,
   &:focus {
-    border-bottom: 2px solid var(--color-border-active);
+    padding-bottom: calc(var(--gridSize) - 1px);
 
-    /* padding-bottom: calc(var(--gridSize) - 1px); */
+    border-bottom: 2px solid var(--color-border-active);
+    outline: none;
 
     &[aria-invalid] {
-      border-bottom: 2px solid var(--color-border-error);
+      border-color: var(--color-border-error);
     }
   }
+}
+
+.defaultTheme:active input,
+.defaultTheme:focus-within input,
+.underlineTheme:active input,
+.underlineTheme:focus-within input {
+  outline: none;
 }

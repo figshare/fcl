@@ -8,8 +8,9 @@ svg {
 
   &:focus {
     border-radius: calc(0.5 * var(--gridSize));
-    outline: none;
-    box-shadow: 0 0 0 2px var(--color-border-focus), 0 0 4px 2px var(--color-border-focusShadow);
+    outline: 2px solid var(--color-border-active);
+    outline-width: 2px;
+    outline-offset: -2px;
   }
 }
 
@@ -33,6 +34,8 @@ button {
     text-decoration: none;
 
     color: var(--color-button-tertiary-label_hover);
+
+    outline-offset: 0;
     background: var(--color-button-tertiary-background_hover);
   }
 
@@ -47,6 +50,8 @@ button {
     text-decoration: none;
 
     color: var(--color-button-tertiary-label_click);
+
+    outline-offset: 0;
     background: var(--color-button-tertiary-background_click);
   }
 

@@ -12,14 +12,6 @@
   align-items: center;
 }
 
-.editorContainer.disabled {
-  background-color: var(--color-input-background_disabled);
-}
-
-.componentContainer:focus-within {
-  border: 2px solid var(--color-border-active);
-}
-
 .editorContainer {
   position: relative;
 
@@ -36,10 +28,20 @@
   box-shadow: inset 0 1px 4px rgba(135, 134, 134, 0.2);
 }
 
+.editorContainer.disabled {
+  background-color: var(--color-input-background_disabled);
+}
+
+.editorContainer:focus-within {
+  border-radius: calc(var(--gridSize) / 2);
+  outline: 2px solid var(--color-border-active);
+}
+
 .titleEditorContainer {
   min-height: calc(14 * var(--gridSize));
 }
 
+/* stylelint-disable-next-line a11y/no-display-none */
 .editorContainer::-webkit-resizer {
   display: none;
 }

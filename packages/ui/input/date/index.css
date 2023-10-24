@@ -259,24 +259,13 @@
   background-color: var(--color-layout-primary-background);
 }
 
-:global(.react-datepicker__input-container) input:focus,
-:global(.react-datepicker__input-container) input:focus-visible {
-  padding: calc(var(--gridSize) - 1px) calc(2 * var(--gridSize) - 1px);
-
-  border: 2px solid var(--color-border-active);
-  outline: none;
-  background-color: var(--color-layout-primary-background);
-
-  box-shadow: none;
-}
-
 .error input {
   border-color: var(--color-border-error);
 }
 
 .error input:focus,
 .error input:focus-visible {
-  border-color: var(--color-border-error);
+  outline-color: var(--color-border-error);
 }
 
 .disabled input,
