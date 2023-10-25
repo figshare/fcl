@@ -77,16 +77,18 @@ const defaultConfig = {
 };
 
 function populateEditorState(value) {
+  const parsedValue = value.replaceAll("<hr>", "&lt;hr&gt;");
+
   return (editor) => {
     const root = $getRoot();
     if (root.getFirstChild() === null) {
       const parser = new DOMParser();
-      const dom = parser.parseFromString(value, "text/html");
+      const dom = parser.parseFromString(parsedValue, "text/html");
 
       // Select the root
       const selection = $getRoot().select();
 
-      const blocks = createBlocksForEditorState($generateNodesFromDOM(editor, dom));
+      const blocks = createBlocksForEditorState($generateNodesFromDOM(editor, dom), value);
 
       const editorNodes = blocks.map((block) => {
         if (Array.isArray(block)) {
@@ -231,8 +233,7 @@ export function Editor(props) {
         },
         HighPriority,
       ),
-    )
-  , [editor, callbacks]);
+    ), [editor, callbacks]);
 
   const handleChange = useCallback((editorState) => {
     editorState.read(() => {
