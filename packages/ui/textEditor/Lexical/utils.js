@@ -45,8 +45,7 @@ export const applyMarkupProcessors = (markup, processorsToRun) => {
 
   return newMarkup;
 };
-
-export const createBlocksForEditorState = (nodes) => {
+export const createBlocksForEditorState = (nodes, original) => {
   let level = 0;
   const blocks = [];
 
@@ -55,7 +54,24 @@ export const createBlocksForEditorState = (nodes) => {
       const block = blocks[level];
 
       if (Array.isArray(block)) {
-        block.push(node);
+        const currentBlockText = block.reduce((acc, current) => {
+          acc += current?.__text; //eslint-disable-line
+
+          return acc;
+        }, "");
+
+        const currentNodeText = node?.__text;
+        const nextNodeText = currentBlockText + currentNodeText;
+        const hasCurrentBlockText = original.includes(currentBlockText);
+        const hasNextBlockText = original.includes(nextNodeText);
+
+        if (hasCurrentBlockText && hasNextBlockText) {
+          block.push(node);
+        } else {
+          blocks.push([node]);
+          level = blocks.length;
+        }
+
       } else {
         blocks.push([node]);
       }
