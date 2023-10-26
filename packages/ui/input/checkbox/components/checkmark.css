@@ -7,7 +7,7 @@
 }
 
 .error {
-  fill: var(--color-icon-error);
+  fill: var(--color-checkbox-icon_error);
 }
 
 .disabled {
