@@ -49,6 +49,9 @@ Also comes with a switch variation to more clearly represent a `toggle` action t
         <Checkbox id="one" checked={checks.one} onChange={handleChange} />
         <Checkbox id="two" checked={checks.two} onChange={handleChange}>Labeled: {checks.two ? "Checked" : "Unchecked"}</Checkbox>
         <br />
+        <Checkbox  indeterminate={true} id="indeterminate-one"/>
+        <Checkbox  indeterminate={true} id="indeterminate-two">Labeled: Indeterminate</Checkbox>
+        <br />
         <Checkbox variant="switch" id="three" checked={checks.three} onChange={handleChange} />
         <Checkbox variant="switch" id="four" checked={checks.four} onChange={handleChange}>Labeled: {checks.four ? "Checked" : "Unchecked"}</Checkbox>
       </>
@@ -80,6 +83,9 @@ function Checks() {
         <Checkbox id="two" checked={checks.two} onChange={handleChange}>Labeled: {checks.two ? "Checked" : "Unchecked"}</Checkbox> <Checkbox id="one" checked={checks.one} onChange={handleChange} />
         <Checkbox id="two" checked={checks.two} onChange={handleChange}>Labeled: {checks.two ? "Checked" : "Unchecked"}</Checkbox>
         <br />
+        <Checkbox  indeterminate={true} id="indeterminate-one"/>
+        <Checkbox  indeterminate={true} id="indeterminate-two">Labeled: Indeterminate</Checkbox>
+        <br />
         <Checkbox variant="switch" id="three" checked={checks.three} onChange={handleChange} />
         <Checkbox variant="switch" id="four" checked={checks.four} onChange={handleChange}>Labeled: {checks.two ? "Checked" : "Unchecked"}</Checkbox>
         {/* Or as types of the Input component: */}
@@ -95,9 +101,14 @@ function Checks() {
 
 ## Examples
 <Canvas>
+  <div style={{display: "flex", alignItems: "center", gap: "18px"}}>
   <Checkbox id="one" checked={false} onChange={(event) => undefined} />
   <Checkbox id="two" checked={true} onChange={(event) => undefined} >Labeled</Checkbox>
   <br />
+  <Checkbox  indeterminate={true} id="indeterminate-one"/>
+  <Checkbox  indeterminate={true} id="indeterminate-two">Labeled: Indeterminate</Checkbox>
+  <br />
   <Checkbox variant="switch" id="three" checked={false} onChange={(event) => undefined} />
   <Checkbox variant="switch" id="four" checked={true} onChange={(event) => undefined} >Labeled</Checkbox>
+  </div>
 </Canvas>

@@ -2,6 +2,8 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
+import Indeterminate from "../../icons/indeterminate";
+
 import Checkmark from "./components/checkmark";
 import Switch from "./components/switch";
 import styles from "./index.css";
@@ -44,6 +46,10 @@ export default class Checkbox extends Component {
      */
     iconClassName: PropTypes.string,
     /**
+      Optional flag for indeterminate state.
+     */
+    indeterminate: PropTypes.bool,
+    /**
       Optional ref function. Provide this property if you need a reference to the input node.
      */
     innerRef: PropTypes.func,
@@ -73,6 +79,7 @@ export default class Checkbox extends Component {
     disabled: false,
     error: false,
     iconClassName: undefined,
+    indeterminate: false,
     innerRef: undefined,
     theme: undefined,
     variant: "checkbox",
@@ -90,6 +97,7 @@ export default class Checkbox extends Component {
       disabled,
       error,
       iconClassName,
+      indeterminate,
       innerRef,
       theme,
       variant,
@@ -99,7 +107,7 @@ export default class Checkbox extends Component {
     const ariaDisabled = disabled || undefined;
     const ariaInvalid = error || undefined;
     const containerClassNames = [styles.container, variants[variant]];
-    const Icon = componentTypes[variant];
+    const Icon = indeterminate ? Indeterminate : componentTypes[variant];
 
     return (
       <label className={classnames(styles.label, className)}>
