@@ -151,7 +151,6 @@ export default class Date extends Component {
 
     return (
       <ReactDatepicker
-        key={this.datepicker?.state?.open}
         ref={this.setRef}
         placeholderText={placeholder ?? dateFormat.toUpperCase()}
         {...rest}
