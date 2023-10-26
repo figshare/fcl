@@ -214,11 +214,12 @@
   --color-input-background_disabled: #f8f8f8;
 
   /** Checkbox **/
-  --color-checkbox-icon: #8d8d8d;
-  --color-checkbox-icon_checked: #5fbdbb;
-  --color-checkbox-icon_hover: #57adab;
-  --color-checkbox-icon_click: #57adab;
+  --color-checkbox-icon: #525252;
+  --color-checkbox-icon_checked: #525252;
+  --color-checkbox-icon_hover: #525252;
+  --color-checkbox-icon_click: #525252;
   --color-checkbox-icon_disabled: #bbb;
+  --color-checkbox-icon_error: #b60000;
   --color-checkbox-alt-icon: #fff;
   --color-checkbox-alt-icon_checked: #fff;
   --color-checkbox-alt-icon_hover: #f5f5f5;
@@ -246,6 +247,7 @@
   --color-switch-handle_checked_hover: #fff;
   --color-switch-handle_checked_click: #fff;
   --color-switch-handle_checked_disabled: #f5f5f5;
+  --color-switch-handle_checked_error: #fff;
 
   /* Label */
   --color-switch-label: #8d8d8d;
