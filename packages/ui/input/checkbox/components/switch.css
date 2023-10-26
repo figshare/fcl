@@ -1,6 +1,6 @@
 .switch {
   --handleSize: calc(5 * var(--gridSize));
-  --switchSize: calc(13 * var(--gridSize));
+  --switchSize: calc(10 * var(--gridSize));
 
   position: relative;
 
@@ -24,8 +24,8 @@
 }
 
 .status {
-  font-size: var(--typography-S-fontSize);
-  line-height: var(--typography-S-lineHeight);
+  font-size: var(--typography-XS-fontSize);
+  line-height: var(--typography-XS-lineHeight);
 
   position: absolute;
   top: 0;
@@ -38,7 +38,7 @@
 
   width: var(--switchSize);
   height: var(--handleSize);
-  padding: 0 calc(2.5 * var(--gridSize));
+  padding: 0 calc(1.5 * var(--gridSize));
 
   color: var(--color-switch-status);
 }
@@ -74,24 +74,23 @@
 
   content: "";
 
-  border: 1px solid var(--color-border-primary);
   border-radius: calc(var(--handleSize) / 2);
 }
 
 .handle {
   position: absolute;
-  top: 1px;
-  left: 1px;
+  top: var(--gridSize);
+  left: var(--gridSize);
 
   display: inline-block;
 
-  width: calc(var(--handleSize) - 2px);
-  height: calc(var(--handleSize) - 2px);
+  width: calc(3 * var(--gridSize));
+  height: calc(3 * var(--gridSize));
 
   transition: 0.25s all ease;
 
   border-radius: 50%;
-  background: var(--color-switch-handle);
+  background: var(--color-icon-secondary);
   box-shadow: 1px 0 2px rgba(0, 0, 0, 0.12);
 
   @media screen and (prefers-reduced-motion: reduce) {
@@ -104,13 +103,15 @@
 }
 
 .checked .slider {
-  background: var(--color-switch-slider_checked);
+  background: var(--color-icon-primary);
 }
 
 .checked .status {
   justify-content: flex-start;
 
-  color: var(--color-switch-status_checked);
+  padding: 0 calc(2 * var(--gridSize));
+
+  color: var(--color-typography-primaryAlt);
 }
 
 .checked .handle {
@@ -120,15 +121,16 @@
 }
 
 .disabled .slider {
-  background: var(--color-switch-slider_disabled);
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-layout-primary-background);
 }
 
 .disabled .status {
-  color: var(--color-switch-status_disabled);
+  color: var(--color-typography-disabled);
 }
 
 .disabled .handle {
-  background: var(--color-switch-handle_disabled);
+  background: var(--color-checkbox-icon_disabled);
 }
 
 .checked.disabled .slider {
@@ -143,33 +145,10 @@
   background: var(--color-switch-handle_checked_disabled);
 }
 
-*:hover,
-*:focus {
-  &:not([aria-invalid]):not([aria-disabled]) > .switch {
-    & .slider {
-      background: var(--color-switch-slider_hover);
-    }
+.checked.error .slider {
+  background: var(--color-typography-error);
+}
 
-    & .status {
-      color: var(--color-switch-status_hover);
-    }
-
-    & .handle {
-      background: var(--color-switch-handle_hover);
-    }
-
-    &.checked {
-      & .slider {
-        background: var(--color-switch-slider_checked_hover);
-      }
-
-      & .status {
-        color: var(--color-switch-status_checked_hover);
-      }
-
-      & .handle {
-        background: var(--color-switch-handle_checked_hover);
-      }
-    }
-  }
+.checked.error .slider::after {
+  border: none;
 }
