@@ -1,75 +1,14 @@
+/* stylelint-disable a11y/no-outline-none */
 .container {
   position: relative;
 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 
   width: calc(60 * var(--gridSize));
-}
-
-.defaultContainer {
-  composes: container;
-
-  border: 1px solid var(--color-border-primary);
-  border-radius: calc(0.5 * var(--gridSize));
-
-  &:active,
-  &:focus {
-    border: 2px solid var(--color-border-active);
-  }
-}
-
-.underlineContainer {
-  composes: container;
-
-  border: none;
-  border-bottom: 1px solid var(--color-border-primary);
-  border-radius: 0;
-  box-shadow: none;
-
-  &::placeholder {
-    color: var(--color-typography-tertiary);
-  }
-
-  &:active,
-  &:focus {
-    border-bottom: 2px solid var(--color-border-active);
-  }
-}
-
-.isDisabled {
-  background-color: var(--color-layout-tertiary-background);
-}
-
-.defaultContainer:focus-within,
-.defaultContainer.isFocused {
-  border: 2px solid var(--color-border-active);
-}
-
-.defaultContainer.error:focus-within,
-.defaultContainer.isFocused.error {
-  border: 2px solid var(--color-border-error);
-}
-
-.underlineContainer:focus-within,
-.underlineContainer.isFocused {
-  border-bottom: 2px solid var(--color-border-active);
-}
-
-.underlineContainer.error:focus-within,
-.underlineContainer.isFocused.error {
-  border-bottom: 2px solid var(--color-border-error);
-}
-
-.error {
-  border-color: var(--color-border-error);
-
-  &:active,
-  &:focus {
-    border-color: var(--color-border-error);
-  }
+  height: calc(6 * var(--gridSize));
+  justify-content: space-between;
+  align-items: center;
 }
 
 .input {
@@ -86,6 +25,7 @@
   &:active,
   &:focus {
     border-color: none;
+    outline: none;
     box-shadow: none;
   }
 
@@ -122,5 +62,76 @@
     height: calc(6 * var(--gridSize));
 
     margin: calc(1.5 * var(--gridSize)) calc(2 * var(--gridSize));
+  }
+}
+
+.defaultContainer {
+  composes: container;
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: calc(0.5 * var(--gridSize));
+
+  &:active,
+  &:focus,
+  &:focus-within {
+    outline: 2px solid var(--color-border-active);
+    outline-width: 2px;
+    outline-offset: -2px;
+  }
+}
+
+.underlineContainer {
+  composes: container;
+
+  border: none;
+  border-bottom: 1px solid var(--color-border-primary);
+  border-radius: 0;
+  box-shadow: none;
+
+  &::placeholder {
+    color: var(--color-typography-tertiary);
+  }
+
+  &:active,
+  &:focus {
+    border-bottom: 2px solid var(--color-border-active);
+    outline: none;
+  }
+}
+
+.isDisabled {
+  background-color: var(--color-layout-tertiary-background);
+}
+
+.defaultContainer.error:focus-within,
+.defaultContainer.isFocused.error {
+  outline-color: var(--color-border-error);
+}
+
+.underlineContainer:focus-within,
+.underlineContainer.isFocused {
+  border-bottom: 2px solid var(--color-border-active);
+  outline: none;
+}
+
+.underlineContainer.error:focus-within,
+.underlineContainer.isFocused.error {
+  border-bottom: 2px solid var(--color-border-error);
+  outline: none;
+}
+
+.underlineContainer:focus-within .input,
+.underlineContainer.isFocused .input {
+  padding-bottom: 0;
+
+  outline: none;
+}
+
+.error {
+  border-color: var(--color-border-error);
+
+  &:active,
+  &:focus {
+    border-color: var(--color-border-error);
   }
 }

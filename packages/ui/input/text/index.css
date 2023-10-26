@@ -1,3 +1,4 @@
+/* stylelint-disable a11y/no-outline-none */
 .container {
   position: relative;
 
@@ -24,10 +25,6 @@
   width: auto;
   height: auto;
   padding: 0 calc(2 * var(--gridSize));
-}
-
-.container.isFocused > button:last-child {
-  padding-right: calc(2 * var(--gridSize) - 1px);
 }
 
 .underlineTheme {
@@ -61,9 +58,8 @@
 
   &:active,
   &:focus {
-    padding: calc(var(--gridSize) - 1px) calc(2 * var(--gridSize) - 1px);
-
     border-color: none;
+    outline: none;
     box-shadow: none;
   }
 
@@ -78,6 +74,7 @@
     &:focus,
     &:active {
       border: none;
+      outline: none;
       box-shadow: none;
     }
 
@@ -101,30 +98,36 @@
 
 .defaultTheme:focus-within,
 .defaultTheme.isFocused {
-  border: 2px solid var(--color-border-active);
-}
-
-.defaultTheme:focus-within > .input,
-.defaultTheme.isFocused > .input {
-  padding: calc(var(--gridSize) - 1px) calc(2 * var(--gridSize) - 1px);
+  outline: 2px solid var(--color-border-active);
+  outline-width: 2px;
+  outline-offset: -2px;
 }
 
 .defaultTheme.error:focus-within,
 .defaultTheme.isFocused.error {
-  border: 2px solid var(--color-border-error);
+  outline-color: var(--color-border-error);
 }
 
-.defaultTheme:focus-within,
+.defaultTheme:focus-within > .input,
+.defaultTheme.isFocused > .input {
+  outline: none;
+}
+
+.underlineTheme:focus-within,
 .underlineTheme.isFocused {
   border-bottom: 2px solid var(--color-border-active);
+  outline: none;
 }
 
 .underlineTheme:focus-within > .input,
 .underlineTheme.isFocused > .input {
   padding-bottom: calc(var(--gridSize) - 2px);
+
+  outline: none;
 }
 
 .underlineTheme.error:focus-within,
 .underlineTheme.isFocused.error {
   border-bottom: 2px solid var(--color-border-error);
+  outline: none;
 }

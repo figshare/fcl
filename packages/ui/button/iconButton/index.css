@@ -24,6 +24,7 @@
 
   &:focus,
   &:hover {
+    outline-offset: -2px;
     background: var(--color-iconButton-primary-background_hover);
     fill: var(--color-iconButton-primary-icon_hover);
   }
@@ -40,6 +41,7 @@
 }
 
 .primaryAlt {
+  outline-offset: -2px;
   background: var(--color-iconButton-primaryAlt-background);
   fill: var(--color-iconButton-primaryAlt-icon);
 
@@ -66,6 +68,7 @@
 
   &:focus,
   &:hover {
+    outline-offset: -2px;
     background: var(--color-iconButton-secondary-background_hover);
     fill: var(--color-iconButton-secondary-icon_hover);
   }
@@ -87,6 +90,7 @@
 
   &:focus,
   &:hover {
+    outline-offset: -2px;
     background: var(--color-iconButton-secondaryAlt-background_hover);
     fill: var(--color-iconButton-secondaryAlt-icon_hover);
   }
@@ -108,6 +112,7 @@
 
   &:focus,
   &:hover {
+    outline-offset: -2px;
     background: var(--color-iconButton-tertiary-background_hover);
     fill: var(--color-iconButton-tertiary-icon_hover);
   }

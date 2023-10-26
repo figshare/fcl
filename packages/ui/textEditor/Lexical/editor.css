@@ -26,6 +26,9 @@
 
 .container:focus-within {
   --border-color: var(--color-border-active);
+
+  outline: 2px solid var(--border-color);
+  outline-offset: -2px;
 }
 
 .container:focus-within::before {
@@ -91,6 +94,7 @@
 }
 
 .input:focus {
+  outline: none;
   box-shadow: none;
 }
 
