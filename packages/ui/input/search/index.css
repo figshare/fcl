@@ -7,6 +7,17 @@
   align-items: center;
 
   width: calc(60 * var(--gridSize));
+  max-height: calc(7 * var(--gridSize));
+}
+
+.container > button {
+  width: auto;
+  height: auto;
+  padding: calc(var(--gridSize) / 2) calc(2 * var(--gridSize));
+}
+
+.container.isFocused > button:last-child {
+  padding-right: calc(2 * var(--gridSize) - 1px);
 }
 
 .defaultContainer {
@@ -85,6 +96,8 @@
 
   &:active,
   &:focus {
+    padding: calc(var(--gridSize) - 5px);
+
     border-color: none;
     box-shadow: none;
   }
