@@ -79,6 +79,17 @@ export default class OverlayHeader extends Component {
           [styles.confirmation]: isForConfirmationOverlay,
         }, className)}
       >
+        <IconButton
+          Icon={Cancel}
+          className={styles.iconBtn}
+          size="M"
+          theme="tertiary"
+          onBlur={this.onFirstFocus}
+          onClick={onClose ?? this.context.onClose}
+          onMouseEnter={this.onFirstFocus}
+        >
+          {firstFocusIn ? undefined : "Close"}
+        </IconButton>
         <div className={styles.headerInfo}>
           {onGoBackFn && (
             <IconButton
@@ -97,17 +108,6 @@ export default class OverlayHeader extends Component {
             {description && <p className={styles.description} id={ariaDescription}>{description}</p>}
           </div>
         </div>
-        <IconButton
-          Icon={Cancel}
-          className={styles.iconBtn}
-          size="M"
-          theme="tertiary"
-          onBlur={this.onFirstFocus}
-          onClick={onClose ?? this.context.onClose}
-          onMouseEnter={this.onFirstFocus}
-        >
-          {firstFocusIn ? undefined : "Close"}
-        </IconButton>
       </div>
     );
   }
