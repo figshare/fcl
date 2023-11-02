@@ -1,0 +1,9 @@
+Dockerfile
+CODEOWNERS
+CONTRIBUTING.md
+README.md
+auto/*
+.scannerwork/*
+.git
+.gitignore
+node_modules
