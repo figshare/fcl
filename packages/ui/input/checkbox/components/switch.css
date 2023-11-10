@@ -55,7 +55,7 @@
 
   border-radius: calc(var(--handleSize) / 2);
 
-  background: var(--color-switch-slider);
+  background: var(--color-switch-slider_hover);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -91,7 +91,6 @@
 
   border-radius: 50%;
   background: var(--color-icon-secondary);
-  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.12);
 
   @media screen and (prefers-reduced-motion: reduce) {
     transition: none;

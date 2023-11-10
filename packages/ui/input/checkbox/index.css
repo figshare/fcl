@@ -69,3 +69,8 @@
 .switch .input {
   border-radius: calc(2.5 * var(--gridSize));
 }
+
+.switch .input:focus {
+  outline: 2px solid var(--color-switch-slider_checked_hover);
+  box-shadow: none;
+}
