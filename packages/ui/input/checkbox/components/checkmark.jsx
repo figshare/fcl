@@ -8,7 +8,11 @@ import Unchecked from "../../../icons/checkBox/unchecked";
 import styles from "./checkmark.css";
 
 
-const themes = { alt: styles.alt };
+const themes = {
+  alt: styles.alt,
+  primary: styles.primary,
+  secondary: styles.secondary,
+};
 
 export default class Checkmark extends PureComponent {
   static propTypes = {

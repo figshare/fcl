@@ -10,12 +10,20 @@
   fill: var(--color-checkbox-icon_error);
 }
 
+.primary {
+  fill: var(--color-checkbox-primary-theme);
+}
+
+.secondary {
+  fill: var(--color-iconButton-primary-icon);
+}
+
 .disabled {
   fill: var(--color-checkbox-icon_disabled);
 }
 
-input:hover + .checkmark:not(.error):not(.disabled),
-input:focus + .checkmark:not(.error):not(.disabled) {
+input:hover + .checkmark:not(.error):not(.disabled, .primary, .secondary),
+input:focus + .checkmark:not(.error):not(.disabled, .primary, .secondary) {
   fill: var(--color-checkbox-icon_hover);
 }
 

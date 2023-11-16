@@ -56,7 +56,7 @@ export default class Checkbox extends Component {
     /**
       Style variation for the checkbox.
      */
-    theme: PropTypes.oneOf(["alt"]),
+    theme: PropTypes.oneOf(["alt", "primary", "secondary"]),
     /**
       Controls the component flavour.
       If you want the input to be rendered as either a traditional checkbox or a switch.
