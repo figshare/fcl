@@ -47,6 +47,9 @@ Also comes with a switch variation to more clearly represent a `toggle` action t
     return (
       <>
         <Checkbox id="one" checked={checks.one} onChange={handleChange} />
+        <Checkbox id="one" checked={checks.one} error={true} onChange={handleChange} />
+        <Checkbox id="two" theme={"primary"} checked={true} >Labeled: Primary theme</Checkbox>
+        <Checkbox id="two" theme={"secondary"} checked={true} >Labeled: Secondary theme</Checkbox>
         <Checkbox id="two" checked={checks.two} onChange={handleChange}>Labeled: {checks.two ? "Checked" : "Unchecked"}</Checkbox>
         <br />
         <Checkbox  indeterminate={true} id="indeterminate-one"/>
