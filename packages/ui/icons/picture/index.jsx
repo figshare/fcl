@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 
 
-export default class FileWithText extends PureComponent {
+export default class Picture extends PureComponent {
   render() {
     return (
       <svg
