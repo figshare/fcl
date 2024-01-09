@@ -87,6 +87,12 @@
   }
 }
 
+.prefix {
+  padding: var(--gridSize) var(--gridSize) var(--gridSize) calc(2 * var(--gridSize));
+
+  color: var(--color-typography-disabled);
+}
+
 .defaultTheme .input,
 .underlineTheme .input {
   background-color: transparent;
@@ -97,6 +103,14 @@
   padding-bottom: calc(var(--gridSize) - 1px);
 
   border-radius: 0;
+}
+
+.inputWithPrefix > .input {
+  padding-left: 0;
+
+  &:focus-within {
+    padding-left: 0 !important;
+  }
 }
 
 .defaultTheme:focus-within,

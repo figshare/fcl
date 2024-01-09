@@ -38,6 +38,11 @@ export default class TextInput extends Component {
     lockLTR: PropTypes.bool,
 
     /**
+     * A prefix that will be shown as disabled within the input itself
+     */
+    prefix: PropTypes.node,
+
+    /**
       Input style variation. Supported variations: `["default", "underline"]`
      */
     theme: PropTypes.string,
@@ -76,6 +81,7 @@ export default class TextInput extends Component {
     onChange: undefined,
     onFocus: undefined,
     lockLTR: false,
+    prefix: undefined,
   }
 
   state = {
@@ -84,7 +90,7 @@ export default class TextInput extends Component {
   }
 
   render() {
-    const { className, children, disabled, error, lockLTR, theme, ...props } = this.props;
+    const { className, children, disabled, error, lockLTR, theme, prefix, ...props } = this.props;
     const { direction, isInputFocused } = this.state;
 
     const textDirection = lockLTR ? "ltr" : direction;
@@ -96,10 +102,12 @@ export default class TextInput extends Component {
       { [styles.isFocused]: isInputFocused },
       { [styles.error]: error },
       { [styles.isDisabled]: disabled },
+      { [styles.inputWithPrefix]: !!prefix },
     ];
 
     return (
       <div className={classnames(classNames)}>
+        {prefix && <span className={styles.prefix}>{prefix}</span>}
         <input
           {...props}
           aria-disabled={disabled || undefined}
