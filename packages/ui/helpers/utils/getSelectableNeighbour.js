@@ -1,4 +1,5 @@
-const generalQuerySelector = "button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])";
+const generalQuerySelector = `button:not([disabled]), [href]:not([disabled]),
+          input:not([disabled]) , select:not([disabled]), textarea, [tabindex]:not([tabindex="-1"])`;
 
 export function getSelectableNeighbour({
   querySelector = generalQuerySelector,
