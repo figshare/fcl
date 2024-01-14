@@ -174,6 +174,10 @@
   margin: 0 0 calc(4 * var(--gridSize)) 0;
 }
 
+p:has(> br) {
+  margin: 0 !important;
+}
+
 .container.singleRow p {
   margin: 0;
 }
@@ -190,11 +194,6 @@
 .input ul[class="rtl"],
 .input ol[class="rtl"] {
   padding: 0 calc(4 * var(--gridSize)) 0 0;
-}
-
-.input p + ul,
-.input p + ol {
-  margin-top: calc(-3 * var(--gridSize));
 }
 
 .input ul ul,
@@ -214,6 +213,11 @@
 .input ul ol ol,
 .input ul ul ol {
   list-style-type: lower-alpha;
+}
+
+.input p:not(:has(> br)) + ul,
+.input p:not(:has(> br)) + ol {
+  margin-top: calc(-3 * var(--gridSize));
 }
 
 .input li:has(ol),
