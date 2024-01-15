@@ -116,7 +116,7 @@ export function LinkEditor({ onClose }) {
           <div className={styles.inputWrapper} >
             <Input
               className={styles.input}
-              lockLTR={true}
+              lockltr={true}
               placeholder="Add link URL here"
               type="text"
               value={isInputInteracted ? editedLinkUrl : (editedLinkUrl || linkUrl)}
