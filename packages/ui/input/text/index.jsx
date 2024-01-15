@@ -35,7 +35,7 @@ export default class TextInput extends Component {
       Force the text direction to always be left to right.
       To be used in example for email or url inputs
      */
-    lockLTR: PropTypes.bool,
+    lockltr: PropTypes.bool,
 
     /**
      * A prefix that will be shown as disabled within the input itself
@@ -80,7 +80,7 @@ export default class TextInput extends Component {
     onBlur: undefined,
     onChange: undefined,
     onFocus: undefined,
-    lockLTR: false,
+    lockltr: false,
     prefix: undefined,
   }
 
@@ -90,10 +90,10 @@ export default class TextInput extends Component {
   }
 
   render() {
-    const { className, children, disabled, error, lockLTR, theme, prefix, ...props } = this.props;
+    const { className, children, disabled, error, lockltr, theme, prefix, ...props } = this.props;
     const { direction, isInputFocused } = this.state;
 
-    const textDirection = lockLTR ? "ltr" : direction;
+    const textDirection = lockltr ? "ltr" : direction;
 
     const classNames = [
       styles.container,
@@ -144,7 +144,7 @@ export default class TextInput extends Component {
   }
 
   onChange = (e) => {
-    const { disabled, onChange, lockLTR } = this.props;
+    const { disabled, onChange, lockltr } = this.props;
 
     if (disabled) {
       return;
@@ -152,7 +152,7 @@ export default class TextInput extends Component {
 
     if (!e.target.value?.length) {
       this.setState({ direction: "ltr" });
-    } else if (!lockLTR) {
+    } else if (!lockltr) {
       const direction = getTextDirection(e.target.value);
       this.setState({ direction });
     }
