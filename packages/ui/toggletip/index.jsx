@@ -5,11 +5,11 @@ import { Manager as PopperManager } from "react-popper";
 import { LinkingProvider } from "../a11y/linking";
 import { Provider } from "../popup/context";
 import uncontrollable from "../helpers/uncontrollable";
-import uuid from "../helpers/utils/uuid";
 
 
 export { Content, Trigger } from "../popup";
 
+let uuid = 0;
 
 export class Toggletip extends Component {
   static propTypes = {
@@ -23,6 +23,10 @@ export class Toggletip extends Component {
 
   constructor(...args) {
     super(...args);
+
+    uuid += 1;
+
+    this.toggletipId = uuid;
 
     this.state = {
       timeoutId: 0,
@@ -43,24 +47,32 @@ export class Toggletip extends Component {
     return { context: { ...prevState.context, isVisible } };
   }
 
-  toggletipId = uuid();
-
   componentDidMount() {
     if (this.props.closeSelf) {
-      document.body.addEventListener("toggletip-opened", this.listener);
+      try {
+        document?.body?.addEventListener?.("toggletip-opened", this.listener);
+      } catch (e) {
+        // document not available
+      }
     }
   }
 
   componentDidUpdate(prepProps, prevState) {
     if (prevState.context.isVisible !== this.state.context.isVisible && this.state.context.isVisible === true) {
-      const ev = new CustomEvent("toggletip-opened", { detail: { id: this.toggletipId } });
-      document.body.dispatchEvent(ev);
+      try {
+        const ev = new CustomEvent("toggletip-opened", { detail: { id: this.toggletipId } });
+        document?.body?.dispatchEvent?.(ev);
+      } catch (e) {
+        // dispatch not available
+      }
     }
   }
 
   componentWillUnmount() {
-    if (this.props.closeSelf) {
-      document.body.removeEventListener("toggletip-opened", this.listener);
+    try {
+      document?.body?.removeEventListener?.("toggletip-opened", this.listener);
+    } catch (e) {
+      // document not available
     }
   }
 
@@ -95,7 +107,6 @@ export class Toggletip extends Component {
 
   listener = (event) => {
     const { id } = event.detail;
-
     if (id !== this.toggletipId) {
       this.props.onToggle(event, { isVisible: false });
     }
