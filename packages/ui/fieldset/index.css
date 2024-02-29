@@ -1,0 +1,72 @@
+.fieldset {
+  position: relative;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  appearance: none;
+}
+
+.legend {
+  display: flex;
+
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 0;
+  justify-content: flex-start;
+}
+
+.hidden {
+  position: absolute;
+
+  visibility: hidden;
+
+  width: 0;
+  height: 0;
+  min-height: 0;
+}
+
+.primary {
+  font-size: var(--typography-M-fontSize);
+  font-weight: bold;
+  line-height: var(--typography-M-lineHeight);
+
+  min-height: calc(6 * var(--gridSize));
+
+  color: var(--color-typography-primary);
+}
+
+.secondary {
+  font-size: var(--typography-M-fontSize);
+  font-weight: bold;
+  line-height: var(--typography-M-lineHeight);
+
+  color: var(--color-typography-primary);
+}
+
+.tertiary {
+  font-size: var(--typography-S-fontSize);
+  font-weight: normal;
+  line-height: var(--typography-S-lineHeight);
+
+  min-height: unset;
+
+  color: var(--color-typography-tertiary);
+}
+
+.items {
+  display: flex;
+  gap: calc(2 * var(--gridSize));
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.items[data-alignment="horizontal"] {
+  flex-direction: row;
+}
+
+.items[data-alignment="vertical"] {
+  flex-direction: column;
+}

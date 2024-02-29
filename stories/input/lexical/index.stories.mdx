@@ -13,11 +13,11 @@ export const canvasStyle = {
 };
 
 <Meta
-  title="UI/Lexical Editor" 
+  title="UI/Inputs/TextEditor"
   component={Editor} 
   parameters={{
     viewMode: 'docs',
-    previewTabs: { 
+    previewTabs: {
       canvas: { hidden: true } 
      },
   }}
@@ -35,9 +35,10 @@ A textarea which allows users to input more complex HTML markup text.
 Users can mark portions or the whole content as paragraphs, headings or emphasise or underline text in various ways.
 
 <Story 
-  name="Lexical Text Editor" 
+  name="TextEditor" 
   parameters={{
     layout: "centered",
+    jest: ["ui/textEditor/Lexical"],
   }}
 >
   {() => {
