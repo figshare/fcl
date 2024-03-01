@@ -137,3 +137,12 @@
     margin: calc(1.5 * var(--gridSize)) calc(2 * var(--gridSize));
   }
 }
+
+.label {
+  position: absolute;
+
+  visibility: hidden;
+
+  width: 0;
+  height: 0;
+}
