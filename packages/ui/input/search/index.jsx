@@ -32,6 +32,15 @@ export default class SearchInput extends PureComponent {
      */
     error: PropTypes.bool,
     /**
+     Identifier value for the input.
+     */
+    id: PropTypes.string,
+    /**
+     Semantic label contents for the search input.
+     If undefined, the label will not be rendered.
+     */
+    label: PropTypes.string,
+    /**
      Search action http method.
      */
     method: PropTypes.string,
@@ -62,6 +71,8 @@ export default class SearchInput extends PureComponent {
     className: undefined,
     disabled: false,
     error: false,
+    id: undefined,
+    label: "Search",
     method: "get",
     size: "S",
     theme: "default",
@@ -73,7 +84,7 @@ export default class SearchInput extends PureComponent {
   state = { isInputFocused: false }
 
   render() {
-    const { className, disabled, error, method, size, theme, action, onSubmit, ...props } = this.props;
+    const { className, disabled, error, label, method, size, theme, action, onSubmit, ...props } = this.props;
     const { isInputFocused } = this.state;
     const SubmitIcon = iconSizes.submit[size];
 
@@ -94,6 +105,7 @@ export default class SearchInput extends PureComponent {
         role="search"
         onSubmit={onSubmit}
       >
+        {label ? (<label className={styles.label} htmlFor={props.id}>{label}</label>) : null}
         <input
           {...props}
           aria-disabled={disabled || undefined}

@@ -9,6 +9,7 @@ const longPressDelay = 500;
 
 export default class Base extends PureComponent {
   static propTypes = {
+    children: PropTypes.any,
     disabled: PropTypes.bool,
     href: PropTypes.string,
     innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -17,6 +18,7 @@ export default class Base extends PureComponent {
     style: PropTypes.object,
     target: PropTypes.string,
     type: PropTypes.oneOf(["button", "reset", "submit"]),
+    value: PropTypes.string,
     onClick: PropTypes.func,
     onLongPress: PropTypes.func,
     onTouchCancel: PropTypes.func,
@@ -26,6 +28,7 @@ export default class Base extends PureComponent {
   }
 
   static defaultProps = {
+    children: undefined,
     disabled: false,
     href: undefined,
     innerRef: null,
@@ -34,6 +37,7 @@ export default class Base extends PureComponent {
     style: undefined,
     target: undefined,
     type: "button",
+    value: undefined,
     onClick: undefined,
     onLongPress: undefined,
     onTouchCancel: undefined,
@@ -61,7 +65,11 @@ export default class Base extends PureComponent {
   }
 
   render() {
-    const { disabled, href, normalizeHref, innerRef, rel, target, type, onLongPress, ...props } = this.props;
+    const {
+      disabled, href, normalizeHref, innerRef, rel, target, type,
+      onLongPress, children, value,
+      ...props
+    } = this.props;
     const BaseComponent = !href ? "button" : "a";
 
     return (
@@ -71,7 +79,20 @@ export default class Base extends PureComponent {
         {...this.computeProps()}
         aria-disabled={disabled || undefined}
         onClick={this.onClick}
-      />
+      >
+        {children}
+        {this.renderValue(value)}
+      </BaseComponent>
+    );
+  }
+
+  renderValue(value) {
+    if (!value) {
+      return null;
+    }
+
+    return (
+      <span className={styles.label}>{value}</span>
     );
   }
 
