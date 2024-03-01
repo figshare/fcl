@@ -1,6 +1,6 @@
 {
   "name": "@figshare/fcl",
-  "version": "1.3.32",
+  "version": "1.4.0",
   "description": "figshare UI components",
   "publishConfig": {
     "access": "public",
