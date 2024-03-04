@@ -256,7 +256,7 @@ export function Editor(props) {
   );
 
   return (<>
-    <div ref={editorRef} className={editorClasses} data-id="editor-content-editable">
+    <div ref={editorRef} className={editorClasses} data-id="editor-content-editable" id={id}>
       <RichTextPlugin
         ErrorBoundary={LexicalErrorBoundary}
         contentEditable={<ContentEditable className={styles.input} />}
