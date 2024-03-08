@@ -152,3 +152,7 @@ a:hover > sup,
 a:focus > sup {
   text-decoration: underline;
 }
+
+p[data-br-only="true"] {
+  margin: 0 !important;
+}
