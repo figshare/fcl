@@ -1,8 +1,6 @@
 import React from "react";
 import { number } from "prop-types";
 
-import { DEFAULT_MAX_TEXT_LENGTH, DEFAULT_MIN_TEXT_LENGTH } from "../../index";
-
 import styles from "./Warning.css";
 
 
@@ -21,6 +19,6 @@ export const Warning = ({ contentLength, minLength, maxLength }) => {
 Warning.propTypes = { contentLength: number, maxLength: number, minLength: number };
 Warning.defaultProps = {
   contentLength: 0,
-  minLength: DEFAULT_MIN_TEXT_LENGTH,
-  maxLength: DEFAULT_MAX_TEXT_LENGTH,
+  minLength: 5000,
+  maxLength: 10000,
 };

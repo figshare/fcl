@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 export default class RenderInPortal extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
-    portalNode: PropTypes.instanceOf(HTMLElement),
+    portalNode: PropTypes.any,
   }
 
   static defaultProps = { portalNode: undefined }
