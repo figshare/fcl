@@ -106,36 +106,6 @@ function populateEditorState(value) {
   };
 }
 
-export default function EditorContainer(props) {
-  const { disabled, onError, onBlur } = props;
-
-  const initialConfig = useMemo(() => {
-    return { ...defaultConfig, editable: !disabled, onError, editorState: populateEditorState(props.value) };
-  }, [defaultConfig, onError, disabled]);
-
-  const containerRef = useRef(null);
-
-  const handleBlur = useCallback((event) => {
-    if (!containerRef.current.contains(event.relatedTarget)) {
-      if (typeof onBlur === "function") {
-        onBlur(event);
-      }
-    }
-  }, [onBlur]);
-
-  return (
-    <div
-      ref={containerRef}
-      role="presentation"
-      onBlur={handleBlur}
-    >
-      <LexicalComposer initialConfig={initialConfig} >
-        <Editor {...props} />
-      </LexicalComposer>
-    </div>
-  );
-}
-
 export function Editor(props) {
   const {
     onBlur,
@@ -273,6 +243,37 @@ export function Editor(props) {
   </>);
 }
 
+export function EditorContainer(props) {
+  const { disabled, onError, onBlur } = props;
+
+  const initialConfig = useMemo(() => {
+    return { ...defaultConfig, editable: !disabled, onError, editorState: populateEditorState(props.value) };
+  }, [defaultConfig, onError, disabled]);
+
+  const containerRef = useRef(null);
+
+  const handleBlur = useCallback((event) => {
+    if (!containerRef.current.contains(event.relatedTarget)) {
+      if (typeof onBlur === "function") {
+        onBlur(event);
+      }
+    }
+  }, [onBlur]);
+
+  return (
+    <div
+      ref={containerRef}
+      role="presentation"
+      onBlur={handleBlur}
+    >
+      <LexicalComposer initialConfig={initialConfig} >
+        <Editor {...props} />
+      </LexicalComposer>
+    </div>
+  );
+}
+
+
 EditorContainer.propTypes = {
   /**
     Callback called when the editor contents are edited or changed.
@@ -376,3 +377,5 @@ EditorContainer.defaultProps = {
 };
 
 Editor.propTypes = EditorContainer.propTypes; // eslint-disable-line
+
+export default EditorContainer;
