@@ -84,7 +84,7 @@ export default class SearchInput extends PureComponent {
   state = { isInputFocused: false }
 
   render() {
-    const { className, disabled, error, label, method, size, theme, action, onSubmit, ...props } = this.props;
+    const { className, disabled, error, label, value, method, size, theme, action, onSubmit, ...props } = this.props;
     const { isInputFocused } = this.state;
     const SubmitIcon = iconSizes.submit[size];
 
@@ -119,7 +119,7 @@ export default class SearchInput extends PureComponent {
           onFocus={this.onFocus}
         />
         {this.renderClearIcon()}
-        <IconButton Icon={SubmitIcon} size={size} theme="tertiary" type="submit">
+        <IconButton Icon={SubmitIcon} data-search-url={`/search?q=${value}`} size={size} theme="tertiary" type="submit">
           Search
         </IconButton>
       </form>
