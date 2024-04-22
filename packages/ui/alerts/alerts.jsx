@@ -1,5 +1,5 @@
 import React from "react";
-import { string, bool } from "prop-types";
+import { string, bool, array } from "prop-types";
 import classnames from "classnames";
 
 import { IconButton } from "../button";
@@ -35,6 +35,11 @@ export class Alerts extends React.PureComponent {
     */
     className: string,
     /**
+      * Optional array of message items to show after mounting.
+      * If we want these to be controlled and change, assign a key to remount.
+    */
+    initialMessages: array,
+    /**
       * Optional flag to show Alerts at the viewport level.
     */
     isFixed: bool,
@@ -49,9 +54,17 @@ export class Alerts extends React.PureComponent {
     noTypeIcon: bool,
   }
 
-  static defaultProps = { id: "global-alerts", className: undefined, isFixed: false, isToast: false, noTypeIcon: false }
+  static defaultProps = {
+    id: "global-alerts",
+    className: undefined,
+    isFixed: false,
+    isToast: false,
+    noTypeIcon: false,
+    initialMessages: undefined,
+  }
 
-  state = { messages: [], id: this.props.id }
+  state = { messages: this.props.initialMessages ?? [], id: this.props.id }
+  tickets = [];
 
   componentDidMount() {
     document.addEventListener("form-alerts:message", this.onWarningEvent);
@@ -59,6 +72,12 @@ export class Alerts extends React.PureComponent {
 
   componentWillUnmount() {
     document.removeEventListener("form-alerts:message", this.onWarningEvent);
+
+    try {
+      this.tickets.forEach((ticket) => clearTimeout(ticket));
+    } catch {
+      // nothing worth handling
+    }
   }
 
   render() {
@@ -164,9 +183,11 @@ export class Alerts extends React.PureComponent {
         if (typeof timeout === "number") {
           const id = message?.id;
 
-          setTimeout(() => {
+          const ticket = setTimeout(() => {
             popAlert(componentChannel, id);
           }, [timeout]);
+
+          this.tickets.push(ticket);
         }
         break;
       case "clear":

@@ -7,8 +7,6 @@
   width: 100%;
   flex: 1 0;
   gap: calc(2 * var(--gridSize));
-
-  margin-bottom: calc(3 * var(--gridSize));
 }
 
 .isFixed {
