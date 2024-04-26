@@ -9,6 +9,10 @@
   gap: calc(2 * var(--gridSize));
 }
 
+.margin {
+  margin-bottom: calc(3 * var(--gridSize));
+}
+
 .isFixed {
   --corner-radius: 0;
 

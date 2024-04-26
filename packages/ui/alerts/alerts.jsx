@@ -48,6 +48,11 @@ export class Alerts extends React.PureComponent {
     */
     isToast: bool,
     /**
+      * Optional flag to add a bottom margin to the
+      * alerts container when it si not empty.
+    */
+    margin: bool,
+    /**
       * Optional flag to hide Alert `type` icons.
       * If true, content will also be visually centered.
     */
@@ -61,6 +66,7 @@ export class Alerts extends React.PureComponent {
     isToast: false,
     noTypeIcon: false,
     initialMessages: undefined,
+    margin: true,
   }
 
   state = { messages: this.props.initialMessages ?? [], id: this.props.id }
@@ -82,7 +88,7 @@ export class Alerts extends React.PureComponent {
 
   render() {
     const { id, messages } = this.state;
-    const { className, isFixed, isToast, noTypeIcon } = this.props;
+    const { className, isFixed, isToast, noTypeIcon, margin } = this.props;
 
     const empty = !messages?.length;
 
@@ -93,6 +99,7 @@ export class Alerts extends React.PureComponent {
             styles.alerts,
             empty ? styles.empty : styles.shown,
             {
+              [styles.margin]: margin,
               [styles.isFixed]: isFixed,
               [styles.noTypeIcon]: noTypeIcon,
               [styles.isToast]: isToast,
