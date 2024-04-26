@@ -114,6 +114,7 @@ export default class SearchInput extends PureComponent {
           data-size={size}
           disabled={disabled || undefined}
           type="text"
+          value={value}
           onBlur={this.onBlur}
           onChange={this.onChange}
           onFocus={this.onFocus}
