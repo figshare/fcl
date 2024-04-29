@@ -91,11 +91,22 @@ export default class GenericButton extends PureComponent {
     isVisible: false,
     popperKey: 0,
     tooltipDelay: 300,
+    isVisibleBtn: false,
+  }
+
+  observer = null;
+
+  componentDidMount() {
+    this.initObserver();
   }
 
   componentWillUnmount() {
     clearTimeout(this.tooltipTimeoutId);
     clearTimeout(this.focusTimeoutId);
+
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 
   render() {
@@ -130,7 +141,7 @@ export default class GenericButton extends PureComponent {
 
     return (
       <Popper
-        eventsEnabled={isVisible}
+        eventsEnabled={this.isVisibleBtn || isVisible}
         modifiers={[
           {
             name: "flip",
@@ -282,4 +293,18 @@ export default class GenericButton extends PureComponent {
 
     this.setState({ isActive: false });
   }
+
+  initObserver = () => {
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        const isVisible = entries[0].isIntersecting;
+        this.setState({ isVisibleBtn: isVisible });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (this.buttonNode) {
+      this.observer.observe(this.buttonNode);
+    }
+  };
 }
