@@ -91,7 +91,6 @@ export default class GenericButton extends PureComponent {
     isVisible: false,
     popperKey: 0,
     tooltipDelay: 300,
-    isVisibleBtn: false,
   }
 
   observer = null;
@@ -137,11 +136,11 @@ export default class GenericButton extends PureComponent {
       return null;
     }
 
-    const { isVisible } = this.state;
+    const { isVisible, isActive } = this.state;
 
     return (
       <Popper
-        eventsEnabled={this.isVisibleBtn || isVisible}
+        eventsEnabled={isVisible && isActive}
         modifiers={[
           {
             name: "flip",
@@ -175,7 +174,7 @@ export default class GenericButton extends PureComponent {
     } = popperProps;
 
     const { tooltip, classNameTooltip } = this.props;
-    const { isActive } = this.state;
+    const { isActive, isVisible } = this.state;
 
     return (
       <>
@@ -185,7 +184,7 @@ export default class GenericButton extends PureComponent {
           aria-hidden={false}
           className={classnames(styles.tooltip, classNameTooltip)}
           data-placement={popperPlacement}
-          data-tooltip-visible={isActive}
+          data-tooltip-visible={isVisible && isActive}
           style={popperStyle}
         >
           {tooltip}
@@ -298,7 +297,7 @@ export default class GenericButton extends PureComponent {
     this.observer = new IntersectionObserver(
       (entries) => {
         const isVisible = entries[0].isIntersecting;
-        this.setState({ isVisibleBtn: isVisible });
+        this.setState({ isVisible });
       },
       { threshold: 0.5 }
     );
