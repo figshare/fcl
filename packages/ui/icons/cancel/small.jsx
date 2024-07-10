@@ -7,13 +7,13 @@ export default class CancelSmall extends PureComponent {
       <svg
         aria-hidden={true}
         fill="transparent"
+        focusable={false}
         height="36"
         preserveAspectRatio="xMidYMid meet"
-        width="10"
-        {...this.props}
-        focusable={false}
         viewBox="0 0 10 36"
+        width="10"
         xmlns="https://www.w3.org/2000/svg"
+        {...this.props}
       >
         <path
           clipRule="evenodd"
