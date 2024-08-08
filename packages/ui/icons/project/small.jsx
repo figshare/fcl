@@ -7,13 +7,13 @@ export default class ProjectSmall extends PureComponent {
       <svg
         aria-hidden={true}
         fill="transparent"
+        focusable={false}
         height="36"
         preserveAspectRatio="xMidYMid meet"
-        width="15"
-        {...this.props}
-        focusable={false}
         viewBox="0 0 15 36"
+        width="15"
         xmlns="https://www.w3.org/2000/svg"
+        {...this.props}
       >
         <path
           clipRule="evenodd"
