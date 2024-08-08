@@ -88,7 +88,11 @@
 }
 
 .prefix {
+  width: fit-content;
+
   padding: var(--gridSize) var(--gridSize) var(--gridSize) calc(2 * var(--gridSize));
+
+  white-space: nowrap;
 
   color: var(--color-typography-disabled);
 }
