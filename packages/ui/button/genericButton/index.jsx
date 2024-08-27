@@ -96,7 +96,9 @@ export default class GenericButton extends PureComponent {
   observer = null;
 
   componentDidMount() {
-    this.initObserver();
+    setTimeout(() => {
+      this.initObserver();
+    }, 100);
   }
 
   componentWillUnmount() {
