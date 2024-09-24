@@ -158,5 +158,13 @@ export default class SearchInput extends PureComponent {
   onClear = (e) => {
     e.target.value = "";
     this.onChange(e);
+
+    if (this.props.id) {
+      const inputElement = document.querySelector(`#${this.props.id}`);
+
+      if (inputElement) {
+        inputElement.focus();
+      }
+    }
   }
 }
