@@ -80,7 +80,7 @@ export class Alerts extends React.PureComponent {
     document.removeEventListener("form-alerts:message", this.onWarningEvent);
 
     try {
-      this.tickets.forEach((ticket) => clearTimeout(ticket));
+      this.tickets.forEach((entry) => clearTimeout(entry.ticket));
     } catch {
       // nothing worth handling
     }
@@ -194,7 +194,9 @@ export class Alerts extends React.PureComponent {
             popAlert(componentChannel, id);
           }, [timeout]);
 
-          this.tickets.push(ticket);
+          this.clearExistingTicket(id);
+
+          this.tickets.push({ id, ticket });
         }
         break;
       case "clear":
@@ -208,6 +210,8 @@ export class Alerts extends React.PureComponent {
           newMessages.splice(index, 1);
 
           this.setState({ messages: newMessages });
+
+          this.clearExistingTicket(message?.id);
         }
         break;
       }
@@ -221,5 +225,12 @@ export class Alerts extends React.PureComponent {
 
     popAlert(componentChannel, alert.id);
   }
-}
 
+  clearExistingTicket(id) {
+    this.tickets.forEach((entry) => {
+      if (entry.id === id) {
+        clearTimeout(entry.ticket);
+      }
+    });
+  }
+}
