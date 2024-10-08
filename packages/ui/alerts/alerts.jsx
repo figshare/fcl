@@ -175,6 +175,14 @@ export class Alerts extends React.PureComponent {
     return null;
   }
 
+  onClearTickets = (tickets) => {
+    try {
+      tickets.forEach((ticket) => clearTimeout(ticket));
+    } catch {
+      // nothing worth handling
+    }
+  }
+
   onWarningEvent = (event) => {
     const { id: componentChannel, messages } = this.state;
     const { detail: { action, message, channel, timeout } } = event;
@@ -189,6 +197,8 @@ export class Alerts extends React.PureComponent {
 
         if (typeof timeout === "number") {
           const id = message?.id;
+
+          this.onClearTickets(this.tickets);
 
           const ticket = setTimeout(() => {
             popAlert(componentChannel, id);
@@ -208,6 +218,8 @@ export class Alerts extends React.PureComponent {
           newMessages.splice(index, 1);
 
           this.setState({ messages: newMessages });
+
+          this.onClearTickets(this.tickets);
         }
         break;
       }
@@ -222,4 +234,3 @@ export class Alerts extends React.PureComponent {
     popAlert(componentChannel, alert.id);
   }
 }
-
