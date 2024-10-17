@@ -298,7 +298,8 @@ export default class GenericButton extends PureComponent {
   initObserver = () => {
     this.observer = new IntersectionObserver(
       (entries) => {
-        const isVisible = entries[0].isIntersecting;
+        const lastEntry = entries?.reduce((a, b) => (a && b && a.time > b.time) ? a : b)
+        const isVisible = lastEntry.isIntersecting;
         this.setState({ isVisible });
       },
       { threshold: 0.5 }
