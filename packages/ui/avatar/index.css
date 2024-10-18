@@ -1,0 +1,45 @@
+.avatar {
+  position: relative;
+
+  width: calc(7 * var(--gridSize));
+  height: calc(7 * var(--gridSize));
+
+  border-radius: 50%;
+
+  background-color: var(--color-layout-tertiaryAlt-background);
+}
+
+.initials {
+  display: flex;
+  flex-direction: row;
+
+  width: inherit;
+  height: inherit;
+
+  justify-content: center;
+  align-items: center;
+
+  text-transform: uppercase;
+
+  color: var(--color-typography-primaryAlt);
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: inherit;
+  max-width: 100%;
+  height: inherit;
+  max-height: 100%;
+
+  border-radius: inherit;
+  object-fit: cover;
+
+  background-color: inherit;
+
+  &[aria-hidden="true"] {
+    opacity: 0;
+  }
+}

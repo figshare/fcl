@@ -378,7 +378,7 @@
       { "blankLine": "always", "prev": "class", "next": "*" },
       { "blankLine": "always", "prev": "*", "next": "class" }
     ],
-    "prefer-arrow-callback": [2, { "allowUnboundThis": false } ],
+    "prefer-arrow-callback": [2, { "allowNamedFunctions": true, "allowUnboundThis": false } ],
     "prefer-const": 2,
     "prefer-destructuring": [ 2, { "object": true } ],
     "prefer-numeric-literals": 0,
