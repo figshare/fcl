@@ -182,7 +182,7 @@ export default class Overlay extends Component {
 
   renderContent = (focusTrapProps) => {
     const { ref } = focusTrapProps;
-    const { children, className, variant, background } = this.props;
+    const { children, className, variant, background, overlayBackground } = this.props;
     const aria = {
       "aria-labelledby": `dialog-${this.id}-title`,
       "aria-describedby": `dialog-${this.id}-description`,
@@ -191,7 +191,9 @@ export default class Overlay extends Component {
     return (
       <section
         ref={ref}
-        className={classnames(styles.overlayBox, styles[background], styles[variant], className)}
+        className={
+          classnames(styles.overlayBox, styles[background], styles[overlayBackground], styles[variant], className)
+        }
         data-node-id={`overlay-box-for-${this.id}`}
         role="dialog"
         {...aria}
