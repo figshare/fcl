@@ -12,18 +12,19 @@ export const Avatar = forwardRef(function Avatar(props, ref) {
     className,
     firstName = "", lastName = "",
     imageProps = {}, initialsProps = {},
+    url: givenUrl,
   } = props;
-  const [state, setState] = useState({ browser: false, loaded: false, error: false, url: props.url });
+  const [state, setState] = useState({ browser: false, loaded: false, error: false, url: givenUrl });
   const { browser, loaded, error, url } = state;
 
   useEffect(() => {
     setState({
       browser: true,
-      url,
-      error: !url,
+      url: givenUrl,
+      error: !givenUrl,
       loaded: false,
     });
-  }, [url]);
+  }, [givenUrl]);
 
   const fullName = useMemo(() => `${firstName} ${lastName}`.trim(), [firstName, lastName]);
   const initialsStr = useMemo(() => {
