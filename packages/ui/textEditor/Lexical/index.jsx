@@ -117,6 +117,7 @@ export function Editor(props) {
     className,
     error,
     isSingleRow,
+    hasWarningText,
     toolbarConfig,
     onChange,
     id,
@@ -239,7 +240,9 @@ export function Editor(props) {
       <LinkPlugin />
       <Toolbar config={toolbarConfig} />
     </div>
-    {!isSingleRow && <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />}
+    {(!isSingleRow && hasWarningText) && (
+      <Warning contentLength={contentLength} maxLength={maxTextLength} minLength={minTextLength} />
+    )}
   </>);
 }
 
@@ -292,6 +295,10 @@ EditorContainer.propTypes = {
     Visually marks the editor as being in an error state.
   */
   error: PropTypes.bool,
+  /**
+    Display the length warning for the editor.
+  */
+  hasWarningText: PropTypes.bool,
   /**
     Identify the editor through a unique field name. Will be passed to the `onChange` function as the first argument.
   */
@@ -359,6 +366,7 @@ EditorContainer.defaultProps = {
   error: false,
   onEditorChange: undefined,
   isSingleRow: false,
+  hasWarningText: true,
   placeholder: "",
   maxTextLength: DEFAULT_MAX_TEXT_LENGTH,
   minTextLength: DEFAULT_MIN_TEXT_LENGTH,
