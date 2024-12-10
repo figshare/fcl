@@ -5,6 +5,8 @@
   width: 100%;
   max-width: calc(100% - var(--gridSize));
   margin: 0 auto;
+
+  text-align: left;
 }
 
 .fullWidth {
@@ -46,6 +48,7 @@
 
   display: flex;
   flex-direction: row;
+  gap: calc(2 * var(--gridSize));
 
   padding: calc(1 * var(--gridSize)) calc(2 * var(--gridSize));
 
@@ -67,6 +70,8 @@
 
 .warningIcon {
   flex-shrink: 0;
+
+  margin-right: var(--gridSize);
 
   fill: var(--color-icon-error);
 }
