@@ -59,6 +59,7 @@ export const Avatar = forwardRef(function Avatar(props, ref) {
       >
         {initialsStr}
       </div>
+      {!error &&
       <img
         alt={fullName}
         aria-hidden={imageAriaHidden}
@@ -68,6 +69,7 @@ export const Avatar = forwardRef(function Avatar(props, ref) {
         onLoad={onImageLoad}
         {...imageProps}
       />
+      }
     </div>);
 });
 
