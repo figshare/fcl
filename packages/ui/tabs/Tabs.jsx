@@ -26,9 +26,13 @@ export function Tabs({ children, value, defaultValue, onChange }) {
 }
 
 Tabs.propTypes = {
+  /** should contain TabsList and TabsPanel elements */
   children: node.isRequired,
+  /** an initial value for the selected tab */
   defaultValue: oneOfType([string, number]),
+  /** A managed/controlled value for the selected tab */
   value: oneOfType([string, number]),
+  /** A function to notify of, or to trigger (if value is provided) a tab change */
   onChange: func,
 };
 
@@ -56,6 +60,7 @@ export function TabsList({ children, className, ...rest }) {
 }
 
 TabsList.propTypes = {
+  /** should contain Tab item elements */
   children: node,
   className: string,
 };
@@ -92,7 +97,12 @@ export function Tab({ value, active, disabled, children, className, ...rest }) {
 
 Tab.propTypes = {
   children: node.isRequired,
+  /** The tab value that this tab will trigger */
   value: oneOfType([string, number]).isRequired,
+  /** Controls wether this tab is active or not.
+   * It is optional, as long as a Tabs parent exists, as this value can be computed from the TabsContext
+   * by comparing `value` with the active `tab` value in the context.
+   **/
   active: bool,
   className: string,
   disabled: bool,
@@ -124,7 +134,16 @@ export function TabsPanel({ value, children, ...rest }) {
   );
 }
 
-TabsPanel.propTypes = { children: any.isRequired, value: oneOfType([string, number]) };
+TabsPanel.propTypes = {
+  /** should contain TabEntry elements */
+  children: any.isRequired,
+  /**
+   * The active value associated with a `Tab` item
+   * It can be ommited, if a Tabs parent exists,
+   * as this value will be taken directly from the TabsContext it provides.
+   */
+  value: oneOfType([string, number]),
+};
 TabsPanel.defaultProps = { value: undefined };
 
 
@@ -134,7 +153,11 @@ export function TabEntry({ value, children }) {
   );
 }
 
-TabEntry.propTypes = { children: oneOfType([node, func]).isRequired, value: oneOfType([string, number]).isRequired };
+TabEntry.propTypes = {
+  children: oneOfType([node, func]).isRequired,
+  /** The value associated with a Tab item */
+  value: oneOfType([string, number]).isRequired,
+};
 
 Tabs.List = TabsList;
 Tabs.Tab = Tab;

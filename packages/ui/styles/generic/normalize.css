@@ -51,7 +51,7 @@ button {
   }
 
   &[disabled],
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     color: var(--color-button-tertiary-label_disabled);
     background: var(--color-button-tertiary-background_disabled);
   }
