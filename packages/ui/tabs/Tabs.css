@@ -53,7 +53,7 @@
 .tab:focus {
   text-decoration: none;
 
-  color: var(--tab-color);
+  color: var(--active-tab-color);
 }
 
 .tab[data-active="true"] {
