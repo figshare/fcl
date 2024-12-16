@@ -1,0 +1,318 @@
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Tabs, TabsList, Tab, TabsPanel, TabEntry } from "@figshare/fcl/tabs";
+import { Button } from "@figshare/fcl/button";
+import image from "../../assets/avatar.png";
+import imageWithTransparentBackground from "../../assets/avatar-transparent-background.png";
+const tab = "map";
+const onTab = () => {};
+
+<Meta
+  title="UI/Tabs"
+  component={Tabs}
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: { hidden: true }
+     },
+  }}
+/>
+
+# Tabs
+---
+- [Overview](#overview)
+- [Props](#props)
+- [Examples](#examples)
+
+## Overview
+
+A component set to render Tabs and their contents in an application.
+Can manage it's own state and notify of tab changes, and can switch between content entries as tabs change.
+
+<Story
+  name="Tabs"
+  parameters={{
+    layout: "centered",
+  }}
+>
+  {() => {
+    const [tab, setTab] = useState("map");
+    const onClickTab = useCallback((e) => { setTab(e.target.getAttribute("data-value")); }, [setTab]);
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <Tabs.List>
+          <Tabs.Tab active={tab === "map"} value="map" onClick={onClickTab}>Map</Tabs.Tab>
+          <Tabs.Tab active={tab === "features"} value="features" onClick={onClickTab}>Features</Tabs.Tab>
+          <Tabs.Tab active={tab === "geojson"} value="geojson" onClick={onClickTab}>GeoJSON</Tabs.Tab>
+          <Tabs.Tab active={tab === "editor"} value="editor" onClick={onClickTab} disabled={true}>Editor</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value={tab}>
+          <Tabs.Entry value="map">
+            {() => (<div data-part="map" data-scope="geospatial">
+              Map Tab
+            </div>)}</Tabs.Entry>
+          <Tabs.Entry value="features">{() => (<div data-part="features" data-scope="geospatial">
+            Features Tab
+          </div>)}</Tabs.Entry>
+          <Tabs.Entry value="geojson">{() => (<div data-part="geojson" data-scope="geospatial">
+            GeoJSON Tab
+          </div>)}</Tabs.Entry>
+        </Tabs.Panel>
+      </div>
+    )
+  }}
+</Story>
+
+The component can be imported from `@figshare/fcl/tabs`.
+See examples below on how add tabs to your pages.
+
+
+```jsx
+import React from "react";
+import { Tabs } from "@figshare/fcl/tabs";
+
+// Tab state is managed internally by the Tabs component
+function TabsWithRootComponentAndUnmanagedState() {
+    // tab state exists internally
+    const onTabChange = useCallback((tab) => {
+      console.log("tab changed", tab);
+    }, []);
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <Tabs defaultValue="map" onChange={onTabChange}>
+          <Tabs.List>
+            <Tabs.Tab value="map" onClick={onClickTab}>Map</Tabs.Tab>
+            <Tabs.Tab value="features" onClick={onClickTab}>Features</Tabs.Tab>
+            <Tabs.Tab value="geojson" onClick={onClickTab}>GeoJSON</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value={tab}>
+            <Tabs.Entry value="map">
+              <div data-part="map" data-scope="geospatial">Map Tab</div>
+            </Tabs.Entry>
+            <Tabs.Entry value="features">
+              <div data-part="features" data-scope="geospatial">Features Tab</div>
+            </Tabs.Entry>
+            {/** Entry contents can be lazily evaluated */}
+            <Tabs.Entry value="geojson">
+              {() => (
+                <div data-part="geojson" data-scope="geospatial">
+                  GeoJSON Tab
+                </div>
+              )}
+            </Tabs.Entry>
+          </Tabs.Panel>
+        </Tabs>
+      </div>
+    );
+}
+
+// Tab state is managed externally providing defined `value` and `onChange` props to a Tabs root component
+function TabsWithRootComponentAndManagedState() {
+  const [tab, setTab] = useState("map");
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <Tabs value={tab} onChange={setTab}>
+          <Tabs.List>
+            <Tabs.Tab value="map" onClick={onClickTab}>Map</Tabs.Tab>
+            <Tabs.Tab value="features" onClick={onClickTab}>Features</Tabs.Tab>
+            <Tabs.Tab value="geojson" onClick={onClickTab}>GeoJSON</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value={tab}>
+            <Tabs.Entry value="map">Map Tab Content</Tabs.Entry>
+            <Tabs.Entry value="features">Features Tab Content</Tabs.Entry>
+            <Tabs.Entry value="geojson">GeoJSON Tab Content</Tabs.Entry>
+          </Tabs.Panel>
+        </Tabs>
+      </div>
+    );
+}
+
+// Tab state is controlled externally without a Tabs root.
+function TabsWithoutRootComponent() {
+  const [tab, setTab] = useState("map");
+  const onClickTab = useCallback((e) => { setTab(e.target.getAttribute("data-value")); }, [setTab]);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <Tabs.List>
+        <Tabs.Tab active={tab === "map"} value="map" onClick={onClickTab}>Map</Tabs.Tab>
+        <Tabs.Tab active={tab === "features"} value="features" onClick={onClickTab}>Features</Tabs.Tab>
+        <Tabs.Tab active={tab === "geojson"} value="geojson" onClick={onClickTab}>GeoJSON</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel value={tab}>
+        <Tabs.Entry value="map">Map Tab Content</Tabs.Entry>
+        <Tabs.Entry value="features">Features Tab Content</Tabs.Entry>
+        <Tabs.Entry value="geojson">GeoJSON Tab Content</Tabs.Entry>
+      </Tabs.Panel>
+    </div>
+  )
+}
+
+// Using individually imported components from the set
+import { TabsList, Tab, TabsPanel, TabEntry } from "@figshare/fcl/tabs";
+
+function IndividuallyImportedComponents() {
+  const [tab, setTab] = useState("map");
+  const onClickTab = useCallback((e) => { setTab(e.target.getAttribute("data-value")); }, [setTab]);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <TabsList>
+        <Tab active={tab === "map"} value="map" onClick={onClickTab}>Map</Tab>
+        <Tab active={tab === "features"} value="features" onClick={onClickTab}>Features</Tab>
+        <Tab active={tab === "geojson"} value="geojson" onClick={onClickTab}>GeoJSON</Tab>
+      </TabsList>
+      <TabsPanel value={tab}>
+        <TabEntry value="map">Map Tab Content</TabEntry>
+        <TabEntry value="features">Features Tab Content</TabEntry>
+        <TabEntry value="geojson">GeoJSON Tab Content</TabEntry>
+      </TabsPanel>
+    </div>
+  )
+}
+```
+
+## Props
+
+
+### Tabs
+A root component that provides a context for managing tabs.
+Values can be controlled by providing the `value` and `onChange(newTabValue)` props.
+It can be used optionally, as you can make use of TabsList + Tab and TabsPanel + TabEntry and manage them in the owner component.
+<ArgsTable of={Tabs} />
+
+### TabsList (Tabs.List)
+A container component for Tab items.
+<ArgsTable of={TabsList} />
+
+### Tab (Tabs.Tab)
+A Tab button component.
+<ArgsTable of={Tab} />
+
+### TabsPanel (Tabs.Panel / Tabs.Content)
+A Content Switch component that renders a `role="tabpanel"` node. 
+It can accept an active value or reads it from a TabsContext.
+Manages switching between TabEntry components inside it based on that value.
+<ArgsTable of={TabsPanel} />
+
+### TabEntry  (Tabs.Entry)
+A virtual tab entry component. Renders no html.
+It reads an active `value` from the parent TabsPanel and will render it's content in case it matches it's own value.
+Can accept a `function` as `children` to lazily evaluate it's contents only if needed.
+<ArgsTable of={TabEntry} />
+
+## Examples
+
+Using Tabs root component without managing state and with a disabled fourth tab.
+
+<Canvas>
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <Tabs>
+      <Tabs.List>
+        <Tabs.Tab value="one">One</Tabs.Tab>
+        <Tabs.Tab value="two">Two</Tabs.Tab>
+        <Tabs.Tab value="three">Three</Tabs.Tab>
+        <Tabs.Tab value="four" disabled={true}>Four (Disabled)</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel>
+        <Tabs.Entry value="one">
+          <div>Content for one</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="two">
+          <div>Content for two</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="three">
+          <div>Content for three</div>
+        </Tabs.Entry>
+      </Tabs.Panel>
+    </Tabs>
+  </div>
+</Canvas>
+
+Using Tabs root component with a provided `defaultValue` and an `onChange` callback.
+The fourth tab, Feed, is disabled.
+
+<Canvas>
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <Tabs defaultValue={"Groups"} onChange={(tab) => console.log("tabbed to", tab)}>
+      <Tabs.List>
+        <Tabs.Tab value="General">General</Tabs.Tab>
+        <Tabs.Tab value="Metadata">Metadata</Tabs.Tab>
+        <Tabs.Tab value="Groups">Groups</Tabs.Tab>
+        <Tabs.Tab value="Feed" disabled={true}>Feed</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel>
+        <Tabs.Entry value="General">
+          <div>Content for General</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="Metadata">
+          <div>Content for Metadata</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="Groups">
+          <div>Content for Groups</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="Feed">
+          <div>Content for Feed</div>
+        </Tabs.Entry>
+      </Tabs.Panel>
+    </Tabs>
+  </div>
+</Canvas>
+
+Using Tabs root component and fully mananging state in the owner by providing `value` and an `onChange` callback.
+<Canvas>
+  {/*  
+    const [tab, setTab] = useState("map");
+    const onTab = useCallback((newTab) => setTab(newTab), []);
+  */}
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <Tabs value={tab} onChange={onTab}>
+      <Tabs.List>
+        <Tabs.Tab value="map">Map</Tabs.Tab>
+        <Tabs.Tab value="features">Features</Tabs.Tab>
+        <Tabs.Tab value="editor">Editor</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel>
+        <Tabs.Entry value="map">
+          <div>Content for Map</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="features">
+          <div>Content for Features</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="editor">
+          <div>Content for Editor</div>
+        </Tabs.Entry>
+      </Tabs.Panel>
+    </Tabs>
+  </div>
+</Canvas>
+
+
+Using only visual components from the set, without a root provider and managing state in the owner.
+
+<Canvas>
+  {/*  
+    const [tab, setTab] = useState("map");
+    const onTab = useCallback((event) => setTab(event.target.getAttribute("data-value")), []);
+  */}
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <Tabs.List>
+        <Tabs.Tab active={tab === "map"} onClick={onTab} value="map">Map</Tabs.Tab>
+        <Tabs.Tab active={tab === "features"} onClick={onTab} value="features">Features</Tabs.Tab>
+        <Tabs.Tab active={tab === "editor"}  onClick={onTab} value="editor">Editor</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel value={tab}>
+        <Tabs.Entry value="map">
+          <div>Content for Map</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="features">
+          <div>Content for Features</div>
+        </Tabs.Entry>
+        <Tabs.Entry value="editor">
+          <div>Content for Editor</div>
+        </Tabs.Entry>
+      </Tabs.Panel>
+  </div>
+</Canvas>
