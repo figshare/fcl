@@ -55,6 +55,8 @@
   min-height: calc(6 * var(--gridSize));
   padding: 0 calc(2 * var(--gridSize));
 
+  text-decoration: none;
+
   color: var(--color-button-primary-label);
   border: 0 none transparent;
   background: var(--color-button-primary-background);
@@ -103,6 +105,8 @@
   min-height: calc(6 * var(--gridSize));
   padding: 0 calc(2 * var(--gridSize));
 
+  text-decoration: none;
+
   color: var(--color-button-primaryAlt-label);
   border: 0 none transparent;
   background: var(--color-button-primaryAlt-background);
@@ -147,6 +151,8 @@
 .secondary {
   min-height: calc(6 * var(--gridSize));
   padding: 0 calc(2 * var(--gridSize));
+
+  text-decoration: none;
 
   color: var(--color-button-secondary-label);
   border: 1px solid var(--color-border-primary);
@@ -237,6 +243,8 @@
 .secondaryAlt {
   min-height: calc(6 * var(--gridSize));
   padding: 0 calc(2 * var(--gridSize));
+
+  text-decoration: none;
 
   color: var(--color-button-secondaryAlt-label);
   border: 1px solid var(--color-border-primary);
