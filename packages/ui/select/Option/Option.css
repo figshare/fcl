@@ -1,0 +1,106 @@
+.optionWrap {
+  width: 100%;
+}
+
+.option {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  height: calc(8 * var(--gridSize));
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: calc(2 * var(--gridSize)) calc(3 * var(--gridSize));
+
+  color: var(--color-typography-primary);
+  flex-shrink: 0;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+
+    color: var(--color-typography-primary);
+  }
+
+  &:focus-visible,
+  &:focus-within,
+  &:focus {
+    appearance: none;
+
+    padding: calc(2 * var(--gridSize) - 2px)  calc(3 * var(--gridSize) - 2px);
+
+    text-decoration: none;
+
+    border: 2px solid var(--color-border-active);
+    outline: none;
+    background: none;
+    box-shadow: none;
+  }
+
+  &:hover {
+    background-color: var(--color-layout-secondary-background);
+  }
+}
+
+.selected {
+  font-weight: 700;
+
+  color: var(--color-typography-primary);
+}
+
+.disabled {
+  color: var(--color-typography-disabled);
+}
+
+.small {
+  font-size: var(--typography-S-fontSize);
+  line-height: var(--typography-S-lineHeight);
+}
+
+.checkbox {
+  flex-shrink: 0;
+
+  position: relative;
+
+  width: calc(6 * var(--gridSize));
+  height: calc(6 * var(--gridSize));
+  fill: var(--color-icon-primary) !important;
+}
+
+.option span {
+  overflow: hidden;
+
+  text-align: left;
+  white-space: normal;
+  word-wrap: normal;
+  flex: 1;
+}
+
+.ellipsis span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  position: fixed;
+
+  visibility: hidden;
+
+  white-space: nowrap;
+}
+
+.longTextOption {
+  height: auto;
+  min-height: calc(6 * var(--gridSize));
+}
+
+.longTextOption .checkbox {
+  align-self: flex-start;
+}
+
+.longTextOption svg {
+  margin-top: calc(-1 * var(--gridSize));
+}
