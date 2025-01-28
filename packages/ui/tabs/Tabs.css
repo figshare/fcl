@@ -1,6 +1,6 @@
 .tabs {
   --tab-color: var(--color-typography-secondary);
-  --tab-focus-outline-color: #5fbdbb;
+  --tab-focus-outline-color: var(--color-border-active);
   --tab-border-color: transparent;
   --tab-background-color: transparent;
   --active-tab-color: var(--color-typography-secondary);
