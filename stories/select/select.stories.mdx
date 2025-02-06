@@ -1,0 +1,130 @@
+import { useState } from "react";
+import classnames from "classnames";
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Select, Option } from "../../packages/ui/select";
+import { Button } from "@figshare/fcl/button";
+import { ErrorBoundary } from "../ErrorBoundary";
+import { SelectDemo, renderTrigger } from "./select.utils";
+
+<Meta
+ title="UI/Select"
+ component={Select}
+ parameters={{
+  viewMode: 'docs',
+  previewTabs: {
+   canvas: { hidden: true }
+   },
+ }}
+/>
+
+# Select
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Examples](#examples)
+
+## Overview
+Basic Select component.
+
+<Story
+ name="Select"
+ parameters={{
+  layout: "centered",
+  jest: ["ui/Select"],
+ }}
+>
+ {() => {
+  return(
+    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <ErrorBoundary>
+    <Select loading={true}>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+    </Select>
+    </ErrorBoundary>
+    </div>
+  );
+ }}
+</Story>
+
+The component can be imported from `@figshare/fcl/Select`.
+
+```jsx
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+import { Select, Option } from "@figshare/fcl/Select";
+
+const SelectExample = () => {
+  return(
+    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <Select loading={true}>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+    </Select>
+    </div>
+  );
+ }
+```
+
+## Props
+
+<ArgsTable of={Select} />
+
+## Examples
+
+<Canvas>
+ <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Loading state</b>
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Error state</b>
+    {/* <SelectDemo loadingErrorMessage="Oups! something when wrong" />  */}
+  </div>
+   <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Infinite loading</b>
+    {/* <SelectDemo infiniteLoading={true} />  */}
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Searchable - inline</b>
+    {/* <SelectDemo infiniteLoading={true} searchable={true} variant="inline" />  */}
+  </div>
+  {/* <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Searchable - external</b>
+    <SelectDemo externalSearch={true} infiniteLoading={true} searchable={true} /> 
+  </div><div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Searchable - custom placeholder</b>
+    <SelectDemo
+     infiniteLoading={true}
+     searchPlaceholder="Filter your dropdown..."
+     searchable={true}
+    /> 
+  </div><div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Multiple</b>
+    <SelectDemo infiniteLoading={true} multiple={true} searchable={true} /> 
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Multiple - custom render trigger</b>
+    <SelectDemo
+    infiniteLoading={true}
+    multiple={true}
+    renderTrigger={renderTrigger}
+    searchable={true}
+   /> 
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Small</b>
+    <SelectDemo infiniteLoading={true} size="S" /> 
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Medium</b>
+    <SelectDemo infiniteLoading={true} size="M" /> 
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Large</b>
+    <SelectDemo infiniteLoading={true} size="L" /> 
+  </div> */}
+ </div>
+</Canvas>

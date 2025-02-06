@@ -1,2 +1,6 @@
-export { default } from "./Content";
+import { Content } from "./Content";
+
+
+export { Content };
+export default Content;
 
