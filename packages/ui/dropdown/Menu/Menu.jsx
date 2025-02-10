@@ -7,7 +7,7 @@ import RootCloseListener from "../../helpers/rootCloseListener";
 import { Consumer } from "../context";
 
 
-class DropdownMenu extends Component {
+export class DropdownMenu extends Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
     dropdownContext: PropTypes.object.isRequired,
@@ -102,5 +102,8 @@ class DropdownMenu extends Component {
   }
 }
 
+export const Menu = withConsumer(Consumer, "dropdownContext")(DropdownMenu);
 
-export default withConsumer(Consumer, "dropdownContext")(DropdownMenu);
+Menu.displayName = "Menu";
+
+export default Menu;
