@@ -1,0 +1,149 @@
+import { useState } from "react";
+import classnames from "classnames";
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Select, Option } from "../../packages/ui/select";
+import { Button } from "@figshare/fcl/button";
+
+<Meta
+ title="UI/Select"
+ component={Select}
+ parameters={{
+  viewMode: 'docs',
+  previewTabs: {
+   canvas: { hidden: true }
+   },
+ }}
+/>
+
+# Select
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Examples](#examples)
+
+## Overview
+Basic Select component.
+
+<Story
+ name="Select"
+ parameters={{
+  layout: "centered",
+  jest: ["ui/Select"],
+ }}
+>
+ {() => {
+  return(
+    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <Select>
+      {Array.from({ length: 10 }, (_, i) => `Option ${i + 1}`).map((option, index) => (
+        <Option key={index} value={option}>
+          {option}
+        </Option>
+      ))}
+    </Select>
+    </div>
+  );
+ }}
+</Story>
+
+The component can be imported from `@figshare/fcl/Select`.
+
+```jsx
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+import { Select, Option } from "@figshare/fcl/Select";
+
+const SelectExample = () => {
+  return(
+    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <Select loading={true}>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+    </Select>
+    </div>
+  );
+ }
+```
+
+## Props
+
+<ArgsTable of={Select} />
+
+## Examples
+
+<Canvas>
+ <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Loading state</b>
+   <Select loading={true} />
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Error state</b>
+    <Select loadingErrorMessage="Ops! something when wrong" />
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Searchable - inline</b>
+    <Select infiniteLoading={true} searchable={true} variant="inline" >
+      {Array.from({ length: 10 }, (_, i) => `Option ${i + 1}`).map((option, index) => (
+        <Option key={index} value={option}>
+          {option}
+        </Option>
+      ))}
+    </Select>
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Searchable - custom placeholder</b>
+    <Select
+     searchPlaceholder="Filter your dropdown..."
+     searchable={true}
+    >
+      {Array.from({ length: 4 }, (_, i) => `Option ${i + 1}`).map((option, index) => (
+        <Option key={index} value={option}>
+        {option}
+        </Option>
+      ))}
+    </Select>
+  </div><div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Multiple</b>
+    <Select multiple={true} searchable={true}>
+      {Array.from({ length: 5 }, (_, i) => `Option ${i + 1}`).map((option, index) => (
+        <Option key={index} value={option}>
+          {option}
+        </Option>
+      ))}
+    </Select>
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Small</b>
+    <Select size="S" >
+      {Array.from({ length: 5 }, (_, i) => `Option ${i + 1}`).map((option, index) => (
+        <Option key={index} value={option}>
+          {option}
+        </Option>
+      ))}
+    </Select>
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Medium</b>
+    <Select size="M">
+      {Array.from({ length: 5 }, (_, i) => `Option ${i + 1}`).map((option, index) => (
+        <Option key={index} value={option}>
+          {option}
+        </Option>
+      ))}
+    </Select>
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+   <b>Large</b>
+    <Select infiniteLoading={true} size="L">
+      {Array.from({ length: 5 }, (_, i) => `Option ${i + 1}`).map((option, index) => (
+        <Option key={index} value={option}>
+          {option}
+        </Option>
+      ))}
+    </Select>
+  </div>
+ </div>
+</Canvas>

@@ -184,5 +184,10 @@ export class Trigger extends Component {
   }
 }
 
-export default withRef(Trigger);
+export const TriggerWithRef = withRef(Trigger);
+
+TriggerWithRef.displayName = "TriggerWithRef";
+
+export default TriggerWithRef;
+
 

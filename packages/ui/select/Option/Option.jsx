@@ -4,7 +4,6 @@ import React, { Component, createRef } from "react";
 
 import { Button } from "../../button";
 import Checkmark from "../../icons/checkMark/medium.jsx";
-import withRef from "../../helpers/withRef.jsx";
 import Context from "../context.js";
 
 import { debounce } from "./utils.js";
@@ -163,4 +162,4 @@ export class Option extends Component {
   };
 }
 
-export default withRef(Option);
+export default Option;

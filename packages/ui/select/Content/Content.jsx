@@ -9,7 +9,7 @@ import Context from "../context";
 import style from "./Content.css";
 
 
-export default class Content extends Component {
+export class Content extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -144,3 +144,5 @@ export default class Content extends Component {
     }
   }
 }
+
+export default Content;
