@@ -123,6 +123,7 @@ export function Editor(props) {
     id,
     name,
     processors,
+    required,
   } = props;
 
   const [editor] = useLexicalComposerContext();
@@ -230,7 +231,7 @@ export function Editor(props) {
     <div ref={editorRef} className={editorClasses} data-id="editor-content-editable" id={id}>
       <RichTextPlugin
         ErrorBoundary={LexicalErrorBoundary}
-        contentEditable={<ContentEditable className={styles.input} />}
+        contentEditable={<ContentEditable aria-required={required} className={styles.input} />}
         placeholder={<div className={styles.placeholder}>{props.placeholder}</div>}
       />
       <HistoryPlugin />
