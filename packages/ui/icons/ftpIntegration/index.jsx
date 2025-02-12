@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 
 
-export default class FTP extends PureComponent {
+export default class FTPIntegration extends PureComponent {
   render() {
     return (
       <svg
