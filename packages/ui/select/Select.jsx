@@ -40,6 +40,7 @@ export class Select extends Component {
     popperModifiers: PropTypes.array,
     renderChipArea: PropTypes.func,
     renderTrigger: PropTypes.func,
+    required: PropTypes.bool,
     retry: PropTypes.shape({
       message: PropTypes.string,
       action: PropTypes.func,
@@ -78,6 +79,7 @@ export class Select extends Component {
     renderChipArea: undefined,
     renderTrigger: undefined,
     retry: undefined,
+    required: false,
     searchPlaceholder: "Search...",
     searchable: false,
     size: "M",
@@ -137,6 +139,7 @@ export class Select extends Component {
       onClear,
       id,
       iconSize,
+      required,
     } = this.props;
     const { search, isVisible } = this.state;
 
@@ -159,6 +162,7 @@ export class Select extends Component {
       <Context.Provider value={context}>
         <div ref={forwardedRef} className={classnames(selectClassName)} {...props}>
           <Trigger
+            aria-required={required}
             ariaLabel={ariaLabel}
             className={triggerClassName}
             disabled={disabled}

@@ -42,6 +42,13 @@ export default class TextInput extends Component {
      */
     prefix: PropTypes.node,
 
+
+    /**
+      Used for screen readers to announce the required state.
+     */
+
+    required: PropTypes.bool,
+
     /**
       Input style variation. Supported variations: `["default", "underline"]`
      */
@@ -82,6 +89,7 @@ export default class TextInput extends Component {
     onFocus: undefined,
     lockltr: false,
     prefix: undefined,
+    required: false,
   }
 
   state = {
@@ -90,7 +98,7 @@ export default class TextInput extends Component {
   }
 
   render() {
-    const { className, children, disabled, error, lockltr, theme, prefix, ...props } = this.props;
+    const { className, children, disabled, error, lockltr, theme, prefix, required, ...props } = this.props;
     const { direction, isInputFocused } = this.state;
 
     const textDirection = lockltr ? "ltr" : direction;
@@ -109,6 +117,7 @@ export default class TextInput extends Component {
       <div className={classnames(classNames)}>
         {prefix && <span className={styles.prefix}>{prefix}</span>}
         <input
+          aria-required={required}
           {...props}
           aria-disabled={disabled || undefined}
           aria-invalid={error || undefined}
