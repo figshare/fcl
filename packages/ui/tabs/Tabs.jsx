@@ -45,7 +45,7 @@ Tabs.defaultProps = {
 
 export function TabsList({ children, className, ...rest }) {
   return (
-    <div
+    <ul
       aria-orientation="horizontal"
       className={classnames(styles.tabs, className)}
       data-id="tabs"
@@ -55,7 +55,7 @@ export function TabsList({ children, className, ...rest }) {
       {...rest}
     >
       {children}
-    </div>
+    </ul>
   );
 }
 
@@ -75,23 +75,25 @@ export function Tab({ value, active, disabled, children, className, ...rest }) {
   const isActive = onTabClick ? tab === value : active;
 
   return (
-    <button
-      key={value}
-      aria-disabled={disabled}
-      aria-selected={active}
-      className={classnames(styles.tab, className)}
-      data-active={isActive}
-      data-part="tab"
-      data-scope="tabs"
-      data-value={value}
-      disabled={disabled}
-      id={`tab-${value}`}
-      role="tab"
-      onClick={onTabClick}
-      {...rest}
-    >
-      {children}
-    </button>
+    <li>
+      <button
+        key={value}
+        aria-disabled={disabled}
+        aria-selected={active}
+        className={classnames(styles.tab, className)}
+        data-active={isActive}
+        data-part="tab"
+        data-scope="tabs"
+        data-value={value}
+        disabled={disabled}
+        id={`tab-${value}`}
+        role="tab"
+        onClick={onTabClick}
+        {...rest}
+      >
+        {children}
+      </button>
+    </li>
   );
 }
 
