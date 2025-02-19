@@ -12,6 +12,10 @@ install:
 	npm install
 .PHONY: install
 
+svg_react:
+  # svgr can be installed with npm install @svgr/cli (requires node 22.13.0)
+	svgr --out-dir packages/ui/icons/react --ignore-existing -- packages/ui/icons/svg
+
 
 build:
 	npm run storybook:build

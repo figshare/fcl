@@ -6,5 +6,8 @@ build
 # Dependency directories
 node_modules
 
+# Generated Icon Components
+packages/ui/icons/react/*
+
 # Enable Storybook eslint
 !.storybook
