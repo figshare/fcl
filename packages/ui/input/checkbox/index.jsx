@@ -109,13 +109,15 @@ export default class Checkbox extends Component {
     const containerClassNames = [styles.container, variants[variant]];
     const Icon = indeterminate ? Indeterminate : componentTypes[variant];
 
+    const checkboxProps = { "aria-checked": checked };
+
     return (
       <label className={classnames(styles.label, className)}>
         <span
-          aria-checked={checked}
+          {...(variant === "checkbox" ? checkboxProps : {})}
           checked={checked}
           className={classnames(containerClassNames)}
-          role="checkbox"
+          role={variant}
         >
           <input
             {...restProps}
