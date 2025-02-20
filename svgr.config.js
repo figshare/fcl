@@ -13,16 +13,14 @@ module.exports = {
   ${variables.componentName}.propTypes = {
     color: string,
     height: oneOfType([string, number]),
-    inline: bool,
     title: string,
     width: oneOfType([string, number]),
   };
 
   ${variables.componentName}.defaultProps = {
     color: "currentColor",
-    height: undefined,
-    inline: true,
-    width: undefined,
+    height: "auto",
+    width: "1em",
     title: "Icon",
   };
 
@@ -44,7 +42,6 @@ module.exports = {
   },
   "ext": "jsx",
   "svgProps": {
-    "width": "{props.width ?? props.inline ?  \"1em\" : \"100%\"}",
     "fill": "{props.color}",
     "focusable": false,
     "aria-hidden": true,

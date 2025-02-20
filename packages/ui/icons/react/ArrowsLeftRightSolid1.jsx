@@ -1,12 +1,11 @@
 import * as React from "react";
 import { memo } from "react";
-import { oneOfType, bool, string, number } from "prop-types";
+import { oneOfType, string, number } from "prop-types";
 const SvgArrowsLeftRightSolid1 = (props) => (
   <svg
     fill={props.color}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 18 18"
-    width={props.width ?? props.inline ? "1em" : "100%"}
     focusable={false}
     aria-hidden={true}
     role="img"
@@ -29,15 +28,13 @@ const SvgArrowsLeftRightSolid1 = (props) => (
 SvgArrowsLeftRightSolid1.propTypes = {
   color: string,
   height: oneOfType([string, number]),
-  inline: bool,
   title: string,
   width: oneOfType([string, number]),
 };
 SvgArrowsLeftRightSolid1.defaultProps = {
   color: "currentColor",
-  height: undefined,
-  inline: true,
-  width: undefined,
+  height: "auto",
+  width: "1em",
   title: "Icon",
 };
 SvgArrowsLeftRightSolid1.displayName = "SvgArrowsLeftRightSolid1";

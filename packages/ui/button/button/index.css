@@ -1,11 +1,14 @@
 /* stylelint-disable no-descending-specificity -- The violation is ignorable for themes */
 
 .button {
+  --icon-color: inherit;
+
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  fill: var(--icon-color);
 
   min-width: calc(6 * var(--gridSize));
 
@@ -45,10 +48,14 @@
 
 .icon {
   height: inherit;
-  fill: inherit;
+
+  color: var(--icon-color);
+  fill: var(--icon-color);
 }
 
 .primary {
+  --icon-color: var(--color-button-primary-icon);
+
   font-size: var(--typography-M-fontSize);
   line-height: var(--typography-M-lineHeight);
 
@@ -60,7 +67,6 @@
   color: var(--color-button-primary-label);
   border: 0 none transparent;
   background: var(--color-button-primary-background);
-  fill: var(--color-button-primary-icon);
 
   &[data-icon-placement="left"] {
     flex-direction: row;
@@ -80,25 +86,30 @@
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-button-primary-icon_hover);
+
     color: var(--color-button-primary-label_hover);
     background: var(--color-button-primary-background_hover);
-    fill: var(--color-button-primary-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-button-primary-icon_click);
+
     color: var(--color-button-primary-label_click);
     background: var(--color-button-primary-background_click);
-    fill: var(--color-button-primary-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-button-primary-icon_disabled);
+
     color: var(--color-button-primary-label_disabled);
     background: var(--color-button-primary-background_disabled);
-    fill: var(--color-button-primary-icon_disabled);
   }
 }
 
 .primaryAlt {
+  --icon-color: var(--color-button-primaryAlt-icon);
+
   font-size: var(--typography-M-fontSize);
   line-height: var(--typography-M-lineHeight);
 
@@ -110,7 +121,6 @@
   color: var(--color-button-primaryAlt-label);
   border: 0 none transparent;
   background: var(--color-button-primaryAlt-background);
-  fill: var(--color-button-primaryAlt-icon);
 
   &[data-icon-placement="left"] {
     flex-direction: row;
@@ -130,25 +140,30 @@
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-button-primaryAlt-icon_hover);
+
     color: var(--color-button-primaryAlt-label_hover);
     background: var(--color-button-primaryAlt-background_hover);
-    fill: var(--color-button-primaryAlt-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-button-primaryAlt-icon_click);
+
     color: var(--color-button-primaryAlt-label_click);
     background: var(--color-button-primaryAlt-background_click);
-    fill: var(--color-button-primaryAlt-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-button-primaryAlt-icon_disabled);
+
     color: var(--color-button-primaryAlt-label_disabled);
     background: var(--color-button-primaryAlt-background_disabled);
-    fill: var(--color-button-primaryAlt-icon_disabled);
   }
 }
 
 .secondary {
+  --icon-color: var(--color-button-secondary-icon);
+
   min-height: calc(6 * var(--gridSize));
   padding: 0 calc(2 * var(--gridSize));
 
@@ -157,7 +172,6 @@
   color: var(--color-button-secondary-label);
   border: 1px solid var(--color-border-primary);
   background: var(--color-button-secondary-background);
-  fill: var(--color-button-secondary-icon);
 
   &[data-size="small"] {
     font-size: var(--typography-S-fontSize);
@@ -202,24 +216,27 @@
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-button-secondary-icon_hover);
+
     color: var(--color-button-secondary-label_hover);
     border-color: var(--color-button-secondary-background_hover);
     background: var(--color-button-secondary-background_hover);
-    fill: var(--color-button-secondary-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-button-secondary-icon_click);
+
     color: var(--color-button-secondary-label_click);
     border-color: var(--color-button-secondary-background_click);
     background: var(--color-button-secondary-background_click);
-    fill: var(--color-button-secondary-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-button-secondary-icon_disabled);
+
     color: var(--color-button-secondary-label_disabled);
     border-color: var(--color-border-secondary);
     background: var(--color-button-secondary-background_disabled);
-    fill: var(--color-button-secondary-icon_disabled);
   }
 
   &::before {
@@ -241,6 +258,8 @@
 }
 
 .secondaryAlt {
+  --icon-color: var(--color-button-secondaryAlt-icon);
+
   min-height: calc(6 * var(--gridSize));
   padding: 0 calc(2 * var(--gridSize));
 
@@ -249,7 +268,6 @@
   color: var(--color-button-secondaryAlt-label);
   border: 1px solid var(--color-border-primary);
   background: var(--color-button-secondaryAlt-background);
-  fill: var(--color-button-secondaryAlt-icon);
 
   &[data-size="small"] {
     font-size: var(--typography-S-fontSize);
@@ -294,24 +312,27 @@
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-button-secondaryAlt-icon_hover);
+
     color: var(--color-button-secondaryAlt-label_hover);
     border-color: var(--color-button-secondaryAlt-background_hover);
     background: var(--color-button-secondaryAlt-background_hover);
-    fill: var(--color-button-secondaryAlt-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-button-secondaryAlt-icon_click);
+
     color: var(--color-button-secondaryAlt-label_click);
     border-color: var(--color-button-secondaryAlt-background_click);
     background: var(--color-button-secondaryAlt-background_click);
-    fill: var(--color-button-secondaryAlt-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-button-secondaryAlt-icon_disabled);
+
     color: var(--color-button-secondaryAlt-label_disabled);
     border-color: var(--color-border-secondary);
     background: var(--color-button-secondaryAlt-background_disabled);
-    fill: var(--color-button-secondaryAlt-icon_disabled);
   }
 
   &::before {
@@ -333,13 +354,14 @@
 }
 
 .tertiary {
+  --icon-color: var(--color-button-tertiary-icon);
+
   min-height: calc(6 * var(--gridSize));
   padding: 0;
 
   color: var(--color-button-tertiary-label);
   border: 0 none transparent;
   background: var(--color-button-tertiary-background);
-  fill: var(--color-button-tertiary-icon);
 
   &[data-size="small"] {
     font-size: var(--typography-S-fontSize);
@@ -384,27 +406,30 @@
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-button-tertiary-icon_hover);
+
     text-decoration: underline;
 
     color: var(--color-button-tertiary-label_hover);
     background: var(--color-button-tertiary-background_hover);
-    fill: var(--color-button-tertiary-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-button-tertiary-icon_click);
+
     text-decoration: underline;
 
     color: var(--color-button-tertiary-label_click);
     background: var(--color-button-tertiary-background_click);
-    fill: var(--color-button-tertiary-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-button-tertiary-icon_disabled);
+
     text-decoration: none;
 
     color: var(--color-button-tertiary-label_disabled);
     background: var(--color-button-tertiary-background_disabled);
-    fill: var(--color-button-tertiary-icon_disabled);
   }
 
   &::before {
@@ -426,13 +451,14 @@
 }
 
 .tertiaryAlt {
+  --icon-color: var(--color-button-tertiaryAlt-icon);
+
   min-height: calc(6 * var(--gridSize));
   padding: 0;
 
   color: var(--color-button-tertiaryAlt-label);
   border: 0 none transparent;
   background: var(--color-button-tertiaryAlt-background);
-  fill: var(--color-button-tertiaryAlt-icon);
 
   &[data-size="small"] {
     font-size: var(--typography-S-fontSize);
@@ -477,27 +503,30 @@
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-button-tertiaryAlt-icon_hover);
+
     text-decoration: underline;
 
     color: var(--color-button-tertiaryAlt-label_hover);
     background: var(--color-button-tertiaryAlt-background_hover);
-    fill: var(--color-button-tertiaryAlt-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-button-tertiaryAlt-icon_click);
+
     text-decoration: underline;
 
     color: var(--color-button-tertiaryAlt-label_click);
     background: var(--color-button-tertiaryAlt-background_click);
-    fill: var(--color-button-tertiaryAlt-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-button-tertiaryAlt-icon_disabled);
+
     text-decoration: none;
 
     color: var(--color-button-tertiaryAlt-label_disabled);
     background: var(--color-button-tertiaryAlt-background_disabled);
-    fill: var(--color-button-tertiaryAlt-icon_disabled);
   }
 
   &::before {
@@ -519,13 +548,14 @@
 }
 
 .inverted {
+  --icon-color: var(--color-button-inverted-icon);
+
   min-height: calc(6 * var(--gridSize));
   padding: 0;
 
   color: var(--color-button-inverted-label);
   border: 0 none transparent;
   background: var(--color-button-inverted-background);
-  fill: var(--color-button-inverted-icon);
 
   &[data-size="small"] {
     font-size: var(--typography-S-fontSize);
@@ -570,27 +600,30 @@
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-button-inverted-icon_hover);
+
     text-decoration: underline;
 
     color: var(--color-button-inverted-label_hover);
     background: var(--color-button-inverted-background_hover);
-    fill: var(--color-button-inverted-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-button-inverted-icon_click);
+
     text-decoration: underline;
 
     color: var(--color-button-inverted-label_click);
     background: var(--color-button-inverted-background_click);
-    fill: var(--color-button-inverted-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-button-inverted-icon_disabled);
+
     text-decoration: none;
 
     color: var(--color-button-inverted-label_disabled);
     background: var(--color-button-inverted-background_disabled);
-    fill: var(--color-button-inverted-icon_disabled);
   }
 
   &::before {
