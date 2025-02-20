@@ -1,9 +1,12 @@
 .button {
+  --icon-color: var(--color-iconButton-primary-icon);
+
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  fill: var(--icon-color);
 
   width: calc(6 * var(--gridSize));
   height: calc(6 * var(--gridSize));
@@ -15,110 +18,132 @@
 }
 
 .icon {
-  fill: inherit;
+  fill: var(--icon-color);
+
+  color: var(--icon-color);
 }
 
 .primary {
+  --icon-color: var(--color-iconButton-primary-icon);
+
   background: var(--color-iconButton-primary-background);
-  fill: var(--color-iconButton-primary-icon);
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-iconButton-primary-icon_hover);
+
     background: var(--color-iconButton-primary-background_hover);
-    fill: var(--color-iconButton-primary-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-iconButton-primary-icon_click);
+
     background: var(--color-iconButton-primary-background_click);
-    fill: var(--color-iconButton-primary-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-iconButton-primary-icon_disabled);
+
     background: var(--color-iconButton-primary-background_disabled);
-    fill: var(--color-iconButton-primary-icon_disabled);
   }
 }
 
 .primaryAlt {
+  --icon-color: var(--color-iconButton-primaryAlt-icon);
+
   background: var(--color-iconButton-primaryAlt-background);
-  fill: var(--color-iconButton-primaryAlt-icon);
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-iconButton-primaryAlt-icon_hover);
+
     background: var(--color-iconButton-primaryAlt-background_hover);
-    fill: var(--color-iconButton-primaryAlt-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-iconButton-primaryAlt-icon_click);
+
     background: var(--color-iconButton-primaryAlt-background_click);
-    fill: var(--color-iconButton-primaryAlt-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-iconButton-primaryAlt-icon_disabled);
+
     background: var(--color-iconButton-primaryAlt-background_disabled);
-    fill: var(--color-iconButton-primaryAlt-icon_disabled);
   }
 }
 
 .secondary {
+  --icon-color: var(--color-iconButton-secondary-icon);
+
   background: var(--color-iconButton-secondary-background);
-  fill: var(--color-iconButton-secondary-icon);
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-iconButton-secondary-icon_hover);
+
     background: var(--color-iconButton-secondary-background_hover);
-    fill: var(--color-iconButton-secondary-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-iconButton-secondary-icon_click);
+
     background: var(--color-iconButton-secondary-background_click);
-    fill: var(--color-iconButton-secondary-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-iconButton-secondary-icon_disabled);
+
     background: var(--color-iconButton-secondary-background_disabled);
-    fill: var(--color-iconButton-secondary-icon_disabled);
   }
 }
 
 .secondaryAlt {
+  --icon-color: var(--color-iconButton-secondaryAlt-icon);
+
   background: var(--color-iconButton-secondaryAlt-background);
-  fill: var(--color-iconButton-secondaryAlt-icon);
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-iconButton-secondaryAlt-icon_hover);
+
     background: var(--color-iconButton-secondaryAlt-background_hover);
-    fill: var(--color-iconButton-secondaryAlt-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-iconButton-secondaryAlt-icon_click);
+
     background: var(--color-iconButton-secondaryAlt-background_click);
-    fill: var(--color-iconButton-secondaryAlt-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-iconButton-secondaryAlt-icon_disabled);
+
     background: var(--color-iconButton-secondaryAlt-background_disabled);
-    fill: var(--color-iconButton-secondaryAlt-icon_disabled);
   }
 }
 
 .tertiary {
+  --icon-color: var(--color-iconButton-tertiary-icon);
+
   background: var(--color-iconButton-tertiary-background);
-  fill: var(--color-iconButton-tertiary-icon);
 
   &:focus,
   &:hover {
+    --icon-color: var(--color-iconButton-tertiary-icon_hover);
+
     background: var(--color-iconButton-tertiary-background_hover);
-    fill: var(--color-iconButton-tertiary-icon_hover);
   }
 
   &:active {
+    --icon-color: var(--color-iconButton-tertiary-icon_click);
+
     background: var(--color-iconButton-tertiary-background_click);
-    fill: var(--color-iconButton-tertiary-icon_click);
   }
 
   &[aria-disabled="true"] {
+    --icon-color: var(--color-iconButton-tertiary-icon_disabled);
+
     background: var(--color-iconButton-tertiary-background_disabled);
-    fill: var(--color-iconButton-tertiary-icon_disabled);
   }
 }
