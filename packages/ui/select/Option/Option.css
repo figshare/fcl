@@ -84,6 +84,11 @@
   text-overflow: ellipsis;
 }
 
+/* stylelint-disable-next-line a11y/no-display-none */
+.option > span:first-child {
+  display: none !important;
+}
+
 .hidden {
   position: fixed;
 

@@ -18,6 +18,7 @@ export class Option extends Component {
     forwardedRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     hasEllipsis: PropTypes.bool,
     isSelectWithSummary: PropTypes.bool,
+    optionValue: PropTypes.string,
     value: PropTypes.any,
   }
 
@@ -28,6 +29,7 @@ export class Option extends Component {
     hasEllipsis: false,
     isSelectWithSummary: false,
     value: undefined,
+    optionValue: "value",
     forwardedRef: null,
   }
 
@@ -78,6 +80,7 @@ export class Option extends Component {
       hasEllipsis,
       isSelectWithSummary,
       value,
+      optionValue,
       ...props
     } = this.props;
     const { longTextOption } = this.state;
@@ -113,7 +116,8 @@ export class Option extends Component {
             classnames(optionClassName)
           }
           disabled={disabled}
-          value={value}
+          theme="tertiary"
+          value={typeof value === "string" ? value : value[optionValue]?.toString?.()}
           variant="inline"
           onClick={this.onClick}
           onKeyDown={this.onKeyDown}
