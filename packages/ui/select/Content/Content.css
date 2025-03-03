@@ -29,6 +29,10 @@
   flex-shrink: 0;
 }
 
+.searchInput {
+  width: 100%;
+}
+
 .content {
   display: flex;
   overflow-y: auto;
@@ -40,8 +44,12 @@
   width: 100%;
 }
 
-.search input[type="text"] {
-  border-radius: 18px;
+.search form {
+  height: calc(6 * var(--gridSize));
+
+  border-radius: calc(3 * var(--gridSize));
+
+  background-color: white;
 }
 
 .loading,

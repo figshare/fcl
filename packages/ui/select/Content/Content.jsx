@@ -102,6 +102,7 @@ export class Content extends Component {
       <div className={style.search}>
         <SearchInput
           aria-label={searchPlaceholder}
+          className={style.searchInput}
           placeholder={searchPlaceholder}
           value={search}
           onChange={this.onSearch}

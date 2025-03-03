@@ -58,7 +58,7 @@ class Alert extends Component {
     }
 
     return (
-      <Button className={styles.close} onClick={onClose}>
+      <Button aria-label="Close" className={styles.close} onClick={onClose}>
         <Cancel className={styles.closeIcon} />
       </Button>
     );
