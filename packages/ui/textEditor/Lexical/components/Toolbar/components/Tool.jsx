@@ -18,7 +18,7 @@ export function Tool({ active, disabled, label, type, group, icon, onToolSelect 
       data-tool-group={group}
       data-tool-type={type}
       disabled={disabled}
-      theme="secondaryAlt"
+      theme="primary"
       onClick={onToolSelect}
     >
       {label}
