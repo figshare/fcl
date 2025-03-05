@@ -107,6 +107,7 @@ export class Content extends Component {
           value={search}
           onChange={this.onSearch}
           onKeyDown={this.onKeyDown}
+          onSubmit={(event) => this.onSubmit(event)}
         />
       </div>
     );
@@ -126,6 +127,12 @@ export class Content extends Component {
     const searchValue = search.target.value;
     this.setState({ search: searchValue });
     this.context.onSearch(searchValue);
+  }
+
+  onSubmit = (event) => {
+    event.preventDefault();
+
+    this.context.onSearch(this.state.search);
   }
 
   onScroll = (event) => {
