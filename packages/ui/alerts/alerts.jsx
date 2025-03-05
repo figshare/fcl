@@ -165,6 +165,7 @@ export class Alerts extends React.PureComponent {
       return (
         <IconButton
           Icon={Close}
+          aria-label="Close"
           className={styles.alertClose}
           data-control-id="form-alert-close-button"
           theme="tertiary"
