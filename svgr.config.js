@@ -19,7 +19,7 @@ module.exports = {
 
   ${variables.componentName}.defaultProps = {
     color: "currentColor",
-    height: "auto",
+    height: undefined,
     width: "1em",
     title: "Icon",
   };

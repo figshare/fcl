@@ -1,6 +1,6 @@
 import * as React from "react";
 import { memo } from "react";
-import { oneOfType, string, number } from "prop-types";
+import { oneOfType, bool, string, number } from "prop-types";
 const SvgChevronLargeDown1 = (props) => (
   <svg
     fill={props.color}
@@ -35,7 +35,7 @@ SvgChevronLargeDown1.propTypes = {
 };
 SvgChevronLargeDown1.defaultProps = {
   color: "currentColor",
-  height: "auto",
+  height: undefined,
   width: "1em",
   title: "Icon",
 };

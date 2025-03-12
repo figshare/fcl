@@ -147,6 +147,8 @@ div.alert {
 }
 
 .alertIcon {
+  font-size: 18px;
+
   position: relative;
 
   display: inline-flex;
@@ -159,15 +161,8 @@ div.alert {
 
   align-items: center;
   justify-content: center;
-  fill: var(--color-icon);
-}
 
-.alertIcon > svg {
-  width: 100%;
-  max-width: 100%;
-
-  color: inherit;
-  fill: inherit;
+  color: var(--color-icon);
 }
 
 .error .alertIcon {
