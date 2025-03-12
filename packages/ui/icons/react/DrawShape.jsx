@@ -1,6 +1,6 @@
 import * as React from "react";
 import { memo } from "react";
-import { oneOfType, string, number } from "prop-types";
+import { oneOfType, bool, string, number } from "prop-types";
 const SvgDrawShape = (props) => (
   <svg
     fill={props.color}
@@ -49,7 +49,7 @@ SvgDrawShape.propTypes = {
 };
 SvgDrawShape.defaultProps = {
   color: "currentColor",
-  height: "auto",
+  height: undefined,
   width: "1em",
   title: "Icon",
 };

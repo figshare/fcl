@@ -4,10 +4,11 @@ import classnames from "classnames";
 
 import { IconButton } from "../button";
 import Alert from "../alert";
-import Info from "../icons/info/small";
-import Warning from "../icons/warning/small";
-import Close from "../icons/cancel/medium";
-import Checkmark from "../icons/checkMark/small";
+import Info from "../icons/react/InfoCircle";
+import Warning from "../icons/react/Warning";
+import WarningCircle from "../icons/react/WarningCircle";
+import Close from "../icons/react/Close";
+import Checkmark from "../icons/react/Checkmark";
 
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from "./alerts.css";
@@ -16,7 +17,7 @@ import { popAlert } from "./utils";
 
 const IconsByType = {
   error: Warning,
-  warning: Info,
+  warning: WarningCircle,
   success: Checkmark,
   info: Info,
 };

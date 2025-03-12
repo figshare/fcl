@@ -1,6 +1,6 @@
 import * as React from "react";
 import { memo } from "react";
-import { oneOfType, string, number } from "prop-types";
+import { oneOfType, bool, string, number } from "prop-types";
 const SvgTwitter = (props) => (
   <svg
     fill={props.color}
@@ -33,7 +33,7 @@ SvgTwitter.propTypes = {
 };
 SvgTwitter.defaultProps = {
   color: "currentColor",
-  height: "auto",
+  height: undefined,
   width: "1em",
   title: "Icon",
 };

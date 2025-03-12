@@ -1,6 +1,6 @@
 import * as React from "react";
 import { memo } from "react";
-import { oneOfType, string, number } from "prop-types";
+import { oneOfType, bool, string, number } from "prop-types";
 const SvgExpandToRight = (props) => (
   <svg
     fill={props.color}
@@ -44,7 +44,7 @@ SvgExpandToRight.propTypes = {
 };
 SvgExpandToRight.defaultProps = {
   color: "currentColor",
-  height: "auto",
+  height: undefined,
   width: "1em",
   title: "Icon",
 };
