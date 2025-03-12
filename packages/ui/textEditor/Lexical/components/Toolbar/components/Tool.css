@@ -1,4 +1,6 @@
 .tool {
+  font-size: var(--typography-M-fontSize);
+
   display: flex;
 
   width: calc(var(--gridSize) * 5);
@@ -27,5 +29,5 @@
 }
 
 .tool > svg {
-  width: calc(var(--gridSize) * 4);
+  width: var(--typography-M-fontSize);
 }
