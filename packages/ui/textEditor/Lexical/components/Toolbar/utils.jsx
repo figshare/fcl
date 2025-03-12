@@ -4,10 +4,48 @@ import { $isListNode, ListNode } from "@lexical/list";
 import { $isHeadingNode } from "@lexical/rich-text";
 import { $getNearestNodeOfType } from "@lexical/utils";
 
-import IconSet from "../../../../icons/editor";
 import { ToolbarItem, ToolbarItemType, ToolbarSections } from "../../constants";
 import { getSelectedNode } from "../../utils";
+import Bold from "../../../../icons/react/TextEditorBold";
+import Italic from "../../../../icons/react/TextEditorItalic";
+import Underline from "../../../../icons/react/TextEditorUnderline";
+import Strikethrough from "../../../../icons/react/TextEditorStrikethrough";
+import H2 from "../../../../icons/react/TextEditorH2";
+import H3 from "../../../../icons/react/TextEditorH3";
+import H4 from "../../../../icons/react/TextEditorH4";
+import Ul from "../../../../icons/react/TextEditorBullet";
+import Ol from "../../../../icons/react/TextEditorNumeric";
+import Superscript from "../../../../icons/react/TextEditorSuperscript";
+import Subscript from "../../../../icons/react/TextEditorSubscript";
+import Paragraph from "../../../../icons/react/TextEditorP";
+import Link from "../../../../icons/react/Link";
+import Undo from "../../../../icons/react/Undo";
+import Redo from "../../../../icons/react/Redo";
+import ClearFormatting from "../../../../icons/react/TextEditorClearFormat";
+import PasteWithoutFormat from "../../../../icons/react/DocumentEdit";
+import Resize from "../../../../icons/editor/resize";
 
+
+export const IconSet = {
+  Bold,
+  Italic,
+  Underline,
+  Strikethrough,
+  H2,
+  H3,
+  H4,
+  Ul,
+  Ol,
+  Superscript,
+  Subscript,
+  Paragraph,
+  Link,
+  Undo,
+  Redo,
+  ClearFormatting,
+  PasteWithoutFormat,
+  Resize,
+};
 
 export function getToolLabelAndIcon(type, group) {
   let label = "Unknown Tool";
