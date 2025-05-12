@@ -1,8 +1,21 @@
-import React, { useMemo, useContext, createContext, useCallback } from "react";
-import { any, bool, func, string, number, node, oneOfType } from "prop-types";
+import React, { useState, useRef, useMemo, useContext, createContext, useCallback, Children, useEffect } from "react";
+import { array, any, bool, func, string, number, node, oneOfType } from "prop-types";
 import classnames from "classnames";
+import { Button } from "@figshare/fcl/button";
 import RenderSwitch from "@figshare/fcl/renderSwitch";
 import { useControllableState } from "@figshare/fcl/helpers/useControllableState";
+import {
+  useFloating, autoUpdate,
+  useInteractions,
+  useClick,
+  useDismiss,
+  flip,
+  FloatingFocusManager,
+} from "@floating-ui/react";
+
+import More from "../icons/react/More";
+import useEventListener from "../helpers/useEventListener";
+import { debounce } from "../helpers/utils/debounce";
 
 import styles from "./Tabs.css";
 
@@ -43,9 +56,78 @@ Tabs.defaultProps = {
 };
 
 
+function sumUp(indices, widths) {
+  return indices.reduce((s, idx) => s + widths[idx], 0);
+}
+
 export function TabsList({ children, className, ...rest }) {
+  const info = useRef({ scrollWidth: 0, isSet: false, widths: [], shown: [], hidden: [], children });
+  const [indices, setIndices] = useState({ shown: Object.keys(Children.toArray(children)), hidden: [] });
+  const showToggle = !!indices.hidden.length;
+  const visibleListRef = useRef(null);
+  const hiddenListRef = useRef(null);
+
+  useEffect(() => {
+    info.current.children = children;
+  }, [children]);
+
+  const onResize = useCallback(debounce(() => {
+    const visibleList = visibleListRef.current ?? { scrollWidth: 0, clientWidth: 0 };
+    const hiddenList = hiddenListRef.current ?? { childNodes: [] };
+    const { scrollWidth, clientWidth } = visibleList;
+    const { children: rclist } = info.current;
+
+    if (scrollWidth <= clientWidth || rclist.length <= 1) {
+      setIndices({ shown: Object.keys(Children.toArray(rclist)), hidden: [] });
+
+      return;
+    }
+
+    info.current.clientWidth = clientWidth;
+    info.current.scrollWidth = scrollWidth;
+    info.current.widths = Array.from(hiddenList.childNodes, (child) => child.clientWidth);
+    info.current.totals = { shown: 0, hidden: 0, toggle: 48 };
+
+    const { widths } = info.current;
+
+    const all = Object.keys(Children.toArray(rclist));
+    let hidden = [];
+    let total = sumUp(all, widths) + info.current.totals.toggle;
+    const shown = [];
+
+    if (total <= clientWidth) {
+      setIndices({ shown: all, hidden });
+
+      return;
+    }
+
+    total = info.current.totals.toggle;
+
+    for (let i = 0; i < all.length; i += 1) {
+      const check = total + widths[i];
+
+      if (check > clientWidth) {
+        hidden = all.slice(i);
+        break;
+      } else {
+        total = check;
+        shown.push(i);
+      }
+    }
+
+    setIndices({ shown, hidden });
+  }, 200), []);
+
+  useEventListener("resize", onResize, window);
+  useEffect(() => {
+    setTimeout(() => {
+      onResize();
+    }, 0);
+  }, []);
+
   return (
     <div
+      ref={visibleListRef}
       aria-orientation="horizontal"
       className={classnames(styles.tabs, className)}
       data-id="tabs"
@@ -54,7 +136,20 @@ export function TabsList({ children, className, ...rest }) {
       role="tablist"
       {...rest}
     >
-      {children}
+      {indices.shown.map((i) => <React.Fragment key={i}>{children[i]}</React.Fragment>)}
+      {showToggle && <TabOverflow elements={indices.hidden.map((i) => children[i])} />}
+      <div
+        ref={hiddenListRef}
+        aria-hidden="true"
+        className={styles.hidden}
+        data-orientation="horizontal"
+        data-part="hidden-tab-list"
+        data-scope="tabs"
+        role="presentation"
+        tabIndex={-1}
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -70,6 +165,81 @@ TabsList.defaultProps = {
   children: undefined,
 };
 
+
+export function TabOverflow({ elements }) {
+  const { tab, onTabClick } = useContext(TabsContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const { refs, context, floatingStyles } = useFloating({
+    placement: "bottom-end",
+    middleware: [flip()],
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    whileElementsMounted: autoUpdate,
+  });
+  const click = useClick(context);
+  const dismiss = useDismiss(context);
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    click,
+    dismiss,
+  ]);
+
+  if (!elements.length) {
+    return null;
+  }
+
+  return (
+    <div
+      className={styles.tabOverflow}
+      data-part="overflow-container"
+      data-scope="tabs"
+    >
+      <Button
+        className={styles.tabOverflowButton}
+        innerRef={refs.setReference}
+        theme="secondaryAlt"
+        tooltip="Show more tabs"
+        {...getReferenceProps()}
+      >
+        <More />
+      </Button>
+      {isOpen && (
+        <FloatingFocusManager context={context} returnFocus={true}>
+          <ol
+            ref={refs.setFloating}
+            className={styles.tabOverflowList}
+            style={floatingStyles}
+            {...getFloatingProps()}
+          >
+            {elements.map((el) => {
+              const isActive = onTabClick ? tab === el.props.value : el.props.active;
+
+              return (
+                <li
+                  key={el.props.value}
+                  className={styles.tabOverflowItem}
+                >
+                  <Button
+                    role="tab"
+                    {...el.props}
+                    aria-selected={isActive}
+                    data-active={isActive}
+                    data-value={el.props.value}
+                    style={ {} }
+                    theme="tertiaryAlt"
+                  >
+                    {el.props.children}
+                  </Button>
+                </li>
+              );
+            })}
+          </ol>
+        </FloatingFocusManager>)}
+    </div>
+  );
+}
+
+TabOverflow.propTypes = { elements: array.isRequired };
+
 export function Tab({ value, active, disabled, children, className, ...rest }) {
   const { tab, onTabClick } = useContext(TabsContext);
   const isActive = onTabClick ? tab === value : active;
@@ -78,7 +248,7 @@ export function Tab({ value, active, disabled, children, className, ...rest }) {
     <button
       key={value}
       aria-disabled={disabled}
-      aria-selected={active}
+      aria-selected={isActive}
       className={classnames(styles.tab, className)}
       data-active={isActive}
       data-part="tab"
