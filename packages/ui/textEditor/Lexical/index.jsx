@@ -6,7 +6,7 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import { HeadingNode, QuoteNode, $isHeadingNode } from "@lexical/rich-text";
 import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { CodeHighlightNode, CodeNode } from "@lexical/code";
@@ -32,6 +32,8 @@ import {
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { mergeRegister } from "@lexical/utils";
 
+import { getTextDirection } from "../../input/text/utils";
+
 import { applyMarkupProcessors, createBlocksForEditorState } from "./utils";
 import { LowPriority, HighPriority, DefaultToolbarConfig } from "./constants";
 import Toolbar from "./components/Toolbar";
@@ -41,6 +43,17 @@ import styles from "./editor.css"; // eslint-disable-line css-modules/no-unused-
 import { CustomTextNode } from "./nodes/CustomTextNode";
 import { definePasteCommand } from "./components/Toolbar/commands";
 
+
+export function replaceHeadingTransform(editor) {
+  return editor.registerNodeTransform(HeadingNode, (node) => {
+    if ($isHeadingNode(node)) {
+      node.direction = getTextDirection(node.getTextContent());
+      node.__dir = getTextDirection(node.getTextContent());
+    }
+
+    return node;
+  });
+}
 
 export const DEFAULT_MAX_TEXT_LENGTH = 10000;
 export const DEFAULT_MIN_TEXT_LENGTH = 5000;
@@ -132,6 +145,10 @@ export function Editor(props) {
   const callbacks = useRef({ onChange, onBlur, onFocus, onEditorChange });
   const processorsRef = useRef(processors);
   const editorRef = useRef();
+
+  useEffect(() => {
+    replaceHeadingTransform(editor);
+  }, [editor]);
 
   useEffect(() => {
     processorsRef.current = processors;

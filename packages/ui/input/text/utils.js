@@ -1,20 +1,27 @@
-const RTL = "\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC";
-const LTR =
-  "A-Za-z\u00C0-\u00D6\u00D8-\u00F6" +
-  "\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF\u200E\u2C00-\uFB1C" +
-  "\uFE00-\uFE6F\uFEFD-\uFFFF";
+/* eslint-disable no-inline-comments */
+/**
+ * Decide direction by whichever script (Arabic vs Latin) appears first in the string.
+ * Falls back to null if neither is present.
+ */
+export function getTextDirection(text) {
+  // ES2018+ Unicode property escapes
+  const rtlRe = /\p{Script=Arabic}/u;
+  const ltrRe = /[A-Za-z]/;
 
-const RTL_REGEX = new RegExp(`^[^${LTR}]*[${RTL}]`);
-const LTR_REGEX = new RegExp(`^[^${RTL}]*[${LTR}]`);
+  // find the index of the first match for each
+  const firstRTL = text.search(rtlRe);
+  const firstLTR = text.search(ltrRe);
 
-
-export const getTextDirection = (text) => {
-  if (RTL_REGEX.test(text)) {
-    return "rtl";
+  if (firstRTL === -1 && firstLTR === -1) {
+    return null; // no strong chars at all
   }
-  if (LTR_REGEX.test(text)) {
-    return "ltr";
+  if (firstRTL === -1) {
+    return "ltr";// only Latin found
+  }
+  if (firstLTR === -1) {
+    return "rtl";// only Arabic found
   }
 
-  return null;
-};
+  // whichever comes earlier in the string wins
+  return firstRTL < firstLTR ? "rtl" : "ltr";
+}
