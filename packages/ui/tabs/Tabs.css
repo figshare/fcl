@@ -9,25 +9,48 @@
   --disabled-tab-color: #707070;
   --disabled-tab-border-color: #e9e9e9;
 
+  position: relative;
+
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
+}
+
+.tabs::before {
+  position: absolute;
+  bottom: 0;
+  left: -1px;
+
+  display: block;
+
+  width: calc(100% + 2px);
+  height: 1px;
+
+  content: "";
+
+  background-color: var(--active-tab-border-color);
 }
 
 .tab {
   position: relative;
 
+  display: flex;
+
   padding: calc(2 * var(--gridSize)) calc(5 * var(--gridSize));
 
   cursor: pointer;
+  white-space: nowrap;
 
   text-decoration: none;
+  word-break: keep-all;
 
   color: var(--tab-color);
   border: 1px solid var(--tab-border-color);
   border-bottom: 1px solid var(--active-tab-border-color);
   border-bottom-color: var(--active-tab-border-color);
   border-radius: var(--gridSize) var(--gridSize) 0 0;
+
+  flex-wrap: nowrap;
 }
 
 .tab:disabled,
@@ -62,27 +85,124 @@
   background-color: var(--active-tab-background-color);
 }
 
-/* border collapse cleanup */
-.tab::before {
+.hidden {
   position: absolute;
-  bottom: -1px;
-  left: -1px;
 
-  display: block;
+  display: flex;
+  visibility: hidden;
+  overflow: visible;
 
-  width: calc(100% + 2px);
-  height: 1px;
-
-  content: "";
-
-  background-color: var(--active-tab-border-color);
+  pointer-events: none;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 
-.tab:focus::before {
-  display: none;
+.tabOverflow {
+  flex: 1 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
-.tab:disabled::before,
-.tab[aria-disabled="true"]::before {
-  background-color: var(--disabled-tab-border-color);
+.tabOverflowButton {
+  max-width: calc(6 * var(--gridSize));
+  margin: var(--gridSize);
+  padding: 0;
+
+  color: var(--icon-color);
+}
+
+.tabOverflowList {
+  z-index: 32;
+
+  display: flex;
+  flex-direction: column;
+
+  width: calc(24 * var(--gridSize));
+  padding: var(--gridSize) 0;
+
+  list-style: none;
+
+  border-radius: var(--gridSize);
+  background: #fff;
+
+  /* x/Dropdown bg shadow */
+  box-shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.14);
+  align-items: flex-end;
+}
+
+.tabOverflowItem {
+  --bg-color: var(--color-layout-primary-background);
+  --icon-color: var(--color-icon-secondary);
+
+  font-size: var(--typography-M-fontSize);
+  line-height: var(--typography-M-lineHeight);
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  width: 100%;
+
+  padding: 0;
+
+  user-select: none;
+
+  color: var(--tab-color);
+
+  border-radius: calc(var(--gridSize) / 2);
+
+  background-color: var(--bg-color);
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1 0;
+}
+
+.tabOverflowItem:hover,
+.tabOverflowItem:focus-within {
+  color: var(--active-tab-color);
+}
+
+.tabOverflowItem > * {
+  font-weight: inherit;
+
+  width: 100%;
+  padding: calc(2 * var(--gridSize)) calc(3 * var(--gridSize));
+
+  text-align: left;
+  text-decoration: none;
+
+  color: inherit;
+  justify-content: flex-start;
+}
+
+.tabOverflowItem > *[aria-disabled="true"] {
+  pointer-events: none;
+
+  color: var(--disabled-tab-color);
+}
+
+.tabOverflowItem > *:hover,
+.tabOverflowItem > *:focus,
+.tabOverflowItem > *:active {
+  text-decoration: none;
+
+  color: var(--active-tab-color);
+
+  background-color: var(--active-tab-background-color);
+}
+
+.tabOverflowItem > *:focus,
+.tabOverflowItem > *:active {
+  outline: 2px solid var(--tab-focus-outline-color);
+  outline-offset: -2px;
+  box-shadow: none;
+}
+
+.tabOverflowItem > *[data-active="true"] {
+  font-weight: bold;
 }
