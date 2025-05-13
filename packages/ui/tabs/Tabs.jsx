@@ -212,6 +212,15 @@ export function TabOverflow({ elements }) {
           >
             {elements.map((el) => {
               const isActive = onTabClick ? tab === el.props.value : el.props.active;
+              const onClickWithClose = (event) => {
+                const onClick = el.props.onClick ?? onTabClick;
+
+                if (typeof originalHandler === "function") {
+                  onClick(event);
+                }
+
+                setIsOpen(false);
+              };
 
               return (
                 <li
@@ -226,6 +235,7 @@ export function TabOverflow({ elements }) {
                     data-value={el.props.value}
                     style={ {} }
                     theme="tertiaryAlt"
+                    onClick={onClickWithClose}
                   >
                     {el.props.children}
                   </Button>
