@@ -147,10 +147,6 @@ export function Editor(props) {
   const editorRef = useRef();
 
   useEffect(() => {
-    replaceHeadingTransform(editor);
-  }, [editor]);
-
-  useEffect(() => {
     processorsRef.current = processors;
   }, [processors]);
 
