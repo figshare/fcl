@@ -100,6 +100,11 @@ function TabsWithRootComponentAndUnmanagedState() {
             <Tabs.Tab value="map" onClick={onClickTab}>Map</Tabs.Tab>
             <Tabs.Tab value="features" onClick={onClickTab}>Features</Tabs.Tab>
             <Tabs.Tab value="geojson" onClick={onClickTab}>GeoJSON</Tabs.Tab>
+            <Tabs.Tab active={tab === "metadata"} value="metadata" onClick={onClickTab}>Metadata</Tabs.Tab>
+            <Tabs.Tab active={tab === "global"} value="global" onClick={onClickTab}>Global</Tabs.Tab>
+            <Tabs.Tab active={tab === "related-materials"} value="related-materials" onClick={onClickTab}>Related Materials</Tabs.Tab>
+            <Tabs.Tab active={tab === "editor"} value="editor" onClick={onClickTab} disabled={true}>Editor</Tabs.Tab>
+            <Button style={{ marginLeft: "auto" }} Icon={Edit} theme="tertiaryAlt">Edit</Button>
           </Tabs.List>
           <Tabs.Panel value={tab}>
             <Tabs.Entry value="map">
@@ -116,6 +121,15 @@ function TabsWithRootComponentAndUnmanagedState() {
                 </div>
               )}
             </Tabs.Entry>
+            <Tabs.Entry value="metadata">{() => (<div data-part="metadata" data-scope="administration">
+              Metadata Tab
+            </div>)}</Tabs.Entry>
+            <Tabs.Entry value="global">{() => (<div data-part="global" data-scope="administration">
+              Global Tab
+            </div>)}</Tabs.Entry>
+            <Tabs.Entry value="related-materials">{() => (<div data-part="related-materials" data-scope="administration">
+              Related Materials Tab
+            </div>)}</Tabs.Entry>
           </Tabs.Panel>
         </Tabs>
       </div>

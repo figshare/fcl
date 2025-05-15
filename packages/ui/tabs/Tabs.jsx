@@ -211,11 +211,11 @@ export function TabOverflow({ elements }) {
             {...getFloatingProps()}
           >
             {elements.map((el) => {
-              const isActive = onTabClick ? tab === el.props.value : el.props.active;
+              const isActive = el.props.active ?? (el.props.value !== undefined && tab === el.props.value);
               const onClickWithClose = (event) => {
                 const onClick = el.props.onClick ?? onTabClick;
 
-                if (typeof originalHandler === "function") {
+                if (typeof onClick === "function") {
                   onClick(event);
                 }
 
@@ -252,7 +252,7 @@ TabOverflow.propTypes = { elements: array.isRequired };
 
 export function Tab({ value, active, disabled, children, className, ...rest }) {
   const { tab, onTabClick } = useContext(TabsContext);
-  const isActive = onTabClick ? tab === value : active;
+  const isActive = active ?? (value !== undefined && tab === value);
 
   return (
     <button
@@ -289,7 +289,7 @@ Tab.propTypes = {
 };
 
 Tab.defaultProps = {
-  active: false,
+  active: undefined,
   className: undefined,
   disabled: false,
 };
