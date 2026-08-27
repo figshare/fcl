@@ -1,0 +1,230 @@
+import { Meta, ArgTypes } from "@storybook/blocks";
+import { Alerts, pushAlert, clearAlerts, popAlert } from "@digital-science/figshare-fcl/latest/Alerts";
+import { Button } from "@digital-science/figshare-fcl/latest/Button";
+import { Cover } from "../story-utils/Cover";
+import { ValueProvider } from "../story-utils/ValueProvider";
+
+<Meta
+  title="UI/latest/Alerts"
+  component={Alerts}
+  parameters={{
+    viewMode: "docs",
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Alerts
+
+---
+
+- [Overview](#overview)
+- [Props](#props-table)
+- [Examples](#examples)
+
+## Overview
+
+A container component that manages and displays a list of alert messages. Messages can be added or removed by dispatching `alerts:message` custom events. This component works in conjunction with the Alert component to create alert systems with proper message management.
+
+<Cover kind={"story"}>
+  {() => (
+    <ValueProvider initialValue={false}>
+      {(isFixed, setIsFixed) => (
+        <ValueProvider initialValue="single">
+          {(stackType, setStackType) => (
+            <ValueProvider initialValue="demo-alerts-channel">
+              {(channel) => (
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div>
+                    <span>Stack type:</span>
+                    <div style={{ display: "flex", flexDirection: "row", gap: "8px", marginTop: "8px", flexWrap: "wrap" }}>
+                      <select value={stackType} onChange={(e) => setStackType(e.target.value)}>
+                        <option value="single">Single</option>
+                        <option value="list">List</option>
+                        <option value="stack">Stack</option>
+                      </select>
+                      <label><input type="checkbox" checked={isFixed} onChange={(e) => setIsFixed(e.target.checked)} /> Fixed to Viewport</label>
+                    </div>
+                  </div>
+                  <div>
+                    <span>Push alerts:</span>
+                    <div style={{ display: "flex", flexDirection: "row", gap: "8px", marginTop: "8px", flexWrap: "wrap" }}>
+                      <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "info", title: "Info", content: "This is an informational message", persistent: false, timeout: 5000 })}>
+                        Push Info
+                      </Button>
+                      <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "success", title: "Success", content: "Operation completed successfully", persistent: false, timeout: 5000 })}>
+                        Push Success
+                      </Button>
+                      <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "warning", title: "Warning", content: "Please review this warning", persistent: false, timeout: 5000 })}>
+                        Push Warning
+                      </Button>
+                      <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "error", title: "Error", content: "An error has occurred", persistent: false, timeout: 5000 })}>
+                        Push Error
+                      </Button>
+                      <Button em="low" kind="secondary" onClick={() => clearAlerts(channel)}>
+                        Clear All
+                      </Button>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", width: "100%", minHeight: "100px", border: "1px solid #ccc", padding: "12px" }}>
+                    <Alerts id={channel} stackType={stackType} isFixed={isFixed} />
+                  </div>
+                </div>
+              )}
+            </ValueProvider>
+          )}
+        </ValueProvider>
+      )}
+    </ValueProvider>
+  )}
+</Cover>
+
+The component can be imported from `@digital-science/figshare-fcl/latest`.
+
+Use the `pushAlert`, `clearAlerts`, and `popAlert` utilities to manage alerts:
+
+```jsx
+import { Alerts, pushAlert, clearAlerts, popAlert } from "@digital-science/figshare-fcl/latest/Alerts";
+
+// Push a new alert
+pushAlert({
+  channel: "my-alerts-channel",
+  type: "success", // "info" | "warning" | "error" | "success" | "notice"
+  title: "Optional Title",
+  content: "Alert message content",
+  persistent: false, // if false, shows close button
+  timeout: 5000, // optional: auto-dismiss after milliseconds
+});
+
+// Clear all alerts in a channel
+clearAlerts("my-alerts-channel");
+
+// Remove a specific alert by ID
+popAlert("my-alerts-channel", "alert-id");
+```
+
+## Props Table
+
+<ArgTypes of={Alerts} />
+
+## Examples
+
+### Basic Alert Container
+
+<Cover kind={"card"}>
+  {() => (
+    <ValueProvider initialValue="basic-alerts">
+      {(channel) => (
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+            <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "info", content: "Information message", persistent: false, timeout: 4000 })}>
+              Info
+            </Button>
+            <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "success", content: "Success message", persistent: false, timeout: 4000 })}>
+              Success
+            </Button>
+            <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "warning", content: "Warning message", persistent: false, timeout: 4000 })}>
+              Warning
+            </Button>
+            <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "error", content: "Error message", persistent: false, timeout: 4000 })}>
+              Error
+            </Button>
+          </div>
+          <div style={{ minHeight: "80px" }}>
+            <Alerts id={channel} />
+          </div>
+        </div>
+      )}
+    </ValueProvider>
+  )}
+</Cover>
+
+### Alerts with Titles
+
+<Cover kind={"card"}>
+  {() => (
+    <ValueProvider initialValue="titled-alerts">
+      {(channel) => (
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+            <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "success", title: "Success", content: "Your changes have been saved", persistent: false, timeout: 5000 })}>
+              Save Success
+            </Button>
+            <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "error", title: "Error", content: "Failed to save changes", persistent: false, timeout: 5000 })}>
+              Save Error
+            </Button>
+            <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "warning", title: "Warning", content: "This action cannot be undone", persistent: false, timeout: 5000 })}>
+              Warning
+            </Button>
+          </div>
+          <div style={{ minHeight: "100px" }}>
+            <Alerts id={channel} />
+          </div>
+        </div>
+      )}
+    </ValueProvider>
+  )}
+</Cover>
+
+### Fixed Positioned Alerts
+
+<Cover kind={"card"}>
+  {() => (
+    <ValueProvider initialValue="fixed-alerts">
+      {(channel) => (
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "info", title: "Fixed Position Alert", content: "This alert is positioned fixed to the viewport", persistent: false, timeout: 4000 })}>
+            Show Fixed Alert
+          </Button>
+          <div style={{ minHeight: "60px" }}>
+            <Alerts id={channel} isFixed />
+          </div>
+        </div>
+      )}
+    </ValueProvider>
+  )}
+</Cover>
+
+### Toast-Style Alerts
+
+<Cover kind={"card"}>
+  {() => (
+    <ValueProvider initialValue="toast-alerts">
+      {(channel) => (
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "success", content: "This is a toast-style notification", persistent: false, timeout: 3000 })}>
+            Show Toast
+          </Button>
+          <div style={{ minHeight: "60px" }}>
+            <Alerts id={channel} isToast />
+          </div>
+        </div>
+      )}
+    </ValueProvider>
+  )}
+</Cover>
+
+### Persistent Alerts
+
+<Cover kind={"card"}>
+  {() => (
+    <ValueProvider initialValue="persistent-alerts">
+      {(channel) => (
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+            <Button em="low" kind="secondary" onClick={() => pushAlert({ channel, type: "info", content: "This alert persists until manually dismissed", persistent: true })}>
+              Add Persistent Alert
+            </Button>
+            <Button em="low" kind="secondary" onClick={() => clearAlerts(channel)}>
+              Clear All
+            </Button>
+          </div>
+          <div style={{ minHeight: "100px" }}>
+            <Alerts id={channel} />
+          </div>
+        </div>
+      )}
+    </ValueProvider>
+  )}
+</Cover>

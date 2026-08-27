@@ -13,13 +13,13 @@ import { Button } from "../Button";
 import styles from "./Alert.module.css";
 
 
-export function Alert({ type, title, message, persistent, className: providedClassName, children, padded, variant, onClose, ...props }) {
+export function Alert({ id, type, title, message, persistent, className: providedClassName, children, padded, variant, onClose, ...props }) {
   const className = classnames(styles.alert, providedClassName);
   const wrap = computeWrap(title, message);
 
   return (
-    <div aria-live="polite" className={className} data-alert-type={type} data-alert-variant={variant} data-padded={padded} role="alert" {...props}>
-      <div data-part="alert-icon-margin">
+    <div aria-live="polite" className={className} data-alert-type={type} data-alert-variant={variant} data-padded={padded && persistent} role="alert" {...props}>
+      <div role="presentation" data-part="alert-icon-margin" aria-hidden="true">
         <Alert.Icon type={type} />
       </div>
       <div data-part="alert-content">
@@ -29,7 +29,7 @@ export function Alert({ type, title, message, persistent, className: providedCla
         </div>
         <div data-part="alert-right-content">
           {children && <>{typeof children === "function" ? children({ type, onClose, ...props }) : children}</>}
-          {!persistent && <Alert.Close wrapType={wrap} onClose={props.onClose} />}
+          {!persistent && <AlertClose id={id} wrapType={wrap} onClose={onClose} />}
         </div>
       </div>
     </div>
@@ -52,6 +52,7 @@ function computeWrap(title, message) {
 
 Alert.propTypes = {
   type: PropTypes.oneOf(["info", "warning", "error", "success", "notice"]).isRequired,
+  id: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node,
   persistent: PropTypes.bool,
@@ -64,6 +65,7 @@ Alert.propTypes = {
 
 Alert.defaultProps = {
   children: undefined,
+  id: "alert",
   onClose: undefined,
   title: undefined,
   message: undefined,
@@ -129,21 +131,27 @@ function AlertDescription({ children, ...props }) {
 
 AlertDescription.propTypes = { children: PropTypes.node.isRequired };
 
-function AlertClose({ onClose, wrapType, ...props }) {
+function AlertClose({ id, onClose, wrapType, ...props }) {
+  const handleOnClose = React.useCallback((event) => {
+    event.stopPropagation();
+    onClose?.({ id, event });
+  }, [onClose]);
+
   return (
     <div data-part="alert-close" data-wrap-type={wrapType} {...props}>
-      <Button data-scope="alert-close-button" em="low" kind="tertiary" span="icon" onClick={onClose} {...props}>
+      <Button data-part="alert-close-button" em="low" kind="tertiary" span="icon" onClick={handleOnClose} {...props}>
         <Button.Icon ><CloseSvg /></Button.Icon>
       </Button>
     </div>
   );
 }
 AlertClose.propTypes = {
+  id: PropTypes.string,
   wrapType: PropTypes.oneOf(["none", "one", "both"]),
   onClose: PropTypes.func,
 };
 
-AlertClose.defaultProps = { onClose: undefined, wrapType: "none" };
+AlertClose.defaultProps = { id: "alert", onClose: undefined, wrapType: "none" };
 
 Alert.Icon = AlertIcon;
 Alert.Title = AlertTitle;
