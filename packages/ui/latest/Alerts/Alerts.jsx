@@ -1,22 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 
-import { compact } from "../../utils/compact";
 import { getIn } from "../../utils/getIn";
-import { Alert } from "../Alert";
 
+import { AlertsList } from "./AlertsList";
 import { popAlert } from "./utils";
-import styles from "./Alerts.module.css";
 
 
 export function Alerts({ id: componentChannel, className, initial, isFixed, onDismiss, margin, stackType }) {
   const [messages, setMessages] = React.useState(initial);
   const tickets = React.useRef([]);
-  const kind = React.useMemo(() => compact([
-    isFixed ? "fixed" : "",
-    margin ? "margin" : "",
-  ], compact.filters.falsy).join(" "), [isFixed, margin]);
 
   const clearExistingTicket = React.useCallback((id) => {
     tickets.current.forEach((entry) => {
@@ -26,7 +19,7 @@ export function Alerts({ id: componentChannel, className, initial, isFixed, onDi
     });
   }, []);
 
-  const onHideAlert = React.useCallback((alert) => {
+  const onDismissAlert = React.useCallback((alert) => {
     const idToPop = getIn(alert, "id", alert, getIn.predicates.nonEmptyString);
 
     popAlert(componentChannel, idToPop);
@@ -94,34 +87,16 @@ export function Alerts({ id: componentChannel, className, initial, isFixed, onDi
   }, [onEvent]);
 
   return (
-    <div
-      className={classnames(styles.alerts, className)}
-      data-scope="alerts"
-      data-part="list"
-      data-stack-type={stackType}
-      data-kind={kind}
-      data-channel={componentChannel}
-      data-empty={messages.length === 0}
-    >
-      {messages.map((message, index) => renderAlert(message, index, onHideAlert))}
-    </div>
+    <AlertsList
+      alerts={messages}
+      channel={componentChannel}
+      className={className}
+      stackType={stackType}
+      isFixed={isFixed}
+      margin={margin}
+      onDismiss={onDismissAlert}
+    />
   );
-}
-
-export function renderAlert(message, index, onClose) {
-  return (
-    <Alert
-      key={message.id}
-      id={message.id}
-      data-alert-index={index}
-      title={message.title}
-      message={message.message}
-      type={message.type}
-      persistent={message.persistent}
-      onClose={onClose}
-      {...message.attributes}
-    >{message.children}</Alert>
-  )
 }
 
 Alerts.propTypes = {
