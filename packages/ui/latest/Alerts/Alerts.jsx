@@ -7,7 +7,7 @@ import { AlertsList } from "./AlertsList";
 import { popAlert } from "./utils";
 
 
-export function Alerts({ id: componentChannel, className, initial, isFixed, onDismiss, margin, stackType }) {
+export function Alerts({ id: componentChannel, className, initial, isFixed, onDismiss, margin, stackType, ...props }) {
   const [messages, setMessages] = React.useState(initial);
   const tickets = React.useRef([]);
 
@@ -95,6 +95,7 @@ export function Alerts({ id: componentChannel, className, initial, isFixed, onDi
       isFixed={isFixed}
       margin={margin}
       onDismiss={onDismissAlert}
+      {...props}
     />
   );
 }
