@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert } from "@digital-science/figshare-fcl/latest/Alert";
+import { Button } from "@digital-science/figshare-fcl/latest/Button";
 
 import { Cover } from "../story-utils/Cover";
 
@@ -109,14 +110,53 @@ export const DismissibleAlerts = {
     <Cover kind={"card"}>
       <div style={ { display: "flex", flexDirection: "column", gap: "16px" } }>
         <div>
-          <h4>Dismissible Alert</h4>
-          <Alert
-            type="info"
-            title="Closeable Alert"
-            message="This alert can be dismissed by clicking the close button"
-            persistent={false}
-            onClose={() => undefined}
-          />
+          <h4>Dismissible Alerts</h4>
+          <div style={ { display: "flex", flexDirection: "column", gap: "16px" } }>
+            <Alert
+              type="info"
+              title="Closeable Alert"
+              message="This alert can be dismissed by clicking the close button"
+              persistent={false}
+              onClose={() => undefined}
+            />
+            <Alert
+              type="info"
+              message="This alert can be dismissed by clicking the close button"
+              persistent={false}
+              onClose={() => undefined}
+            />
+            <Alert
+              type="info"
+              title="Can be dismissed"
+              persistent={false}
+              onClose={() => undefined}
+            />
+            <Alert
+              type="info"
+              title="Closeable Alert"
+              message="This alert can be dismissed by clicking the close button"
+              persistent={false}
+              onClose={() => undefined}
+            >
+              <Button kind="tertiary" em="high"><Button.Label>Retry</Button.Label></Button>
+            </Alert>
+            <Alert
+              type="info"
+              message="This alert can be dismissed by clicking the close button"
+              persistent={false}
+              onClose={() => undefined}
+            >
+              <Button kind="secondary" em="low"><Button.Label>Try again</Button.Label></Button>
+            </Alert>
+            <Alert
+              type="info"
+              title="Can be dismissed"
+              persistent={false}
+              onClose={() => undefined}
+            >
+              <Button kind="secondary" em="low"><Button.Label>Try again</Button.Label></Button>
+            </Alert>
+          </div>
         </div>
       </div>
     </Cover>

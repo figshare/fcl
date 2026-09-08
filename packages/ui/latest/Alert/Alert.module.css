@@ -39,6 +39,11 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex: 0 1;
+
+  &[data-wrap-type="one"] {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 }
 
 .alert [data-part="alert-content"] {
@@ -61,6 +66,9 @@
   width: auto;
   max-width: 100%;
   align-items: flex-start;
+
+  /* Important property for contexts where only a message or title is present */
+  align-self: center;
   flex: 1 1 auto;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -72,6 +80,9 @@
   justify-content: flex-end;
   gap: calc(4 * var(--gridSize));
   align-items: center;
+
+  /* Important property for contexts where children and or close button is present */
+  align-self: center;
 }
 
 .alert [data-part="alert-title"] {
