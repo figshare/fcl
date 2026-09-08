@@ -12,10 +12,14 @@ export function Alerts({ id: componentChannel, className, initial, isFixed, onDi
   const tickets = React.useRef([]);
 
   const clearExistingTicket = React.useCallback((id) => {
-    tickets.current.forEach((entry) => {
+    tickets.current = tickets.current.filter((entry) => {
       if (entry.id === id) {
         clearTimeout(entry.ticket);
+
+        return false;
       }
+
+      return true;
     });
   }, []);
 
@@ -107,14 +111,15 @@ Alerts.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       type: PropTypes.oneOf(["info", "warning", "error", "success", "notice"]),
-      content: PropTypes.node.isRequired,
+      message: PropTypes.node,
+      children: PropTypes.node,
       persistent: PropTypes.bool,
       attributes: PropTypes.object,
       title: PropTypes.string,
     })
   ),
   isFixed: PropTypes.bool,
-  margin: PropTypes.string,
+  margin: PropTypes.bool,
   stackType: PropTypes.oneOf(["single", "list", "stack"]),
   onDismiss: PropTypes.func,
 };
@@ -124,7 +129,7 @@ Alerts.defaultProps = {
   id: "global-alerts",
   initial: [],
   isFixed: false,
-  margin: "0px",
+  margin: false,
   onDismiss: undefined,
   stackType: "single",
 };

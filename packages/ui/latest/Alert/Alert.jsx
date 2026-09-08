@@ -18,7 +18,7 @@ export function Alert({ id, type, title, message, persistent, className: provide
   const wrap = computeWrap(title, message);
 
   return (
-    <div aria-live="polite" className={className} data-alert-type={type} data-alert-variant={variant} data-padded={padded && persistent} role="alert" {...props}>
+    <div aria-live="polite" className={className} data-alert-type={type} data-alert-variant={variant} data-padded={padded} role="alert" {...props}>
       <div role="presentation" data-part="alert-icon-margin" aria-hidden="true">
         <Alert.Icon type={type} />
       </div>
@@ -135,7 +135,7 @@ function AlertClose({ id, onClose, wrapType, ...props }) {
   const handleOnClose = React.useCallback((event) => {
     event.stopPropagation();
     onClose?.({ id, event });
-  }, [onClose]);
+  }, [onClose, id]);
 
   return (
     <div data-part="alert-close" data-wrap-type={wrapType} {...props}>

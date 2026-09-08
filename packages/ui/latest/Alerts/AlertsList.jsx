@@ -40,6 +40,7 @@ export function renderAlert(message, index, onClose) {
       key={message.id}
       id={message.id}
       data-alert-index={index}
+      style={ { "--alert-index": index } }
       title={message.title}
       message={message.message}
       type={message.type}
@@ -55,7 +56,8 @@ AlertsList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       type: PropTypes.oneOf(["info", "warning", "error", "success", "notice"]),
-      content: PropTypes.node.isRequired,
+      message: PropTypes.node,
+      children: PropTypes.node,
       persistent: PropTypes.bool,
       attributes: PropTypes.object,
       title: PropTypes.string,
@@ -65,7 +67,7 @@ AlertsList.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   isFixed: PropTypes.bool,
-  margin: PropTypes.string,
+  margin: PropTypes.bool,
   stackType: PropTypes.oneOf(["single", "list", "stack"]),
   onDismiss: PropTypes.func,
 };
@@ -76,7 +78,7 @@ AlertsList.defaultProps = {
   children: undefined,
   channel: "global-alerts",
   isFixed: false,
-  margin: "0px",
+  margin: false,
   onDismiss: undefined,
   stackType: "single",
 };
