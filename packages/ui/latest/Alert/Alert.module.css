@@ -103,7 +103,7 @@
   height: 24px;
 }
 
-[data-part="alert-close-button"] {
+.alert [data-part="alert-close-button"] {
   position: absolute;
   top: -7px;
   right: -2px;
