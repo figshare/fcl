@@ -42,6 +42,9 @@ export function Alerts({ id: componentChannel, className, initial, isFixed, onDi
       case "push":
         setMessages((previous) => {
           if (stackType === "single") {
+            // Clear any existing timeouts before replacing with new alert
+            previous.forEach((msg) => clearExistingTicket(msg.id));
+
             return [alert];
           }
 
@@ -59,6 +62,9 @@ export function Alerts({ id: componentChannel, className, initial, isFixed, onDi
         }
         break;
       case "clear":
+        // Clear all pending timeouts
+        tickets.current.forEach((entry) => clearTimeout(entry.ticket));
+        tickets.current = [];
         setMessages([]);
         break;
       case "pop": {
@@ -87,6 +93,9 @@ export function Alerts({ id: componentChannel, className, initial, isFixed, onDi
 
     return () => {
       document?.removeEventListener?.("alerts:message", onEvent);
+      // Clear all pending timeouts on unmount
+      tickets.current.forEach((entry) => clearTimeout(entry.ticket));
+      tickets.current = [];
     };
   }, [onEvent]);
 

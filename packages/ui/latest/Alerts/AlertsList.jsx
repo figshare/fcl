@@ -45,6 +45,7 @@ export function renderAlert(message, index, onClose) {
       message={message.message}
       type={message.type}
       persistent={message.persistent}
+      padded={message.padded}
       onClose={onClose}
       {...message.attributes}
     >{message.children}</Alert>
