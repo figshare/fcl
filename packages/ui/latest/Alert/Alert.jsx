@@ -16,10 +16,14 @@ import styles from "./Alert.module.css";
 export function Alert({ id, type, title, message, persistent, className: providedClassName, children, padded, variant, onClose, ...props }) {
   const className = classnames(styles.alert, providedClassName);
   const wrap = computeWrap(title, message);
+  // Determine if the right side padding should be applied based on the padded and persistent props.
+  // If an alert is persistent, we want to show the right side padding if the developer asks for it
+  // If not, we do not want to show the padding on the right side regardless of the padded prop.
+  const showRightSidePadding = padded && persistent;
 
   return (
-    <div aria-live="polite" className={className} data-alert-type={type} data-alert-variant={variant} data-padded={padded} role="alert" {...props}>
-      <div role="presentation" data-part="alert-icon-margin" aria-hidden="true">
+    <div aria-live="polite" className={className} data-alert-type={type} data-alert-variant={variant} data-padded={showRightSidePadding} role="alert" {...props}>
+      <div role="presentation" data-part="alert-icon-margin" aria-hidden="true" data-wrap-type={wrap}>
         <Alert.Icon type={type} />
       </div>
       <div data-part="alert-content">
